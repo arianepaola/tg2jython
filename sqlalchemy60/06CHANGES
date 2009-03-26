@@ -1,0 +1,35 @@
+- orm
+    - the 'expire' option on query.update() has been renamed to 'fetch', thus matching
+      that of query.delete()
+    - query.update() and query.delete() both default to 'evaluate' for the synchronize 
+      strategy.
+    - the 'synchronize' strategy for update() and delete() raises an error on failure.  
+      There is no implicit fallback onto "fetch".   Failure of evaluation is based
+      on the structure of criteria, so success/failure is deterministic based on 
+      code structure.
+    
+- dialect refactor
+    - server_version_info becomes a static attribute.
+    - create_engine() now establishes an initial connection immediately upon
+      creation, which is passed to the dialect to determine connection properties.
+    - cached TypeEngine classes are cached per-dialect class instead of per-dialect.
+    
+- mysql
+    - all the _detect_XXX() functions now run once underneath dialect.initialize()
+    
+- new dialects
+    - pg8000
+    - pyodbc+mysql
+    
+- mssql
+    - the "has_window_funcs" flag is removed.  LIMIT/OFFSET usage will use ROW NUMBER as always,
+      and if on an older version of SQL Server, the operation fails.  The behavior is exactly
+      the same except the error is raised by SQL server instead of the dialect, and no
+      flag setting is required to enable it.
+    - using new dialect.initialize() feature to set up version-dependent behavior.
+    
+- types
+    - PickleType now uses == for comparison of values when mutable=True, 
+      unless the "comparator" argument with a comparsion function is specified to the type.  
+      Objects being pickled will be compared based on identity (which defeats the purpose
+      of mutable=True) if __eq__() is not overridden or a comparison function is not provided.
