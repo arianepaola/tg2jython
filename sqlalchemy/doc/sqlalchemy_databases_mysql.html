@@ -1,0 +1,2152 @@
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<title>SQLAlchemy 0.4 Documentation - module sqlalchemy.databases.mysql</title>
+	
+    
+    <link rel="stylesheet" href="style.css"></link>
+    <link rel="stylesheet" href="docs.css"></link>
+    <link href="syntaxhighlight.css" rel="stylesheet" type="text/css"></link>
+    <script src="scripts.js"></script>
+
+    <link rel="stylesheet" href="docutil.css"></link>
+
+
+
+</head>
+<body>
+
+
+
+
+
+
+
+
+<div id="topanchor"><a name="top">&nbsp;</a></div>
+
+
+<h1>SQLAlchemy 0.4 Documentation</h1>
+
+<div id="pagecontrol"><a href="index.html">Multiple Pages</a> | <a href="documentation.html">One Page</a></div>
+
+<div class="versionheader">Version: 0.4.7p1   Last Updated: 07/31/08 11:09:56</div>
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class="topnav">
+
+    
+    <div class="navbanner">
+        <a href="index.html" class="totoc">Table of Contents</a>
+        
+    <div class="prevnext">
+            Up: <a href="docstrings.html">API Documentation</a>
+
+               |   
+            Previous: <a href="sqlalchemy_databases_postgres.html">module sqlalchemy.databases.postgres</a>
+
+               |   
+            Next: <a href="sqlalchemy_databases_oracle.html">module sqlalchemy.databases.oracle</a>
+    </div>
+
+        <h2>module sqlalchemy.databases.mysql</h2>
+    </div>
+
+	
+	
+    <ul>
+        
+        <li><a style="" href="sqlalchemy_databases_mysql.html#docstrings_sqlalchemy.databases.mysql_MSBigInteger">class MSBigInteger(MSInteger)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_mysql.html#docstrings_sqlalchemy.databases.mysql_MSBinary">class MSBinary(_BinaryType)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_mysql.html#docstrings_sqlalchemy.databases.mysql_MSBit">class MSBit(TypeEngine)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_mysql.html#docstrings_sqlalchemy.databases.mysql_MSBlob">class MSBlob(_BinaryType)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_mysql.html#docstrings_sqlalchemy.databases.mysql_MSBoolean">class MSBoolean(Boolean)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_mysql.html#docstrings_sqlalchemy.databases.mysql_MSChar">class MSChar(_StringType,CHAR)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_mysql.html#docstrings_sqlalchemy.databases.mysql_MSDate">class MSDate(Date)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_mysql.html#docstrings_sqlalchemy.databases.mysql_MSDateTime">class MSDateTime(DateTime)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_mysql.html#docstrings_sqlalchemy.databases.mysql_MSDecimal">class MSDecimal(MSNumeric)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_mysql.html#docstrings_sqlalchemy.databases.mysql_MSDouble">class MSDouble(Float,_NumericType)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_mysql.html#docstrings_sqlalchemy.databases.mysql_MSEnum">class MSEnum(MSString)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_mysql.html#docstrings_sqlalchemy.databases.mysql_MSFloat">class MSFloat(Float,_NumericType)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_mysql.html#docstrings_sqlalchemy.databases.mysql_MSInteger">class MSInteger(Integer,_NumericType)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_mysql.html#docstrings_sqlalchemy.databases.mysql_MSLongBlob">class MSLongBlob(MSBlob)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_mysql.html#docstrings_sqlalchemy.databases.mysql_MSLongText">class MSLongText(MSText)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_mysql.html#docstrings_sqlalchemy.databases.mysql_MSMediumBlob">class MSMediumBlob(MSBlob)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_mysql.html#docstrings_sqlalchemy.databases.mysql_MSMediumText">class MSMediumText(MSText)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_mysql.html#docstrings_sqlalchemy.databases.mysql_MSNChar">class MSNChar(_StringType,CHAR)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_mysql.html#docstrings_sqlalchemy.databases.mysql_MSNVarChar">class MSNVarChar(_StringType,String)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_mysql.html#docstrings_sqlalchemy.databases.mysql_MSNumeric">class MSNumeric(Numeric,_NumericType)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_mysql.html#docstrings_sqlalchemy.databases.mysql_MSSet">class MSSet(MSString)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_mysql.html#docstrings_sqlalchemy.databases.mysql_MSSmallInteger">class MSSmallInteger(SmallInteger,MSInteger)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_mysql.html#docstrings_sqlalchemy.databases.mysql_MSString">class MSString(_StringType,String)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_mysql.html#docstrings_sqlalchemy.databases.mysql_MSText">class MSText(_StringType,Text)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_mysql.html#docstrings_sqlalchemy.databases.mysql_MSTime">class MSTime(Time)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_mysql.html#docstrings_sqlalchemy.databases.mysql_MSTimeStamp">class MSTimeStamp(TIMESTAMP)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_mysql.html#docstrings_sqlalchemy.databases.mysql_MSTinyBlob">class MSTinyBlob(MSBlob)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_mysql.html#docstrings_sqlalchemy.databases.mysql_MSTinyInteger">class MSTinyInteger(MSInteger)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_mysql.html#docstrings_sqlalchemy.databases.mysql_MSTinyText">class MSTinyText(MSText)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_mysql.html#docstrings_sqlalchemy.databases.mysql_MSVarBinary">class MSVarBinary(_BinaryType)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_mysql.html#docstrings_sqlalchemy.databases.mysql_MSYear">class MSYear(TypeEngine)</a></li>
+
+    </ul>
+
+	</div>
+
+
+
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.databases.mysql"></a>
+    
+    <div class="sectionL2">
+
+    <h3>module sqlalchemy.databases.mysql</h3>
+    
+    
+    <div class="darkcell"><p>Support for the MySQL database.</p>
+<p>SQLAlchemy supports 6 major MySQL versions: 3.23, 4.0, 4.1, 5.0, 5.1 and 6.0,
+with capablities increasing with more modern servers.</p>
+<p>Versions 4.1 and higher support the basic SQL functionality that SQLAlchemy
+uses in the ORM and SQL expressions.  These versions pass the applicable
+tests in the suite 100%.  No heroic measures are taken to work around major
+missing SQL features- if your server version does not support sub-selects, for
+example, they won't work in SQLAlchemy either.</p>
+<p>Currently, the only DB-API driver supported is <cite>MySQL-Python</cite> (also referred to
+as <cite>MySQLdb</cite>).  Either 1.2.1 or 1.2.2 are recommended.  The alpha, beta and
+gamma releases of 1.2.1 and 1.2.2 should be avoided.  Support for Jython and
+IronPython is planned.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="71%" />
+<col width="29%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">Feature</th>
+<th class="head">Minimum Version</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td>sqlalchemy.orm</td>
+<td>4.1.1</td>
+</tr>
+<tr><td>Table Reflection</td>
+<td>3.23.x</td>
+</tr>
+<tr><td>DDL Generation</td>
+<td>4.1.1</td>
+</tr>
+<tr><td>utf8/Full Unicode Connections</td>
+<td>4.1.1</td>
+</tr>
+<tr><td>Transactions</td>
+<td>3.23.15</td>
+</tr>
+<tr><td>Two-Phase Transactions</td>
+<td>5.0.3</td>
+</tr>
+<tr><td>Nested Transactions</td>
+<td>5.0.3</td>
+</tr>
+</tbody>
+</table>
+<p>See the official MySQL documentation for detailed information about features
+supported in any given server release.</p>
+<p>Many MySQL server installations default to a <tt class="docutils literal"><span class="pre">latin1</span></tt> encoding for client
+connections.  All data sent through the connection will be converted
+into <tt class="docutils literal"><span class="pre">latin1</span></tt>, even if you have <tt class="docutils literal"><span class="pre">utf8</span></tt> or another character set on your
+tables and columns.  With versions 4.1 and higher, you can change the
+connection character set either through server configuration or by passing
+the  <tt class="docutils literal"><span class="pre">charset</span></tt> parameter to  <tt class="docutils literal"><span class="pre">create_engine</span></tt>.  The <tt class="docutils literal"><span class="pre">charset</span></tt> option is
+passed through to MySQL-Python and has the side-effect of also enabling
+<tt class="docutils literal"><span class="pre">use_unicode</span></tt> in the driver by default.  For regular encoded strings, also
+pass <tt class="docutils literal"><span class="pre">use_unicode=0</span></tt> in the connection arguments.</p>
+<p>Most MySQL server installations have a default table type of <cite>MyISAM</cite>, a
+non-transactional table type.  During a transaction, non-transactional
+storage engines do not participate and continue to store table changes in
+autocommit mode.  For fully atomic transactions, all participating tables
+must use a transactional engine such as <cite>InnoDB</cite>, <cite>Falcon</cite>, <cite>SolidDB</cite>,
+<cite>PBXT</cite>, etc.  Storage engines can be elected when creating tables in
+SQLAlchemy by supplying a <tt class="docutils literal"><span class="pre">mysql_engine='whatever'</span></tt> to the <tt class="docutils literal"><span class="pre">Table</span></tt>
+constructor.  Any MySQL table creation option can be specified in this syntax.</p>
+<p>Not all MySQL storage engines support foreign keys.  For <cite>MyISAM</cite> and similar
+engines, the information loaded by table reflection will not include foreign
+keys.  For these tables, you may supply <tt class="docutils literal"><span class="pre">ForeignKeyConstraints</span></tt> at reflection
+time:</p>
+<pre class="literal-block">
+Table('mytable', metadata, autoload=True,
+      ForeignKeyConstraint(['other_id'], ['othertable.other_id']))
+</pre>
+<p>When creating tables, SQLAlchemy will automatically set AUTO_INCREMENT on an
+integer primary key column:</p>
+<pre class="literal-block">
+&gt;&gt;&gt; t = Table('mytable', metadata,
+...   Column('mytable_id', Integer, primary_key=True))
+&gt;&gt;&gt; t.create()
+CREATE TABLE mytable (
+        id INTEGER NOT NULL AUTO_INCREMENT,
+        PRIMARY KEY (id)
+)
+</pre>
+<p>You can disable this behavior by supplying <tt class="docutils literal"><span class="pre">autoincrement=False</span></tt> in addition.
+This can also be used to enable auto-increment on a secondary column in a
+multi-column key for some storage engines:</p>
+<pre class="literal-block">
+Table('mytable', metadata,
+      Column('gid', Integer, primary_key=True, autoincrement=False),
+      Column('id', Integer, primary_key=True))
+</pre>
+<p>MySQL SQL modes are supported.  Modes that enable <tt class="docutils literal"><span class="pre">ANSI_QUOTES</span></tt> (such as
+<tt class="docutils literal"><span class="pre">ANSI</span></tt>) require an engine option to modify SQLAlchemy's quoting style.
+When using an ANSI-quoting mode, supply <tt class="docutils literal"><span class="pre">use_ansiquotes=True</span></tt> when
+creating your <tt class="docutils literal"><span class="pre">Engine</span></tt>:</p>
+<pre class="literal-block">
+create_engine('mysql://localhost/test', use_ansiquotes=True)
+</pre>
+<p>This is an engine-wide option and is not toggleable on a per-connection basis.
+SQLAlchemy does not presume to <tt class="docutils literal"><span class="pre">SET</span> <span class="pre">sql_mode</span></tt> for you with this option.
+For the best performance, set the quoting style server-wide in <tt class="docutils literal"><span class="pre">my.cnf</span></tt> or
+by supplying <tt class="docutils literal"><span class="pre">--sql-mode</span></tt> to <tt class="docutils literal"><span class="pre">mysqld</span></tt>.  You can also use a <tt class="docutils literal"><span class="pre">Pool</span></tt> hook
+to issue a <tt class="docutils literal"><span class="pre">SET</span> <span class="pre">SESSION</span> <span class="pre">sql_mode='...'</span></tt> on connect to configure each
+connection.</p>
+<p>If you do not specify 'use_ansiquotes', the regular MySQL quoting style is
+used by default.  Table reflection operations will query the server</p>
+<p>If you do issue a 'SET sql_mode' through SQLAlchemy, the dialect must be
+updated if the quoting style is changed.  Again, this change will affect all
+connections:</p>
+<pre class="literal-block">
+connection.execute('SET sql_mode=&quot;ansi&quot;')
+connection.dialect.use_ansiquotes = True
+</pre>
+<p>For normal SQLAlchemy usage, loading this module is unnescesary.  It will be
+loaded on-demand when a MySQL connection is needed.  The generic column types
+like <tt class="docutils literal"><span class="pre">String</span></tt> and <tt class="docutils literal"><span class="pre">Integer</span></tt> will automatically be adapted to the optimal
+matching MySQL column type.</p>
+<p>But if you would like to use one of the MySQL-specific or enhanced column
+types when creating tables with your <tt class="docutils literal"><span class="pre">Table</span></tt> definitions, then you will
+need to import them from this module:</p>
+<pre class="literal-block">
+from sqlalchemy.databases import mysql
+
+Table('mytable', metadata,
+      Column('id', Integer, primary_key=True),
+      Column('ittybittyblob', mysql.MSTinyBlob),
+      Column('biggy', mysql.MSBigInteger(unsigned=True)))
+</pre>
+<p>All standard MySQL column types are supported.  The OpenGIS types are
+available for use via table reflection but have no special support or
+mapping to Python classes.  If you're using these types and have opinions
+about how OpenGIS can be smartly integrated into SQLAlchemy please join
+the mailing list!</p>
+<p>Many of the MySQL SQL extensions are handled through SQLAlchemy's generic
+function and operator support:</p>
+<pre class="literal-block">
+table.select(table.c.password==func.md5('plaintext'))
+table.select(table.c.username.op('regexp')('^[a-d]'))
+</pre>
+<p>And of course any valid statement can be executed as a string rather than
+through the SQL expression language.</p>
+<p>Some limited support for MySQL extensions to SQL expressions is currently
+available.</p>
+<blockquote>
+<ul>
+<li><p class="first">SELECT pragma:</p>
+<pre class="literal-block">
+select(..., prefixes=['HIGH_PRIORITY', 'SQL_SMALL_RESULT'])
+</pre>
+</li>
+<li><p class="first">UPDATE with LIMIT:</p>
+<pre class="literal-block">
+update(..., mysql_limit=10)
+</pre>
+</li>
+</ul>
+</blockquote>
+<p>If you have problems that seem server related, first check that you are
+using the most recent stable MySQL-Python package available.  The Database
+Notes page on the wiki at <a class="reference" href="http://www.sqlalchemy.org">http://www.sqlalchemy.org</a> is a good resource for
+timely information affecting MySQL in SQLAlchemy.</p>
+</div>
+    
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.databases.mysql_MSBigInteger"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class MSBigInteger(<a href="sqlalchemy_databases_mysql.html#docstrings_sqlalchemy.databases.mysql_MSInteger">MSInteger</a>)</h3>
+    
+    
+    <div class="darkcell"><p>MySQL BIGINTEGER type.</p>
+</div>
+    
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def __init__(<i>self</i>, <i>length=None</i>, <i>**kw</i>)</b>
+    <div class="docstring">
+    <p>Construct a BIGINTEGER.</p>
+<dl class="docutils">
+<dt>length</dt>
+<dd>Optional, maximum display width for this number.</dd>
+<dt>unsigned</dt>
+<dd>Optional.</dd>
+<dt>zerofill</dt>
+<dd>Optional. If true, values will be stored as strings left-padded with
+zeros. Note that this does not effect the values returned by the
+underlying database API, which continue to be numeric.</dd>
+</dl>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def get_col_spec(<i>self</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.databases.mysql_MSBinary"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class MSBinary(_BinaryType)</h3>
+    
+    
+    <div class="darkcell"><p>MySQL BINARY type, for fixed length binary data</p>
+</div>
+    
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def __init__(<i>self</i>, <i>length=None</i>, <i>**kw</i>)</b>
+    <div class="docstring">
+    <p>Construct a BINARY.  This is a fixed length type, and short
+values will be right-padded with a server-version-specific
+pad value.</p>
+<dl class="docutils">
+<dt>length</dt>
+<dd>Maximum data length, in bytes.  If length is not specified, this
+will generate a BLOB.  This usage is deprecated.</dd>
+</dl>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def get_col_spec(<i>self</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def result_processor(<i>self</i>, <i>dialect</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.databases.mysql_MSBit"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class MSBit(<a href="sqlalchemy_types.html#docstrings_sqlalchemy.types_TypeEngine">TypeEngine</a>)</h3>
+    
+    
+    <div class="darkcell"><p>MySQL BIT type.</p>
+<p>This type is for MySQL 5.0.3 or greater for MyISAM, and 5.0.5 or greater for
+MyISAM, MEMORY, InnoDB and BDB.  For older versions, use a MSTinyInteger(1)
+type.</p>
+</div>
+    
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def __init__(<i>self</i>, <i>length=None</i>)</b>
+    <div class="docstring">
+    <p>Construct a new <tt class="docutils literal"><span class="pre">MSBit</span></tt>.</p>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def get_col_spec(<i>self</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def result_processor(<i>self</i>, <i>dialect</i>)</b>
+    <div class="docstring">
+    <p>Convert a MySQL's 64 bit, variable length binary string to a long.</p>
+
+    </div>
+    </div>
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.databases.mysql_MSBlob"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class MSBlob(_BinaryType)</h3>
+    
+    
+    <div class="darkcell"><p>MySQL BLOB type, for binary data up to 2^16 bytes</p>
+</div>
+    
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def __init__(<i>self</i>, <i>length=None</i>, <i>**kw</i>)</b>
+    <div class="docstring">
+    <p>Construct a BLOB.  Arguments are:</p>
+<dl class="docutils">
+<dt>length</dt>
+<dd>Optional, if provided the server may optimize storage by
+subsitituting the smallest TEXT type sufficient to store
+<tt class="docutils literal"><span class="pre">length</span></tt> characters.</dd>
+</dl>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def get_col_spec(<i>self</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def result_processor(<i>self</i>, <i>dialect</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.databases.mysql_MSBoolean"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class MSBoolean(<a href="sqlalchemy_types.html#docstrings_sqlalchemy.types_Boolean">Boolean</a>)</h3>
+    
+    
+    <div class="darkcell"><p>MySQL BOOLEAN type.</p>
+</div>
+    
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def bind_processor(<i>self</i>, <i>dialect</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def get_col_spec(<i>self</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def result_processor(<i>self</i>, <i>dialect</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.databases.mysql_MSChar"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class MSChar(_StringType,<a href="sqlalchemy_types.html#docstrings_sqlalchemy.types_CHAR">CHAR</a>)</h3>
+    
+    
+    <div class="darkcell"><p>MySQL CHAR type, for fixed-length character data.</p>
+</div>
+    
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def __init__(<i>self</i>, <i>length</i>, <i>**kwargs</i>)</b>
+    <div class="docstring">
+    <p>Construct an NCHAR.</p>
+<dl class="docutils">
+<dt>length</dt>
+<dd>Maximum data length, in characters.</dd>
+<dt>binary</dt>
+<dd>Optional, use the default binary collation for the national character
+set.  This does not affect the type of data stored, use a BINARY
+type for binary data.</dd>
+<dt>collation</dt>
+<dd>Optional, request a particular collation.  Must be compatibile
+with the national character set.</dd>
+</dl>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def get_col_spec(<i>self</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.databases.mysql_MSDate"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class MSDate(<a href="sqlalchemy_types.html#docstrings_sqlalchemy.types_Date">Date</a>)</h3>
+    
+    
+    <div class="darkcell"><p>MySQL DATE type.</p>
+</div>
+    
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def get_col_spec(<i>self</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.databases.mysql_MSDateTime"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class MSDateTime(<a href="sqlalchemy_types.html#docstrings_sqlalchemy.types_DateTime">DateTime</a>)</h3>
+    
+    
+    <div class="darkcell"><p>MySQL DATETIME type.</p>
+</div>
+    
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def get_col_spec(<i>self</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.databases.mysql_MSDecimal"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class MSDecimal(<a href="sqlalchemy_databases_mysql.html#docstrings_sqlalchemy.databases.mysql_MSNumeric">MSNumeric</a>)</h3>
+    
+    
+    <div class="darkcell"><p>MySQL DECIMAL type.</p>
+</div>
+    
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def __init__(<i>self</i>, <i>precision=10</i>, <i>length=2</i>, <i>asdecimal=True</i>, <i>**kw</i>)</b>
+    <div class="docstring">
+    <p>Construct a DECIMAL.</p>
+<dl class="docutils">
+<dt>precision</dt>
+<dd>Total digits in this number.  If length and precision are both None,
+values are stored to limits allowed by the server.</dd>
+<dt>length</dt>
+<dd>The number of digits after the decimal point.</dd>
+<dt>unsigned</dt>
+<dd>Optional.</dd>
+<dt>zerofill</dt>
+<dd>Optional. If true, values will be stored as strings left-padded with
+zeros. Note that this does not effect the values returned by the
+underlying database API, which continue to be numeric.</dd>
+</dl>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def get_col_spec(<i>self</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.databases.mysql_MSDouble"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class MSDouble(<a href="sqlalchemy_types.html#docstrings_sqlalchemy.types_Float">Float</a>,_NumericType)</h3>
+    
+    
+    <div class="darkcell"><p>MySQL DOUBLE type.</p>
+</div>
+    
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def __init__(<i>self</i>, <i>precision=None</i>, <i>length=None</i>, <i>asdecimal=True</i>, <i>**kw</i>)</b>
+    <div class="docstring">
+    <p>Construct a DOUBLE.</p>
+<dl class="docutils">
+<dt>precision</dt>
+<dd>Total digits in this number.  If length and precision are both None,
+values are stored to limits allowed by the server.</dd>
+<dt>length</dt>
+<dd>The number of digits after the decimal point.</dd>
+<dt>unsigned</dt>
+<dd>Optional.</dd>
+<dt>zerofill</dt>
+<dd>Optional. If true, values will be stored as strings left-padded with
+zeros. Note that this does not effect the values returned by the
+underlying database API, which continue to be numeric.</dd>
+</dl>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def get_col_spec(<i>self</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.databases.mysql_MSEnum"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class MSEnum(<a href="sqlalchemy_databases_mysql.html#docstrings_sqlalchemy.databases.mysql_MSString">MSString</a>)</h3>
+    
+    
+    <div class="darkcell"><p>MySQL ENUM type.</p>
+</div>
+    
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def __init__(<i>self</i>, <i>*enums</i>, <i>**kw</i>)</b>
+    <div class="docstring">
+    <p>Construct an ENUM.</p>
+<p>Example:</p>
+<blockquote>
+Column('myenum', MSEnum(&quot;'foo'&quot;, &quot;'bar'&quot;, &quot;'baz'&quot;))</blockquote>
+<p>Arguments are:</p>
+<dl class="docutils">
+<dt>enums</dt>
+<dd>The range of valid values for this ENUM.  Values will be used
+exactly as they appear when generating schemas.  Strings must
+be quoted, as in the example above.  Single-quotes are suggested
+for ANSI compatability and are required for portability to servers
+with ANSI_QUOTES enabled.</dd>
+<dt>strict</dt>
+<dd>Defaults to False: ensure that a given value is in this ENUM's
+range of permissible values when inserting or updating rows.
+Note that MySQL will not raise a fatal error if you attempt to
+store an out of range value- an alternate value will be stored
+instead.  (See MySQL ENUM documentation.)</dd>
+<dt>charset</dt>
+<dd>Optional, a column-level character set for this string
+value.  Takes precendence to 'ascii' or 'unicode' short-hand.</dd>
+<dt>collation</dt>
+<dd>Optional, a column-level collation for this string value.
+Takes precedence to 'binary' short-hand.</dd>
+<dt>ascii</dt>
+<dd>Defaults to False: short-hand for the <tt class="docutils literal"><span class="pre">latin1</span></tt> character set,
+generates ASCII in schema.</dd>
+<dt>unicode</dt>
+<dd>Defaults to False: short-hand for the <tt class="docutils literal"><span class="pre">ucs2</span></tt> character set,
+generates UNICODE in schema.</dd>
+<dt>binary</dt>
+<dd>Defaults to False: short-hand, pick the binary collation type
+that matches the column's character set.  Generates BINARY in
+schema.  This does not affect the type of data stored, only the
+collation of character data.</dd>
+</dl>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def bind_processor(<i>self</i>, <i>dialect</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def get_col_spec(<i>self</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.databases.mysql_MSFloat"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class MSFloat(<a href="sqlalchemy_types.html#docstrings_sqlalchemy.types_Float">Float</a>,_NumericType)</h3>
+    
+    
+    <div class="darkcell"><p>MySQL FLOAT type.</p>
+</div>
+    
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def __init__(<i>self</i>, <i>precision=None</i>, <i>length=None</i>, <i>asdecimal=False</i>, <i>**kw</i>)</b>
+    <div class="docstring">
+    <p>Construct a FLOAT.</p>
+<dl class="docutils">
+<dt>precision</dt>
+<dd>Total digits in this number.  If length and precision are both None,
+values are stored to limits allowed by the server.</dd>
+<dt>length</dt>
+<dd>The number of digits after the decimal point.</dd>
+<dt>unsigned</dt>
+<dd>Optional.</dd>
+<dt>zerofill</dt>
+<dd>Optional. If true, values will be stored as strings left-padded with
+zeros. Note that this does not effect the values returned by the
+underlying database API, which continue to be numeric.</dd>
+</dl>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def bind_processor(<i>self</i>, <i>dialect</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def get_col_spec(<i>self</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.databases.mysql_MSInteger"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class MSInteger(<a href="sqlalchemy_types.html#docstrings_sqlalchemy.types_Integer">Integer</a>,_NumericType)</h3>
+    
+    
+    <div class="darkcell"><p>MySQL INTEGER type.</p>
+</div>
+    
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def __init__(<i>self</i>, <i>length=None</i>, <i>**kw</i>)</b>
+    <div class="docstring">
+    <p>Construct an INTEGER.</p>
+<dl class="docutils">
+<dt>length</dt>
+<dd>Optional, maximum display width for this number.</dd>
+<dt>unsigned</dt>
+<dd>Optional.</dd>
+<dt>zerofill</dt>
+<dd>Optional. If true, values will be stored as strings left-padded with
+zeros. Note that this does not effect the values returned by the
+underlying database API, which continue to be numeric.</dd>
+</dl>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def get_col_spec(<i>self</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.databases.mysql_MSLongBlob"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class MSLongBlob(<a href="sqlalchemy_databases_mysql.html#docstrings_sqlalchemy.databases.mysql_MSBlob">MSBlob</a>)</h3>
+    
+    
+    <div class="darkcell"><p>MySQL LONGBLOB type, for binary data up to 2^32 bytes.</p>
+</div>
+    
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def get_col_spec(<i>self</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.databases.mysql_MSLongText"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class MSLongText(<a href="sqlalchemy_databases_mysql.html#docstrings_sqlalchemy.databases.mysql_MSText">MSText</a>)</h3>
+    
+    
+    <div class="darkcell"><p>MySQL LONGTEXT type, for text up to 2^32 characters.</p>
+</div>
+    
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def __init__(<i>self</i>, <i>**kwargs</i>)</b>
+    <div class="docstring">
+    <p>Construct a LONGTEXT.</p>
+<dl class="docutils">
+<dt>charset</dt>
+<dd>Optional, a column-level character set for this string
+value.  Takes precendence to 'ascii' or 'unicode' short-hand.</dd>
+<dt>collation</dt>
+<dd>Optional, a column-level collation for this string value.
+Takes precedence to 'binary' short-hand.</dd>
+<dt>ascii</dt>
+<dd>Defaults to False: short-hand for the <tt class="docutils literal"><span class="pre">latin1</span></tt> character set,
+generates ASCII in schema.</dd>
+<dt>unicode</dt>
+<dd>Defaults to False: short-hand for the <tt class="docutils literal"><span class="pre">ucs2</span></tt> character set,
+generates UNICODE in schema.</dd>
+<dt>national</dt>
+<dd>Optional. If true, use the server's configured national
+character set.</dd>
+<dt>binary</dt>
+<dd>Defaults to False: short-hand, pick the binary collation type
+that matches the column's character set.  Generates BINARY in
+schema.  This does not affect the type of data stored, only the
+collation of character data.</dd>
+</dl>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def get_col_spec(<i>self</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.databases.mysql_MSMediumBlob"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class MSMediumBlob(<a href="sqlalchemy_databases_mysql.html#docstrings_sqlalchemy.databases.mysql_MSBlob">MSBlob</a>)</h3>
+    
+    
+    <div class="darkcell"><p>MySQL MEDIUMBLOB type, for binary data up to 2^24 bytes.</p>
+</div>
+    
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def get_col_spec(<i>self</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.databases.mysql_MSMediumText"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class MSMediumText(<a href="sqlalchemy_databases_mysql.html#docstrings_sqlalchemy.databases.mysql_MSText">MSText</a>)</h3>
+    
+    
+    <div class="darkcell"><p>MySQL MEDIUMTEXT type, for text up to 2^24 characters.</p>
+</div>
+    
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def __init__(<i>self</i>, <i>**kwargs</i>)</b>
+    <div class="docstring">
+    <p>Construct a MEDIUMTEXT.</p>
+<dl class="docutils">
+<dt>charset</dt>
+<dd>Optional, a column-level character set for this string
+value.  Takes precendence to 'ascii' or 'unicode' short-hand.</dd>
+<dt>collation</dt>
+<dd>Optional, a column-level collation for this string value.
+Takes precedence to 'binary' short-hand.</dd>
+<dt>ascii</dt>
+<dd>Defaults to False: short-hand for the <tt class="docutils literal"><span class="pre">latin1</span></tt> character set,
+generates ASCII in schema.</dd>
+<dt>unicode</dt>
+<dd>Defaults to False: short-hand for the <tt class="docutils literal"><span class="pre">ucs2</span></tt> character set,
+generates UNICODE in schema.</dd>
+<dt>national</dt>
+<dd>Optional. If true, use the server's configured national
+character set.</dd>
+<dt>binary</dt>
+<dd>Defaults to False: short-hand, pick the binary collation type
+that matches the column's character set.  Generates BINARY in
+schema.  This does not affect the type of data stored, only the
+collation of character data.</dd>
+</dl>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def get_col_spec(<i>self</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.databases.mysql_MSNChar"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class MSNChar(_StringType,<a href="sqlalchemy_types.html#docstrings_sqlalchemy.types_CHAR">CHAR</a>)</h3>
+    
+    
+    <div class="darkcell"><p>MySQL NCHAR type.</p>
+<p>For fixed-length character data in the server's configured national
+character set.</p>
+</div>
+    
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def __init__(<i>self</i>, <i>length=None</i>, <i>**kwargs</i>)</b>
+    <div class="docstring">
+    <p>Construct an NCHAR.  Arguments are:</p>
+<dl class="docutils">
+<dt>length</dt>
+<dd>Maximum data length, in characters.</dd>
+<dt>binary</dt>
+<dd>Optional, request the default binary collation for the
+national character set.</dd>
+<dt>collation</dt>
+<dd>Optional, request a particular collation.  Must be compatibile
+with the national character set.</dd>
+</dl>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def get_col_spec(<i>self</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.databases.mysql_MSNVarChar"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class MSNVarChar(_StringType,<a href="sqlalchemy_types.html#docstrings_sqlalchemy.types_String">String</a>)</h3>
+    
+    
+    <div class="darkcell"><p>MySQL NVARCHAR type.</p>
+<p>For variable-length character data in the server's configured national
+character set.</p>
+</div>
+    
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def __init__(<i>self</i>, <i>length=None</i>, <i>**kwargs</i>)</b>
+    <div class="docstring">
+    <p>Construct an NVARCHAR.</p>
+<dl class="docutils">
+<dt>length</dt>
+<dd>Maximum data length, in characters.</dd>
+<dt>binary</dt>
+<dd>Optional, use the default binary collation for the national character
+set.  This does not affect the type of data stored, use a VARBINARY
+type for binary data.</dd>
+<dt>collation</dt>
+<dd>Optional, request a particular collation.  Must be compatibile
+with the national character set.</dd>
+</dl>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def get_col_spec(<i>self</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.databases.mysql_MSNumeric"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class MSNumeric(<a href="sqlalchemy_types.html#docstrings_sqlalchemy.types_Numeric">Numeric</a>,_NumericType)</h3>
+    
+    
+    <div class="darkcell"><p>MySQL NUMERIC type.</p>
+</div>
+    
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def __init__(<i>self</i>, <i>precision=10</i>, <i>length=2</i>, <i>asdecimal=True</i>, <i>**kw</i>)</b>
+    <div class="docstring">
+    <p>Construct a NUMERIC.</p>
+<dl class="docutils">
+<dt>precision</dt>
+<dd>Total digits in this number.  If length and precision are both
+None, values are stored to limits allowed by the server.</dd>
+<dt>length</dt>
+<dd>The number of digits after the decimal point.</dd>
+<dt>unsigned</dt>
+<dd>Optional.</dd>
+<dt>zerofill</dt>
+<dd>Optional. If true, values will be stored as strings left-padded with
+zeros. Note that this does not effect the values returned by the
+underlying database API, which continue to be numeric.</dd>
+</dl>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def bind_processor(<i>self</i>, <i>dialect</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def get_col_spec(<i>self</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def result_processor(<i>self</i>, <i>dialect</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.databases.mysql_MSSet"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class MSSet(<a href="sqlalchemy_databases_mysql.html#docstrings_sqlalchemy.databases.mysql_MSString">MSString</a>)</h3>
+    
+    
+    <div class="darkcell"><p>MySQL SET type.</p>
+</div>
+    
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def __init__(<i>self</i>, <i>*values</i>, <i>**kw</i>)</b>
+    <div class="docstring">
+    <p>Construct a SET.</p>
+<p>Example:</p>
+<pre class="literal-block">
+Column('myset', MSSet(&quot;'foo'&quot;, &quot;'bar'&quot;, &quot;'baz'&quot;))
+</pre>
+<p>Arguments are:</p>
+<dl class="docutils">
+<dt>values</dt>
+<dd>The range of valid values for this SET.  Values will be used
+exactly as they appear when generating schemas.  Strings must
+be quoted, as in the example above.  Single-quotes are suggested
+for ANSI compatability and are required for portability to servers
+with ANSI_QUOTES enabled.</dd>
+<dt>charset</dt>
+<dd>Optional, a column-level character set for this string
+value.  Takes precendence to 'ascii' or 'unicode' short-hand.</dd>
+<dt>collation</dt>
+<dd>Optional, a column-level collation for this string value.
+Takes precedence to 'binary' short-hand.</dd>
+<dt>ascii</dt>
+<dd>Defaults to False: short-hand for the <tt class="docutils literal"><span class="pre">latin1</span></tt> character set,
+generates ASCII in schema.</dd>
+<dt>unicode</dt>
+<dd>Defaults to False: short-hand for the <tt class="docutils literal"><span class="pre">ucs2</span></tt> character set,
+generates UNICODE in schema.</dd>
+<dt>binary</dt>
+<dd>Defaults to False: short-hand, pick the binary collation type
+that matches the column's character set.  Generates BINARY in
+schema.  This does not affect the type of data stored, only the
+collation of character data.</dd>
+</dl>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def bind_processor(<i>self</i>, <i>dialect</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def get_col_spec(<i>self</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def result_processor(<i>self</i>, <i>dialect</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.databases.mysql_MSSmallInteger"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class MSSmallInteger(<a href="sqlalchemy_types.html#docstrings_sqlalchemy.types_SmallInteger">SmallInteger</a>,<a href="sqlalchemy_databases_mysql.html#docstrings_sqlalchemy.databases.mysql_MSInteger">MSInteger</a>)</h3>
+    
+    
+    <div class="darkcell"><p>MySQL SMALLINTEGER type.</p>
+</div>
+    
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def __init__(<i>self</i>, <i>length=None</i>, <i>**kw</i>)</b>
+    <div class="docstring">
+    <p>Construct a SMALLINTEGER.</p>
+<dl class="docutils">
+<dt>length</dt>
+<dd>Optional, maximum display width for this number.</dd>
+<dt>unsigned</dt>
+<dd>Optional.</dd>
+<dt>zerofill</dt>
+<dd>Optional. If true, values will be stored as strings left-padded with
+zeros. Note that this does not effect the values returned by the
+underlying database API, which continue to be numeric.</dd>
+</dl>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def get_col_spec(<i>self</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.databases.mysql_MSString"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class MSString(_StringType,<a href="sqlalchemy_types.html#docstrings_sqlalchemy.types_String">String</a>)</h3>
+    
+    
+    <div class="darkcell"><p>MySQL VARCHAR type, for variable-length character data.</p>
+</div>
+    
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def __init__(<i>self</i>, <i>length=None</i>, <i>**kwargs</i>)</b>
+    <div class="docstring">
+    <p>Construct a VARCHAR.</p>
+<dl class="docutils">
+<dt>length</dt>
+<dd>Maximum data length, in characters.</dd>
+<dt>charset</dt>
+<dd>Optional, a column-level character set for this string
+value.  Takes precendence to 'ascii' or 'unicode' short-hand.</dd>
+<dt>collation</dt>
+<dd>Optional, a column-level collation for this string value.
+Takes precedence to 'binary' short-hand.</dd>
+<dt>ascii</dt>
+<dd>Defaults to False: short-hand for the <tt class="docutils literal"><span class="pre">latin1</span></tt> character set,
+generates ASCII in schema.</dd>
+<dt>unicode</dt>
+<dd>Defaults to False: short-hand for the <tt class="docutils literal"><span class="pre">ucs2</span></tt> character set,
+generates UNICODE in schema.</dd>
+<dt>national</dt>
+<dd>Optional. If true, use the server's configured national
+character set.</dd>
+<dt>binary</dt>
+<dd>Defaults to False: short-hand, pick the binary collation type
+that matches the column's character set.  Generates BINARY in
+schema.  This does not affect the type of data stored, only the
+collation of character data.</dd>
+</dl>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def get_col_spec(<i>self</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.databases.mysql_MSText"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class MSText(_StringType,<a href="sqlalchemy_types.html#docstrings_sqlalchemy.types_Text">Text</a>)</h3>
+    
+    
+    <div class="darkcell"><p>MySQL TEXT type, for text up to 2^16 characters.</p>
+</div>
+    
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def __init__(<i>self</i>, <i>length=None</i>, <i>**kwargs</i>)</b>
+    <div class="docstring">
+    <p>Construct a TEXT.</p>
+<dl class="docutils">
+<dt>length</dt>
+<dd>Optional, if provided the server may optimize storage by
+subsitituting the smallest TEXT type sufficient to store
+<tt class="docutils literal"><span class="pre">length</span></tt> characters.</dd>
+<dt>charset</dt>
+<dd>Optional, a column-level character set for this string
+value.  Takes precendence to 'ascii' or 'unicode' short-hand.</dd>
+<dt>collation</dt>
+<dd>Optional, a column-level collation for this string value.
+Takes precedence to 'binary' short-hand.</dd>
+<dt>ascii</dt>
+<dd>Defaults to False: short-hand for the <tt class="docutils literal"><span class="pre">latin1</span></tt> character set,
+generates ASCII in schema.</dd>
+<dt>unicode</dt>
+<dd>Defaults to False: short-hand for the <tt class="docutils literal"><span class="pre">ucs2</span></tt> character set,
+generates UNICODE in schema.</dd>
+<dt>national</dt>
+<dd>Optional. If true, use the server's configured national
+character set.</dd>
+<dt>binary</dt>
+<dd>Defaults to False: short-hand, pick the binary collation type
+that matches the column's character set.  Generates BINARY in
+schema.  This does not affect the type of data stored, only the
+collation of character data.</dd>
+</dl>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def get_col_spec(<i>self</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.databases.mysql_MSTime"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class MSTime(<a href="sqlalchemy_types.html#docstrings_sqlalchemy.types_Time">Time</a>)</h3>
+    
+    
+    <div class="darkcell"><p>MySQL TIME type.</p>
+</div>
+    
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def get_col_spec(<i>self</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def result_processor(<i>self</i>, <i>dialect</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.databases.mysql_MSTimeStamp"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class MSTimeStamp(<a href="sqlalchemy_types.html#docstrings_sqlalchemy.types_TIMESTAMP">TIMESTAMP</a>)</h3>
+    
+    
+    <div class="darkcell"><p>MySQL TIMESTAMP type.</p>
+<p>To signal the orm to automatically re-select modified rows to retrieve
+the updated timestamp, add a PassiveDefault to your column specification:</p>
+<pre class="literal-block">
+from sqlalchemy.databases import mysql
+Column('updated', mysql.MSTimeStamp,
+       PassiveDefault(sql.text('CURRENT_TIMESTAMP')))
+</pre>
+<p>The full range of MySQL 4.1+ TIMESTAMP defaults can be specified in
+the PassiveDefault:</p>
+<pre class="literal-block">
+PassiveDefault(sql.text('CURRENT TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'))
+</pre>
+</div>
+    
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def get_col_spec(<i>self</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.databases.mysql_MSTinyBlob"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class MSTinyBlob(<a href="sqlalchemy_databases_mysql.html#docstrings_sqlalchemy.databases.mysql_MSBlob">MSBlob</a>)</h3>
+    
+    
+    <div class="darkcell"><p>MySQL TINYBLOB type, for binary data up to 2^8 bytes.</p>
+</div>
+    
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def get_col_spec(<i>self</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.databases.mysql_MSTinyInteger"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class MSTinyInteger(<a href="sqlalchemy_databases_mysql.html#docstrings_sqlalchemy.databases.mysql_MSInteger">MSInteger</a>)</h3>
+    
+    
+    <div class="darkcell"><p>MySQL TINYINT type.</p>
+</div>
+    
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def __init__(<i>self</i>, <i>length=None</i>, <i>**kw</i>)</b>
+    <div class="docstring">
+    <p>Construct a TINYINT.</p>
+<p>Note: following the usual MySQL conventions, TINYINT(1) columns
+reflected during Table(..., autoload=True) are treated as
+Boolean columns.</p>
+<dl class="docutils">
+<dt>length</dt>
+<dd>Optional, maximum display width for this number.</dd>
+<dt>unsigned</dt>
+<dd>Optional.</dd>
+<dt>zerofill</dt>
+<dd>Optional. If true, values will be stored as strings left-padded with
+zeros. Note that this does not effect the values returned by the
+underlying database API, which continue to be numeric.</dd>
+</dl>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def get_col_spec(<i>self</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.databases.mysql_MSTinyText"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class MSTinyText(<a href="sqlalchemy_databases_mysql.html#docstrings_sqlalchemy.databases.mysql_MSText">MSText</a>)</h3>
+    
+    
+    <div class="darkcell"><p>MySQL TINYTEXT type, for text up to 2^8 characters.</p>
+</div>
+    
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def __init__(<i>self</i>, <i>**kwargs</i>)</b>
+    <div class="docstring">
+    <p>Construct a TINYTEXT.</p>
+<dl class="docutils">
+<dt>charset</dt>
+<dd>Optional, a column-level character set for this string
+value.  Takes precendence to 'ascii' or 'unicode' short-hand.</dd>
+<dt>collation</dt>
+<dd>Optional, a column-level collation for this string value.
+Takes precedence to 'binary' short-hand.</dd>
+<dt>ascii</dt>
+<dd>Defaults to False: short-hand for the <tt class="docutils literal"><span class="pre">latin1</span></tt> character set,
+generates ASCII in schema.</dd>
+<dt>unicode</dt>
+<dd>Defaults to False: short-hand for the <tt class="docutils literal"><span class="pre">ucs2</span></tt> character set,
+generates UNICODE in schema.</dd>
+<dt>national</dt>
+<dd>Optional. If true, use the server's configured national
+character set.</dd>
+<dt>binary</dt>
+<dd>Defaults to False: short-hand, pick the binary collation type
+that matches the column's character set.  Generates BINARY in
+schema.  This does not affect the type of data stored, only the
+collation of character data.</dd>
+</dl>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def get_col_spec(<i>self</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.databases.mysql_MSVarBinary"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class MSVarBinary(_BinaryType)</h3>
+    
+    
+    <div class="darkcell"><p>MySQL VARBINARY type, for variable length binary data.</p>
+</div>
+    
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def __init__(<i>self</i>, <i>length=None</i>, <i>**kw</i>)</b>
+    <div class="docstring">
+    <p>Construct a VARBINARY.  Arguments are:</p>
+<dl class="docutils">
+<dt>length</dt>
+<dd>Maximum data length, in bytes.</dd>
+</dl>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def get_col_spec(<i>self</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.databases.mysql_MSYear"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class MSYear(<a href="sqlalchemy_types.html#docstrings_sqlalchemy.types_TypeEngine">TypeEngine</a>)</h3>
+    
+    
+    <div class="darkcell"><p>MySQL YEAR type, for single byte storage of years 1901-2155.</p>
+</div>
+    
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def __init__(<i>self</i>, <i>length=None</i>)</b>
+    <div class="docstring">
+    <p>Construct a new <tt class="docutils literal"><span class="pre">MSYear</span></tt>.</p>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def get_col_spec(<i>self</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+    
+
+    </div>
+
+
+
+
+
+    <div class="bottomnav">
+        
+    <div class="prevnext">
+            Up: <a href="docstrings.html">API Documentation</a>
+
+               |   
+            Previous: <a href="sqlalchemy_databases_postgres.html">module sqlalchemy.databases.postgres</a>
+
+               |   
+            Next: <a href="sqlalchemy_databases_oracle.html">module sqlalchemy.databases.oracle</a>
+    </div>
+
+    </div>
+
+
+
+
+
+
+
+
+</body>
+</html>
+
+
+
+
+
+

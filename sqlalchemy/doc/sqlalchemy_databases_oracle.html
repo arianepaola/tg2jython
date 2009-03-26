@@ -1,0 +1,1260 @@
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<title>SQLAlchemy 0.4 Documentation - module sqlalchemy.databases.oracle</title>
+	
+    
+    <link rel="stylesheet" href="style.css"></link>
+    <link rel="stylesheet" href="docs.css"></link>
+    <link href="syntaxhighlight.css" rel="stylesheet" type="text/css"></link>
+    <script src="scripts.js"></script>
+
+    <link rel="stylesheet" href="docutil.css"></link>
+
+
+
+</head>
+<body>
+
+
+
+
+
+
+
+
+<div id="topanchor"><a name="top">&nbsp;</a></div>
+
+
+<h1>SQLAlchemy 0.4 Documentation</h1>
+
+<div id="pagecontrol"><a href="index.html">Multiple Pages</a> | <a href="documentation.html">One Page</a></div>
+
+<div class="versionheader">Version: 0.4.7p1   Last Updated: 07/31/08 11:09:56</div>
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class="topnav">
+
+    
+    <div class="navbanner">
+        <a href="index.html" class="totoc">Table of Contents</a>
+        
+    <div class="prevnext">
+            Up: <a href="docstrings.html">API Documentation</a>
+
+               |   
+            Previous: <a href="sqlalchemy_databases_mysql.html">module sqlalchemy.databases.mysql</a>
+
+               |   
+            Next: <a href="sqlalchemy_databases_mssql.html">module sqlalchemy.databases.mssql</a>
+    </div>
+
+        <h2>module sqlalchemy.databases.oracle</h2>
+    </div>
+
+	
+	
+    <ul>
+        
+        <li><a style="" href="sqlalchemy_databases_oracle.html#docstrings_sqlalchemy.databases.oracle_modfunc">Module Functions</a></li>
+
+	        <li>
+                
+    <ul>
+        
+        <li><a style="" href="sqlalchemy_databases_oracle.html#docstrings_sqlalchemy.databases.oracle_modfunc_descriptor">descriptor()</a></li>
+
+    </ul>
+
+	        </li>
+        
+        <li><a style="" href="sqlalchemy_databases_oracle.html#docstrings_sqlalchemy.databases.oracle_OracleBinary">class OracleBinary(Binary)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_oracle.html#docstrings_sqlalchemy.databases.oracle_OracleBoolean">class OracleBoolean(Boolean)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_oracle.html#docstrings_sqlalchemy.databases.oracle_OracleChar">class OracleChar(CHAR)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_oracle.html#docstrings_sqlalchemy.databases.oracle_OracleCompiler">class OracleCompiler(DefaultCompiler)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_oracle.html#docstrings_sqlalchemy.databases.oracle_OracleDate">class OracleDate(Date)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_oracle.html#docstrings_sqlalchemy.databases.oracle_OracleDateTime">class OracleDateTime(DateTime)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_oracle.html#docstrings_sqlalchemy.databases.oracle_OracleDefaultRunner">class OracleDefaultRunner(DefaultRunner)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_oracle.html#docstrings_sqlalchemy.databases.oracle_OracleDialect">class OracleDialect(DefaultDialect)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_oracle.html#docstrings_sqlalchemy.databases.oracle_OracleExecutionContext">class OracleExecutionContext(DefaultExecutionContext)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_oracle.html#docstrings_sqlalchemy.databases.oracle_OracleIdentifierPreparer">class OracleIdentifierPreparer(IdentifierPreparer)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_oracle.html#docstrings_sqlalchemy.databases.oracle_OracleInteger">class OracleInteger(Integer)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_oracle.html#docstrings_sqlalchemy.databases.oracle_OracleNumeric">class OracleNumeric(Numeric)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_oracle.html#docstrings_sqlalchemy.databases.oracle_OracleRaw">class OracleRaw(OracleBinary)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_oracle.html#docstrings_sqlalchemy.databases.oracle_OracleSchemaDropper">class OracleSchemaDropper(SchemaDropper)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_oracle.html#docstrings_sqlalchemy.databases.oracle_OracleSchemaGenerator">class OracleSchemaGenerator(SchemaGenerator)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_oracle.html#docstrings_sqlalchemy.databases.oracle_OracleSmallInteger">class OracleSmallInteger(SmallInteger)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_oracle.html#docstrings_sqlalchemy.databases.oracle_OracleString">class OracleString(String)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_oracle.html#docstrings_sqlalchemy.databases.oracle_OracleText">class OracleText(Text)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_oracle.html#docstrings_sqlalchemy.databases.oracle_OracleTimestamp">class OracleTimestamp(TIMESTAMP)</a></li>
+
+    </ul>
+
+	</div>
+
+
+
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.databases.oracle"></a>
+    
+    <div class="sectionL2">
+
+    <h3>module sqlalchemy.databases.oracle</h3>
+    
+    
+    
+
+        
+    
+    <A name="docstrings_sqlalchemy.databases.oracle_modfunc"></a>
+    
+    <div class="sectionL3">
+
+    <h3>Module Functions</h3>
+    
+    
+                
+    <div class="darkcell">
+    
+    <A name="docstrings_sqlalchemy.databases.oracle_modfunc_descriptor"></a>
+    <b>def descriptor()</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+        
+
+    </div>
+
+
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.databases.oracle_OracleBinary"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class OracleBinary(<a href="sqlalchemy_types.html#docstrings_sqlalchemy.types_Binary">Binary</a>)</h3>
+    
+    
+    
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def bind_processor(<i>self</i>, <i>dialect</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def get_col_spec(<i>self</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def get_dbapi_type(<i>self</i>, <i>dbapi</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def result_processor(<i>self</i>, <i>dialect</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.databases.oracle_OracleBoolean"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class OracleBoolean(<a href="sqlalchemy_types.html#docstrings_sqlalchemy.types_Boolean">Boolean</a>)</h3>
+    
+    
+    
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def bind_processor(<i>self</i>, <i>dialect</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def get_col_spec(<i>self</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def result_processor(<i>self</i>, <i>dialect</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.databases.oracle_OracleChar"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class OracleChar(<a href="sqlalchemy_types.html#docstrings_sqlalchemy.types_CHAR">CHAR</a>)</h3>
+    
+    
+    
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def get_col_spec(<i>self</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.databases.oracle_OracleCompiler"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class OracleCompiler(<a href="sqlalchemy_sql_compiler.html#docstrings_sqlalchemy.sql.compiler_DefaultCompiler">DefaultCompiler</a>)</h3>
+    
+    
+    <div class="darkcell"><p>Oracle compiler modifies the lexical structure of Select
+statements to work under non-ANSI configured Oracle databases, if
+the use_ansi flag is False.</p>
+</div>
+    
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def __init__(<i>self</i>, <i>*args</i>, <i>**kwargs</i>)</b>
+    <div class="docstring">
+    <p>Construct a new <tt class="docutils literal"><span class="pre">OracleCompiler</span></tt>.</p>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def apply_function_parens(<i>self</i>, <i>func</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def default_from(<i>self</i>)</b>
+    <div class="docstring">
+    <p>Called when a <tt class="docutils literal"><span class="pre">SELECT</span></tt> statement has no froms, and no <tt class="docutils literal"><span class="pre">FROM</span></tt> clause is to be appended.</p>
+<p>The Oracle compiler tacks a &quot;FROM DUAL&quot; to the statement.</p>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def for_update_clause(<i>self</i>, <i>select</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def limit_clause(<i>self</i>, <i>select</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def visit_alias(<i>self</i>, <i>alias</i>, <i>asfrom=False</i>, <i>**kwargs</i>)</b>
+    <div class="docstring">
+    <p>Oracle doesn't like <tt class="docutils literal"><span class="pre">FROM</span> <span class="pre">table</span> <span class="pre">AS</span> <span class="pre">alias</span></tt>.  Is the AS standard SQL??</p>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def visit_join(<i>self</i>, <i>join</i>, <i>**kwargs</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def visit_outer_join_column(<i>self</i>, <i>vc</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def visit_select(<i>self</i>, <i>select</i>, <i>**kwargs</i>)</b>
+    <div class="docstring">
+    <p>Look for <tt class="docutils literal"><span class="pre">LIMIT</span></tt> and OFFSET in a select statement, and if
+so tries to wrap it in a subquery with <tt class="docutils literal"><span class="pre">row_number()</span></tt> criterion.</p>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def visit_sequence(<i>self</i>, <i>seq</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.databases.oracle_OracleDate"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class OracleDate(<a href="sqlalchemy_types.html#docstrings_sqlalchemy.types_Date">Date</a>)</h3>
+    
+    
+    
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def bind_processor(<i>self</i>, <i>dialect</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def get_col_spec(<i>self</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def result_processor(<i>self</i>, <i>dialect</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.databases.oracle_OracleDateTime"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class OracleDateTime(<a href="sqlalchemy_types.html#docstrings_sqlalchemy.types_DateTime">DateTime</a>)</h3>
+    
+    
+    
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def get_col_spec(<i>self</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def result_processor(<i>self</i>, <i>dialect</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.databases.oracle_OracleDefaultRunner"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class OracleDefaultRunner(<a href="sqlalchemy_engine.html#docstrings_sqlalchemy.engine_DefaultRunner">DefaultRunner</a>)</h3>
+    
+    
+    
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def visit_sequence(<i>self</i>, <i>seq</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.databases.oracle_OracleDialect"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class OracleDialect(<a href="sqlalchemy_engine_default.html#docstrings_sqlalchemy.engine.default_DefaultDialect">DefaultDialect</a>)</h3>
+    
+    
+    
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def __init__(<i>self</i>, <i>use_ansi=True</i>, <i>auto_setinputsizes=True</i>, <i>auto_convert_lobs=True</i>, <i>threaded=True</i>, <i>allow_twophase=True</i>, <i>arraysize=50</i>, <i>**kwargs</i>)</b>
+    <div class="docstring">
+    <p>Construct a new <tt class="docutils literal"><span class="pre">OracleDialect</span></tt>.</p>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def create_connect_args(<i>self</i>, <i>url</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def create_execution_context(<i>self</i>, <i>*args</i>, <i>**kwargs</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def create_xid(<i>self</i>)</b>
+    <div class="docstring">
+    <p>create a two-phase transaction ID.</p>
+<p>this id will be passed to do_begin_twophase(), do_rollback_twophase(),
+do_commit_twophase().  its format is unspecified.</p>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def dbapi(<i>cls</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def do_begin_twophase(<i>self</i>, <i>connection</i>, <i>xid</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def do_commit_twophase(<i>self</i>, <i>connection</i>, <i>xid</i>, <i>is_prepared=True</i>, <i>recover=False</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def do_prepare_twophase(<i>self</i>, <i>connection</i>, <i>xid</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def do_recover_twophase(<i>self</i>, <i>connection</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def do_release_savepoint(<i>self</i>, <i>connection</i>, <i>name</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def do_rollback_twophase(<i>self</i>, <i>connection</i>, <i>xid</i>, <i>is_prepared=True</i>, <i>recover=False</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def get_default_schema_name(<i>self</i>, <i>connection</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def has_sequence(<i>self</i>, <i>connection</i>, <i>sequence_name</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def has_table(<i>self</i>, <i>connection</i>, <i>table_name</i>, <i>schema=None</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def is_disconnect(<i>self</i>, <i>e</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def oid_column_name(<i>self</i>, <i>column</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def reflecttable(<i>self</i>, <i>connection</i>, <i>table</i>, <i>include_columns</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def table_names(<i>self</i>, <i>connection</i>, <i>schema</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def type_descriptor(<i>self</i>, <i>typeobj</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.databases.oracle_OracleExecutionContext"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class OracleExecutionContext(<a href="sqlalchemy_engine_default.html#docstrings_sqlalchemy.engine.default_DefaultExecutionContext">DefaultExecutionContext</a>)</h3>
+    
+    
+    
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def create_cursor(<i>self</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def get_result_proxy(<i>self</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def pre_exec(<i>self</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.databases.oracle_OracleIdentifierPreparer"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class OracleIdentifierPreparer(<a href="sqlalchemy_sql_compiler.html#docstrings_sqlalchemy.sql.compiler_IdentifierPreparer">IdentifierPreparer</a>)</h3>
+    
+    
+    
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def format_savepoint(<i>self</i>, <i>savepoint</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.databases.oracle_OracleInteger"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class OracleInteger(<a href="sqlalchemy_types.html#docstrings_sqlalchemy.types_Integer">Integer</a>)</h3>
+    
+    
+    
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def get_col_spec(<i>self</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.databases.oracle_OracleNumeric"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class OracleNumeric(<a href="sqlalchemy_types.html#docstrings_sqlalchemy.types_Numeric">Numeric</a>)</h3>
+    
+    
+    
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def get_col_spec(<i>self</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.databases.oracle_OracleRaw"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class OracleRaw(<a href="sqlalchemy_databases_oracle.html#docstrings_sqlalchemy.databases.oracle_OracleBinary">OracleBinary</a>)</h3>
+    
+    
+    
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def get_col_spec(<i>self</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.databases.oracle_OracleSchemaDropper"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class OracleSchemaDropper(<a href="sqlalchemy_sql_compiler.html#docstrings_sqlalchemy.sql.compiler_SchemaDropper">SchemaDropper</a>)</h3>
+    
+    
+    
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def visit_sequence(<i>self</i>, <i>sequence</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.databases.oracle_OracleSchemaGenerator"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class OracleSchemaGenerator(<a href="sqlalchemy_sql_compiler.html#docstrings_sqlalchemy.sql.compiler_SchemaGenerator">SchemaGenerator</a>)</h3>
+    
+    
+    
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def get_column_specification(<i>self</i>, <i>column</i>, <i>**kwargs</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def visit_sequence(<i>self</i>, <i>sequence</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.databases.oracle_OracleSmallInteger"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class OracleSmallInteger(<a href="sqlalchemy_types.html#docstrings_sqlalchemy.types_SmallInteger">SmallInteger</a>)</h3>
+    
+    
+    
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def get_col_spec(<i>self</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.databases.oracle_OracleString"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class OracleString(<a href="sqlalchemy_types.html#docstrings_sqlalchemy.types_String">String</a>)</h3>
+    
+    
+    
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def get_col_spec(<i>self</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.databases.oracle_OracleText"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class OracleText(<a href="sqlalchemy_types.html#docstrings_sqlalchemy.types_Text">Text</a>)</h3>
+    
+    
+    
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def get_col_spec(<i>self</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def get_dbapi_type(<i>self</i>, <i>dbapi</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def result_processor(<i>self</i>, <i>dialect</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.databases.oracle_OracleTimestamp"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class OracleTimestamp(<a href="sqlalchemy_types.html#docstrings_sqlalchemy.types_TIMESTAMP">TIMESTAMP</a>)</h3>
+    
+    
+    
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def get_col_spec(<i>self</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def get_dbapi_type(<i>self</i>, <i>dialect</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def result_processor(<i>self</i>, <i>dialect</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+    
+
+    </div>
+
+
+
+
+
+    <div class="bottomnav">
+        
+    <div class="prevnext">
+            Up: <a href="docstrings.html">API Documentation</a>
+
+               |   
+            Previous: <a href="sqlalchemy_databases_mysql.html">module sqlalchemy.databases.mysql</a>
+
+               |   
+            Next: <a href="sqlalchemy_databases_mssql.html">module sqlalchemy.databases.mssql</a>
+    </div>
+
+    </div>
+
+
+
+
+
+
+
+
+</body>
+</html>
+
+
+
+
+
+

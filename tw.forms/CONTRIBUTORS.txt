@@ -1,0 +1,20 @@
+tw.forms Contributors
+=====================
+
+* Alberto Valverde
+* Roger Demetrescu
+* Paul Johnston
+* Chris Perkins.
+
+Thanks
+======
+
+* Michele Cella did the original implementation of many form fields in TG
+widgets which were copied almost verbatim into tw.forms.
+* Max Ischenko wrote the original DataGrids.
+* Pauli Virtanen implemented the SecureFormMixin and contrubuted some good
+  patches.
+* Timothy Sweetser has contributed fieldfactory.py
+
+* All of those who've contributed to TurboGears' widgets which TW owes it's
+  whole existence (you know who you are ;)

@@ -1,1 +1,70 @@
-TurboGears 2 on Jython
+********************************
+**                            **
+** Google Summer of Code 2008 **
+**                            **
+********************************
+
+Improving TurboGears2 support on Jython
+
+Student: Ariane Paola Gomes
+Mentor: Philip Jenvey
+Mentoring Organization: TurboGears
+
+
+More information:
+http://code.google.com/soc/2008/turbogears/about.html
+http://code.google.com/soc/2008/turbogears/appinfo.html?csaid=9D3A17CF760D00B9
+http://wiki.python.org/jython/TurboGearsOnJython
+
+http://www.turbogears.org
+http://www.jython.org
+http://www.python.org
+
+Note:
+The Jython source code is not included in this archive and 
+has to be checked out (> 40MB size).
+
+You can download the current Jython 2.5 alpha 2 installer from:
+http://ufpr.dl.sourceforge.net/sourceforge/jython/jython_installer-2.5a2.jar
+
+
+Installation:
+
+- Jython
+svn co https://jython.svn.sourceforge.net/svnroot/jython/trunk jython
+
+- setuptools
+- virtualenv
+- nose
+- paste
+- pastedeploy
+- pastescript
+- weberror
+- webtest
+- webob
+- beaker
+- mako
+- simplejson
+- webhelpers
+- formencode
+- decorator
+- tempita
+- routes
+- pygments
+- wsgiref
+- pylons
+- sqlalchemy
+- zope.interface
+- transaction
+- zope.sqlalchemy
+- toscawidgets
+- tw.forms
+- repoze.tm2
+- turbogears2
+- tg.ext.repoze.who
+- sqlalchemy-migrate
+- dbsprockets
+- tg.devtools
+- docutils
+
+

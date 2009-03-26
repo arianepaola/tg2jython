@@ -1,0 +1,904 @@
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<title>SQLAlchemy 0.4 Documentation - module sqlalchemy.orm.collections</title>
+	
+    
+    <link rel="stylesheet" href="style.css"></link>
+    <link rel="stylesheet" href="docs.css"></link>
+    <link href="syntaxhighlight.css" rel="stylesheet" type="text/css"></link>
+    <script src="scripts.js"></script>
+
+    <link rel="stylesheet" href="docutil.css"></link>
+
+
+
+</head>
+<body>
+
+
+
+
+
+
+
+
+<div id="topanchor"><a name="top">&nbsp;</a></div>
+
+
+<h1>SQLAlchemy 0.4 Documentation</h1>
+
+<div id="pagecontrol"><a href="index.html">Multiple Pages</a> | <a href="documentation.html">One Page</a></div>
+
+<div class="versionheader">Version: 0.4.7p1   Last Updated: 07/31/08 11:09:56</div>
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class="topnav">
+
+    
+    <div class="navbanner">
+        <a href="index.html" class="totoc">Table of Contents</a>
+        
+    <div class="prevnext">
+            Up: <a href="docstrings.html">API Documentation</a>
+
+               |   
+            Previous: <a href="sqlalchemy_orm.html">module sqlalchemy.orm</a>
+
+               |   
+            Next: <a href="sqlalchemy_orm_interfaces.html">module sqlalchemy.orm.interfaces</a>
+    </div>
+
+        <h2>module sqlalchemy.orm.collections</h2>
+    </div>
+
+	
+	
+    <ul>
+        
+        <li><a style="" href="sqlalchemy_orm_collections.html#docstrings_sqlalchemy.orm.collections_modfunc">Module Functions</a></li>
+
+	        <li>
+                
+    <ul>
+        
+        <li><a style="" href="sqlalchemy_orm_collections.html#docstrings_sqlalchemy.orm.collections_modfunc_attribute_mapped_collection">attribute_mapped_collection()</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_orm_collections.html#docstrings_sqlalchemy.orm.collections_modfunc_collection_adapter">collection_adapter()</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_orm_collections.html#docstrings_sqlalchemy.orm.collections_modfunc_column_mapped_collection">column_mapped_collection()</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_orm_collections.html#docstrings_sqlalchemy.orm.collections_modfunc_mapped_collection">mapped_collection()</a></li>
+
+    </ul>
+
+	        </li>
+        
+        <li><a style="" href="sqlalchemy_orm_collections.html#docstrings_sqlalchemy.orm.collections_collection">class collection(object)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_orm_collections.html#docstrings_sqlalchemy.orm.collections_MappedCollection">class MappedCollection(dict)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_orm_collections.html#docstrings_sqlalchemy.orm.collections_CollectionAdapter">class CollectionAdapter(object)</a></li>
+
+    </ul>
+
+	</div>
+
+
+
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.orm.collections"></a>
+    
+    <div class="sectionL2">
+
+    <h3>module sqlalchemy.orm.collections</h3>
+    
+    
+    <div class="darkcell"><p>Support for collections of mapped entities.</p>
+<p>The collections package supplies the machinery used to inform the ORM of
+collection membership changes.  An instrumentation via decoration approach is
+used, allowing arbitrary types (including built-ins) to be used as entity
+collections without requiring inheritance from a base class.</p>
+<p>Instrumentation decoration relays membership change events to the
+<tt class="docutils literal"><span class="pre">InstrumentedCollectionAttribute</span></tt> that is currently managing the collection.
+The decorators observe function call arguments and return values, tracking
+entities entering or leaving the collection.  Two decorator approaches are
+provided.  One is a bundle of generic decorators that map function arguments
+and return values to events:</p>
+<pre class="literal-block">
+from sqlalchemy.orm.collections import collection
+class MyClass(object):
+    # ...
+
+    &#64;collection.adds(1)
+    def store(self, item):
+        self.data.append(item)
+
+    &#64;collection.removes_return()
+    def pop(self):
+        return self.data.pop()
+</pre>
+<p>The second approach is a bundle of targeted decorators that wrap appropriate
+append and remove notifiers around the mutation methods present in the
+standard Python <tt class="docutils literal"><span class="pre">list</span></tt>, <tt class="docutils literal"><span class="pre">set</span></tt> and <tt class="docutils literal"><span class="pre">dict</span></tt> interfaces.  These could be
+specified in terms of generic decorator recipes, but are instead hand-tooled for
+increased efficiency.   The targeted decorators occasionally implement
+adapter-like behavior, such as mapping bulk-set methods (<tt class="docutils literal"><span class="pre">extend</span></tt>, <tt class="docutils literal"><span class="pre">update</span></tt>,
+<tt class="docutils literal"><span class="pre">__setslice__</span></tt>, etc.) into the series of atomic mutation events that the ORM
+requires.</p>
+<p>The targeted decorators are used internally for automatic instrumentation of
+entity collection classes.  Every collection class goes through a
+transformation process roughly like so:</p>
+<ol class="arabic simple">
+<li>If the class is a built-in, substitute a trivial sub-class</li>
+<li>Is this class already instrumented?</li>
+<li>Add in generic decorators</li>
+<li>Sniff out the collection interface through duck-typing</li>
+<li>Add targeted decoration to any undecorated interface method</li>
+</ol>
+<p>This process modifies the class at runtime, decorating methods and adding some
+bookkeeping properties.  This isn't possible (or desirable) for built-in
+classes like <tt class="docutils literal"><span class="pre">list</span></tt>, so trivial sub-classes are substituted to hold
+decoration:</p>
+<pre class="literal-block">
+class InstrumentedList(list):
+    pass
+</pre>
+<p>Collection classes can be specified in <tt class="docutils literal"><span class="pre">relation(collection_class=)</span></tt> as
+types or a function that returns an instance.  Collection classes are
+inspected and instrumented during the mapper compilation phase.  The
+collection_class callable will be executed once to produce a specimen
+instance, and the type of that specimen will be instrumented.  Functions that
+return built-in types like <tt class="docutils literal"><span class="pre">lists</span></tt> will be adapted to produce instrumented
+instances.</p>
+<p>When extending a known type like <tt class="docutils literal"><span class="pre">list</span></tt>, additional decorations are not
+generally not needed.  Odds are, the extension method will delegate to a
+method that's already instrumented.  For example:</p>
+<pre class="literal-block">
+class QueueIsh(list):
+   def push(self, item):
+       self.append(item)
+   def shift(self):
+       return self.pop(0)
+</pre>
+<p>There's no need to decorate these methods.  <tt class="docutils literal"><span class="pre">append</span></tt> and <tt class="docutils literal"><span class="pre">pop</span></tt> are already
+instrumented as part of the <tt class="docutils literal"><span class="pre">list</span></tt> interface.  Decorating them would fire
+duplicate events, which should be avoided.</p>
+<p>The targeted decoration tries not to rely on other methods in the underlying
+collection class, but some are unavoidable.  Many depend on 'read' methods
+being present to properly instrument a 'write', for example, <tt class="docutils literal"><span class="pre">__setitem__</span></tt>
+needs <tt class="docutils literal"><span class="pre">__getitem__</span></tt>.  &quot;Bulk&quot; methods like <tt class="docutils literal"><span class="pre">update</span></tt> and <tt class="docutils literal"><span class="pre">extend</span></tt> may also
+reimplemented in terms of atomic appends and removes, so the <tt class="docutils literal"><span class="pre">extend</span></tt>
+decoration will actually perform many <tt class="docutils literal"><span class="pre">append</span></tt> operations and not call the
+underlying method at all.</p>
+<p>Tight control over bulk operation and the firing of events is also possible by
+implementing the instrumentation internally in your methods.  The basic
+instrumentation package works under the general assumption that collection
+mutation will not raise unusual exceptions.  If you want to closely
+orchestrate append and remove events with exception management, internal
+instrumentation may be the answer.  Within your method,
+<tt class="docutils literal"><span class="pre">collection_adapter(self)</span></tt> will retrieve an object that you can use for
+explicit control over triggering append and remove events.</p>
+<p>The owning object and InstrumentedCollectionAttribute are also reachable
+through the adapter, allowing for some very sophisticated behavior.</p>
+</div>
+    
+
+        
+    
+    <A name="docstrings_sqlalchemy.orm.collections_modfunc"></a>
+    
+    <div class="sectionL3">
+
+    <h3>Module Functions</h3>
+    
+    
+                
+    <div class="darkcell">
+    
+    <A name="docstrings_sqlalchemy.orm.collections_modfunc_attribute_mapped_collection"></a>
+    <b>def attribute_mapped_collection(<i>attr_name</i>)</b>
+    <div class="docstring">
+    <p>A dictionary-based collection type with attribute-based keying.</p>
+<p>Returns a MappedCollection factory with a keying based on the
+'attr_name' attribute of entities in the collection.</p>
+<p>The key value must be immutable for the lifetime of the object.  You
+can not, for example, map on foreign key values if those key values will
+change during the session, i.e. from None to a database-assigned integer
+after a session flush.</p>
+
+    </div>
+    </div>
+
+                
+    <div class="darkcell">
+    
+    <A name="docstrings_sqlalchemy.orm.collections_modfunc_collection_adapter"></a>
+    <b>def collection_adapter(<i>collection</i>)</b>
+    <div class="docstring">
+    <p>Fetch the CollectionAdapter for a collection.</p>
+
+    </div>
+    </div>
+
+                
+    <div class="darkcell">
+    
+    <A name="docstrings_sqlalchemy.orm.collections_modfunc_column_mapped_collection"></a>
+    <b>def column_mapped_collection(<i>mapping_spec</i>)</b>
+    <div class="docstring">
+    <p>A dictionary-based collection type with column-based keying.</p>
+<p>Returns a MappedCollection factory with a keying function generated
+from mapping_spec, which may be a Column or a sequence of Columns.</p>
+<p>The key value must be immutable for the lifetime of the object.  You
+can not, for example, map on foreign key values if those key values will
+change during the session, i.e. from None to a database-assigned integer
+after a session flush.</p>
+
+    </div>
+    </div>
+
+                
+    <div class="darkcell">
+    
+    <A name="docstrings_sqlalchemy.orm.collections_modfunc_mapped_collection"></a>
+    <b>def mapped_collection(<i>keyfunc</i>)</b>
+    <div class="docstring">
+    <p>A dictionary-based collection type with arbitrary keying.</p>
+<p>Returns a MappedCollection factory with a keying function generated
+from keyfunc, a callable that takes an entity and returns a key value.</p>
+<p>The key value must be immutable for the lifetime of the object.  You
+can not, for example, map on foreign key values if those key values will
+change during the session, i.e. from None to a database-assigned integer
+after a session flush.</p>
+
+    </div>
+    </div>
+
+        
+
+    </div>
+
+
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.orm.collections_collection"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class collection(object)</h3>
+    
+    
+    <div class="darkcell"><p>Decorators for entity collection classes.</p>
+<p>The decorators fall into two groups: annotations and interception recipes.</p>
+<p>The annotating decorators (appender, remover, iterator,
+internally_instrumented, on_link) indicate the method's purpose and take no
+arguments.  They are not written with parens:</p>
+<pre class="literal-block">
+&#64;collection.appender
+def append(self, append): ...
+</pre>
+<p>The recipe decorators all require parens, even those that take no
+arguments:</p>
+<pre class="literal-block">
+&#64;collection.adds('entity'):
+def insert(self, position, entity): ...
+
+&#64;collection.removes_return()
+def popitem(self): ...
+</pre>
+<p>Decorators can be specified in long-hand for Python 2.3, or with
+the class-level dict attribute '__instrumentation__'- see the source
+for details.</p>
+</div>
+    
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def adds(<i>cls</i>, <i>arg</i>)</b>
+    <div class="docstring">
+    <p>Mark the method as adding an entity to the collection.</p>
+<p>Adds &quot;add to collection&quot; handling to the method.  The decorator argument
+indicates which method argument holds the SQLAlchemy-relevant value.
+Arguments can be specified positionally (i.e. integer) or by name:</p>
+<pre class="literal-block">
+&#64;collection.adds(1)
+def push(self, item): ...
+
+&#64;collection.adds('entity')
+def do_stuff(self, thing, entity=None): ...
+</pre>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def appender(<i>cls</i>, <i>fn</i>)</b>
+    <div class="docstring">
+    <p>Tag the method as the collection appender.</p>
+<p>The appender method is called with one positional argument: the value
+to append. The method will be automatically decorated with 'adds(1)'
+if not already decorated:</p>
+<pre class="literal-block">
+&#64;collection.appender
+def add(self, append): ...
+
+# or, equivalently
+&#64;collection.appender
+&#64;collection.adds(1)
+def add(self, append): ...
+
+# for mapping type, an 'append' may kick out a previous value
+# that occupies that slot.  consider d['a'] = 'foo'- any previous
+# value in d['a'] is discarded.
+&#64;collection.appender
+&#64;collection.replaces(1)
+def add(self, entity):
+    key = some_key_func(entity)
+    previous = None
+    if key in self:
+        previous = self[key]
+    self[key] = entity
+    return previous
+</pre>
+<p>If the value to append is not allowed in the collection, you may
+raise an exception.  Something to remember is that the appender
+will be called for each object mapped by a database query.  If the
+database contains rows that violate your collection semantics, you
+will need to get creative to fix the problem, as access via the
+collection will not work.</p>
+<p>If the appender method is internally instrumented, you must also
+receive the keyword argument '_sa_initiator' and ensure its
+promulgation to collection events.</p>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def converter(<i>cls</i>, <i>fn</i>)</b>
+    <div class="docstring">
+    <p>Tag the method as the collection converter.</p>
+<p>This optional method will be called when a collection is being
+replaced entirely, as in:</p>
+<pre class="literal-block">
+myobj.acollection = [newvalue1, newvalue2]
+</pre>
+<p>The converter method will receive the object being assigned and should
+return an iterable of values suitable for use by the <tt class="docutils literal"><span class="pre">appender</span></tt>
+method.  A converter must not assign values or mutate the collection,
+it's sole job is to adapt the value the user provides into an iterable
+of values for the ORM's use.</p>
+<p>The default converter implementation will use duck-typing to do the
+conversion.  A dict-like collection will be convert into an iterable
+of dictionary values, and other types will simply be iterated.</p>
+<blockquote>
+&#64;collection.converter
+def convert(self, other): ...</blockquote>
+<p>If the duck-typing of the object does not match the type of this
+collection, a TypeError is raised.</p>
+<p>Supply an implementation of this method if you want to expand the
+range of possible types that can be assigned in bulk or perform
+validation on the values about to be assigned.</p>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def internally_instrumented(<i>cls</i>, <i>fn</i>)</b>
+    <div class="docstring">
+    <p>Tag the method as instrumented.</p>
+<p>This tag will prevent any decoration from being applied to the method.
+Use this if you are orchestrating your own calls to collection_adapter
+in one of the basic SQLAlchemy interface methods, or to prevent
+an automatic ABC method decoration from wrapping your implementation:</p>
+<pre class="literal-block">
+# normally an 'extend' method on a list-like class would be
+# automatically intercepted and re-implemented in terms of
+# SQLAlchemy events and append().  your implementation will
+# never be called, unless:
+&#64;collection.internally_instrumented
+def extend(self, items): ...
+</pre>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def iterator(<i>cls</i>, <i>fn</i>)</b>
+    <div class="docstring">
+    <p>Tag the method as the collection remover.</p>
+<p>The iterator method is called with no arguments.  It is expected to
+return an iterator over all collection members:</p>
+<pre class="literal-block">
+&#64;collection.iterator
+def __iter__(self): ...
+</pre>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def on_link(<i>cls</i>, <i>fn</i>)</b>
+    <div class="docstring">
+    <p>Tag the method as a the &quot;linked to attribute&quot; event handler.</p>
+<p>This optional event handler will be called when the collection class
+is linked to or unlinked from the InstrumentedAttribute.  It is
+invoked immediately after the '_sa_adapter' property is set on
+the instance.  A single argument is passed: the collection adapter
+that has been linked, or None if unlinking.</p>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def remover(<i>cls</i>, <i>fn</i>)</b>
+    <div class="docstring">
+    <p>Tag the method as the collection remover.</p>
+<p>The remover method is called with one positional argument: the value
+to remove. The method will be automatically decorated with
+'removes_return()' if not already decorated:</p>
+<pre class="literal-block">
+&#64;collection.remover
+def zap(self, entity): ...
+
+# or, equivalently
+&#64;collection.remover
+&#64;collection.removes_return()
+def zap(self, ): ...
+</pre>
+<p>If the value to remove is not present in the collection, you may
+raise an exception or return None to ignore the error.</p>
+<p>If the remove method is internally instrumented, you must also
+receive the keyword argument '_sa_initiator' and ensure its
+promulgation to collection events.</p>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def removes(<i>cls</i>, <i>arg</i>)</b>
+    <div class="docstring">
+    <p>Mark the method as removing an entity in the collection.</p>
+<p>Adds &quot;remove from collection&quot; handling to the method.  The decorator
+argument indicates which method argument holds the SQLAlchemy-relevant
+value to be removed. Arguments can be specified positionally (i.e.
+integer) or by name:</p>
+<pre class="literal-block">
+&#64;collection.removes(1)
+def zap(self, item): ...
+</pre>
+<p>For methods where the value to remove is not known at call-time, use
+collection.removes_return.</p>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def removes_return(<i>cls</i>)</b>
+    <div class="docstring">
+    <p>Mark the method as removing an entity in the collection.</p>
+<p>Adds &quot;remove from collection&quot; handling to the method.  The return value
+of the method, if any, is considered the value to remove.  The method
+arguments are not inspected:</p>
+<pre class="literal-block">
+&#64;collection.removes_return()
+def pop(self): ...
+</pre>
+<p>For methods where the value to remove is known at call-time, use
+collection.remove.</p>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def replaces(<i>cls</i>, <i>arg</i>)</b>
+    <div class="docstring">
+    <p>Mark the method as replacing an entity in the collection.</p>
+<p>Adds &quot;add to collection&quot; and &quot;remove from collection&quot; handling to
+the method.  The decorator argument indicates which method argument
+holds the SQLAlchemy-relevant value to be added, and return value, if
+any will be considered the value to remove.</p>
+<p>Arguments can be specified positionally (i.e. integer) or by name:</p>
+<pre class="literal-block">
+&#64;collection.replaces(2)
+def __setitem__(self, index, item): ...
+</pre>
+
+    </div>
+    </div>
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.orm.collections_MappedCollection"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class MappedCollection(dict)</h3>
+    
+    
+    <div class="darkcell"><p>A basic dictionary-based collection class.</p>
+<p>Extends dict with the minimal bag semantics that collection classes require.
+<tt class="docutils literal"><span class="pre">set</span></tt> and <tt class="docutils literal"><span class="pre">remove</span></tt> are implemented in terms of a keying function: any
+callable that takes an object and returns an object for use as a dictionary
+key.</p>
+</div>
+    
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def __init__(<i>self</i>, <i>keyfunc</i>)</b>
+    <div class="docstring">
+    <p>Create a new collection with keying provided by keyfunc.</p>
+<p>keyfunc may be any callable any callable that takes an object and
+returns an object for use as a dictionary key.</p>
+<p>The keyfunc will be called every time the ORM needs to add a member by
+value-only (such as when loading instances from the database) or remove
+a member.  The usual cautions about dictionary keying apply-
+<tt class="docutils literal"><span class="pre">keyfunc(object)</span></tt> should return the same output for the life of the
+collection.  Keying based on mutable properties can result in
+unreachable instances &quot;lost&quot; in the collection.</p>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def remove(<i>self</i>, <i>value</i>, <i>_sa_initiator=None</i>)</b>
+    <div class="docstring">
+    <p>Remove an item from the collection by value, consulting this instance's keyfunc for the key.</p>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def set(<i>self</i>, <i>value</i>, <i>_sa_initiator=None</i>)</b>
+    <div class="docstring">
+    <p>Add an item to the collection, with a key provided by this instance's keyfunc.</p>
+
+    </div>
+    </div>
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.orm.collections_CollectionAdapter"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class CollectionAdapter(object)</h3>
+    
+    
+    <div class="darkcell"><p>Bridges between the ORM and arbitrary Python collections.</p>
+<p>Proxies base-level collection operations (append, remove, iterate)
+to the underlying Python collection, and emits add/remove events for
+entities entering or leaving the collection.</p>
+<p>The ORM uses an CollectionAdapter exclusively for interaction with
+entity collections.</p>
+</div>
+    
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def __init__(<i>self</i>, <i>attr</i>, <i>owner_state</i>, <i>data</i>)</b>
+    <div class="docstring">
+    <p>Construct a new <tt class="docutils literal"><span class="pre">CollectionAdapter</span></tt>.</p>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def adapt_like_to_iterable(<i>self</i>, <i>obj</i>)</b>
+    <div class="docstring">
+    <p>Converts collection-compatible objects to an iterable of values.</p>
+<p>Can be passed any type of object, and if the underlying collection
+determines that it can be adapted into a stream of values it can
+use, returns an iterable of values suitable for append()ing.</p>
+<p>This method may raise TypeError or any other suitable exception
+if adaptation fails.</p>
+<p>If a converter implementation is not supplied on the collection,
+a default duck-typing-based implementation is used.</p>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def append_with_event(<i>self</i>, <i>item</i>, <i>initiator=None</i>)</b>
+    <div class="docstring">
+    <p>Add an entity to the collection, firing mutation events.</p>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def append_without_event(<i>self</i>, <i>item</i>)</b>
+    <div class="docstring">
+    <p>Add or restore an entity to the collection, firing no events.</p>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def clear_with_event(<i>self</i>, <i>initiator=None</i>)</b>
+    <div class="docstring">
+    <p>Empty the collection, firing a mutation event for each entity.</p>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def clear_without_event(<i>self</i>)</b>
+    <div class="docstring">
+    <p>Empty the collection, firing no events.</p>
+
+    </div>
+    </div>
+
+                    
+         <div class="darkcell">
+         <A name=""></a>
+         <b>data = property()</b>
+         <div class="docstring">
+         <p>The entity collection being adapted.</p>
+
+         </div> 
+         </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def fire_append_event(<i>self</i>, <i>item</i>, <i>initiator=None</i>)</b>
+    <div class="docstring">
+    <p>Notify that a entity has entered the collection.</p>
+<p>Initiator is the InstrumentedAttribute that initiated the membership
+mutation, and should be left as None unless you are passing along
+an initiator value from a chained operation.</p>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def fire_pre_remove_event(<i>self</i>, <i>initiator=None</i>)</b>
+    <div class="docstring">
+    <p>Notify that an entity is about to be removed from the collection.</p>
+<p>Only called if the entity cannot be removed after calling
+fire_remove_event().</p>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def fire_remove_event(<i>self</i>, <i>item</i>, <i>initiator=None</i>)</b>
+    <div class="docstring">
+    <p>Notify that a entity has been removed from the collection.</p>
+<p>Initiator is the InstrumentedAttribute that initiated the membership
+mutation, and should be left as None unless you are passing along
+an initiator value from a chained operation.</p>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def link_to_self(<i>self</i>, <i>data</i>)</b>
+    <div class="docstring">
+    <p>Link a collection to this adapter, and fire a link event.</p>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def remove_with_event(<i>self</i>, <i>item</i>, <i>initiator=None</i>)</b>
+    <div class="docstring">
+    <p>Remove an entity from the collection, firing mutation events.</p>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def remove_without_event(<i>self</i>, <i>item</i>)</b>
+    <div class="docstring">
+    <p>Remove an entity from the collection, firing no events.</p>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def unlink(<i>self</i>, <i>data</i>)</b>
+    <div class="docstring">
+    <p>Unlink a collection from any adapter, and fire a link event.</p>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def __iter__(<i>self</i>)</b>
+    <div class="docstring">
+    <p>Iterate over entities in the collection.</p>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def __len__(<i>self</i>)</b>
+    <div class="docstring">
+    <p>Count entities in the collection.</p>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def __nonzero__(<i>self</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+    
+
+    </div>
+
+
+
+
+
+    <div class="bottomnav">
+        
+    <div class="prevnext">
+            Up: <a href="docstrings.html">API Documentation</a>
+
+               |   
+            Previous: <a href="sqlalchemy_orm.html">module sqlalchemy.orm</a>
+
+               |   
+            Next: <a href="sqlalchemy_orm_interfaces.html">module sqlalchemy.orm.interfaces</a>
+    </div>
+
+    </div>
+
+
+
+
+
+
+
+
+</body>
+</html>
+
+
+
+
+
+

@@ -1,0 +1,140 @@
+zope.interface Package Changes
+******************************
+
+==================
+3.4.2 (unreleased)
+==================
+
+- Fixed declaration of _zope_interface_coptimizations, it's not a top level
+  package.
+
+- Allow to bootstrap on Jython.
+
+- Fix https://bugs.launchpad.net/zope3/3.3/+bug/98388: ISpecification
+  was missing a declaration for __iro__.
+
+- Added optional code optimizations support, which allows the building
+  of C code optimizations to fail (Jython).
+
+==================
+3.4.1 (2007/10/02)
+==================
+
+Fixed a setup bug that prevented installation from source on systems
+without setuptools.
+
+==================
+3.4.0 (2007/07/19)
+==================
+
+Final release for 3.4.0.
+
+====================
+3.4.0b3 (2007/05/22)
+====================
+
+Bug Fixes
+=========
+
+- Objects with picky custom comparison methods couldn't be added to
+  component registries.  Now, when checking whether an object is
+  already registered, identity comparison is used.
+
+====================
+3.3.0.1 (2007/01/03)
+====================
+
+Bug Fixes
+=========
+
+- Made a reference to OverflowWarning, which disappeared in Python
+  2.5, conditional.
+
+==================
+3.3.0 (2007/01/03)
+==================
+
+New Features
+============
+
+- The adapter-lookup algorithim was refactored to make it
+  much simpler and faster.  
+
+  Also, more of the adapter-lookup logic is implemented in C, making
+  debugging of application code easier, since there is less
+  infrastructre code to step through.
+
+- We now treat objects without interafce declarations as if they
+  declared that they provide zope.interface.Interface.
+
+- There are a number of richer new adapter-registration interfaces
+  that provide greater control and introspection.
+
+- Added a new interface decorator to zope.interface that allows the
+  setting of tagged values on an interface at definition time (see
+  zope.interface.taggedValue).
+
+Bug Fixes
+=========
+
+- A bug in multi-adapter lookup sometimes caused incorrect adapters to
+  be returned.
+
+
+===========================================
+zope.interface version 3.2.0.2 (2006/04/15)
+===========================================
+
+- Fix packaging bug:  'package_dir' must be a *relative* path.
+
+
+===========================================
+zope.interface version 3.2.0.1 (2006/04/14)
+===========================================
+
+- Packaging change:  suppress inclusion of 'setup.cfg' in 'sdist' builds.
+
+
+=========================================
+zope.interface version 3.2.0 (2006/01/05)
+=========================================
+
+- Corresponds to the verison of the zope.interface package shipped as part of
+  the Zope 3.2.0 release.
+
+- TODO:  note other changes
+
+
+=========================================
+zope.interface version 3.1.0 (2005/10/03)
+=========================================
+
+- Corresponds to the verison of the zope.interface package shipped as part of
+  the Zope 3.1.0 release.
+
+- TODO:  note other changes
+
+- Made attribute resolution order consistent with component lookup order,
+  i.e. new-style class MRO semantics.
+
+- Deprecated 'isImplementedBy' and 'isImplementedByInstancesOf' APIs in
+  favor of 'implementedBy' and 'providedBy'.
+
+
+=========================================
+zope.interface version 3.0.1 (2005/07/27)
+=========================================
+
+- Corresponds to the verison of the zope.interface package shipped as part of
+  the Zope X3.0.1 release.
+
+- Fixed a bug reported by James Knight, which caused adapter registries
+  to fail occasionally to reflect declaration changes.
+
+
+=========================================
+zope.interface version 3.0.0 (2004/11/07)
+=========================================
+
+- Corresponds to the verison of the zope.interface package shipped as part of
+  the Zope X3.0.0 release.

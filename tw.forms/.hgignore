@@ -1,0 +1,14 @@
+syntax:glob
+
+.coverage
+*.py[c,o]
+*.bak
+*.db
+*.sw?
+*.orig
+.svn
+build/*
+dist/*
+docs/.build
+ez_setup/*
+*.egg-info/*

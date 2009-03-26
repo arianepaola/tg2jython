@@ -1,0 +1,84 @@
+>>> from tw.forms import InputWidget, InputWidgetRepeater
+>>> from tw.api import Widget
+>>> from formencode.validators import Int
+>>> from formencode.foreach import ForEach
+>>> from formencode.schema import Schema
+
+
+A Schema is generated if widget has any InputWidget as a child.
+
+>>> form = InputWidget('form', children = [
+...     InputWidget('foo', validator=Int),
+...     ])
+>>> form.validator.fields.keys()
+['foo']
+
+
+A Schema is copied and extended if provided and  widget has any InputWidget as 
+a child.
+
+>>> schema = Schema()
+>>> form = InputWidget('form', children = [
+...     InputWidget('foo', validator=Int),
+...     ], validator = schema)
+>>> form.validator.fields.keys()
+['foo']
+>>> schema.fields.keys()
+[]
+>>> form.validator is not schema
+True
+
+>>> schema = Schema
+>>> form = InputWidget('form', children = [
+...     InputWidget('foo', validator=Int),
+...     ], validator = schema)
+>>> form.validator.fields.keys()
+['foo']
+>>> schema.fields.keys()
+[]
+>>> form.validator is not schema
+True
+
+
+No Schema is generated if widget has no InputWidget as a child.
+
+>>> form = InputWidget('form', children=[Widget('foo')])
+>>> form.validator
+<class 'tw.forms.core.DefaultValidator'>
+
+
+Schema is not modified if widget has no InputWidget as a child.
+
+>>> form = InputWidget('form', validator=schema)
+>>> form.validator is schema
+True
+
+
+A ForEach is generated for InputWidgetRepeaters if None is provided.
+
+>>> w = InputWidgetRepeater('foo', widget=InputWidget('bar', validator=Int), max_repetitions=100)
+>>> isinstance(w.validator, ForEach)
+True
+
+
+If a validator is provided none is generated.
+
+>>> w = InputWidgetRepeater('foo', widget=InputWidget('bar', validator=Int), max_repetitions=100, validator=Int)
+>>> w.validator
+<class 'formencode.validators.Int'>
+
+
+Widgets provided with a validator can coerce input from the web into python
+objects.
+
+>>> w = InputWidget('age', validator=Int(not_empty=True))
+>>> w.validate('3')
+3
+>>> w.validate('')
+Traceback (most recent call last):
+    ...
+Invalid: Please enter a value
+>>> w.validate('i')
+Traceback (most recent call last):
+    ...
+Invalid: Please enter an integer value

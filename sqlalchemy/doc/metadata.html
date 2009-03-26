@@ -1,0 +1,1116 @@
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<title>SQLAlchemy 0.4 Documentation - Database Meta Data</title>
+	
+    <link rel="stylesheet" href="style.css"></link>
+    <link rel="stylesheet" href="docs.css"></link>
+    <link href="syntaxhighlight.css" rel="stylesheet" type="text/css"></link>
+    <script src="scripts.js"></script>
+
+
+
+</head>
+<body>
+
+
+
+
+
+
+
+
+<div id="topanchor"><a name="top">&nbsp;</a></div>
+
+
+<h1>SQLAlchemy 0.4 Documentation</h1>
+
+<div id="pagecontrol"><a href="index.html">Multiple Pages</a> | <a href="documentation.html">One Page</a></div>
+
+<div class="versionheader">Version: 0.4.7p1   Last Updated: 07/31/08 11:09:56</div>
+
+
+
+
+
+
+
+<A name=""></a>
+
+
+    <div class="topnav">
+
+    
+    <div class="navbanner">
+        <a href="index.html" class="totoc">Table of Contents</a>
+        
+    <div class="prevnext">
+
+            
+            Previous: <a href="dbengine.html">Database Engines</a>
+
+               |   
+            Next: <a href="types.html">The Types System</a>
+    </div>
+
+        <h2>Database Meta Data</h2>
+    </div>
+
+	
+	
+    <ul>
+        
+        <li><a style="" href="metadata.html#metadata_tables">Describing Databases with MetaData</a></li>
+
+	        <li>
+                
+    <ul>
+        
+        <li><a style="" href="metadata.html#metadata_tables_binding">Binding MetaData to an Engine or Connection</a></li>
+
+        
+        <li><a style="" href="metadata.html#metadata_tables_reflecting">Reflecting Tables</a></li>
+
+	        <li>
+                
+    <ul>
+        
+        <li><a style="" href="metadata.html#metadata_tables_reflecting_overriding">Overriding Reflected Columns</a></li>
+
+    </ul>
+
+	        </li>
+        
+        <li><a style="" href="metadata.html#metadata_tables_schema">Specifying the Schema Name</a></li>
+
+        
+        <li><a style="" href="metadata.html#metadata_tables_onupdate">ON UPDATE and ON DELETE</a></li>
+
+        
+        <li><a style="" href="metadata.html#metadata_tables_options">Other Options</a></li>
+
+    </ul>
+
+	        </li>
+        
+        <li><a style="" href="metadata.html#metadata_creating">Creating and Dropping Database Tables</a></li>
+
+        
+        <li><a style="" href="metadata.html#metadata_defaults">Column Insert/Update Defaults</a></li>
+
+	        <li>
+                
+    <ul>
+        
+        <li><a style="" href="metadata.html#metadata_defaults_preexecute_functions">Pre-Executed Python Functions</a></li>
+
+        
+        <li><a style="" href="metadata.html#metadata_defaults_sqlexpression">Pre-executed and Inline SQL Expressions</a></li>
+
+        
+        <li><a style="" href="metadata.html#metadata_defaults_passive">DDL-Level Defaults</a></li>
+
+        
+        <li><a style="" href="metadata.html#metadata_defaults_sequences">Defining Sequences</a></li>
+
+    </ul>
+
+	        </li>
+        
+        <li><a style="" href="metadata.html#metadata_constraints">Defining Constraints and Indexes</a></li>
+
+	        <li>
+                
+    <ul>
+        
+        <li><a style="" href="metadata.html#metadata_constraints_unique">UNIQUE Constraint</a></li>
+
+        
+        <li><a style="" href="metadata.html#metadata_constraints_check">CHECK Constraint</a></li>
+
+        
+        <li><a style="" href="metadata.html#metadata_constraints_indexes">Indexes</a></li>
+
+    </ul>
+
+	        </li>
+        
+        <li><a style="" href="metadata.html#metadata_adapting">Adapting Tables to Alternate Metadata</a></li>
+
+    </ul>
+
+	</div>
+
+
+
+
+
+
+
+
+
+
+
+    
+    <A name="metadata"></a>
+    
+    <div class="sectionL1">
+
+    
+    
+
+
+
+    
+    <A name="metadata_tables"></a>
+    
+    <div class="sectionL2">
+
+    <h3>Describing Databases with MetaData</h3>
+    
+    
+
+<p>The core of SQLAlchemy's query and object mapping operations are supported by <strong>database metadata</strong>, which is comprised of Python objects that describe tables and other schema-level objects.  These objects can be created by explicitly naming the various components and their properties, using the Table, Column, ForeignKey, Index, and Sequence objects imported from <code>sqlalchemy.schema</code>.  There is also support for <strong>reflection</strong> of some entities, which means you only specify the <em>name</em> of the entities and they are recreated from the database automatically.
+</p>
+<p>A collection of metadata entities is stored in an object aptly named <code>MetaData</code>:
+</p>
+
+    
+
+    <div class="sliding_code">
+        <pre>
+<span class="python_keyword">from </span><span class="python_name">sqlalchemy </span><span class="python_keyword">import </span><span class="python_operator">*
+</span>
+<span class="python_name">metadata </span><span class="python_operator">= </span><span class="python_name">MetaData</span><span class="python_enclosure">()</span><span class="python_operator">
+</span></pre>
+    </div>
+<p>To represent a Table, use the <code>Table</code> class:
+</p>
+
+    
+
+    <div class="sliding_code">
+        <pre>
+<span class="python_name">users </span><span class="python_operator">= </span><span class="python_name">Table</span><span class="python_enclosure">(</span><span class="python_literal">'users'</span><span class="python_operator">, </span><span class="python_name">metadata</span><span class="python_operator">, </span>
+    <span class="python_name">Column</span><span class="python_enclosure">(</span><span class="python_literal">'user_id'</span><span class="python_operator">, </span><span class="python_name">Integer</span><span class="python_operator">, </span><span class="python_name">primary_key </span><span class="python_operator">= </span><span class="python_name">True</span><span class="python_enclosure">)</span><span class="python_operator">,</span>
+    <span class="python_name">Column</span><span class="python_enclosure">(</span><span class="python_literal">'user_name'</span><span class="python_operator">, </span><span class="python_name">String</span><span class="python_enclosure">(</span><span class="python_number">16</span><span class="python_enclosure">)</span><span class="python_operator">, </span><span class="python_name">nullable </span><span class="python_operator">= </span><span class="python_name">False</span><span class="python_enclosure">)</span><span class="python_operator">,</span>
+    <span class="python_name">Column</span><span class="python_enclosure">(</span><span class="python_literal">'email_address'</span><span class="python_operator">, </span><span class="python_name">String</span><span class="python_enclosure">(</span><span class="python_number">60</span><span class="python_enclosure">)</span><span class="python_operator">, </span><span class="python_name">key</span><span class="python_operator">=</span><span class="python_literal">'email'</span><span class="python_enclosure">)</span><span class="python_operator">,</span>
+    <span class="python_name">Column</span><span class="python_enclosure">(</span><span class="python_literal">'password'</span><span class="python_operator">, </span><span class="python_name">String</span><span class="python_enclosure">(</span><span class="python_number">20</span><span class="python_enclosure">)</span><span class="python_operator">, </span><span class="python_name">nullable </span><span class="python_operator">= </span><span class="python_name">False</span><span class="python_enclosure">)</span>
+<span class="python_enclosure">)</span><span class="python_operator">
+</span>
+<span class="python_name">user_prefs </span><span class="python_operator">= </span><span class="python_name">Table</span><span class="python_enclosure">(</span><span class="python_literal">'user_prefs'</span><span class="python_operator">, </span><span class="python_name">metadata</span><span class="python_operator">, </span>
+    <span class="python_name">Column</span><span class="python_enclosure">(</span><span class="python_literal">'pref_id'</span><span class="python_operator">, </span><span class="python_name">Integer</span><span class="python_operator">, </span><span class="python_name">primary_key</span><span class="python_operator">=</span><span class="python_name">True</span><span class="python_enclosure">)</span><span class="python_operator">,</span>
+    <span class="python_name">Column</span><span class="python_enclosure">(</span><span class="python_literal">'user_id'</span><span class="python_operator">, </span><span class="python_name">Integer</span><span class="python_operator">, </span><span class="python_name">ForeignKey</span><span class="python_enclosure">(</span><span class="python_literal">"users.user_id"</span><span class="python_enclosure">)</span><span class="python_operator">, </span><span class="python_name">nullable</span><span class="python_operator">=</span><span class="python_name">False</span><span class="python_enclosure">)</span><span class="python_operator">,</span>
+    <span class="python_name">Column</span><span class="python_enclosure">(</span><span class="python_literal">'pref_name'</span><span class="python_operator">, </span><span class="python_name">String</span><span class="python_enclosure">(</span><span class="python_number">40</span><span class="python_enclosure">)</span><span class="python_operator">, </span><span class="python_name">nullable</span><span class="python_operator">=</span><span class="python_name">False</span><span class="python_enclosure">)</span><span class="python_operator">,</span>
+    <span class="python_name">Column</span><span class="python_enclosure">(</span><span class="python_literal">'pref_value'</span><span class="python_operator">, </span><span class="python_name">String</span><span class="python_enclosure">(</span><span class="python_number">100</span><span class="python_enclosure">))</span>
+<span class="python_enclosure">)</span><span class="python_operator">
+</span></pre>
+    </div>
+<p>The specific datatypes for each Column, such as Integer, String, etc. are described in <a href="types.html">The Types System</a>, and exist within the module <code>sqlalchemy.types</code> as well as the global <code>sqlalchemy</code> namespace.
+</p>
+<p>Foreign keys are most easily specified by the <code>ForeignKey</code> object within a <code>Column</code> object.  For a composite foreign key, i.e. a foreign key that contains multiple columns referencing multiple columns to a composite primary key, an explicit syntax is provided which allows the correct table CREATE statements to be generated:
+</p>
+
+    
+
+    <div class="sliding_code">
+        <pre>
+<span class="python_comment"># a table with a composite primary key
+</span><span class="python_name">invoices </span><span class="python_operator">= </span><span class="python_name">Table</span><span class="python_enclosure">(</span><span class="python_literal">'invoices'</span><span class="python_operator">, </span><span class="python_name">metadata</span><span class="python_operator">, </span>
+    <span class="python_name">Column</span><span class="python_enclosure">(</span><span class="python_literal">'invoice_id'</span><span class="python_operator">, </span><span class="python_name">Integer</span><span class="python_operator">, </span><span class="python_name">primary_key</span><span class="python_operator">=</span><span class="python_name">True</span><span class="python_enclosure">)</span><span class="python_operator">,</span>
+    <span class="python_name">Column</span><span class="python_enclosure">(</span><span class="python_literal">'ref_num'</span><span class="python_operator">, </span><span class="python_name">Integer</span><span class="python_operator">, </span><span class="python_name">primary_key</span><span class="python_operator">=</span><span class="python_name">True</span><span class="python_enclosure">)</span><span class="python_operator">,</span>
+    <span class="python_name">Column</span><span class="python_enclosure">(</span><span class="python_literal">'description'</span><span class="python_operator">, </span><span class="python_name">String</span><span class="python_enclosure">(</span><span class="python_number">60</span><span class="python_enclosure">)</span><span class="python_operator">, </span><span class="python_name">nullable</span><span class="python_operator">=</span><span class="python_name">False</span><span class="python_enclosure">)</span>
+<span class="python_enclosure">)</span><span class="python_operator">
+</span>
+<span class="python_comment"># a table with a composite foreign key referencing the parent table
+</span><span class="python_name">invoice_items </span><span class="python_operator">= </span><span class="python_name">Table</span><span class="python_enclosure">(</span><span class="python_literal">'invoice_items'</span><span class="python_operator">, </span><span class="python_name">metadata</span><span class="python_operator">, </span>
+    <span class="python_name">Column</span><span class="python_enclosure">(</span><span class="python_literal">'item_id'</span><span class="python_operator">, </span><span class="python_name">Integer</span><span class="python_operator">, </span><span class="python_name">primary_key</span><span class="python_operator">=</span><span class="python_name">True</span><span class="python_enclosure">)</span><span class="python_operator">,</span>
+    <span class="python_name">Column</span><span class="python_enclosure">(</span><span class="python_literal">'item_name'</span><span class="python_operator">, </span><span class="python_name">String</span><span class="python_enclosure">(</span><span class="python_number">60</span><span class="python_enclosure">)</span><span class="python_operator">, </span><span class="python_name">nullable</span><span class="python_operator">=</span><span class="python_name">False</span><span class="python_enclosure">)</span><span class="python_operator">,</span>
+    <span class="python_name">Column</span><span class="python_enclosure">(</span><span class="python_literal">'invoice_id'</span><span class="python_operator">, </span><span class="python_name">Integer</span><span class="python_operator">, </span><span class="python_name">nullable</span><span class="python_operator">=</span><span class="python_name">False</span><span class="python_enclosure">)</span><span class="python_operator">,</span>
+    <span class="python_name">Column</span><span class="python_enclosure">(</span><span class="python_literal">'ref_num'</span><span class="python_operator">, </span><span class="python_name">Integer</span><span class="python_operator">, </span><span class="python_name">nullable</span><span class="python_operator">=</span><span class="python_name">False</span><span class="python_enclosure">)</span><span class="python_operator">,</span>
+    <span class="python_name">ForeignKeyConstraint</span><span class="python_enclosure">([</span><span class="python_literal">'invoice_id'</span><span class="python_operator">, </span><span class="python_literal">'ref_num'</span><span class="python_enclosure">]</span><span class="python_operator">, </span><span class="python_enclosure">[</span><span class="python_literal">'invoices.invoice_id'</span><span class="python_operator">, </span><span class="python_literal">'invoices.ref_num'</span><span class="python_enclosure">])</span>
+<span class="python_enclosure">)</span><span class="python_operator">
+</span></pre>
+    </div>
+<p>Above, the <code>invoice_items</code> table will have <code>ForeignKey</code> objects automatically added to the <code>invoice_id</code> and <code>ref_num</code> <code>Column</code> objects as a result of the additional <code>ForeignKeyConstraint</code> object.
+</p>
+<p>The <code>MetaData</code> object supports some handy methods, such as getting a list of Tables in the order (or reverse) of their dependency:
+</p>
+
+    
+
+    <div class="sliding_code">
+        <pre>
+<span class="python_literal">&gt;&gt;&gt; </span><span class="python_keyword">for </span><span class="python_name">t </span><span class="python_keyword">in </span><span class="python_name">metadata</span><span class="python_operator">.</span><span class="python_name">table_iterator</span><span class="python_enclosure">(</span><span class="python_name">reverse</span><span class="python_operator">=</span><span class="python_name">False</span><span class="python_enclosure">)</span><span class="python_operator">:
+...    </span><span class="python_keyword">print </span><span class="python_name">t</span><span class="python_operator">.</span><span class="python_name">name</span><span class="python_operator">
+</span><span class="python_name">users</span><span class="python_operator">
+</span><span class="python_name">user_prefs</span><span class="python_operator">
+</span></pre>
+    </div>
+<p>And <code>Table</code> provides an interface to the table's properties as well as that of its columns:
+</p>
+
+    
+
+    <div class="sliding_code">
+        <pre>
+<span class="python_name">employees </span><span class="python_operator">= </span><span class="python_name">Table</span><span class="python_enclosure">(</span><span class="python_literal">'employees'</span><span class="python_operator">, </span><span class="python_name">metadata</span><span class="python_operator">, </span>
+    <span class="python_name">Column</span><span class="python_enclosure">(</span><span class="python_literal">'employee_id'</span><span class="python_operator">, </span><span class="python_name">Integer</span><span class="python_operator">, </span><span class="python_name">primary_key</span><span class="python_operator">=</span><span class="python_name">True</span><span class="python_enclosure">)</span><span class="python_operator">,</span>
+    <span class="python_name">Column</span><span class="python_enclosure">(</span><span class="python_literal">'employee_name'</span><span class="python_operator">, </span><span class="python_name">String</span><span class="python_enclosure">(</span><span class="python_number">60</span><span class="python_enclosure">)</span><span class="python_operator">, </span><span class="python_name">nullable</span><span class="python_operator">=</span><span class="python_name">False</span><span class="python_operator">, </span><span class="python_name">key</span><span class="python_operator">=</span><span class="python_literal">'name'</span><span class="python_enclosure">)</span><span class="python_operator">,</span>
+    <span class="python_name">Column</span><span class="python_enclosure">(</span><span class="python_literal">'employee_dept'</span><span class="python_operator">, </span><span class="python_name">Integer</span><span class="python_operator">, </span><span class="python_name">ForeignKey</span><span class="python_enclosure">(</span><span class="python_literal">"departments.department_id"</span><span class="python_enclosure">))</span>
+<span class="python_enclosure">)</span><span class="python_operator">
+</span>
+<span class="python_comment"># access the column "EMPLOYEE_ID":
+</span><span class="python_name">employees</span><span class="python_operator">.</span><span class="python_name">columns</span><span class="python_operator">.</span><span class="python_name">employee_id</span><span class="python_operator">
+</span>
+<span class="python_comment"># or just
+</span><span class="python_name">employees</span><span class="python_operator">.</span><span class="python_name">c</span><span class="python_operator">.</span><span class="python_name">employee_id</span><span class="python_operator">
+</span>
+<span class="python_comment"># via string
+</span><span class="python_name">employees</span><span class="python_operator">.</span><span class="python_name">c</span><span class="python_enclosure">[</span><span class="python_literal">'employee_id'</span><span class="python_enclosure">]</span><span class="python_operator">
+</span>
+<span class="python_comment"># iterate through all columns
+</span><span class="python_keyword">for </span><span class="python_name">c </span><span class="python_keyword">in </span><span class="python_name">employees</span><span class="python_operator">.</span><span class="python_name">c</span><span class="python_operator">:
+    </span><span class="python_comment"># ...
+</span>
+<span class="python_comment"># get the table's primary key columns
+</span><span class="python_keyword">for </span><span class="python_name">primary_key </span><span class="python_keyword">in </span><span class="python_name">employees</span><span class="python_operator">.</span><span class="python_name">primary_key</span><span class="python_operator">:
+    </span><span class="python_comment"># ...
+</span>
+<span class="python_comment"># get the table's foreign key objects:
+</span><span class="python_keyword">for </span><span class="python_name">fkey </span><span class="python_keyword">in </span><span class="python_name">employees</span><span class="python_operator">.</span><span class="python_name">foreign_keys</span><span class="python_operator">:
+    </span><span class="python_comment"># ...
+</span>
+<span class="python_comment"># access the table's MetaData:
+</span><span class="python_name">employees</span><span class="python_operator">.</span><span class="python_name">metadata</span><span class="python_operator">
+</span>
+<span class="python_comment"># access the table's bound Engine or Connection, if its MetaData is bound:
+</span><span class="python_name">employees</span><span class="python_operator">.</span><span class="python_name">bind</span><span class="python_operator">
+</span>
+<span class="python_comment"># access a column's name, type, nullable, primary key, foreign key
+</span><span class="python_name">employees</span><span class="python_operator">.</span><span class="python_name">c</span><span class="python_operator">.</span><span class="python_name">employee_id</span><span class="python_operator">.</span><span class="python_name">name</span><span class="python_operator">
+</span><span class="python_name">employees</span><span class="python_operator">.</span><span class="python_name">c</span><span class="python_operator">.</span><span class="python_name">employee_id</span><span class="python_operator">.</span><span class="python_name">type</span><span class="python_operator">
+</span><span class="python_name">employees</span><span class="python_operator">.</span><span class="python_name">c</span><span class="python_operator">.</span><span class="python_name">employee_id</span><span class="python_operator">.</span><span class="python_name">nullable</span><span class="python_operator">
+</span><span class="python_name">employees</span><span class="python_operator">.</span><span class="python_name">c</span><span class="python_operator">.</span><span class="python_name">employee_id</span><span class="python_operator">.</span><span class="python_name">primary_key</span><span class="python_operator">
+</span><span class="python_name">employees</span><span class="python_operator">.</span><span class="python_name">c</span><span class="python_operator">.</span><span class="python_name">employee_dept</span><span class="python_operator">.</span><span class="python_name">foreign_key</span><span class="python_operator">
+</span>
+<span class="python_comment"># get the "key" of a column, which defaults to its name, but can 
+# be any user-defined string:
+</span><span class="python_name">employees</span><span class="python_operator">.</span><span class="python_name">c</span><span class="python_operator">.</span><span class="python_name">name</span><span class="python_operator">.</span><span class="python_name">key</span><span class="python_operator">
+</span>
+<span class="python_comment"># access a column's table:
+</span><span class="python_name">employees</span><span class="python_operator">.</span><span class="python_name">c</span><span class="python_operator">.</span><span class="python_name">employee_id</span><span class="python_operator">.</span><span class="python_name">table </span><span class="python_keyword">is </span><span class="python_name">employees</span><span class="python_operator">
+</span><span class="python_literal">&gt;&gt;&gt; </span><span class="python_name">True</span><span class="python_operator">
+</span>
+<span class="python_comment"># get the table related by a foreign key
+</span><span class="python_name">fcolumn </span><span class="python_operator">= </span><span class="python_name">employees</span><span class="python_operator">.</span><span class="python_name">c</span><span class="python_operator">.</span><span class="python_name">employee_dept</span><span class="python_operator">.</span><span class="python_name">foreign_key</span><span class="python_operator">.</span><span class="python_name">column</span><span class="python_operator">.</span><span class="python_name">table</span><span class="python_operator">
+</span></pre>
+    </div>
+
+
+    
+    <A name="metadata_tables_binding"></a>
+    
+    <div class="sectionL3">
+
+    <h3>Binding MetaData to an Engine or Connection</h3>
+    
+    
+
+<p>A <code>MetaData</code> object can be associated with an <code>Engine</code> or an individual <code>Connection</code>; this process is called <strong>binding</strong>.  The term used to describe "an engine or a connection" is often referred to as a <strong>connectable</strong>.  Binding allows the <code>MetaData</code> and the elements which it contains to perform operations against the database directly, using the connection resources to which it's bound.   Common operations which are made more convenient through binding include being able to generate SQL constructs which know how to execute themselves, creating <code>Table</code> objects which query the database for their column and constraint information, and issuing CREATE or DROP statements.
+</p>
+<p>To bind <code>MetaData</code> to an <code>Engine</code>, use the <code>bind</code> attribute:
+</p>
+
+    
+
+    <div class="sliding_code">
+        <pre>
+<span class="python_name">engine </span><span class="python_operator">= </span><span class="python_name">create_engine</span><span class="python_enclosure">(</span><span class="python_literal">'sqlite://'</span><span class="python_operator">, **</span><span class="python_name">kwargs</span><span class="python_enclosure">)</span><span class="python_operator">
+</span>
+<span class="python_comment"># create MetaData 
+</span><span class="python_name">meta </span><span class="python_operator">= </span><span class="python_name">MetaData</span><span class="python_enclosure">()</span><span class="python_operator">
+</span>
+<span class="python_comment"># bind to an engine
+</span><span class="python_name">meta</span><span class="python_operator">.</span><span class="python_name">bind </span><span class="python_operator">= </span><span class="python_name">engine</span><span class="python_operator">
+</span></pre>
+    </div>
+<p>Once this is done, the <code>MetaData</code> and its contained <code>Table</code> objects can access the database directly:
+</p>
+
+    
+
+    <div class="sliding_code">
+        <pre>
+<span class="python_name">meta</span><span class="python_operator">.</span><span class="python_name">create_all</span><span class="python_enclosure">()  </span><span class="python_comment"># issue CREATE statements for all tables</span><span class="python_operator">
+</span>
+<span class="python_comment"># describe a table called 'users', query the database for its columns
+</span><span class="python_name">users_table </span><span class="python_operator">= </span><span class="python_name">Table</span><span class="python_enclosure">(</span><span class="python_literal">'users'</span><span class="python_operator">, </span><span class="python_name">meta</span><span class="python_operator">, </span><span class="python_name">autoload</span><span class="python_operator">=</span><span class="python_name">True</span><span class="python_enclosure">)</span><span class="python_operator">
+</span>
+<span class="python_comment"># generate a SELECT statement and execute
+</span><span class="python_name">result </span><span class="python_operator">= </span><span class="python_name">users_table</span><span class="python_operator">.</span><span class="python_name">select</span><span class="python_enclosure">()</span><span class="python_operator">.</span><span class="python_name">execute</span><span class="python_enclosure">()</span><span class="python_operator">
+</span></pre>
+    </div>
+<p>Note that the feature of binding engines is <strong>completely optional</strong>.  All of the operations which take advantage of "bound" <code>MetaData</code> also can be given an <code>Engine</code> or <code>Connection</code> explicitly with which to perform the operation.   The equivalent "non-bound" of the above would be:
+</p>
+
+    
+
+    <div class="sliding_code">
+        <pre>
+<span class="python_name">meta</span><span class="python_operator">.</span><span class="python_name">create_all</span><span class="python_enclosure">(</span><span class="python_name">engine</span><span class="python_enclosure">)  </span><span class="python_comment"># issue CREATE statements for all tables</span><span class="python_operator">
+</span>
+<span class="python_comment"># describe a table called 'users',  query the database for its columns
+</span><span class="python_name">users_table </span><span class="python_operator">= </span><span class="python_name">Table</span><span class="python_enclosure">(</span><span class="python_literal">'users'</span><span class="python_operator">, </span><span class="python_name">meta</span><span class="python_operator">, </span><span class="python_name">autoload</span><span class="python_operator">=</span><span class="python_name">True</span><span class="python_operator">, </span><span class="python_name">autoload_with</span><span class="python_operator">=</span><span class="python_name">engine</span><span class="python_enclosure">)</span><span class="python_operator">
+</span>
+<span class="python_comment"># generate a SELECT statement and execute
+</span><span class="python_name">result </span><span class="python_operator">= </span><span class="python_name">engine</span><span class="python_operator">.</span><span class="python_name">execute</span><span class="python_enclosure">(</span><span class="python_name">users_table</span><span class="python_operator">.</span><span class="python_name">select</span><span class="python_enclosure">())</span><span class="python_operator">
+</span></pre>
+    </div>
+
+
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+    
+    <A name="metadata_tables_reflecting"></a>
+    
+    <div class="sectionL3">
+
+    <h3>Reflecting Tables</h3>
+    
+    
+
+<p>A <code>Table</code> object can be created without specifying any of its contained attributes, using the argument <code>autoload=True</code> in conjunction with the table's name and possibly its schema (if not the databases "default" schema).  (You can also specify a list or set of column names to autoload as the kwarg include_columns, if you only want to load a subset of the columns in the actual database.)  This will issue the appropriate queries to the database in order to locate all properties of the table required for SQLAlchemy to use it effectively, including its column names and datatypes, foreign and primary key constraints, and in some cases its default-value generating attributes.   To use <code>autoload=True</code>, the table's <code>MetaData</code> object need be bound to an <code>Engine</code> or <code>Connection</code>, or alternatively the <code>autoload_with=&lt;some connectable&gt;</code> argument can be passed.  Below we illustrate autoloading a table and then iterating through the names of its columns:
+</p>
+
+    
+
+    <div class="sliding_code">
+        <pre>
+<span class="python_literal">&gt;&gt;&gt; </span><span class="python_name">messages </span><span class="python_operator">= </span><span class="python_name">Table</span><span class="python_enclosure">(</span><span class="python_literal">'messages'</span><span class="python_operator">, </span><span class="python_name">meta</span><span class="python_operator">, </span><span class="python_name">autoload</span><span class="python_operator">=</span><span class="python_name">True</span><span class="python_enclosure">)</span><span class="python_operator">
+</span><span class="python_literal">&gt;&gt;&gt; </span><span class="python_enclosure">[</span><span class="python_name">c</span><span class="python_operator">.</span><span class="python_name">name </span><span class="python_keyword">for </span><span class="python_name">c </span><span class="python_keyword">in </span><span class="python_name">messages</span><span class="python_operator">.</span><span class="python_name">columns</span><span class="python_enclosure">]</span><span class="python_operator">
+</span><span class="python_enclosure">[</span><span class="python_literal">'message_id'</span><span class="python_operator">, </span><span class="python_literal">'message_name'</span><span class="python_operator">, </span><span class="python_literal">'date'</span><span class="python_enclosure">]</span><span class="python_operator">
+</span></pre>
+    </div>
+<p>Note that if a reflected table has a foreign key referencing another table, the related <code>Table</code> object  will be automatically created within the <code>MetaData</code> object if it does not exist already.  Below, suppose table <code>shopping_cart_items</code> references a table <code>shopping_carts</code>.  After reflecting, the <code>shopping carts</code> table is present:
+</p>
+
+    
+
+    <div class="sliding_code">
+        <pre>
+<span class="python_literal">&gt;&gt;&gt; </span><span class="python_name">shopping_cart_items </span><span class="python_operator">= </span><span class="python_name">Table</span><span class="python_enclosure">(</span><span class="python_literal">'shopping_cart_items'</span><span class="python_operator">, </span><span class="python_name">meta</span><span class="python_operator">, </span><span class="python_name">autoload</span><span class="python_operator">=</span><span class="python_name">True</span><span class="python_enclosure">)</span><span class="python_operator">
+</span><span class="python_literal">&gt;&gt;&gt; 'shopping_carts' </span><span class="python_keyword">in </span><span class="python_name">meta</span><span class="python_operator">.</span><span class="python_name">tables</span><span class="python_operator">:
+</span><span class="python_name">True</span><span class="python_operator">
+</span></pre>
+    </div>
+<p>To get direct access to 'shopping_carts', simply instantiate it via the <code>Table</code> constructor.  <code>Table</code> uses a special contructor that will return the already created <code>Table</code> instance if it's already present:
+</p>
+
+    
+
+    <div class="sliding_code">
+        <pre>
+<span class="python_name">shopping_carts </span><span class="python_operator">= </span><span class="python_name">Table</span><span class="python_enclosure">(</span><span class="python_literal">'shopping_carts'</span><span class="python_operator">, </span><span class="python_name">meta</span><span class="python_enclosure">)</span><span class="python_operator">
+</span></pre>
+    </div>
+<p>Of course, it's a good idea to use <code>autoload=True</code> with the above table regardless.  This is so that if it hadn't been loaded already, the operation will load the table.  The autoload operation only occurs for the table if it hasn't already been loaded; once loaded, new calls to <code>Table</code> will not re-issue any reflection queries.
+</p>
+
+    
+    <A name="metadata_tables_reflecting_overriding"></a>
+    
+    <div class="sectionL4">
+
+    <h3>Overriding Reflected Columns</h3>
+    
+    
+<p>Individual columns can be overridden with explicit values when reflecting tables; this is handy for specifying custom datatypes, constraints such as primary keys that may not be configured within the database, etc.
+</p>
+
+    
+
+    <div class="sliding_code">
+        <pre>
+<span class="python_literal">&gt;&gt;&gt; </span><span class="python_name">mytable </span><span class="python_operator">= </span><span class="python_name">Table</span><span class="python_enclosure">(</span><span class="python_literal">'mytable'</span><span class="python_operator">, </span><span class="python_name">meta</span><span class="python_operator">,</span>
+<span class="python_operator">... </span><span class="python_name">Column</span><span class="python_enclosure">(</span><span class="python_literal">'id'</span><span class="python_operator">, </span><span class="python_name">Integer</span><span class="python_operator">, </span><span class="python_name">primary_key</span><span class="python_operator">=</span><span class="python_name">True</span><span class="python_enclosure">)</span><span class="python_operator">,   </span><span class="python_comment"># override reflected 'id' to have primary key</span>
+<span class="python_operator">... </span><span class="python_name">Column</span><span class="python_enclosure">(</span><span class="python_literal">'mydata'</span><span class="python_operator">, </span><span class="python_name">Unicode</span><span class="python_enclosure">(</span><span class="python_number">50</span><span class="python_enclosure">))</span><span class="python_operator">,    </span><span class="python_comment"># override reflected 'mydata' to be Unicode</span>
+<span class="python_operator">... </span><span class="python_name">autoload</span><span class="python_operator">=</span><span class="python_name">True</span><span class="python_enclosure">)</span><span class="python_operator">
+</span></pre>
+    </div>
+
+
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+
+    </div>
+
+
+
+    
+    <A name="metadata_tables_schema"></a>
+    
+    <div class="sectionL3">
+
+    <h3>Specifying the Schema Name</h3>
+    
+    
+
+<p>Some databases support the concept of multiple schemas.  A <code>Table</code> can reference this by specifying the <code>schema</code> keyword argument:
+</p>
+
+    
+
+    <div class="sliding_code">
+        <pre>
+<span class="python_name">financial_info </span><span class="python_operator">= </span><span class="python_name">Table</span><span class="python_enclosure">(</span><span class="python_literal">'financial_info'</span><span class="python_operator">, </span><span class="python_name">meta</span><span class="python_operator">,</span>
+    <span class="python_name">Column</span><span class="python_enclosure">(</span><span class="python_literal">'id'</span><span class="python_operator">, </span><span class="python_name">Integer</span><span class="python_operator">, </span><span class="python_name">primary_key</span><span class="python_operator">=</span><span class="python_name">True</span><span class="python_enclosure">)</span><span class="python_operator">,</span>
+    <span class="python_name">Column</span><span class="python_enclosure">(</span><span class="python_literal">'value'</span><span class="python_operator">, </span><span class="python_name">String</span><span class="python_enclosure">(</span><span class="python_number">100</span><span class="python_enclosure">)</span><span class="python_operator">, </span><span class="python_name">nullable</span><span class="python_operator">=</span><span class="python_name">False</span><span class="python_enclosure">)</span><span class="python_operator">,</span>
+    <span class="python_name">schema</span><span class="python_operator">=</span><span class="python_literal">'remote_banks'</span>
+<span class="python_enclosure">)</span><span class="python_operator">
+</span></pre>
+    </div>
+<p>Within the <code>MetaData</code> collection, this table will be identified by the combination of <code>financial_info</code> and <code>remote_banks</code>.  If another table called <code>financial_info</code> is referenced without the <code>remote_banks</code> schema, it will refer to a different <code>Table</code>.  <code>ForeignKey</code> objects can reference columns in this table using the form <code>remote_banks.financial_info.id</code>.
+</p>
+
+
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+    
+    <A name="metadata_tables_onupdate"></a>
+    
+    <div class="sectionL3">
+
+    <h3>ON UPDATE and ON DELETE</h3>
+    
+    
+
+<p><code>ON UPDATE</code> and <code>ON DELETE</code> clauses to a table create are specified within the <code>ForeignKeyConstraint</code> object, using the <code>onupdate</code> and <code>ondelete</code> keyword arguments:
+</p>
+
+    
+
+    <div class="sliding_code">
+        <pre>
+<span class="python_name">foobar </span><span class="python_operator">= </span><span class="python_name">Table</span><span class="python_enclosure">(</span><span class="python_literal">'foobar'</span><span class="python_operator">, </span><span class="python_name">meta</span><span class="python_operator">,</span>
+    <span class="python_name">Column</span><span class="python_enclosure">(</span><span class="python_literal">'id'</span><span class="python_operator">, </span><span class="python_name">Integer</span><span class="python_operator">, </span><span class="python_name">primary_key</span><span class="python_operator">=</span><span class="python_name">True</span><span class="python_enclosure">)</span><span class="python_operator">,</span>
+    <span class="python_name">Column</span><span class="python_enclosure">(</span><span class="python_literal">'lala'</span><span class="python_operator">, </span><span class="python_name">String</span><span class="python_enclosure">(</span><span class="python_number">40</span><span class="python_enclosure">))</span><span class="python_operator">,</span>
+    <span class="python_name">ForeignKeyConstraint</span><span class="python_enclosure">([</span><span class="python_literal">'lala'</span><span class="python_enclosure">]</span><span class="python_operator">,</span><span class="python_enclosure">[</span><span class="python_literal">'hoho.lala'</span><span class="python_enclosure">]</span><span class="python_operator">, </span><span class="python_name">onupdate</span><span class="python_operator">=</span><span class="python_literal">"CASCADE"</span><span class="python_operator">, </span><span class="python_name">ondelete</span><span class="python_operator">=</span><span class="python_literal">"CASCADE"</span><span class="python_enclosure">))</span><span class="python_operator">
+</span></pre>
+    </div>
+<p>Note that these clauses are not supported on SQLite, and require <code>InnoDB</code> tables when used with MySQL.  They may also not be supported on other databases.
+</p>
+
+
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+    
+    <A name="metadata_tables_options"></a>
+    
+    <div class="sectionL3">
+
+    <h3>Other Options</h3>
+    
+    
+
+<p><code>Tables</code> may support database-specific options, such as MySQL's <code>engine</code> option that can specify "MyISAM", "InnoDB", and other backends for the table:
+</p>
+
+    
+
+    <div class="sliding_code">
+        <pre>
+<span class="python_name">addresses </span><span class="python_operator">= </span><span class="python_name">Table</span><span class="python_enclosure">(</span><span class="python_literal">'engine_email_addresses'</span><span class="python_operator">, </span><span class="python_name">meta</span><span class="python_operator">,</span>
+    <span class="python_name">Column</span><span class="python_enclosure">(</span><span class="python_literal">'address_id'</span><span class="python_operator">, </span><span class="python_name">Integer</span><span class="python_operator">, </span><span class="python_name">primary_key </span><span class="python_operator">= </span><span class="python_name">True</span><span class="python_enclosure">)</span><span class="python_operator">,</span>
+    <span class="python_name">Column</span><span class="python_enclosure">(</span><span class="python_literal">'remote_user_id'</span><span class="python_operator">, </span><span class="python_name">Integer</span><span class="python_operator">, </span><span class="python_name">ForeignKey</span><span class="python_enclosure">(</span><span class="python_name">users</span><span class="python_operator">.</span><span class="python_name">c</span><span class="python_operator">.</span><span class="python_name">user_id</span><span class="python_enclosure">))</span><span class="python_operator">,</span>
+    <span class="python_name">Column</span><span class="python_enclosure">(</span><span class="python_literal">'email_address'</span><span class="python_operator">, </span><span class="python_name">String</span><span class="python_enclosure">(</span><span class="python_number">20</span><span class="python_enclosure">))</span><span class="python_operator">,</span>
+    <span class="python_name">mysql_engine</span><span class="python_operator">=</span><span class="python_literal">'InnoDB'</span>
+<span class="python_enclosure">)</span><span class="python_operator">
+</span></pre>
+    </div>
+
+
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+
+    </div>
+
+
+
+    
+    <A name="metadata_creating"></a>
+    
+    <div class="sectionL2">
+
+    <h3>Creating and Dropping Database Tables</h3>
+    
+    
+
+<p>Creating and dropping individual tables can be done via the <code>create()</code> and <code>drop()</code> methods of <code>Table</code>; these methods take an optional <code>bind</code> parameter which references an <code>Engine</code> or a <code>Connection</code>.  If not supplied, the <code>Engine</code> bound to the <code>MetaData</code> will be used, else an error is raised:
+</p>
+
+    
+
+    <div class="code">
+        <pre>
+<span class="python_name">meta </span><span class="python_operator">= </span><span class="python_name">MetaData</span><span class="python_enclosure">()</span><span class="python_operator">
+</span><span class="python_name">meta</span><span class="python_operator">.</span><span class="python_name">bind </span><span class="python_operator">= </span><span class="python_literal">'sqlite:///:memory:'</span><span class="python_operator">
+</span>
+<span class="python_name">employees </span><span class="python_operator">= </span><span class="python_name">Table</span><span class="python_enclosure">(</span><span class="python_literal">'employees'</span><span class="python_operator">, </span><span class="python_name">meta</span><span class="python_operator">, </span>
+    <span class="python_name">Column</span><span class="python_enclosure">(</span><span class="python_literal">'employee_id'</span><span class="python_operator">, </span><span class="python_name">Integer</span><span class="python_operator">, </span><span class="python_name">primary_key</span><span class="python_operator">=</span><span class="python_name">True</span><span class="python_enclosure">)</span><span class="python_operator">,</span>
+    <span class="python_name">Column</span><span class="python_enclosure">(</span><span class="python_literal">'employee_name'</span><span class="python_operator">, </span><span class="python_name">String</span><span class="python_enclosure">(</span><span class="python_number">60</span><span class="python_enclosure">)</span><span class="python_operator">, </span><span class="python_name">nullable</span><span class="python_operator">=</span><span class="python_name">False</span><span class="python_operator">, </span><span class="python_name">key</span><span class="python_operator">=</span><span class="python_literal">'name'</span><span class="python_enclosure">)</span><span class="python_operator">,</span>
+    <span class="python_name">Column</span><span class="python_enclosure">(</span><span class="python_literal">'employee_dept'</span><span class="python_operator">, </span><span class="python_name">Integer</span><span class="python_operator">, </span><span class="python_name">ForeignKey</span><span class="python_enclosure">(</span><span class="python_literal">"departments.department_id"</span><span class="python_enclosure">))</span>
+<span class="python_enclosure">)</span><span class="python_operator">
+</span><span class="python_literal"><a href="javascript:togglePopbox('popbox_1', 'show', 'hide')" class="codepoplink">sql</a></span><span class="python_name">employees</span><span class="python_operator">.</span><span class="python_name">create</span><span class="python_enclosure">()</span><span class="python_operator"></span></pre><div id="popbox_1_div" class="codepop" style="display:none;">CREATE TABLE employees(<br/>
+employee_id SERIAL NOT NULL PRIMARY KEY,<br/>
+employee_name VARCHAR(60) NOT NULL,<br/>
+employee_dept INTEGER REFERENCES departments(department_id)<br/>
+)<br/>
+{}</div><pre><span class="python_operator"></span></pre>
+    </div>
+<p><code>drop()</code> method:
+</p>
+
+    
+
+    <div class="code">
+        <pre>
+<span class="python_literal"><a href="javascript:togglePopbox('popbox_2', 'show', 'hide')" class="codepoplink">sql</a></span><span class="python_name">employees</span><span class="python_operator">.</span><span class="python_name">drop</span><span class="python_enclosure">(</span><span class="python_name">bind</span><span class="python_operator">=</span><span class="python_name">e</span><span class="python_enclosure">)</span><span class="python_operator"></span></pre><div id="popbox_2_div" class="codepop" style="display:none;">DROP TABLE employees<br/>
+{}</div><pre><span class="python_operator"></span></pre>
+    </div>
+<p>The <code>create()</code> and <code>drop()</code> methods also support an optional keyword argument <code>checkfirst</code> which will issue the database's appropriate pragma statements to check if the table exists before creating or dropping:
+</p>
+
+    
+
+    <div class="sliding_code">
+        <pre>
+<span class="python_name">employees</span><span class="python_operator">.</span><span class="python_name">create</span><span class="python_enclosure">(</span><span class="python_name">bind</span><span class="python_operator">=</span><span class="python_name">e</span><span class="python_operator">, </span><span class="python_name">checkfirst</span><span class="python_operator">=</span><span class="python_name">True</span><span class="python_enclosure">)</span><span class="python_operator">
+</span><span class="python_name">employees</span><span class="python_operator">.</span><span class="python_name">drop</span><span class="python_enclosure">(</span><span class="python_name">checkfirst</span><span class="python_operator">=</span><span class="python_name">False</span><span class="python_enclosure">)</span><span class="python_operator">
+</span></pre>
+    </div>
+<p>Entire groups of Tables can be created and dropped directly from the <code>MetaData</code> object with <code>create_all()</code> and <code>drop_all()</code>.  These methods always check for the existence of each table before creating or dropping.  Each method takes an optional <code>bind</code> keyword argument which can reference an <code>Engine</code> or a <code>Connection</code>.  If no engine is specified, the underlying bound <code>Engine</code>,  if any, is used:
+</p>
+
+    
+
+    <div class="code">
+        <pre>
+<span class="python_name">engine </span><span class="python_operator">= </span><span class="python_name">create_engine</span><span class="python_enclosure">(</span><span class="python_literal">'sqlite:///:memory:'</span><span class="python_enclosure">)</span><span class="python_operator">
+</span>
+<span class="python_name">metadata </span><span class="python_operator">= </span><span class="python_name">MetaData</span><span class="python_enclosure">()</span><span class="python_operator">
+</span>
+<span class="python_name">users </span><span class="python_operator">= </span><span class="python_name">Table</span><span class="python_enclosure">(</span><span class="python_literal">'users'</span><span class="python_operator">, </span><span class="python_name">metadata</span><span class="python_operator">, </span>
+    <span class="python_name">Column</span><span class="python_enclosure">(</span><span class="python_literal">'user_id'</span><span class="python_operator">, </span><span class="python_name">Integer</span><span class="python_operator">, </span><span class="python_name">primary_key </span><span class="python_operator">= </span><span class="python_name">True</span><span class="python_enclosure">)</span><span class="python_operator">,</span>
+    <span class="python_name">Column</span><span class="python_enclosure">(</span><span class="python_literal">'user_name'</span><span class="python_operator">, </span><span class="python_name">String</span><span class="python_enclosure">(</span><span class="python_number">16</span><span class="python_enclosure">)</span><span class="python_operator">, </span><span class="python_name">nullable </span><span class="python_operator">= </span><span class="python_name">False</span><span class="python_enclosure">)</span><span class="python_operator">,</span>
+    <span class="python_name">Column</span><span class="python_enclosure">(</span><span class="python_literal">'email_address'</span><span class="python_operator">, </span><span class="python_name">String</span><span class="python_enclosure">(</span><span class="python_number">60</span><span class="python_enclosure">)</span><span class="python_operator">, </span><span class="python_name">key</span><span class="python_operator">=</span><span class="python_literal">'email'</span><span class="python_enclosure">)</span><span class="python_operator">,</span>
+    <span class="python_name">Column</span><span class="python_enclosure">(</span><span class="python_literal">'password'</span><span class="python_operator">, </span><span class="python_name">String</span><span class="python_enclosure">(</span><span class="python_number">20</span><span class="python_enclosure">)</span><span class="python_operator">, </span><span class="python_name">nullable </span><span class="python_operator">= </span><span class="python_name">False</span><span class="python_enclosure">)</span>
+<span class="python_enclosure">)</span><span class="python_operator">
+</span>
+<span class="python_name">user_prefs </span><span class="python_operator">= </span><span class="python_name">Table</span><span class="python_enclosure">(</span><span class="python_literal">'user_prefs'</span><span class="python_operator">, </span><span class="python_name">metadata</span><span class="python_operator">, </span>
+    <span class="python_name">Column</span><span class="python_enclosure">(</span><span class="python_literal">'pref_id'</span><span class="python_operator">, </span><span class="python_name">Integer</span><span class="python_operator">, </span><span class="python_name">primary_key</span><span class="python_operator">=</span><span class="python_name">True</span><span class="python_enclosure">)</span><span class="python_operator">,</span>
+    <span class="python_name">Column</span><span class="python_enclosure">(</span><span class="python_literal">'user_id'</span><span class="python_operator">, </span><span class="python_name">Integer</span><span class="python_operator">, </span><span class="python_name">ForeignKey</span><span class="python_enclosure">(</span><span class="python_literal">"users.user_id"</span><span class="python_enclosure">)</span><span class="python_operator">, </span><span class="python_name">nullable</span><span class="python_operator">=</span><span class="python_name">False</span><span class="python_enclosure">)</span><span class="python_operator">,</span>
+    <span class="python_name">Column</span><span class="python_enclosure">(</span><span class="python_literal">'pref_name'</span><span class="python_operator">, </span><span class="python_name">String</span><span class="python_enclosure">(</span><span class="python_number">40</span><span class="python_enclosure">)</span><span class="python_operator">, </span><span class="python_name">nullable</span><span class="python_operator">=</span><span class="python_name">False</span><span class="python_enclosure">)</span><span class="python_operator">,</span>
+    <span class="python_name">Column</span><span class="python_enclosure">(</span><span class="python_literal">'pref_value'</span><span class="python_operator">, </span><span class="python_name">String</span><span class="python_enclosure">(</span><span class="python_number">100</span><span class="python_enclosure">))</span>
+<span class="python_enclosure">)</span><span class="python_operator">
+</span>
+<span class="python_literal"><a href="javascript:togglePopbox('popbox_3', 'show', 'hide')" class="codepoplink">sql</a></span><span class="python_name">metadata</span><span class="python_operator">.</span><span class="python_name">create_all</span><span class="python_enclosure">(</span><span class="python_name">bind</span><span class="python_operator">=</span><span class="python_name">engine</span><span class="python_enclosure">)</span><span class="python_operator"></span></pre><div id="popbox_3_div" class="codepop" style="display:none;">PRAGMA table_info(users){}<br/>
+CREATE TABLE users(<br/>
+        user_id INTEGER NOT NULL PRIMARY KEY, <br/>
+        user_name VARCHAR(16) NOT NULL, <br/>
+        email_address VARCHAR(60), <br/>
+        password VARCHAR(20) NOT NULL<br/>
+)<br/>
+PRAGMA table_info(user_prefs){}<br/>
+CREATE TABLE user_prefs(<br/>
+        pref_id INTEGER NOT NULL PRIMARY KEY, <br/>
+        user_id INTEGER NOT NULL REFERENCES users(user_id), <br/>
+        pref_name VARCHAR(40) NOT NULL, <br/>
+        pref_value VARCHAR(100)<br/>
+)</div><pre><span class="python_operator"></span></pre>
+    </div>
+
+
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+    
+    <A name="metadata_defaults"></a>
+    
+    <div class="sectionL2">
+
+    <h3>Column Insert/Update Defaults</h3>
+    
+    
+
+<p>SQLAlchemy includes several constructs which provide default values provided during INSERT and UPDATE statements.  The defaults may be provided as Python constants, Python functions, or SQL expressions, and the SQL expressions themselves may be "pre-executed", executed inline within the insert/update statement itself, or can be created as a SQL level "default" placed on the table definition itself.  A "default" value by definition is only invoked if no explicit value is passed into the INSERT or UPDATE statement.
+</p>
+
+
+    
+    <A name="metadata_defaults_preexecute_functions"></a>
+    
+    <div class="sectionL3">
+
+    <h3>Pre-Executed Python Functions</h3>
+    
+    
+
+<p>The "default" keyword argument on Column can reference a Python value or callable which is invoked at the time of an insert:
+</p>
+
+    
+
+    <div class="sliding_code">
+        <pre>
+<span class="python_comment"># a function which counts upwards
+</span><span class="python_name">i </span><span class="python_operator">= </span><span class="python_number">0</span><span class="python_operator">
+</span><span class="python_keyword">def </span><span class="python_name">mydefault</span><span class="python_enclosure">()</span><span class="python_operator">:
+    </span><span class="python_keyword">global </span><span class="python_name">i</span><span class="python_operator">
+    </span><span class="python_name">i </span><span class="python_operator">+= </span><span class="python_number">1</span><span class="python_operator">
+    </span><span class="python_keyword">return </span><span class="python_name">i</span><span class="python_operator">
+</span>
+<span class="python_operator"></span><span class="python_name">t </span><span class="python_operator">= </span><span class="python_name">Table</span><span class="python_enclosure">(</span><span class="python_literal">"mytable"</span><span class="python_operator">, </span><span class="python_name">meta</span><span class="python_operator">, </span>
+    <span class="python_comment"># function-based default</span>
+    <span class="python_name">Column</span><span class="python_enclosure">(</span><span class="python_literal">'id'</span><span class="python_operator">, </span><span class="python_name">Integer</span><span class="python_operator">, </span><span class="python_name">primary_key</span><span class="python_operator">=</span><span class="python_name">True</span><span class="python_operator">, </span><span class="python_name">default</span><span class="python_operator">=</span><span class="python_name">mydefault</span><span class="python_enclosure">)</span><span class="python_operator">,</span>
+
+    <span class="python_comment"># a scalar default</span>
+    <span class="python_name">Column</span><span class="python_enclosure">(</span><span class="python_literal">'key'</span><span class="python_operator">, </span><span class="python_name">String</span><span class="python_enclosure">(</span><span class="python_number">10</span><span class="python_enclosure">)</span><span class="python_operator">, </span><span class="python_name">default</span><span class="python_operator">=</span><span class="python_literal">"default"</span><span class="python_enclosure">)</span>
+<span class="python_enclosure">)</span><span class="python_operator">
+</span></pre>
+    </div>
+<p>Similarly, the "onupdate" keyword does the same thing for update statements:
+</p>
+
+    
+
+    <div class="sliding_code">
+        <pre>
+<span class="python_keyword">import </span><span class="python_name">datetime</span><span class="python_operator">
+</span>
+<span class="python_name">t </span><span class="python_operator">= </span><span class="python_name">Table</span><span class="python_enclosure">(</span><span class="python_literal">"mytable"</span><span class="python_operator">, </span><span class="python_name">meta</span><span class="python_operator">, </span>
+    <span class="python_name">Column</span><span class="python_enclosure">(</span><span class="python_literal">'id'</span><span class="python_operator">, </span><span class="python_name">Integer</span><span class="python_operator">, </span><span class="python_name">primary_key</span><span class="python_operator">=</span><span class="python_name">True</span><span class="python_enclosure">)</span><span class="python_operator">,</span>
+
+    <span class="python_comment"># define 'last_updated' to be populated with datetime.now()</span>
+    <span class="python_name">Column</span><span class="python_enclosure">(</span><span class="python_literal">'last_updated'</span><span class="python_operator">, </span><span class="python_name">DateTime</span><span class="python_operator">, </span><span class="python_name">onupdate</span><span class="python_operator">=</span><span class="python_name">datetime</span><span class="python_operator">.</span><span class="python_name">now</span><span class="python_enclosure">)</span><span class="python_operator">,</span>
+<span class="python_enclosure">)</span><span class="python_operator">
+</span></pre>
+    </div>
+
+
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+    
+    <A name="metadata_defaults_sqlexpression"></a>
+    
+    <div class="sectionL3">
+
+    <h3>Pre-executed and Inline SQL Expressions</h3>
+    
+    
+
+<p>The "default" and "onupdate" keywords may also be passed SQL expressions, including select statements or direct function calls:
+</p>
+
+    
+
+    <div class="sliding_code">
+        <pre>
+<span class="python_name">t </span><span class="python_operator">= </span><span class="python_name">Table</span><span class="python_enclosure">(</span><span class="python_literal">"mytable"</span><span class="python_operator">, </span><span class="python_name">meta</span><span class="python_operator">, </span>
+    <span class="python_name">Column</span><span class="python_enclosure">(</span><span class="python_literal">'id'</span><span class="python_operator">, </span><span class="python_name">Integer</span><span class="python_operator">, </span><span class="python_name">primary_key</span><span class="python_operator">=</span><span class="python_name">True</span><span class="python_enclosure">)</span><span class="python_operator">,</span>
+
+    <span class="python_comment"># define 'create_date' to default to now()</span>
+    <span class="python_name">Column</span><span class="python_enclosure">(</span><span class="python_literal">'create_date'</span><span class="python_operator">, </span><span class="python_name">DateTime</span><span class="python_operator">, </span><span class="python_name">default</span><span class="python_operator">=</span><span class="python_name">func</span><span class="python_operator">.</span><span class="python_name">now</span><span class="python_enclosure">())</span><span class="python_operator">,</span>
+
+    <span class="python_comment"># define 'key' to pull its default from the 'keyvalues' table</span>
+    <span class="python_name">Column</span><span class="python_enclosure">(</span><span class="python_literal">'key'</span><span class="python_operator">, </span><span class="python_name">String</span><span class="python_enclosure">(</span><span class="python_number">20</span><span class="python_enclosure">)</span><span class="python_operator">, </span><span class="python_name">default</span><span class="python_operator">=</span><span class="python_name">keyvalues</span><span class="python_operator">.</span><span class="python_name">select</span><span class="python_enclosure">(</span><span class="python_name">keyvalues</span><span class="python_operator">.</span><span class="python_name">c</span><span class="python_operator">.</span><span class="python_name">type</span><span class="python_operator">=</span><span class="python_literal">'type1'</span><span class="python_operator">, </span><span class="python_name">limit</span><span class="python_operator">=</span><span class="python_number">1</span><span class="python_enclosure">))</span>
+
+    <span class="python_comment"># define 'last_modified' to use the current_timestamp SQL function on update</span>
+    <span class="python_name">Column</span><span class="python_enclosure">(</span><span class="python_literal">'last_modified'</span><span class="python_operator">, </span><span class="python_name">DateTime</span><span class="python_operator">, </span><span class="python_name">onupdate</span><span class="python_operator">=</span><span class="python_name">func</span><span class="python_operator">.</span><span class="python_name">current_timestamp</span><span class="python_enclosure">())</span>
+    <span class="python_enclosure">)</span><span class="python_operator">
+</span></pre>
+    </div>
+<p>The above SQL functions are usually executed "inline" with the INSERT or UPDATE statement being executed.  In some cases, the function is "pre-executed" and its result pre-fetched explicitly.  This happens under the following circumstances:
+</p>
+<ul>
+ <li><p>the column is a primary key column
+</p>
+
+ </li>
+
+ <li><p>the database dialect does not support a usable <code>cursor.lastrowid</code> accessor (or equivalent); this currently includes Postgres, Oracle, and Firebird.
+</p>
+
+ </li>
+
+ <li><p>the statement is a single execution, i.e. only supplies one set of parameters and doesn't use "executemany" behavior
+</p>
+
+ </li>
+
+ <li><p>the <code>inline=True</code> flag is not set on the <code>Insert()</code> or <code>Update()</code> construct.
+</p>
+
+ </li>
+</ul>
+<p>For a statement execution which is not an executemany, the returned <code>ResultProxy</code> will contain a collection accessible via <code>result.postfetch_cols()</code> which contains a list of all <code>Column</code> objects which had an inline-executed default.  Similarly, all parameters which were bound to the statement, including all Python and SQL expressions which were pre-executed, are present in the <code>last_inserted_params()</code> or <code>last_updated_params()</code> collections on <code>ResultProxy</code>.  The <code>last_inserted_ids()</code> collection contains a list of primary key values for the row inserted.  <br></br>
+</p>
+
+
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+    
+    <A name="metadata_defaults_passive"></a>
+    
+    <div class="sectionL3">
+
+    <h3>DDL-Level Defaults</h3>
+    
+    
+
+<p>A variant on a SQL expression default is the <code>PassiveDefault</code>, which gets placed in the CREATE TABLE statement during a <code>create()</code> operation:
+</p>
+
+    
+
+    <div class="sliding_code">
+        <pre>
+<span class="python_name">t </span><span class="python_operator">= </span><span class="python_name">Table</span><span class="python_enclosure">(</span><span class="python_literal">'test'</span><span class="python_operator">, </span><span class="python_name">meta</span><span class="python_operator">, </span>
+    <span class="python_name">Column</span><span class="python_enclosure">(</span><span class="python_literal">'mycolumn'</span><span class="python_operator">, </span><span class="python_name">DateTime</span><span class="python_operator">, </span><span class="python_name">PassiveDefault</span><span class="python_enclosure">(</span><span class="python_name">text</span><span class="python_enclosure">(</span><span class="python_literal">"sysdate"</span><span class="python_enclosure">)))</span>
+<span class="python_enclosure">)</span><span class="python_operator">
+</span></pre>
+    </div>
+<p>A create call for the above table will produce:
+</p>
+
+    
+
+    <div class="sliding_code">
+        <pre>
+CREATE TABLE test (
+    mycolumn datetime default sysdate
+)
+</pre>
+    </div>
+<p>The behavior of <code>PassiveDefault</code> is similar to that of a regular SQL default; if it's placed on a primary key column for a database which doesn't have a way to "postfetch" the ID, and the statement is not "inlined", the SQL expression is pre-executed; otherwise, SQLAlchemy lets the default fire off on the database side normally.
+</p>
+
+
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+    
+    <A name="metadata_defaults_sequences"></a>
+    
+    <div class="sectionL3">
+
+    <h3>Defining Sequences</h3>
+    
+    
+
+<p>A table with a sequence looks like:
+</p>
+
+    
+
+    <div class="sliding_code">
+        <pre>
+<span class="python_name">table </span><span class="python_operator">= </span><span class="python_name">Table</span><span class="python_enclosure">(</span><span class="python_literal">"cartitems"</span><span class="python_operator">, </span><span class="python_name">meta</span><span class="python_operator">, </span>
+    <span class="python_name">Column</span><span class="python_enclosure">(</span><span class="python_literal">"cart_id"</span><span class="python_operator">, </span><span class="python_name">Integer</span><span class="python_operator">, </span><span class="python_name">Sequence</span><span class="python_enclosure">(</span><span class="python_literal">'cart_id_seq'</span><span class="python_enclosure">)</span><span class="python_operator">, </span><span class="python_name">primary_key</span><span class="python_operator">=</span><span class="python_name">True</span><span class="python_enclosure">)</span><span class="python_operator">,</span>
+    <span class="python_name">Column</span><span class="python_enclosure">(</span><span class="python_literal">"description"</span><span class="python_operator">, </span><span class="python_name">String</span><span class="python_enclosure">(</span><span class="python_number">40</span><span class="python_enclosure">))</span><span class="python_operator">,</span>
+    <span class="python_name">Column</span><span class="python_enclosure">(</span><span class="python_literal">"createdate"</span><span class="python_operator">, </span><span class="python_name">DateTime</span><span class="python_enclosure">())</span>
+<span class="python_enclosure">)</span><span class="python_operator">
+</span></pre>
+    </div>
+<p>The <code>Sequence</code> object works a lot like the <code>default</code> keyword on <code>Column</code>, except that it only takes effect on a database which supports sequences.  When used with a database that does not support sequences, the <code>Sequence</code> object has no effect; therefore it's safe to place on a table which is used against multiple database backends.  The same rules for pre- and inline execution apply.
+</p>
+<p>When the <code>Sequence</code> is associated with a table, CREATE and DROP statements issued for that table will also issue CREATE/DROP for the sequence object as well, thus "bundling" the sequence object with its parent table.
+</p>
+<p>The flag <code>optional=True</code> on <code>Sequence</code> will produce a sequence that is only used on databases which have no "autoincrementing" capability.  For example, Postgres supports primary key generation using the SERIAL keyword, whereas Oracle has no such capability.  Therefore, a <code>Sequence</code> placed on a primary key column with <code>optional=True</code> will only be used with an Oracle backend but not Postgres.
+</p>
+<p>A sequence can also be executed standalone, using an <code>Engine</code> or <code>Connection</code>, returning its next value in a database-independent fashion:
+</p>
+
+    
+
+    <div class="sliding_code">
+        <pre>
+<span class="python_name">seq </span><span class="python_operator">= </span><span class="python_name">Sequence</span><span class="python_enclosure">(</span><span class="python_literal">'some_sequence'</span><span class="python_enclosure">)</span><span class="python_operator">
+</span><span class="python_name">nextid </span><span class="python_operator">= </span><span class="python_name">connection</span><span class="python_operator">.</span><span class="python_name">execute</span><span class="python_enclosure">(</span><span class="python_name">seq</span><span class="python_enclosure">)</span><span class="python_operator">
+</span></pre>
+    </div>
+
+
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+
+    </div>
+
+
+
+    
+    <A name="metadata_constraints"></a>
+    
+    <div class="sectionL2">
+
+    <h3>Defining Constraints and Indexes</h3>
+    
+    
+
+
+
+    
+    <A name="metadata_constraints_unique"></a>
+    
+    <div class="sectionL3">
+
+    <h3>UNIQUE Constraint</h3>
+    
+    
+
+<p>Unique constraints can be created anonymously on a single column using the <code>unique</code> keyword on <code>Column</code>.  Explicitly named unique constraints and/or those with multiple columns are created via the <code>UniqueConstraint</code> table-level construct.
+</p>
+
+    
+
+    <div class="sliding_code">
+        <pre>
+<span class="python_name">meta </span><span class="python_operator">= </span><span class="python_name">MetaData</span><span class="python_enclosure">()</span><span class="python_operator">
+</span><span class="python_name">mytable </span><span class="python_operator">= </span><span class="python_name">Table</span><span class="python_enclosure">(</span><span class="python_literal">'mytable'</span><span class="python_operator">, </span><span class="python_name">meta</span><span class="python_operator">,</span>
+
+    <span class="python_comment"># per-column anonymous unique constraint</span>
+    <span class="python_name">Column</span><span class="python_enclosure">(</span><span class="python_literal">'col1'</span><span class="python_operator">, </span><span class="python_name">Integer</span><span class="python_operator">, </span><span class="python_name">unique</span><span class="python_operator">=</span><span class="python_name">True</span><span class="python_enclosure">)</span><span class="python_operator">,</span>
+
+    <span class="python_name">Column</span><span class="python_enclosure">(</span><span class="python_literal">'col2'</span><span class="python_operator">, </span><span class="python_name">Integer</span><span class="python_enclosure">)</span><span class="python_operator">,</span>
+    <span class="python_name">Column</span><span class="python_enclosure">(</span><span class="python_literal">'col3'</span><span class="python_operator">, </span><span class="python_name">Integer</span><span class="python_enclosure">)</span><span class="python_operator">,</span>
+
+    <span class="python_comment"># explicit/composite unique constraint.  'name' is optional.</span>
+    <span class="python_name">UniqueConstraint</span><span class="python_enclosure">(</span><span class="python_literal">'col2'</span><span class="python_operator">, </span><span class="python_literal">'col3'</span><span class="python_operator">, </span><span class="python_name">name</span><span class="python_operator">=</span><span class="python_literal">'uix_1'</span><span class="python_enclosure">)</span>
+    <span class="python_enclosure">)</span><span class="python_operator">
+</span></pre>
+    </div>
+
+
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+    
+    <A name="metadata_constraints_check"></a>
+    
+    <div class="sectionL3">
+
+    <h3>CHECK Constraint</h3>
+    
+    
+
+<p>Check constraints can be named or unnamed and can be created at the Column or Table level, using the <code>CheckConstraint</code> construct.  The text of the check constraint is passed directly through to the database, so there is limited "database independent" behavior.  Column level check constraints generally should only refer to the column to which they are placed, while table level constraints can refer to any columns in the table.
+</p>
+<p>Note that some databases do not actively support check constraints such as MySQL and SQLite.
+</p>
+
+    
+
+    <div class="sliding_code">
+        <pre>
+<span class="python_name">meta </span><span class="python_operator">= </span><span class="python_name">MetaData</span><span class="python_enclosure">()</span><span class="python_operator">
+</span><span class="python_name">mytable </span><span class="python_operator">= </span><span class="python_name">Table</span><span class="python_enclosure">(</span><span class="python_literal">'mytable'</span><span class="python_operator">, </span><span class="python_name">meta</span><span class="python_operator">,</span>
+
+    <span class="python_comment"># per-column CHECK constraint</span>
+    <span class="python_name">Column</span><span class="python_enclosure">(</span><span class="python_literal">'col1'</span><span class="python_operator">, </span><span class="python_name">Integer</span><span class="python_operator">, </span><span class="python_name">CheckConstraint</span><span class="python_enclosure">(</span><span class="python_literal">'col1&gt;5'</span><span class="python_enclosure">))</span><span class="python_operator">,</span>
+
+    <span class="python_name">Column</span><span class="python_enclosure">(</span><span class="python_literal">'col2'</span><span class="python_operator">, </span><span class="python_name">Integer</span><span class="python_enclosure">)</span><span class="python_operator">,</span>
+    <span class="python_name">Column</span><span class="python_enclosure">(</span><span class="python_literal">'col3'</span><span class="python_operator">, </span><span class="python_name">Integer</span><span class="python_enclosure">)</span><span class="python_operator">,</span>
+
+    <span class="python_comment"># table level CHECK constraint.  'name' is optional.</span>
+    <span class="python_name">CheckConstraint</span><span class="python_enclosure">(</span><span class="python_literal">'col2 &gt; col3 + 5'</span><span class="python_operator">, </span><span class="python_name">name</span><span class="python_operator">=</span><span class="python_literal">'check1'</span><span class="python_enclosure">)</span>
+    <span class="python_enclosure">)</span><span class="python_operator">
+</span></pre>
+    </div>
+
+
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+    
+    <A name="metadata_constraints_indexes"></a>
+    
+    <div class="sectionL3">
+
+    <h3>Indexes</h3>
+    
+    
+
+<p>Indexes can be created anonymously (using an auto-generated name "ix_<column label>") for a single column using the inline <code>index</code> keyword on <code>Column</code>, which also modifies the usage of <code>unique</code> to apply the uniqueness to the index itself, instead of adding a separate UNIQUE constraint.  For indexes with specific names or which encompass more than one column, use the <code>Index</code> construct, which requires a name.  <br></br>
+</p>
+<p>Note that the <code>Index</code> construct is created <strong>externally</strong> to the table which it corresponds, using <code>Column</code> objects and not strings.
+</p>
+
+    
+
+    <div class="sliding_code">
+        <pre>
+<span class="python_name">meta </span><span class="python_operator">= </span><span class="python_name">MetaData</span><span class="python_enclosure">()</span><span class="python_operator">
+</span><span class="python_name">mytable </span><span class="python_operator">= </span><span class="python_name">Table</span><span class="python_enclosure">(</span><span class="python_literal">'mytable'</span><span class="python_operator">, </span><span class="python_name">meta</span><span class="python_operator">,</span>
+    <span class="python_comment"># an indexed column, with index "ix_mytable_col1"</span>
+    <span class="python_name">Column</span><span class="python_enclosure">(</span><span class="python_literal">'col1'</span><span class="python_operator">, </span><span class="python_name">Integer</span><span class="python_operator">, </span><span class="python_name">index</span><span class="python_operator">=</span><span class="python_name">True</span><span class="python_enclosure">)</span><span class="python_operator">,</span>
+
+    <span class="python_comment"># a uniquely indexed column with index "ix_mytable_col2"</span>
+    <span class="python_name">Column</span><span class="python_enclosure">(</span><span class="python_literal">'col2'</span><span class="python_operator">, </span><span class="python_name">Integer</span><span class="python_operator">, </span><span class="python_name">index</span><span class="python_operator">=</span><span class="python_name">True</span><span class="python_operator">, </span><span class="python_name">unique</span><span class="python_operator">=</span><span class="python_name">True</span><span class="python_enclosure">)</span><span class="python_operator">,</span>
+
+    <span class="python_name">Column</span><span class="python_enclosure">(</span><span class="python_literal">'col3'</span><span class="python_operator">, </span><span class="python_name">Integer</span><span class="python_enclosure">)</span><span class="python_operator">,</span>
+    <span class="python_name">Column</span><span class="python_enclosure">(</span><span class="python_literal">'col4'</span><span class="python_operator">, </span><span class="python_name">Integer</span><span class="python_enclosure">)</span><span class="python_operator">,</span>
+
+    <span class="python_name">Column</span><span class="python_enclosure">(</span><span class="python_literal">'col5'</span><span class="python_operator">, </span><span class="python_name">Integer</span><span class="python_enclosure">)</span><span class="python_operator">,</span>
+    <span class="python_name">Column</span><span class="python_enclosure">(</span><span class="python_literal">'col6'</span><span class="python_operator">, </span><span class="python_name">Integer</span><span class="python_enclosure">)</span><span class="python_operator">,</span>
+    <span class="python_enclosure">)</span><span class="python_operator">
+</span>
+<span class="python_comment"># place an index on col3, col4
+</span><span class="python_name">Index</span><span class="python_enclosure">(</span><span class="python_literal">'idx_col34'</span><span class="python_operator">, </span><span class="python_name">mytable</span><span class="python_operator">.</span><span class="python_name">c</span><span class="python_operator">.</span><span class="python_name">col3</span><span class="python_operator">, </span><span class="python_name">mytable</span><span class="python_operator">.</span><span class="python_name">c</span><span class="python_operator">.</span><span class="python_name">col4</span><span class="python_enclosure">)</span><span class="python_operator">
+</span>
+<span class="python_comment"># place a unique index on col5, col6
+</span><span class="python_name">Index</span><span class="python_enclosure">(</span><span class="python_literal">'myindex'</span><span class="python_operator">, </span><span class="python_name">mytable</span><span class="python_operator">.</span><span class="python_name">c</span><span class="python_operator">.</span><span class="python_name">col5</span><span class="python_operator">, </span><span class="python_name">mytable</span><span class="python_operator">.</span><span class="python_name">c</span><span class="python_operator">.</span><span class="python_name">col6</span><span class="python_operator">, </span><span class="python_name">unique</span><span class="python_operator">=</span><span class="python_name">True</span><span class="python_enclosure">)</span><span class="python_operator">
+</span></pre>
+    </div>
+<p>The <code>Index</code> objects will be created along with the CREATE statements for the table itself.  An index can also be created on its own independently of the table:
+</p>
+
+    
+
+    <div class="sliding_code">
+        <pre>
+<span class="python_comment"># create a table
+</span><span class="python_name">sometable</span><span class="python_operator">.</span><span class="python_name">create</span><span class="python_enclosure">()</span><span class="python_operator">
+</span>
+<span class="python_comment"># define an index
+</span><span class="python_name">i </span><span class="python_operator">= </span><span class="python_name">Index</span><span class="python_enclosure">(</span><span class="python_literal">'someindex'</span><span class="python_operator">, </span><span class="python_name">sometable</span><span class="python_operator">.</span><span class="python_name">c</span><span class="python_operator">.</span><span class="python_name">col5</span><span class="python_enclosure">)</span><span class="python_operator">
+</span>
+<span class="python_comment"># create the index, will use the table's bound connectable if the `bind` keyword argument not specified
+</span><span class="python_name">i</span><span class="python_operator">.</span><span class="python_name">create</span><span class="python_enclosure">()</span><span class="python_operator">
+</span></pre>
+    </div>
+
+
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+
+    </div>
+
+
+
+    
+    <A name="metadata_adapting"></a>
+    
+    <div class="sectionL2">
+
+    <h3>Adapting Tables to Alternate Metadata</h3>
+    
+    
+
+<p>A <code>Table</code> object created against a specific <code>MetaData</code> object can be re-created against a new MetaData using the <code>tometadata</code> method:
+</p>
+
+    
+
+    <div class="sliding_code">
+        <pre>
+<span class="python_comment"># create two metadata
+</span><span class="python_name">meta1 </span><span class="python_operator">= </span><span class="python_name">MetaData</span><span class="python_enclosure">(</span><span class="python_literal">'sqlite:///querytest.db'</span><span class="python_enclosure">)</span><span class="python_operator">
+</span><span class="python_name">meta2 </span><span class="python_operator">= </span><span class="python_name">MetaData</span><span class="python_enclosure">()</span><span class="python_operator">
+</span>
+<span class="python_comment"># load 'users' from the sqlite engine
+</span><span class="python_name">users_table </span><span class="python_operator">= </span><span class="python_name">Table</span><span class="python_enclosure">(</span><span class="python_literal">'users'</span><span class="python_operator">, </span><span class="python_name">meta1</span><span class="python_operator">, </span><span class="python_name">autoload</span><span class="python_operator">=</span><span class="python_name">True</span><span class="python_enclosure">)</span><span class="python_operator">
+</span>
+<span class="python_comment"># create the same Table object for the plain metadata
+</span><span class="python_name">users_table_2 </span><span class="python_operator">= </span><span class="python_name">users_table</span><span class="python_operator">.</span><span class="python_name">tometadata</span><span class="python_enclosure">(</span><span class="python_name">meta2</span><span class="python_enclosure">)</span><span class="python_operator">
+</span></pre>
+    </div>
+
+
+
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+
+    </div>
+
+
+
+
+
+    <div class="bottomnav">
+        
+    <div class="prevnext">
+
+            
+            Previous: <a href="dbengine.html">Database Engines</a>
+
+               |   
+            Next: <a href="types.html">The Types System</a>
+    </div>
+
+    </div>
+
+
+
+
+
+
+</body>
+</html>
+
+
+
+
+
+

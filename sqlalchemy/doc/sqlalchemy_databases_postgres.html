@@ -1,0 +1,1443 @@
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<title>SQLAlchemy 0.4 Documentation - module sqlalchemy.databases.postgres</title>
+	
+    
+    <link rel="stylesheet" href="style.css"></link>
+    <link rel="stylesheet" href="docs.css"></link>
+    <link href="syntaxhighlight.css" rel="stylesheet" type="text/css"></link>
+    <script src="scripts.js"></script>
+
+    <link rel="stylesheet" href="docutil.css"></link>
+
+
+
+</head>
+<body>
+
+
+
+
+
+
+
+
+<div id="topanchor"><a name="top">&nbsp;</a></div>
+
+
+<h1>SQLAlchemy 0.4 Documentation</h1>
+
+<div id="pagecontrol"><a href="index.html">Multiple Pages</a> | <a href="documentation.html">One Page</a></div>
+
+<div class="versionheader">Version: 0.4.7p1   Last Updated: 07/31/08 11:09:56</div>
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class="topnav">
+
+    
+    <div class="navbanner">
+        <a href="index.html" class="totoc">Table of Contents</a>
+        
+    <div class="prevnext">
+            Up: <a href="docstrings.html">API Documentation</a>
+
+               |   
+            Previous: <a href="sqlalchemy_databases_sqlite.html">module sqlalchemy.databases.sqlite</a>
+
+               |   
+            Next: <a href="sqlalchemy_databases_mysql.html">module sqlalchemy.databases.mysql</a>
+    </div>
+
+        <h2>module sqlalchemy.databases.postgres</h2>
+    </div>
+
+	
+	
+    <ul>
+        
+        <li><a style="" href="sqlalchemy_databases_postgres.html#docstrings_sqlalchemy.databases.postgres_modfunc">Module Functions</a></li>
+
+	        <li>
+                
+    <ul>
+        
+        <li><a style="" href="sqlalchemy_databases_postgres.html#docstrings_sqlalchemy.databases.postgres_modfunc_descriptor">descriptor()</a></li>
+
+    </ul>
+
+	        </li>
+        
+        <li><a style="" href="sqlalchemy_databases_postgres.html#docstrings_sqlalchemy.databases.postgres_PGArray">class PGArray(MutableType,Concatenable,TypeEngine)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_postgres.html#docstrings_sqlalchemy.databases.postgres_PGBigInteger">class PGBigInteger(PGInteger)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_postgres.html#docstrings_sqlalchemy.databases.postgres_PGBinary">class PGBinary(Binary)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_postgres.html#docstrings_sqlalchemy.databases.postgres_PGBoolean">class PGBoolean(Boolean)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_postgres.html#docstrings_sqlalchemy.databases.postgres_PGChar">class PGChar(CHAR)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_postgres.html#docstrings_sqlalchemy.databases.postgres_PGCidr">class PGCidr(TypeEngine)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_postgres.html#docstrings_sqlalchemy.databases.postgres_PGCompiler">class PGCompiler(DefaultCompiler)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_postgres.html#docstrings_sqlalchemy.databases.postgres_PGDate">class PGDate(Date)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_postgres.html#docstrings_sqlalchemy.databases.postgres_PGDateTime">class PGDateTime(DateTime)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_postgres.html#docstrings_sqlalchemy.databases.postgres_PGDefaultRunner">class PGDefaultRunner(DefaultRunner)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_postgres.html#docstrings_sqlalchemy.databases.postgres_PGDialect">class PGDialect(DefaultDialect)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_postgres.html#docstrings_sqlalchemy.databases.postgres_PGExecutionContext">class PGExecutionContext(DefaultExecutionContext)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_postgres.html#docstrings_sqlalchemy.databases.postgres_PGFloat">class PGFloat(Float)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_postgres.html#docstrings_sqlalchemy.databases.postgres_PGIdentifierPreparer">class PGIdentifierPreparer(IdentifierPreparer)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_postgres.html#docstrings_sqlalchemy.databases.postgres_PGInet">class PGInet(TypeEngine)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_postgres.html#docstrings_sqlalchemy.databases.postgres_PGInteger">class PGInteger(Integer)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_postgres.html#docstrings_sqlalchemy.databases.postgres_PGInterval">class PGInterval(TypeEngine)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_postgres.html#docstrings_sqlalchemy.databases.postgres_PGMacAddr">class PGMacAddr(TypeEngine)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_postgres.html#docstrings_sqlalchemy.databases.postgres_PGNumeric">class PGNumeric(Numeric)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_postgres.html#docstrings_sqlalchemy.databases.postgres_PGSchemaDropper">class PGSchemaDropper(SchemaDropper)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_postgres.html#docstrings_sqlalchemy.databases.postgres_PGSchemaGenerator">class PGSchemaGenerator(SchemaGenerator)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_postgres.html#docstrings_sqlalchemy.databases.postgres_PGSmallInteger">class PGSmallInteger(SmallInteger)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_postgres.html#docstrings_sqlalchemy.databases.postgres_PGString">class PGString(String)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_postgres.html#docstrings_sqlalchemy.databases.postgres_PGText">class PGText(Text)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_postgres.html#docstrings_sqlalchemy.databases.postgres_PGTime">class PGTime(Time)</a></li>
+
+    </ul>
+
+	</div>
+
+
+
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.databases.postgres"></a>
+    
+    <div class="sectionL2">
+
+    <h3>module sqlalchemy.databases.postgres</h3>
+    
+    
+    <div class="darkcell"><p>Support for the PostgreSQL database.</p>
+<p>PostgreSQL supports partial indexes. To create them pass a posgres_where
+option to the Index constructor:</p>
+<pre class="literal-block">
+Index('my_index', my_table.c.id, postgres_where=tbl.c.value &gt; 10)
+</pre>
+<p>PostgreSQL 8.2+ supports returning a result set from inserts and updates.
+To use this pass the column/expression list to the postgres_returning
+parameter when creating the queries:</p>
+<pre class="literal-block">
+raises = tbl.update(empl.c.sales &gt; 100, values=dict(salary=empl.c.salary * 1.1),
+  postgres_returning=[empl.c.id, empl.c.salary]).execute().fetchall()
+</pre>
+</div>
+    
+
+        
+    
+    <A name="docstrings_sqlalchemy.databases.postgres_modfunc"></a>
+    
+    <div class="sectionL3">
+
+    <h3>Module Functions</h3>
+    
+    
+                
+    <div class="darkcell">
+    
+    <A name="docstrings_sqlalchemy.databases.postgres_modfunc_descriptor"></a>
+    <b>def descriptor()</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+        
+
+    </div>
+
+
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.databases.postgres_PGArray"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class PGArray(MutableType,Concatenable,<a href="sqlalchemy_types.html#docstrings_sqlalchemy.types_TypeEngine">TypeEngine</a>)</h3>
+    
+    
+    
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def __init__(<i>self</i>, <i>item_type</i>, <i>mutable=True</i>)</b>
+    <div class="docstring">
+    <p>Construct a new <tt class="docutils literal"><span class="pre">PGArray</span></tt>.</p>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def bind_processor(<i>self</i>, <i>dialect</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def compare_values(<i>self</i>, <i>x</i>, <i>y</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def copy_value(<i>self</i>, <i>value</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def dialect_impl(<i>self</i>, <i>dialect</i>, <i>**kwargs</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def get_col_spec(<i>self</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def is_mutable(<i>self</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def result_processor(<i>self</i>, <i>dialect</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.databases.postgres_PGBigInteger"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class PGBigInteger(<a href="sqlalchemy_databases_postgres.html#docstrings_sqlalchemy.databases.postgres_PGInteger">PGInteger</a>)</h3>
+    
+    
+    
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def get_col_spec(<i>self</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.databases.postgres_PGBinary"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class PGBinary(<a href="sqlalchemy_types.html#docstrings_sqlalchemy.types_Binary">Binary</a>)</h3>
+    
+    
+    
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def get_col_spec(<i>self</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.databases.postgres_PGBoolean"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class PGBoolean(<a href="sqlalchemy_types.html#docstrings_sqlalchemy.types_Boolean">Boolean</a>)</h3>
+    
+    
+    
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def get_col_spec(<i>self</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.databases.postgres_PGChar"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class PGChar(<a href="sqlalchemy_types.html#docstrings_sqlalchemy.types_CHAR">CHAR</a>)</h3>
+    
+    
+    
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def get_col_spec(<i>self</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.databases.postgres_PGCidr"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class PGCidr(<a href="sqlalchemy_types.html#docstrings_sqlalchemy.types_TypeEngine">TypeEngine</a>)</h3>
+    
+    
+    
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def get_col_spec(<i>self</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.databases.postgres_PGCompiler"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class PGCompiler(<a href="sqlalchemy_sql_compiler.html#docstrings_sqlalchemy.sql.compiler_DefaultCompiler">DefaultCompiler</a>)</h3>
+    
+    
+    
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def for_update_clause(<i>self</i>, <i>select</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def get_select_precolumns(<i>self</i>, <i>select</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def limit_clause(<i>self</i>, <i>select</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def visit_insert(<i>self</i>, <i>insert_stmt</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def visit_sequence(<i>self</i>, <i>seq</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def visit_update(<i>self</i>, <i>update_stmt</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.databases.postgres_PGDate"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class PGDate(<a href="sqlalchemy_types.html#docstrings_sqlalchemy.types_Date">Date</a>)</h3>
+    
+    
+    
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def get_col_spec(<i>self</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.databases.postgres_PGDateTime"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class PGDateTime(<a href="sqlalchemy_types.html#docstrings_sqlalchemy.types_DateTime">DateTime</a>)</h3>
+    
+    
+    
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def get_col_spec(<i>self</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.databases.postgres_PGDefaultRunner"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class PGDefaultRunner(<a href="sqlalchemy_engine.html#docstrings_sqlalchemy.engine_DefaultRunner">DefaultRunner</a>)</h3>
+    
+    
+    
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def __init__(<i>self</i>, <i>context</i>)</b>
+    <div class="docstring">
+    <p>Construct a new <tt class="docutils literal"><span class="pre">PGDefaultRunner</span></tt>.</p>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def get_column_default(<i>self</i>, <i>column</i>, <i>isinsert=True</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def visit_sequence(<i>self</i>, <i>seq</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.databases.postgres_PGDialect"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class PGDialect(<a href="sqlalchemy_engine_default.html#docstrings_sqlalchemy.engine.default_DefaultDialect">DefaultDialect</a>)</h3>
+    
+    
+    
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def __init__(<i>self</i>, <i>use_oids=False</i>, <i>server_side_cursors=False</i>, <i>**kwargs</i>)</b>
+    <div class="docstring">
+    <p>Construct a new <tt class="docutils literal"><span class="pre">PGDialect</span></tt>.</p>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def create_connect_args(<i>self</i>, <i>url</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def create_execution_context(<i>self</i>, <i>*args</i>, <i>**kwargs</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def dbapi(<i>cls</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def do_begin_twophase(<i>self</i>, <i>connection</i>, <i>xid</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def do_commit_twophase(<i>self</i>, <i>connection</i>, <i>xid</i>, <i>is_prepared=True</i>, <i>recover=False</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def do_prepare_twophase(<i>self</i>, <i>connection</i>, <i>xid</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def do_recover_twophase(<i>self</i>, <i>connection</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def do_rollback_twophase(<i>self</i>, <i>connection</i>, <i>xid</i>, <i>is_prepared=True</i>, <i>recover=False</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def get_default_schema_name(<i>self</i>, <i>connection</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def has_sequence(<i>self</i>, <i>connection</i>, <i>sequence_name</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def has_table(<i>self</i>, <i>connection</i>, <i>table_name</i>, <i>schema=None</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def is_disconnect(<i>self</i>, <i>e</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def last_inserted_ids(<i>self</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def oid_column_name(<i>self</i>, <i>column</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def reflecttable(<i>self</i>, <i>connection</i>, <i>table</i>, <i>include_columns</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def server_version_info(<i>self</i>, <i>connection</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def table_names(<i>self</i>, <i>connection</i>, <i>schema</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def type_descriptor(<i>self</i>, <i>typeobj</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.databases.postgres_PGExecutionContext"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class PGExecutionContext(<a href="sqlalchemy_engine_default.html#docstrings_sqlalchemy.engine.default_DefaultExecutionContext">DefaultExecutionContext</a>)</h3>
+    
+    
+    
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def create_cursor(<i>self</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def get_result_proxy(<i>self</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def post_exec(<i>self</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def returns_rows_compiled(<i>self</i>, <i>compiled</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def returns_rows_text(<i>self</i>, <i>statement</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.databases.postgres_PGFloat"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class PGFloat(<a href="sqlalchemy_types.html#docstrings_sqlalchemy.types_Float">Float</a>)</h3>
+    
+    
+    
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def get_col_spec(<i>self</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.databases.postgres_PGIdentifierPreparer"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class PGIdentifierPreparer(<a href="sqlalchemy_sql_compiler.html#docstrings_sqlalchemy.sql.compiler_IdentifierPreparer">IdentifierPreparer</a>)</h3>
+    
+    
+    
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.databases.postgres_PGInet"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class PGInet(<a href="sqlalchemy_types.html#docstrings_sqlalchemy.types_TypeEngine">TypeEngine</a>)</h3>
+    
+    
+    
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def get_col_spec(<i>self</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.databases.postgres_PGInteger"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class PGInteger(<a href="sqlalchemy_types.html#docstrings_sqlalchemy.types_Integer">Integer</a>)</h3>
+    
+    
+    
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def get_col_spec(<i>self</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.databases.postgres_PGInterval"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class PGInterval(<a href="sqlalchemy_types.html#docstrings_sqlalchemy.types_TypeEngine">TypeEngine</a>)</h3>
+    
+    
+    
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def get_col_spec(<i>self</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.databases.postgres_PGMacAddr"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class PGMacAddr(<a href="sqlalchemy_types.html#docstrings_sqlalchemy.types_TypeEngine">TypeEngine</a>)</h3>
+    
+    
+    
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def get_col_spec(<i>self</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.databases.postgres_PGNumeric"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class PGNumeric(<a href="sqlalchemy_types.html#docstrings_sqlalchemy.types_Numeric">Numeric</a>)</h3>
+    
+    
+    
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def bind_processor(<i>self</i>, <i>dialect</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def get_col_spec(<i>self</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def result_processor(<i>self</i>, <i>dialect</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.databases.postgres_PGSchemaDropper"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class PGSchemaDropper(<a href="sqlalchemy_sql_compiler.html#docstrings_sqlalchemy.sql.compiler_SchemaDropper">SchemaDropper</a>)</h3>
+    
+    
+    
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def visit_sequence(<i>self</i>, <i>sequence</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.databases.postgres_PGSchemaGenerator"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class PGSchemaGenerator(<a href="sqlalchemy_sql_compiler.html#docstrings_sqlalchemy.sql.compiler_SchemaGenerator">SchemaGenerator</a>)</h3>
+    
+    
+    
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def get_column_specification(<i>self</i>, <i>column</i>, <i>**kwargs</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def visit_index(<i>self</i>, <i>index</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def visit_sequence(<i>self</i>, <i>sequence</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.databases.postgres_PGSmallInteger"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class PGSmallInteger(<a href="sqlalchemy_types.html#docstrings_sqlalchemy.types_SmallInteger">SmallInteger</a>)</h3>
+    
+    
+    
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def get_col_spec(<i>self</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.databases.postgres_PGString"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class PGString(<a href="sqlalchemy_types.html#docstrings_sqlalchemy.types_String">String</a>)</h3>
+    
+    
+    
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def get_col_spec(<i>self</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.databases.postgres_PGText"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class PGText(<a href="sqlalchemy_types.html#docstrings_sqlalchemy.types_Text">Text</a>)</h3>
+    
+    
+    
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def get_col_spec(<i>self</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.databases.postgres_PGTime"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class PGTime(<a href="sqlalchemy_types.html#docstrings_sqlalchemy.types_Time">Time</a>)</h3>
+    
+    
+    
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def get_col_spec(<i>self</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+    
+
+    </div>
+
+
+
+
+
+    <div class="bottomnav">
+        
+    <div class="prevnext">
+            Up: <a href="docstrings.html">API Documentation</a>
+
+               |   
+            Previous: <a href="sqlalchemy_databases_sqlite.html">module sqlalchemy.databases.sqlite</a>
+
+               |   
+            Next: <a href="sqlalchemy_databases_mysql.html">module sqlalchemy.databases.mysql</a>
+    </div>
+
+    </div>
+
+
+
+
+
+
+
+
+</body>
+</html>
+
+
+
+
+
+

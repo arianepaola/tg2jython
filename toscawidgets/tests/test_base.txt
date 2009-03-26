@@ -1,0 +1,125 @@
+Params should be collected from all bases.
+
+>>> from tw.api import Widget, Child, WidgetRepeater
+>>> class MyWidget(Widget):
+...     params = ['foo']
+...     foo = 'bar'
+>>> 'id' in MyWidget.params
+True
+>>> MyWidget.params.difference(Widget.params)
+frozenset(['foo'])
+
+update_params should bring those attributes from self listed at 'params'
+
+>>> d = {}
+>>> w = Widget('foo')
+>>> w.update_params(d)
+>>> set(w.params).issubset(set(d.keys()))
+True
+>>> d = {}
+>>> w = MyWidget('foo')
+>>> w.update_params(d)
+>>> set(w.params).issubset(set(d.keys()))
+True
+>>> d['foo']
+'bar'
+
+Widget should reject attribute setting and deleting once initialized.
+
+>>> w = Widget('foo', a=2)
+>>> w.a = 3
+Traceback (most recent call last):
+    ...
+WidgetLocked: The widget is locked. It's unthread-safe to alter it's attributes after initialization.
+>>> del w.a
+Traceback (most recent call last):
+    ...
+WidgetLocked: The widget is locked. It's unthread-safe to alter it's attributes after initialization.
+
+Widget should reject appending new children after initialization.
+
+>>> w = Widget('parent')
+>>> w._append_child(Widget('child'))
+Traceback (most recent call last):
+    ...
+WidgetInitialized: The widget is already initialized, try doing it at the constructor.
+
+Widgets should be pickable
+XXX: Not really...
+
+>>> import pickle
+>>> w = Widget('foo', template="<h1>${id}</h1>")
+>>> s = pickle.dumps(w)
+>>> type(s)
+<type 'str'>
+
+TODO: Doesn't test still if the unpickled instance behaves as expected
+
+Widgets can be cloned
+
+>>> p = Widget('parent', children=[Child(Widget, 'child%d'%i) for i in xrange(3)])
+>>> p1 = p.clone()
+>>> p1 == p
+True
+>>> p1 is not p
+True
+>>> [c.id == c1.id for c, c1 in zip(p.children, p1.children)]
+[True, True, True]
+>>> [c is not c1 for c, c1 in zip(p.children, p1.children)]
+[True, True, True]
+
+
+Widgets are attached well
+
+>>> subchildren = [Widget('sw%d'%i) for i in range(2)]
+>>> children = [Widget('w%d'%i, children=subchildren) for i in range(2)]
+>>> parent = Widget('p', children=children)
+>>> len(parent.children)
+2
+>>> [len(c.children) for c in parent.children]
+[2, 2]
+
+
+WidgetRepeater doesn't do funky stuff
+
+>>> repeated = WidgetRepeater('repeated', widget=parent, repetitions=10)
+>>> len(parent.children)
+2
+>>> [len(c.children) for c in parent.children]
+[2, 2]
+>>> len(repeated.children)
+10
+>>> [c.repetition for c in repeated.children] == range(10)
+True
+
+
+Widgets can have children with ids begininng with underscore
+
+>>> w = Widget(children=[Widget('_foo')])
+>>> w.c._foo
+Widget('_foo', children=[], **{})
+
+
+Parameters can be passed to child widgets using dot-notation.
+
+>>> class Container(Widget):
+...     children = [Widget('foo')]
+...     def update_params(self, d):
+...         Widget.update_params(self, d)
+...         print d.child_args
+...         print d.args_for('foo')
+...
+>>> Container('c').display(**{'.foo':{'a':1}, 'bar':2})
+{'foo': {'a': 1}} 
+{'a': 1}
+
+CSS class  class can be overrided when subclassing
+>>> class BaseWidget(Widget):
+...     css_class = "base_css"
+...
+>>> class ConcreteWidget(BaseWidget):
+...     pass
+...
+>>> ConcreteWidget().css_class
+'base_css'
+

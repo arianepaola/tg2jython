@@ -1,0 +1,925 @@
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<title>SQLAlchemy 0.4 Documentation - module sqlalchemy.exceptions</title>
+	
+    
+    <link rel="stylesheet" href="style.css"></link>
+    <link rel="stylesheet" href="docs.css"></link>
+    <link href="syntaxhighlight.css" rel="stylesheet" type="text/css"></link>
+    <script src="scripts.js"></script>
+
+    <link rel="stylesheet" href="docutil.css"></link>
+
+
+
+</head>
+<body>
+
+
+
+
+
+
+
+
+<div id="topanchor"><a name="top">&nbsp;</a></div>
+
+
+<h1>SQLAlchemy 0.4 Documentation</h1>
+
+<div id="pagecontrol"><a href="index.html">Multiple Pages</a> | <a href="documentation.html">One Page</a></div>
+
+<div class="versionheader">Version: 0.4.7p1   Last Updated: 07/31/08 11:09:56</div>
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class="topnav">
+
+    
+    <div class="navbanner">
+        <a href="index.html" class="totoc">Table of Contents</a>
+        
+    <div class="prevnext">
+            Up: <a href="docstrings.html">API Documentation</a>
+
+               |   
+            Previous: <a href="sqlalchemy_engine_url.html">module sqlalchemy.engine.url</a>
+
+               |   
+            Next: <a href="sqlalchemy_interfaces.html">module sqlalchemy.interfaces</a>
+    </div>
+
+        <h2>module sqlalchemy.exceptions</h2>
+    </div>
+
+	
+	
+    <ul>
+        
+        <li><a style="" href="sqlalchemy_exceptions.html#docstrings_sqlalchemy.exceptions_ArgumentError">class ArgumentError(SQLAlchemyError)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_exceptions.html#docstrings_sqlalchemy.exceptions_AssertionError">class AssertionError(SQLAlchemyError)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_exceptions.html#docstrings_sqlalchemy.exceptions_CircularDependencyError">class CircularDependencyError(SQLAlchemyError)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_exceptions.html#docstrings_sqlalchemy.exceptions_CompileError">class CompileError(SQLAlchemyError)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_exceptions.html#docstrings_sqlalchemy.exceptions_ConcurrentModificationError">class ConcurrentModificationError(SQLAlchemyError)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_exceptions.html#docstrings_sqlalchemy.exceptions_DBAPIError">class DBAPIError(SQLAlchemyError)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_exceptions.html#docstrings_sqlalchemy.exceptions_DataError">class DataError(DatabaseError)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_exceptions.html#docstrings_sqlalchemy.exceptions_DatabaseError">class DatabaseError(DBAPIError)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_exceptions.html#docstrings_sqlalchemy.exceptions_DisconnectionError">class DisconnectionError(SQLAlchemyError)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_exceptions.html#docstrings_sqlalchemy.exceptions_FlushError">class FlushError(SQLAlchemyError)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_exceptions.html#docstrings_sqlalchemy.exceptions_IdentifierError">class IdentifierError(SQLAlchemyError)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_exceptions.html#docstrings_sqlalchemy.exceptions_IntegrityError">class IntegrityError(DatabaseError)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_exceptions.html#docstrings_sqlalchemy.exceptions_InterfaceError">class InterfaceError(DBAPIError)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_exceptions.html#docstrings_sqlalchemy.exceptions_InternalError">class InternalError(DatabaseError)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_exceptions.html#docstrings_sqlalchemy.exceptions_InvalidRequestError">class InvalidRequestError(SQLAlchemyError)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_exceptions.html#docstrings_sqlalchemy.exceptions_NoReferencedTableError">class NoReferencedTableError(InvalidRequestError)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_exceptions.html#docstrings_sqlalchemy.exceptions_NoSuchColumnError">class NoSuchColumnError(KeyError,SQLAlchemyError)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_exceptions.html#docstrings_sqlalchemy.exceptions_NoSuchTableError">class NoSuchTableError(InvalidRequestError)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_exceptions.html#docstrings_sqlalchemy.exceptions_NotSupportedError">class NotSupportedError(DatabaseError)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_exceptions.html#docstrings_sqlalchemy.exceptions_OperationalError">class OperationalError(DatabaseError)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_exceptions.html#docstrings_sqlalchemy.exceptions_ProgrammingError">class ProgrammingError(DatabaseError)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_exceptions.html#docstrings_sqlalchemy.exceptions_SADeprecationWarning">class SADeprecationWarning(DeprecationWarning)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_exceptions.html#docstrings_sqlalchemy.exceptions_SAPendingDeprecationWarning">class SAPendingDeprecationWarning(PendingDeprecationWarning)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_exceptions.html#docstrings_sqlalchemy.exceptions_SAWarning">class SAWarning(RuntimeWarning)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_exceptions.html#docstrings_sqlalchemy.exceptions_SQLAlchemyError">class SQLAlchemyError(Exception)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_exceptions.html#docstrings_sqlalchemy.exceptions_TimeoutError">class TimeoutError(SQLAlchemyError)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_exceptions.html#docstrings_sqlalchemy.exceptions_UnboundExecutionError">class UnboundExecutionError(InvalidRequestError)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_exceptions.html#docstrings_sqlalchemy.exceptions_UnmappedColumnError">class UnmappedColumnError(InvalidRequestError)</a></li>
+
+    </ul>
+
+	</div>
+
+
+
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.exceptions"></a>
+    
+    <div class="sectionL2">
+
+    <h3>module sqlalchemy.exceptions</h3>
+    
+    
+    <div class="darkcell"><p>Exceptions used with SQLAlchemy.</p>
+<p>The base exception class is SQLAlchemyError.  Exceptions which are raised as a result
+of DBAPI exceptions are all subclasses of <a href="sqlalchemy_exceptions.html#docstrings_sqlalchemy.exceptions_DBAPIError">DBAPIError</a>.</p>
+</div>
+    
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.exceptions_ArgumentError"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class ArgumentError(<a href="sqlalchemy_exceptions.html#docstrings_sqlalchemy.exceptions_SQLAlchemyError">SQLAlchemyError</a>)</h3>
+    
+    
+    <div class="darkcell"><p>Raised for all those conditions where invalid arguments are
+sent to constructed objects.  This error generally corresponds to
+construction time state errors.</p>
+</div>
+    
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.exceptions_AssertionError"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class AssertionError(<a href="sqlalchemy_exceptions.html#docstrings_sqlalchemy.exceptions_SQLAlchemyError">SQLAlchemyError</a>)</h3>
+    
+    
+    <div class="darkcell"><p>Corresponds to internal state being detected in an invalid state.</p>
+</div>
+    
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.exceptions_CircularDependencyError"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class CircularDependencyError(<a href="sqlalchemy_exceptions.html#docstrings_sqlalchemy.exceptions_SQLAlchemyError">SQLAlchemyError</a>)</h3>
+    
+    
+    <div class="darkcell"><p>Raised by topological sorts when a circular dependency is detected</p>
+</div>
+    
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.exceptions_CompileError"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class CompileError(<a href="sqlalchemy_exceptions.html#docstrings_sqlalchemy.exceptions_SQLAlchemyError">SQLAlchemyError</a>)</h3>
+    
+    
+    <div class="darkcell"><p>Raised when an error occurs during SQL compilation</p>
+</div>
+    
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.exceptions_ConcurrentModificationError"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class ConcurrentModificationError(<a href="sqlalchemy_exceptions.html#docstrings_sqlalchemy.exceptions_SQLAlchemyError">SQLAlchemyError</a>)</h3>
+    
+    
+    <div class="darkcell"><p>Raised when a concurrent modification condition is detected.</p>
+</div>
+    
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.exceptions_DBAPIError"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class DBAPIError(<a href="sqlalchemy_exceptions.html#docstrings_sqlalchemy.exceptions_SQLAlchemyError">SQLAlchemyError</a>)</h3>
+    
+    
+    <div class="darkcell"><p>Raised when the execution of a database operation fails.</p>
+<p><tt class="docutils literal"><span class="pre">DBAPIError</span></tt> wraps exceptions raised by the DB-API underlying the
+database operation.  Driver-specific implementations of the standard
+DB-API exception types are wrapped by matching sub-types of SQLAlchemy's
+<tt class="docutils literal"><span class="pre">DBAPIError</span></tt> when possible.  DB-API's <tt class="docutils literal"><span class="pre">Error</span></tt> type maps to
+<tt class="docutils literal"><span class="pre">DBAPIError</span></tt> in SQLAlchemy, otherwise the names are identical.  Note
+that there is no guarantee that different DB-API implementations will
+raise the same exception type for any given error condition.</p>
+<p>If the error-raising operation occured in the execution of a SQL
+statement, that statement and its parameters will be available on
+the exception object in the <tt class="docutils literal"><span class="pre">statement</span></tt> and <tt class="docutils literal"><span class="pre">params</span></tt> attributes.</p>
+<p>The wrapped exception object is available in the <tt class="docutils literal"><span class="pre">orig</span></tt> attribute.
+Its type and properties are DB-API implementation specific.</p>
+</div>
+    
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def __init__(<i>self</i>, <i>statement</i>, <i>params</i>, <i>orig</i>, <i>connection_invalidated=False</i>)</b>
+    <div class="docstring">
+    <p>Construct a new <tt class="docutils literal"><span class="pre">DBAPIError</span></tt>.</p>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def instance(<i>cls</i>, <i>statement</i>, <i>params</i>, <i>orig</i>, <i>connection_invalidated=False</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.exceptions_DataError"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class DataError(<a href="sqlalchemy_exceptions.html#docstrings_sqlalchemy.exceptions_DatabaseError">DatabaseError</a>)</h3>
+    
+    
+    <div class="darkcell"><p>Wraps a DB-API DataError.</p>
+</div>
+    
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.exceptions_DatabaseError"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class DatabaseError(<a href="sqlalchemy_exceptions.html#docstrings_sqlalchemy.exceptions_DBAPIError">DBAPIError</a>)</h3>
+    
+    
+    <div class="darkcell"><p>Wraps a DB-API DatabaseError.</p>
+</div>
+    
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.exceptions_DisconnectionError"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class DisconnectionError(<a href="sqlalchemy_exceptions.html#docstrings_sqlalchemy.exceptions_SQLAlchemyError">SQLAlchemyError</a>)</h3>
+    
+    
+    <div class="darkcell"><p>Raised within <tt class="docutils literal"><span class="pre">Pool</span></tt> when a disconnect is detected on a raw DB-API connection.</p>
+<p>This error is consumed internally by a connection pool.  It can be raised by
+a <tt class="docutils literal"><span class="pre">PoolListener</span></tt> so that the host pool forces a disconnect.</p>
+</div>
+    
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.exceptions_FlushError"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class FlushError(<a href="sqlalchemy_exceptions.html#docstrings_sqlalchemy.exceptions_SQLAlchemyError">SQLAlchemyError</a>)</h3>
+    
+    
+    <div class="darkcell"><p>Raised when an invalid condition is detected upon a <tt class="docutils literal"><span class="pre">flush()</span></tt>.</p>
+</div>
+    
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.exceptions_IdentifierError"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class IdentifierError(<a href="sqlalchemy_exceptions.html#docstrings_sqlalchemy.exceptions_SQLAlchemyError">SQLAlchemyError</a>)</h3>
+    
+    
+    <div class="darkcell"><p>Raised when a schema name is beyond the max character limit</p>
+</div>
+    
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.exceptions_IntegrityError"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class IntegrityError(<a href="sqlalchemy_exceptions.html#docstrings_sqlalchemy.exceptions_DatabaseError">DatabaseError</a>)</h3>
+    
+    
+    <div class="darkcell"><p>Wraps a DB-API IntegrityError.</p>
+</div>
+    
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.exceptions_InterfaceError"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class InterfaceError(<a href="sqlalchemy_exceptions.html#docstrings_sqlalchemy.exceptions_DBAPIError">DBAPIError</a>)</h3>
+    
+    
+    <div class="darkcell"><p>Wraps a DB-API InterfaceError.</p>
+</div>
+    
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.exceptions_InternalError"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class InternalError(<a href="sqlalchemy_exceptions.html#docstrings_sqlalchemy.exceptions_DatabaseError">DatabaseError</a>)</h3>
+    
+    
+    <div class="darkcell"><p>Wraps a DB-API InternalError.</p>
+</div>
+    
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.exceptions_InvalidRequestError"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class InvalidRequestError(<a href="sqlalchemy_exceptions.html#docstrings_sqlalchemy.exceptions_SQLAlchemyError">SQLAlchemyError</a>)</h3>
+    
+    
+    <div class="darkcell"><p>SQLAlchemy was asked to do something it can't do, return
+nonexistent data, etc.</p>
+<p>This error generally corresponds to runtime state errors.</p>
+</div>
+    
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.exceptions_NoReferencedTableError"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class NoReferencedTableError(<a href="sqlalchemy_exceptions.html#docstrings_sqlalchemy.exceptions_InvalidRequestError">InvalidRequestError</a>)</h3>
+    
+    
+    <div class="darkcell"><p>Raised by <tt class="docutils literal"><span class="pre">ForeignKey</span></tt> when the referred <tt class="docutils literal"><span class="pre">Table</span></tt> cannot be located.</p>
+</div>
+    
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.exceptions_NoSuchColumnError"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class NoSuchColumnError(KeyError,<a href="sqlalchemy_exceptions.html#docstrings_sqlalchemy.exceptions_SQLAlchemyError">SQLAlchemyError</a>)</h3>
+    
+    
+    <div class="darkcell"><p>Raised by <tt class="docutils literal"><span class="pre">RowProxy</span></tt> when a nonexistent column is requested from a row.</p>
+</div>
+    
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.exceptions_NoSuchTableError"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class NoSuchTableError(<a href="sqlalchemy_exceptions.html#docstrings_sqlalchemy.exceptions_InvalidRequestError">InvalidRequestError</a>)</h3>
+    
+    
+    <div class="darkcell"><p>SQLAlchemy was asked to load a table's definition from the
+database, but the table doesn't exist.</p>
+</div>
+    
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.exceptions_NotSupportedError"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class NotSupportedError(<a href="sqlalchemy_exceptions.html#docstrings_sqlalchemy.exceptions_DatabaseError">DatabaseError</a>)</h3>
+    
+    
+    <div class="darkcell"><p>Wraps a DB-API NotSupportedError.</p>
+</div>
+    
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.exceptions_OperationalError"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class OperationalError(<a href="sqlalchemy_exceptions.html#docstrings_sqlalchemy.exceptions_DatabaseError">DatabaseError</a>)</h3>
+    
+    
+    <div class="darkcell"><p>Wraps a DB-API OperationalError.</p>
+</div>
+    
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.exceptions_ProgrammingError"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class ProgrammingError(<a href="sqlalchemy_exceptions.html#docstrings_sqlalchemy.exceptions_DatabaseError">DatabaseError</a>)</h3>
+    
+    
+    <div class="darkcell"><p>Wraps a DB-API ProgrammingError.</p>
+</div>
+    
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.exceptions_SADeprecationWarning"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class SADeprecationWarning(DeprecationWarning)</h3>
+    
+    
+    <div class="darkcell"><p>Issued once per usage of a deprecated API.</p>
+</div>
+    
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.exceptions_SAPendingDeprecationWarning"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class SAPendingDeprecationWarning(PendingDeprecationWarning)</h3>
+    
+    
+    <div class="darkcell"><p>Issued once per usage of a deprecated API.</p>
+</div>
+    
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.exceptions_SAWarning"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class SAWarning(RuntimeWarning)</h3>
+    
+    
+    <div class="darkcell"><p>Issued at runtime.</p>
+</div>
+    
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.exceptions_SQLAlchemyError"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class SQLAlchemyError(Exception)</h3>
+    
+    
+    <div class="darkcell"><p>Generic error class.</p>
+</div>
+    
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.exceptions_TimeoutError"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class TimeoutError(<a href="sqlalchemy_exceptions.html#docstrings_sqlalchemy.exceptions_SQLAlchemyError">SQLAlchemyError</a>)</h3>
+    
+    
+    <div class="darkcell"><p>Raised when a connection pool times out on getting a connection.</p>
+</div>
+    
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.exceptions_UnboundExecutionError"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class UnboundExecutionError(<a href="sqlalchemy_exceptions.html#docstrings_sqlalchemy.exceptions_InvalidRequestError">InvalidRequestError</a>)</h3>
+    
+    
+    <div class="darkcell"><p>SQL was attempted without a database connection to execute it on.</p>
+</div>
+    
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.exceptions_UnmappedColumnError"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class UnmappedColumnError(<a href="sqlalchemy_exceptions.html#docstrings_sqlalchemy.exceptions_InvalidRequestError">InvalidRequestError</a>)</h3>
+    
+    
+    <div class="darkcell"><p>A mapper was asked to return mapped information about a column
+which it does not map</p>
+</div>
+    
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+    
+
+    </div>
+
+
+
+
+
+    <div class="bottomnav">
+        
+    <div class="prevnext">
+            Up: <a href="docstrings.html">API Documentation</a>
+
+               |   
+            Previous: <a href="sqlalchemy_engine_url.html">module sqlalchemy.engine.url</a>
+
+               |   
+            Next: <a href="sqlalchemy_interfaces.html">module sqlalchemy.interfaces</a>
+    </div>
+
+    </div>
+
+
+
+
+
+
+
+
+</body>
+</html>
+
+
+
+
+
+

@@ -1,0 +1,149 @@
+<html>
+  <head>
+    <title>nose: Importing Tests</title>
+    <link rel="stylesheet" href="site.css" type="text/css"></link>
+  </head>
+  <body>
+    
+    <div id="menu">
+      <p>This document covers nose version <b>0.10.3</b></p>
+      <p>Last update: <b>Tue Jun  3 11:50:26 2008</b></p>
+      <h2>Plugins</h2><ul><li><a href="plugin_attrib.html">Builtin Plugin: attrib</a></li><li><a href="plugin_capture.html">Builtin Plugin: capture</a></li><li><a href="plugin_cover.html">Builtin Plugin: cover</a></li><li><a href="plugin_debug.html">Builtin Plugin: debug</a></li><li><a href="plugin_deprecated.html">Builtin Plugin: deprecated</a></li><li><a href="plugin_doctests.html">Builtin Plugin: doctests</a></li><li><a href="plugin_failuredetail.html">Builtin Plugin: failuredetail</a></li><li><a href="plugin_isolate.html">Builtin Plugin: isolate</a></li><li><a href="plugin_prof.html">Builtin Plugin: prof</a></li><li><a href="plugin_skip.html">Builtin Plugin: skip</a></li><li><a href="plugin_testid.html">Builtin Plugin: testid</a></li><li><a href="error_class_plugin.html">ErrorClass Plugins</a></li><li><a href="plugin_interface.html">Plugin Interface</a></li><li><a href="writing_plugins.html">Writing Plugins</a></li></ul><h2>Modules</h2><ul><li><a href="module_nose.case.html">Module: nose.case</a></li><li><a href="module_nose.commands.html">Module: nose.commands</a></li><li><a href="module_nose.config.html">Module: nose.config</a></li><li><a href="module_nose.core.html">Module: nose.core</a></li><li><a href="module_nose.exc.html">Module: nose.exc</a></li><li><a href="module_nose.failure.html">Module: nose.failure</a></li><li><a href="module_nose.importer.html">Module: nose.importer</a></li><li><a href="module_nose.inspector.html">Module: nose.inspector</a></li><li><a href="module_nose.loader.html">Module: nose.loader</a></li><li><a href="module_nose.plugins.manager.html">Module: nose.plugins.manager</a></li><li><a href="module_nose.plugins.plugintest.html">Module: nose.plugins.plugintest</a></li><li><a href="module_nose.proxy.html">Module: nose.proxy</a></li><li><a href="module_nose.result.html">Module: nose.result</a></li><li><a href="module_nose.selector.html">Module: nose.selector</a></li><li><a href="module_nose.suite.html">Module: nose.suite</a></li><li><a href="module_nose.tools.html">Module: nose.tools</a></li><li><a href="module_nose.twistedtools.html">Module: nose.twistedtools</a></li><li><a href="module_nose.util.html">Module: nose.util</a></li></ul><h2>Plugin Examples</h2><ul><li><a href="unwanted_package.html">Excluding Unwanted Packages</a></li><li><a href="errorclass_failure.html">Failure of Errorclasses</a></li><li><a href="imported_tests.html">Importing Tests</a></li><li><a href="empty_plugin.html">Minimal plugin</a></li><li><a href="restricted_plugin_options.html">Restricted Plugin Managers</a></li><li><a href="init_plugin.html">Running Initialization Code Before the Test Run</a></li><li><a href="selector_plugin.html">Using a Custom Selector</a></li><li><a href="plugin_exceptions.html">When Plugins Fail</a></li><li><a href="plugintest_environment.html">nose.plugins.plugintest, os.environ and sys.argv</a></li></ul>
+      
+    </div>
+    
+    <div id="main">
+      <h1>nose: Importing Tests</h1>
+      
+      <p>When a package imports tests from another package, the tests are
+<strong>completely</strong> relocated into the importing package. This means that the
+fixtures from the source package are <strong>not</strong> run when the tests in the
+importing package are executed.</p>
+<p>For example, consider this collection of packages:</p>
+<blockquote>
+<div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="k">import</span> <span class="nn">os</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">support</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">__file__</span><span class="p">),</span> <span class="s">&#39;support&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">from</span> <span class="nn">nose.util</span> <span class="k">import</span> <span class="n">ls_tree</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="n">ls_tree</span><span class="p">(</span><span class="n">support</span><span class="p">)</span> <span class="c"># doctest: +REPORT_NDIFF</span>
+<span class="go">|-- package1</span>
+<span class="go">|   |-- __init__.py</span>
+<span class="go">|   `-- test_module.py</span>
+<span class="go">|-- package2c</span>
+<span class="go">|   |-- __init__.py</span>
+<span class="go">|   `-- test_module.py</span>
+<span class="go">`-- package2f</span>
+<span class="go">    |-- __init__.py</span>
+<span class="go">    `-- test_module.py</span>
+</pre></div>
+</blockquote>
+<p>In these packages, the tests are all defined in package1, and are imported
+into package2f and package2c.</p>
+<div class="note">
+<p class="first admonition-title">Note</p>
+<p>The run() function in <a class="reference" href="module_nose.plugins.plugintest.html">nose.plugins.plugintest</a> reformats test result
+output to remove timings, which will vary from run to run, and
+redirects the output to stdout.</p>
+<blockquote class="last">
+<div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="k">from</span> <span class="nn">nose.plugins.plugintest</span> <span class="k">import</span> <span class="n">run_buffered</span> <span class="k">as</span> <span class="n">run</span>
+</pre></div>
+</blockquote>
+</div>
+<!--  -->
+<p>package1 has fixtures, which we can see by running all of the tests. Note
+below that the test names reflect the modules into which the tests are
+imported, not the source modules.</p>
+<blockquote>
+<div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">argv</span> <span class="o">=</span> <span class="p">[</span><span class="n">__file__</span><span class="p">,</span> <span class="s">&#39;-v&#39;</span><span class="p">,</span> <span class="n">support</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">run</span><span class="p">(</span><span class="n">argv</span><span class="o">=</span><span class="n">argv</span><span class="p">)</span> <span class="c"># doctest: +REPORT_NDIFF</span>
+<span class="go">package1 setup</span>
+<span class="go">test (package1.test_module.TestCase) ... ok</span>
+<span class="go">package1.test_module.TestClass.test_class ... ok</span>
+<span class="go">package1.test_module.test_function ... ok</span>
+<span class="go">package2c setup</span>
+<span class="go">test (package2c.test_module.TestCase) ... ok</span>
+<span class="go">package2c.test_module.TestClass.test_class ... ok</span>
+<span class="go">package2f setup</span>
+<span class="go">package2f.test_module.test_function ... ok</span>
+<span class="go">&lt;BLANKLINE&gt;</span>
+<span class="go">----------------------------------------------------------------------</span>
+<span class="go">Ran 6 tests in ...s</span>
+<span class="go">&lt;BLANKLINE&gt;</span>
+<span class="go">OK</span>
+</pre></div>
+</blockquote>
+<p>When tests are run in package2f or package2c, only the fixtures from those
+packages are executed.</p>
+<blockquote>
+<div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">argv</span> <span class="o">=</span> <span class="p">[</span><span class="n">__file__</span><span class="p">,</span> <span class="s">&#39;-v&#39;</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">support</span><span class="p">,</span> <span class="s">&#39;package2f&#39;</span><span class="p">)]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">run</span><span class="p">(</span><span class="n">argv</span><span class="o">=</span><span class="n">argv</span><span class="p">)</span> <span class="c"># doctest: +REPORT_NDIFF</span>
+<span class="go">package2f setup</span>
+<span class="go">package2f.test_module.test_function ... ok</span>
+<span class="go">&lt;BLANKLINE&gt;</span>
+<span class="go">----------------------------------------------------------------------</span>
+<span class="go">Ran 1 test in ...s</span>
+<span class="go">&lt;BLANKLINE&gt;</span>
+<span class="go">OK</span>
+</pre></div>
+<div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">argv</span> <span class="o">=</span> <span class="p">[</span><span class="n">__file__</span><span class="p">,</span> <span class="s">&#39;-v&#39;</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">support</span><span class="p">,</span> <span class="s">&#39;package2c&#39;</span><span class="p">)]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">run</span><span class="p">(</span><span class="n">argv</span><span class="o">=</span><span class="n">argv</span><span class="p">)</span> <span class="c"># doctest: +REPORT_NDIFF</span>
+<span class="go">package2c setup</span>
+<span class="go">test (package2c.test_module.TestCase) ... ok</span>
+<span class="go">package2c.test_module.TestClass.test_class ... ok</span>
+<span class="go">&lt;BLANKLINE&gt;</span>
+<span class="go">----------------------------------------------------------------------</span>
+<span class="go">Ran 2 tests in ...s</span>
+<span class="go">&lt;BLANKLINE&gt;</span>
+<span class="go">OK</span>
+</pre></div>
+</blockquote>
+<p>This also applies when only the specific tests are selected via the
+command-line.</p>
+<blockquote>
+<div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">argv</span> <span class="o">=</span> <span class="p">[</span><span class="n">__file__</span><span class="p">,</span> <span class="s">&#39;-v&#39;</span><span class="p">,</span>
+<span class="gp">... </span>        <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">support</span><span class="p">,</span> <span class="s">&#39;package2c&#39;</span><span class="p">,</span> <span class="s">&#39;test_module.py&#39;</span><span class="p">)</span> <span class="o">+</span>
+<span class="gp">... </span>        <span class="s">&#39;:TestClass.test_class&#39;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">run</span><span class="p">(</span><span class="n">argv</span><span class="o">=</span><span class="n">argv</span><span class="p">)</span> <span class="c"># doctest: +REPORT_NDIFF</span>
+<span class="go">package2c setup</span>
+<span class="go">package2c.test_module.TestClass.test_class ... ok</span>
+<span class="go">&lt;BLANKLINE&gt;</span>
+<span class="go">----------------------------------------------------------------------</span>
+<span class="go">Ran 1 test in ...s</span>
+<span class="go">&lt;BLANKLINE&gt;</span>
+<span class="go">OK</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">argv</span> <span class="o">=</span> <span class="p">[</span><span class="n">__file__</span><span class="p">,</span> <span class="s">&#39;-v&#39;</span><span class="p">,</span>
+<span class="gp">... </span>        <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">support</span><span class="p">,</span> <span class="s">&#39;package2c&#39;</span><span class="p">,</span> <span class="s">&#39;test_module.py&#39;</span><span class="p">)</span> <span class="o">+</span>
+<span class="gp">... </span>        <span class="s">&#39;:TestCase.test&#39;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">run</span><span class="p">(</span><span class="n">argv</span><span class="o">=</span><span class="n">argv</span><span class="p">)</span> <span class="c"># doctest: +REPORT_NDIFF</span>
+<span class="go">package2c setup</span>
+<span class="go">test (package2c.test_module.TestCase) ... ok</span>
+<span class="go">&lt;BLANKLINE&gt;</span>
+<span class="go">----------------------------------------------------------------------</span>
+<span class="go">Ran 1 test in ...s</span>
+<span class="go">&lt;BLANKLINE&gt;</span>
+<span class="go">OK</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">argv</span> <span class="o">=</span> <span class="p">[</span><span class="n">__file__</span><span class="p">,</span> <span class="s">&#39;-v&#39;</span><span class="p">,</span>
+<span class="gp">... </span>        <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">support</span><span class="p">,</span> <span class="s">&#39;package2f&#39;</span><span class="p">,</span> <span class="s">&#39;test_module.py&#39;</span><span class="p">)</span> <span class="o">+</span>
+<span class="gp">... </span>        <span class="s">&#39;:test_function&#39;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">run</span><span class="p">(</span><span class="n">argv</span><span class="o">=</span><span class="n">argv</span><span class="p">)</span> <span class="c"># doctest: +REPORT_NDIFF</span>
+<span class="go">package2f setup</span>
+<span class="go">package2f.test_module.test_function ... ok</span>
+<span class="go">&lt;BLANKLINE&gt;</span>
+<span class="go">----------------------------------------------------------------------</span>
+<span class="go">Ran 1 test in ...s</span>
+<span class="go">&lt;BLANKLINE&gt;</span>
+<span class="go">OK</span>
+</pre></div>
+</blockquote>
+
+
+    </div>
+    <script src="http://www.google-analytics.com/urchin.js" 
+	    type="text/javascript">
+    </script>
+    <script type="text/javascript">
+      _uacct = "UA-2236166-1";
+      urchinTracker();
+    </script>
+  </body>
+</html>
+  

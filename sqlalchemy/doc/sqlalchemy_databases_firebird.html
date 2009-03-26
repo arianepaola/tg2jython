@@ -1,0 +1,1173 @@
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<title>SQLAlchemy 0.4 Documentation - module sqlalchemy.databases.firebird</title>
+	
+    
+    <link rel="stylesheet" href="style.css"></link>
+    <link rel="stylesheet" href="docs.css"></link>
+    <link href="syntaxhighlight.css" rel="stylesheet" type="text/css"></link>
+    <script src="scripts.js"></script>
+
+    <link rel="stylesheet" href="docutil.css"></link>
+
+
+
+</head>
+<body>
+
+
+
+
+
+
+
+
+<div id="topanchor"><a name="top">&nbsp;</a></div>
+
+
+<h1>SQLAlchemy 0.4 Documentation</h1>
+
+<div id="pagecontrol"><a href="index.html">Multiple Pages</a> | <a href="documentation.html">One Page</a></div>
+
+<div class="versionheader">Version: 0.4.7p1   Last Updated: 07/31/08 11:09:56</div>
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class="topnav">
+
+    
+    <div class="navbanner">
+        <a href="index.html" class="totoc">Table of Contents</a>
+        
+    <div class="prevnext">
+            Up: <a href="docstrings.html">API Documentation</a>
+
+               |   
+            Previous: <a href="sqlalchemy_databases_mssql.html">module sqlalchemy.databases.mssql</a>
+
+               |   
+            Next: <a href="sqlalchemy_databases_sybase.html">module sqlalchemy.databases.sybase</a>
+    </div>
+
+        <h2>module sqlalchemy.databases.firebird</h2>
+    </div>
+
+	
+	
+    <ul>
+        
+        <li><a style="" href="sqlalchemy_databases_firebird.html#docstrings_sqlalchemy.databases.firebird_modfunc">Module Functions</a></li>
+
+	        <li>
+                
+    <ul>
+        
+        <li><a style="" href="sqlalchemy_databases_firebird.html#docstrings_sqlalchemy.databases.firebird_modfunc_descriptor">descriptor()</a></li>
+
+    </ul>
+
+	        </li>
+        
+        <li><a style="" href="sqlalchemy_databases_firebird.html#docstrings_sqlalchemy.databases.firebird_FBBinary">class FBBinary(Binary)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_firebird.html#docstrings_sqlalchemy.databases.firebird_FBBoolean">class FBBoolean(Boolean)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_firebird.html#docstrings_sqlalchemy.databases.firebird_FBChar">class FBChar(CHAR)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_firebird.html#docstrings_sqlalchemy.databases.firebird_FBCompiler">class FBCompiler(DefaultCompiler)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_firebird.html#docstrings_sqlalchemy.databases.firebird_FBDate">class FBDate(DateTime)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_firebird.html#docstrings_sqlalchemy.databases.firebird_FBDateTime">class FBDateTime(DateTime)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_firebird.html#docstrings_sqlalchemy.databases.firebird_FBDefaultRunner">class FBDefaultRunner(DefaultRunner)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_firebird.html#docstrings_sqlalchemy.databases.firebird_FBDialect">class FBDialect(DefaultDialect)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_firebird.html#docstrings_sqlalchemy.databases.firebird_FBExecutionContext">class FBExecutionContext(DefaultExecutionContext)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_firebird.html#docstrings_sqlalchemy.databases.firebird_FBFloat">class FBFloat(Float)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_firebird.html#docstrings_sqlalchemy.databases.firebird_FBIdentifierPreparer">class FBIdentifierPreparer(IdentifierPreparer)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_firebird.html#docstrings_sqlalchemy.databases.firebird_FBInteger">class FBInteger(Integer)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_firebird.html#docstrings_sqlalchemy.databases.firebird_FBNumeric">class FBNumeric(Numeric)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_firebird.html#docstrings_sqlalchemy.databases.firebird_FBSchemaDropper">class FBSchemaDropper(SchemaDropper)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_firebird.html#docstrings_sqlalchemy.databases.firebird_FBSchemaGenerator">class FBSchemaGenerator(SchemaGenerator)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_firebird.html#docstrings_sqlalchemy.databases.firebird_FBSmallInteger">class FBSmallInteger(SmallInteger)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_firebird.html#docstrings_sqlalchemy.databases.firebird_FBString">class FBString(String)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_firebird.html#docstrings_sqlalchemy.databases.firebird_FBText">class FBText(Text)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_firebird.html#docstrings_sqlalchemy.databases.firebird_FBTime">class FBTime(Time)</a></li>
+
+    </ul>
+
+	</div>
+
+
+
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.databases.firebird"></a>
+    
+    <div class="sectionL2">
+
+    <h3>module sqlalchemy.databases.firebird</h3>
+    
+    
+    <div class="darkcell"><p>This module implements the Firebird backend, thru the <a class="reference" href="http://sourceforge.net/projects/kinterbasdb">kinterbasdb</a>
+DBAPI module.</p>
+<div class="section">
+<h1><a id="firebird-dialects" name="firebird-dialects">Firebird dialects</a></h1>
+<p>Firebird offers two distinct <a class="reference" href="http://mc-computing.com/Databases/Firebird/SQL_Dialect.html">dialects</a> (not to be confused with the
+SA <tt class="docutils literal"><span class="pre">Dialect</span></tt> thing):</p>
+<dl class="docutils">
+<dt>dialect 1</dt>
+<dd>This is the old syntax and behaviour, inherited from Interbase pre-6.0.</dd>
+<dt>dialect 3</dt>
+<dd>This is the newer and supported syntax, introduced in Interbase 6.0.</dd>
+</dl>
+<p>From the user point of view, the biggest change is in date/time
+handling: under dialect 1, there's a single kind of field, <tt class="docutils literal"><span class="pre">DATE</span></tt>
+with a synonim <tt class="docutils literal"><span class="pre">DATETIME</span></tt>, that holds a <cite>timestamp</cite> value, that is a
+date with hour, minute, second. Under dialect 3 there are three kinds,
+a <tt class="docutils literal"><span class="pre">DATE</span></tt> that holds a date, a <tt class="docutils literal"><span class="pre">TIME</span></tt> that holds a <em>time of the
+day</em> value and a <tt class="docutils literal"><span class="pre">TIMESTAMP</span></tt>, equivalent to the old <tt class="docutils literal"><span class="pre">DATE</span></tt>.</p>
+<p>The problem is that the dialect of a Firebird database is a property
+of the database itself <a class="footnote-reference" href="#id2" id="id1" name="id1">[1]</a> (that is, any single database has been
+created with one dialect or the other: there is no way to change the
+after creation). SQLAlchemy has a single instance of the class that
+controls all the connections to a particular kind of database, so it
+cannot easily differentiate between the two modes, and in particular
+it <strong>cannot</strong> simultaneously talk with two distinct Firebird databases
+with different dialects.</p>
+<p>By default this module is biased toward dialect 3, but you can easily
+tweak it to handle dialect 1 if needed:</p>
+<pre class="literal-block">
+from sqlalchemy import types as sqltypes
+from sqlalchemy.databases.firebird import FBDate, colspecs, ischema_names
+
+# Adjust the mapping of the timestamp kind
+ischema_names['TIMESTAMP'] = FBDate
+colspecs[sqltypes.DateTime] = FBDate,
+</pre>
+<p>Other aspects may be version-specific. You can use the <tt class="docutils literal"><span class="pre">server_version_info()</span></tt> method
+on the <tt class="docutils literal"><span class="pre">FBDialect</span></tt> class to do whatever is needed:</p>
+<pre class="literal-block">
+from sqlalchemy.databases.firebird import FBCompiler
+
+if engine.dialect.server_version_info(connection) &lt; (2,0):
+    # Change the name of the function ``length`` to use the UDF version
+    # instead of ``char_length``
+    FBCompiler.LENGTH_FUNCTION_NAME = 'strlen'
+</pre>
+</div>
+<div class="section">
+<h1><a id="pooling-connections" name="pooling-connections">Pooling connections</a></h1>
+<p>The default strategy used by SQLAlchemy to pool the database connections
+in particular cases may raise an <tt class="docutils literal"><span class="pre">OperationalError</span></tt> with a message
+<cite>&quot;object XYZ is in use&quot;</cite>. This happens on Firebird when there are two
+connections to the database, one is using, or has used, a particular table
+and the other tries to drop or alter the same table. To garantee DDL
+operations success Firebird recommend doing them as the single connected user.</p>
+<p>In case your SA application effectively needs to do DDL operations while other
+connections are active, the following setting may alleviate the problem:</p>
+<pre class="literal-block">
+from sqlalchemy import pool
+from sqlalchemy.databases.firebird import dialect
+
+# Force SA to use a single connection per thread
+dialect.poolclass = pool.SingletonThreadPool
+</pre>
+<table class="docutils footnote" frame="void" id="id2" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id1" name="id2">[1]</a></td><td>Well, that is not the whole story, as the client may still ask
+a different (lower) dialect...</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+    
+
+        
+    
+    <A name="docstrings_sqlalchemy.databases.firebird_modfunc"></a>
+    
+    <div class="sectionL3">
+
+    <h3>Module Functions</h3>
+    
+    
+                
+    <div class="darkcell">
+    
+    <A name="docstrings_sqlalchemy.databases.firebird_modfunc_descriptor"></a>
+    <b>def descriptor()</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+        
+
+    </div>
+
+
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.databases.firebird_FBBinary"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class FBBinary(<a href="sqlalchemy_types.html#docstrings_sqlalchemy.types_Binary">Binary</a>)</h3>
+    
+    
+    <div class="darkcell"><p>Handle <tt class="docutils literal"><span class="pre">BLOB</span> <span class="pre">SUB_TYPE</span> <span class="pre">0</span></tt> datatype (aka <em>binary</em> blob).</p>
+</div>
+    
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def get_col_spec(<i>self</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.databases.firebird_FBBoolean"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class FBBoolean(<a href="sqlalchemy_types.html#docstrings_sqlalchemy.types_Boolean">Boolean</a>)</h3>
+    
+    
+    <div class="darkcell"><p>Handle boolean values as a <tt class="docutils literal"><span class="pre">SMALLINT</span></tt> datatype.</p>
+</div>
+    
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def get_col_spec(<i>self</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.databases.firebird_FBChar"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class FBChar(<a href="sqlalchemy_types.html#docstrings_sqlalchemy.types_CHAR">CHAR</a>)</h3>
+    
+    
+    <div class="darkcell"><p>Handle <tt class="docutils literal"><span class="pre">CHAR(length)</span></tt> datatype.</p>
+</div>
+    
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def get_col_spec(<i>self</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.databases.firebird_FBCompiler"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class FBCompiler(<a href="sqlalchemy_sql_compiler.html#docstrings_sqlalchemy.sql.compiler_DefaultCompiler">DefaultCompiler</a>)</h3>
+    
+    
+    <div class="darkcell"><p>Firebird specific idiosincrasies</p>
+</div>
+    
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def default_from(<i>self</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def function_argspec(<i>self</i>, <i>func</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def function_string(<i>self</i>, <i>func</i>)</b>
+    <div class="docstring">
+    <p>Substitute the <tt class="docutils literal"><span class="pre">length</span></tt> function.</p>
+<p>On newer FB there is a <tt class="docutils literal"><span class="pre">char_length</span></tt> function, while older
+ones need the <tt class="docutils literal"><span class="pre">strlen</span></tt> UDF.</p>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def get_select_precolumns(<i>self</i>, <i>select</i>)</b>
+    <div class="docstring">
+    <p>Called when building a <tt class="docutils literal"><span class="pre">SELECT</span></tt> statement, position is just
+before column list Firebird puts the limit and offset right
+after the <tt class="docutils literal"><span class="pre">SELECT</span></tt>...</p>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def limit_clause(<i>self</i>, <i>select</i>)</b>
+    <div class="docstring">
+    <p>Already taken care of in the <cite>get_select_precolumns</cite> method.</p>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def visit_alias(<i>self</i>, <i>alias</i>, <i>asfrom=False</i>, <i>**kwargs</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def visit_sequence(<i>self</i>, <i>seq</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.databases.firebird_FBDate"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class FBDate(<a href="sqlalchemy_types.html#docstrings_sqlalchemy.types_DateTime">DateTime</a>)</h3>
+    
+    
+    <div class="darkcell"><p>Handle <tt class="docutils literal"><span class="pre">DATE</span></tt> datatype.</p>
+</div>
+    
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def get_col_spec(<i>self</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.databases.firebird_FBDateTime"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class FBDateTime(<a href="sqlalchemy_types.html#docstrings_sqlalchemy.types_DateTime">DateTime</a>)</h3>
+    
+    
+    <div class="darkcell"><p>Handle <tt class="docutils literal"><span class="pre">TIMESTAMP</span></tt> datatype.</p>
+</div>
+    
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def bind_processor(<i>self</i>, <i>dialect</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def get_col_spec(<i>self</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.databases.firebird_FBDefaultRunner"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class FBDefaultRunner(<a href="sqlalchemy_engine.html#docstrings_sqlalchemy.engine_DefaultRunner">DefaultRunner</a>)</h3>
+    
+    
+    <div class="darkcell"><p>Firebird specific idiosincrasies</p>
+</div>
+    
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def visit_sequence(<i>self</i>, <i>seq</i>)</b>
+    <div class="docstring">
+    <p>Get the next value from the sequence using <tt class="docutils literal"><span class="pre">gen_id()</span></tt>.</p>
+
+    </div>
+    </div>
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.databases.firebird_FBDialect"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class FBDialect(<a href="sqlalchemy_engine_default.html#docstrings_sqlalchemy.engine.default_DefaultDialect">DefaultDialect</a>)</h3>
+    
+    
+    <div class="darkcell"><p>Firebird dialect</p>
+</div>
+    
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def __init__(<i>self</i>, <i>type_conv=200</i>, <i>concurrency_level=1</i>, <i>**kwargs</i>)</b>
+    <div class="docstring">
+    <p>Construct a new <tt class="docutils literal"><span class="pre">FBDialect</span></tt>.</p>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def create_connect_args(<i>self</i>, <i>url</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def create_execution_context(<i>self</i>, <i>*args</i>, <i>**kwargs</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def dbapi(<i>cls</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def do_commit(<i>self</i>, <i>connection</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def do_execute(<i>self</i>, <i>cursor</i>, <i>statement</i>, <i>parameters</i>, <i>**kwargs</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def do_rollback(<i>self</i>, <i>connection</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def has_sequence(<i>self</i>, <i>connection</i>, <i>sequence_name</i>)</b>
+    <div class="docstring">
+    <p>Return <tt class="docutils literal"><span class="pre">True</span></tt> if the given sequence (generator) exists.</p>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def has_table(<i>self</i>, <i>connection</i>, <i>table_name</i>, <i>schema=None</i>)</b>
+    <div class="docstring">
+    <p>Return <tt class="docutils literal"><span class="pre">True</span></tt> if the given table exists, ignoring the <cite>schema</cite>.</p>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def is_disconnect(<i>self</i>, <i>e</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def reflecttable(<i>self</i>, <i>connection</i>, <i>table</i>, <i>include_columns</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def server_version_info(<i>self</i>, <i>connection</i>)</b>
+    <div class="docstring">
+    <p>Get the version of the Firebird server used by a connection.</p>
+<p>Returns a tuple of (<cite>major</cite>, <cite>minor</cite>, <cite>build</cite>), three integers
+representing the version of the attached server.</p>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def table_names(<i>self</i>, <i>connection</i>, <i>schema</i>)</b>
+    <div class="docstring">
+    <p>Return a list of <em>normalized</em> table names omitting system relations.</p>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def type_descriptor(<i>self</i>, <i>typeobj</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.databases.firebird_FBExecutionContext"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class FBExecutionContext(<a href="sqlalchemy_engine_default.html#docstrings_sqlalchemy.engine.default_DefaultExecutionContext">DefaultExecutionContext</a>)</h3>
+    
+    
+    
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.databases.firebird_FBFloat"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class FBFloat(<a href="sqlalchemy_types.html#docstrings_sqlalchemy.types_Float">Float</a>)</h3>
+    
+    
+    <div class="darkcell"><p>Handle <tt class="docutils literal"><span class="pre">FLOAT(precision)</span></tt> datatype.</p>
+</div>
+    
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def get_col_spec(<i>self</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.databases.firebird_FBIdentifierPreparer"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class FBIdentifierPreparer(<a href="sqlalchemy_sql_compiler.html#docstrings_sqlalchemy.sql.compiler_IdentifierPreparer">IdentifierPreparer</a>)</h3>
+    
+    
+    <div class="darkcell"><p>Install Firebird specific reserved words.</p>
+</div>
+    
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def __init__(<i>self</i>, <i>dialect</i>)</b>
+    <div class="docstring">
+    <p>Construct a new <tt class="docutils literal"><span class="pre">FBIdentifierPreparer</span></tt>.</p>
+
+    </div>
+    </div>
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.databases.firebird_FBInteger"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class FBInteger(<a href="sqlalchemy_types.html#docstrings_sqlalchemy.types_Integer">Integer</a>)</h3>
+    
+    
+    <div class="darkcell"><p>Handle <tt class="docutils literal"><span class="pre">INTEGER</span></tt> datatype.</p>
+</div>
+    
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def get_col_spec(<i>self</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.databases.firebird_FBNumeric"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class FBNumeric(<a href="sqlalchemy_types.html#docstrings_sqlalchemy.types_Numeric">Numeric</a>)</h3>
+    
+    
+    <div class="darkcell"><p>Handle <tt class="docutils literal"><span class="pre">NUMERIC(precision,length)</span></tt> datatype.</p>
+</div>
+    
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def bind_processor(<i>self</i>, <i>dialect</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def get_col_spec(<i>self</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def result_processor(<i>self</i>, <i>dialect</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.databases.firebird_FBSchemaDropper"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class FBSchemaDropper(<a href="sqlalchemy_sql_compiler.html#docstrings_sqlalchemy.sql.compiler_SchemaDropper">SchemaDropper</a>)</h3>
+    
+    
+    <div class="darkcell"><p>Firebird syntactic idiosincrasies</p>
+</div>
+    
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def visit_sequence(<i>self</i>, <i>sequence</i>)</b>
+    <div class="docstring">
+    <p>Generate a <tt class="docutils literal"><span class="pre">DROP</span> <span class="pre">GENERATOR</span></tt> statement for the sequence.</p>
+
+    </div>
+    </div>
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.databases.firebird_FBSchemaGenerator"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class FBSchemaGenerator(<a href="sqlalchemy_sql_compiler.html#docstrings_sqlalchemy.sql.compiler_SchemaGenerator">SchemaGenerator</a>)</h3>
+    
+    
+    <div class="darkcell"><p>Firebird syntactic idiosincrasies</p>
+</div>
+    
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def get_column_specification(<i>self</i>, <i>column</i>, <i>**kwargs</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def visit_sequence(<i>self</i>, <i>sequence</i>)</b>
+    <div class="docstring">
+    <p>Generate a <tt class="docutils literal"><span class="pre">CREATE</span> <span class="pre">GENERATOR</span></tt> statement for the sequence.</p>
+
+    </div>
+    </div>
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.databases.firebird_FBSmallInteger"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class FBSmallInteger(<a href="sqlalchemy_types.html#docstrings_sqlalchemy.types_SmallInteger">SmallInteger</a>)</h3>
+    
+    
+    <div class="darkcell"><p>Handle <tt class="docutils literal"><span class="pre">SMALLINT</span></tt> datatype.</p>
+</div>
+    
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def get_col_spec(<i>self</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.databases.firebird_FBString"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class FBString(<a href="sqlalchemy_types.html#docstrings_sqlalchemy.types_String">String</a>)</h3>
+    
+    
+    <div class="darkcell"><p>Handle <tt class="docutils literal"><span class="pre">VARCHAR(length)</span></tt> datatype.</p>
+</div>
+    
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def get_col_spec(<i>self</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.databases.firebird_FBText"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class FBText(<a href="sqlalchemy_types.html#docstrings_sqlalchemy.types_Text">Text</a>)</h3>
+    
+    
+    <div class="darkcell"><p>Handle <tt class="docutils literal"><span class="pre">BLOB</span> <span class="pre">SUB_TYPE</span> <span class="pre">1</span></tt> datatype (aka <em>textual</em> blob).</p>
+</div>
+    
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def get_col_spec(<i>self</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.databases.firebird_FBTime"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class FBTime(<a href="sqlalchemy_types.html#docstrings_sqlalchemy.types_Time">Time</a>)</h3>
+    
+    
+    <div class="darkcell"><p>Handle <tt class="docutils literal"><span class="pre">TIME</span></tt> datatype.</p>
+</div>
+    
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def get_col_spec(<i>self</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+    
+
+    </div>
+
+
+
+
+
+    <div class="bottomnav">
+        
+    <div class="prevnext">
+            Up: <a href="docstrings.html">API Documentation</a>
+
+               |   
+            Previous: <a href="sqlalchemy_databases_mssql.html">module sqlalchemy.databases.mssql</a>
+
+               |   
+            Next: <a href="sqlalchemy_databases_sybase.html">module sqlalchemy.databases.sybase</a>
+    </div>
+
+    </div>
+
+
+
+
+
+
+
+
+</body>
+</html>
+
+
+
+
+
+

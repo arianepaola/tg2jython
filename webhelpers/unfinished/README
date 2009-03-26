@@ -1,0 +1,52 @@
+This directory contains functions contributed by James Gardner that need some
+work before they can be included in the release.
+
+constants.py
+
+[Already moved to webhelpers.constants.]
+
+    * Need unit tests.
+    * Need list of US states.
+    * Need docstrings.
+
+fields.py
+
+    * Needs significant work, not added yet. Left as WebHelpers/james_gardner/fields.py. Recommend 
+
+moving to webhelpers.form when finished.
+
+    * form_start() and form_end() are too trivial to add.
+    * radio_group() and checkbox() group are features missing in webhelpers.
+    * "&nbsp;" is not appropriate for styling. Use margin-left style or empty-cells style instead.
+    * Recommend distributing a default stylesheet.
+    * field() is useful as a poor man's form generator. It generates 1-3 <tr>'s depending on the arguments.
+    * All functions need docstrings. Especially field(). What is field's defect and error ars for? How is help different from field_desc and label_desc?
+    * Where are the <form:error> tags for htmlfill?
+    * Need to port all HTML tags to webhelpers.html.HTML, and use literal() where necessary.
+    * options_with_caption: refactor for new select() helper, rename to select_with_caption() or something. Or drop because it's so trivial.
+    * ids_from_options(): too trivial and obscure to add.
+    * value_from_option_id(): what is this function for? Either drop this or refactor it for new select() helper.
+    * Need unit tests. 
+
+helpers.py
+
+    * Needs work, did not add yet. Left as WebHelpers/james_gardner/helpers.py.
+    * Recommend adding size_to_human() to webhelpers.text
+    * Recommend inlining divide() into size_to_human because it's trivial and not widely useful.
+    * I'm getting six doctest failures, due to divide() rounding differently than expected, or where the expected string was nothing.
+    * size_to_human may not work as expected with shift to true division. The 'else' part should be rewritten as 'a // b' but I'm not sure if that's legal in Python 2.3. But the test are failing anyway. Consider refactoring with math.modf(), "%d", or "%f". Is it really necessary to divide the same numbers twice? You can divide once, call math.modf() to split out the fractional portion, and if the fraction is zero return the int of the whole, and if it's nonzero return the original result. 
+
+time.py:
+
+    * What is this module for? Why is it important enough to be a webhelper? 
+
+
+Update 2008-04-29
+-----------------
+helpers.patch addresses some of the issues in helpers.py.
+
+test_mail.py is a test suite for webhelpers.mail.  It depends on an SMTP server
+being available, so we're unsure how to integrate it with the standard test
+suite.  
+
+wsgiapp_image.jpg is a file used by test_mail.py.

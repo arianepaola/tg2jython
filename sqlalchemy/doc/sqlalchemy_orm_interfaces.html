@@ -1,0 +1,1291 @@
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<title>SQLAlchemy 0.4 Documentation - module sqlalchemy.orm.interfaces</title>
+	
+    
+    <link rel="stylesheet" href="style.css"></link>
+    <link rel="stylesheet" href="docs.css"></link>
+    <link href="syntaxhighlight.css" rel="stylesheet" type="text/css"></link>
+    <script src="scripts.js"></script>
+
+    <link rel="stylesheet" href="docutil.css"></link>
+
+
+
+</head>
+<body>
+
+
+
+
+
+
+
+
+<div id="topanchor"><a name="top">&nbsp;</a></div>
+
+
+<h1>SQLAlchemy 0.4 Documentation</h1>
+
+<div id="pagecontrol"><a href="index.html">Multiple Pages</a> | <a href="documentation.html">One Page</a></div>
+
+<div class="versionheader">Version: 0.4.7p1   Last Updated: 07/31/08 11:09:56</div>
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class="topnav">
+
+    
+    <div class="navbanner">
+        <a href="index.html" class="totoc">Table of Contents</a>
+        
+    <div class="prevnext">
+            Up: <a href="docstrings.html">API Documentation</a>
+
+               |   
+            Previous: <a href="sqlalchemy_orm_collections.html">module sqlalchemy.orm.collections</a>
+
+               |   
+            Next: <a href="sqlalchemy_orm_mapper.html">module sqlalchemy.orm.mapper</a>
+    </div>
+
+        <h2>module sqlalchemy.orm.interfaces</h2>
+    </div>
+
+	
+	
+    <ul>
+        
+        <li><a style="" href="sqlalchemy_orm_interfaces.html#docstrings_sqlalchemy.orm.interfaces_modfunc">Module Functions</a></li>
+
+	        <li>
+                
+    <ul>
+        
+        <li><a style="" href="sqlalchemy_orm_interfaces.html#docstrings_sqlalchemy.orm.interfaces_modfunc_build_path">build_path()</a></li>
+
+    </ul>
+
+	        </li>
+        
+        <li><a style="" href="sqlalchemy_orm_interfaces.html#docstrings_sqlalchemy.orm.interfaces_AttributeExtension">class AttributeExtension(object)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_orm_interfaces.html#docstrings_sqlalchemy.orm.interfaces_ExtensionOption">class ExtensionOption(MapperOption)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_orm_interfaces.html#docstrings_sqlalchemy.orm.interfaces_LoaderStrategy">class LoaderStrategy(object)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_orm_interfaces.html#docstrings_sqlalchemy.orm.interfaces_MapperExtension">class MapperExtension(object)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_orm_interfaces.html#docstrings_sqlalchemy.orm.interfaces_MapperOption">class MapperOption(object)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_orm_interfaces.html#docstrings_sqlalchemy.orm.interfaces_MapperProperty">class MapperProperty(object)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_orm_interfaces.html#docstrings_sqlalchemy.orm.interfaces_PropComparator">class PropComparator(ColumnOperators)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_orm_interfaces.html#docstrings_sqlalchemy.orm.interfaces_PropertyOption">class PropertyOption(MapperOption)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_orm_interfaces.html#docstrings_sqlalchemy.orm.interfaces_StrategizedOption">class StrategizedOption(PropertyOption)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_orm_interfaces.html#docstrings_sqlalchemy.orm.interfaces_StrategizedProperty">class StrategizedProperty(MapperProperty)</a></li>
+
+    </ul>
+
+	</div>
+
+
+
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.orm.interfaces"></a>
+    
+    <div class="sectionL2">
+
+    <h3>module sqlalchemy.orm.interfaces</h3>
+    
+    
+    <div class="darkcell"><p>Semi-private implementation objects which form the basis
+of ORM-mapped attributes, query options and mapper extension.</p>
+<p>Defines the <a href="sqlalchemy_orm_interfaces.html#docstrings_sqlalchemy.orm.interfaces_MapperExtension">MapperExtension</a> class,
+which can be end-user subclassed to add event-based functionality
+to mappers.  The remainder of this module is generally private to the
+ORM.</p>
+</div>
+    
+
+        
+    
+    <A name="docstrings_sqlalchemy.orm.interfaces_modfunc"></a>
+    
+    <div class="sectionL3">
+
+    <h3>Module Functions</h3>
+    
+    
+                
+    <div class="darkcell">
+    
+    <A name="docstrings_sqlalchemy.orm.interfaces_modfunc_build_path"></a>
+    <b>def build_path(<i>mapper</i>, <i>key</i>, <i>prev=None</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+        
+
+    </div>
+
+
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.orm.interfaces_AttributeExtension"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class AttributeExtension(object)</h3>
+    
+    
+    <div class="darkcell"><p>An abstract class which specifies <cite>append</cite>, <cite>delete</cite>, and <cite>set</cite>
+event handlers to be attached to an object property.</p>
+</div>
+    
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def append(<i>self</i>, <i>obj</i>, <i>child</i>, <i>initiator</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def remove(<i>self</i>, <i>obj</i>, <i>child</i>, <i>initiator</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def set(<i>self</i>, <i>obj</i>, <i>child</i>, <i>oldchild</i>, <i>initiator</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.orm.interfaces_ExtensionOption"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class ExtensionOption(<a href="sqlalchemy_orm_interfaces.html#docstrings_sqlalchemy.orm.interfaces_MapperOption">MapperOption</a>)</h3>
+    
+    
+    <div class="darkcell"><p>a MapperOption that applies a MapperExtension to a query operation.</p>
+</div>
+    
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def __init__(<i>self</i>, <i>ext</i>)</b>
+    <div class="docstring">
+    <p>Construct a new <tt class="docutils literal"><span class="pre">ExtensionOption</span></tt>.</p>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def process_query(<i>self</i>, <i>query</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.orm.interfaces_LoaderStrategy"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class LoaderStrategy(object)</h3>
+    
+    
+    <div class="darkcell"><p>Describe the loading behavior of a StrategizedProperty object.</p>
+<p>The <tt class="docutils literal"><span class="pre">LoaderStrategy</span></tt> interacts with the querying process in three
+ways:</p>
+<ul class="simple">
+<li>it controls the configuration of the <tt class="docutils literal"><span class="pre">InstrumentedAttribute</span></tt>
+placed on a class to handle the behavior of the attribute.  this
+may involve setting up class-level callable functions to fire
+off a select operation when the attribute is first accessed
+(i.e. a lazy load)</li>
+<li>it processes the <tt class="docutils literal"><span class="pre">QueryContext</span></tt> at statement construction time,
+where it can modify the SQL statement that is being produced.
+simple column attributes may add their represented column to the
+list of selected columns, <em>eager loading</em> properties may add
+<tt class="docutils literal"><span class="pre">LEFT</span> <span class="pre">OUTER</span> <span class="pre">JOIN</span></tt> clauses to the statement.</li>
+<li>it processes the <tt class="docutils literal"><span class="pre">SelectionContext</span></tt> at row-processing time.  This
+includes straight population of attributes corresponding to rows,
+setting instance-level lazyloader callables on newly
+constructed instances, and appending child items to scalar/collection
+attributes in response to eagerly-loaded relations.</li>
+</ul>
+</div>
+    
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def __init__(<i>self</i>, <i>parent</i>)</b>
+    <div class="docstring">
+    <p>Construct a new <tt class="docutils literal"><span class="pre">LoaderStrategy</span></tt>.</p>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def create_row_processor(<i>self</i>, <i>selectcontext</i>, <i>mapper</i>, <i>row</i>)</b>
+    <div class="docstring">
+    <p>Return row processing functions which fulfill the contract specified
+by MapperProperty.create_row_processor.</p>
+<p>StrategizedProperty delegates its create_row_processor method directly
+to this method.</p>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def init(<i>self</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def init_class_attribute(<i>self</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def setup_query(<i>self</i>, <i>context</i>, <i>**kwargs</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.orm.interfaces_MapperExtension"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class MapperExtension(object)</h3>
+    
+    
+    <div class="darkcell"><p>Base implementation for customizing Mapper behavior.</p>
+<p>For each method in MapperExtension, returning a result of EXT_CONTINUE
+will allow processing to continue to the next MapperExtension in line or
+use the default functionality if there are no other extensions.</p>
+<p>Returning EXT_STOP will halt processing of further extensions handling
+that method.  Some methods such as <tt class="docutils literal"><span class="pre">load</span></tt> have other return
+requirements, see the individual documentation for details.  Other than
+these exception cases, any return value other than EXT_CONTINUE or
+EXT_STOP will be interpreted as equivalent to EXT_STOP.</p>
+<p>EXT_PASS is a synonym for EXT_CONTINUE and is provided for backward
+compatibility.</p>
+</div>
+    
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def after_delete(<i>self</i>, <i>mapper</i>, <i>connection</i>, <i>instance</i>)</b>
+    <div class="docstring">
+    <p>Receive an object instance after that instance is DELETEed.</p>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def after_insert(<i>self</i>, <i>mapper</i>, <i>connection</i>, <i>instance</i>)</b>
+    <div class="docstring">
+    <p>Receive an object instance after that instance is INSERTed.</p>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def after_update(<i>self</i>, <i>mapper</i>, <i>connection</i>, <i>instance</i>)</b>
+    <div class="docstring">
+    <p>Receive an object instance after that instance is UPDATEed.</p>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def append_result(<i>self</i>, <i>mapper</i>, <i>selectcontext</i>, <i>row</i>, <i>instance</i>, <i>result</i>, <i>**flags</i>)</b>
+    <div class="docstring">
+    <p>Receive an object instance before that instance is appended
+to a result list.</p>
+<p>If this method returns EXT_CONTINUE, result appending will proceed
+normally.  if this method returns any other value or None,
+result appending will not proceed for this instance, giving
+this extension an opportunity to do the appending itself, if
+desired.</p>
+<dl class="docutils">
+<dt>mapper</dt>
+<dd>The mapper doing the operation.</dd>
+<dt>selectcontext</dt>
+<dd>SelectionContext corresponding to the instances() call.</dd>
+<dt>row</dt>
+<dd>The result row from the database.</dd>
+<dt>instance</dt>
+<dd>The object instance to be appended to the result.</dd>
+<dt>result</dt>
+<dd>List to which results are being appended.</dd>
+<dt>**flags</dt>
+<dd>extra information about the row, same as criterion in
+<cite>create_row_processor()</cite> method of <a href="sqlalchemy_orm_interfaces.html#docstrings_sqlalchemy.orm.interfaces_MapperProperty">MapperProperty</a></dd>
+</dl>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def before_delete(<i>self</i>, <i>mapper</i>, <i>connection</i>, <i>instance</i>)</b>
+    <div class="docstring">
+    <p>Receive an object instance before that instance is DELETEed.</p>
+<p>Note that <em>no</em> changes to the overall
+flush plan can be made here; this means any collection modification,
+save() or delete() operations which occur within this method will
+not take effect until the next flush call.</p>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def before_insert(<i>self</i>, <i>mapper</i>, <i>connection</i>, <i>instance</i>)</b>
+    <div class="docstring">
+    <p>Receive an object instance before that instance is INSERTed
+into its table.</p>
+<p>This is a good place to set up primary key values and such
+that aren't handled otherwise.</p>
+<p>Column-based attributes can be modified within this method which will
+result in the new value being inserted.  However <em>no</em> changes to the overall
+flush plan can be made; this means any collection modification or
+save() operations which occur within this method will not take effect
+until the next flush call.</p>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def before_update(<i>self</i>, <i>mapper</i>, <i>connection</i>, <i>instance</i>)</b>
+    <div class="docstring">
+    <p>Receive an object instance before that instance is UPDATEed.</p>
+<p>Note that this method is called for all instances that are marked as
+&quot;dirty&quot;, even those which have no net changes to their column-based
+attributes.  An object is marked as dirty when any of its column-based
+attributes have a &quot;set attribute&quot; operation called or when any of its
+collections are modified.  If, at update time, no column-based attributes
+have any net changes, no UPDATE statement will be issued.  This means
+that an instance being sent to before_update is <em>not</em> a guarantee that
+an UPDATE statement will be issued (although you can affect the outcome
+here).</p>
+<p>To detect if the column-based attributes on the object have net changes,
+and will therefore generate an UPDATE statement, use
+<tt class="docutils literal"><span class="pre">object_session(instance).is_modified(instance,</span> <span class="pre">include_collections=False)</span></tt>.</p>
+<p>Column-based attributes can be modified within this method which will
+result in their being updated.  However <em>no</em> changes to the overall
+flush plan can be made; this means any collection modification or
+save() operations which occur within this method will not take effect
+until the next flush call.</p>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def create_instance(<i>self</i>, <i>mapper</i>, <i>selectcontext</i>, <i>row</i>, <i>class_</i>)</b>
+    <div class="docstring">
+    <p>Receive a row when a new object instance is about to be
+created from that row.</p>
+<p>The method can choose to create the instance itself, or it can return
+EXT_CONTINUE to indicate normal object creation should take place.</p>
+<dl class="docutils">
+<dt>mapper</dt>
+<dd>The mapper doing the operation</dd>
+<dt>selectcontext</dt>
+<dd>SelectionContext corresponding to the instances() call</dd>
+<dt>row</dt>
+<dd>The result row from the database</dd>
+<dt>class_</dt>
+<dd>The class we are mapping.</dd>
+<dt>return value</dt>
+<dd>A new object instance, or EXT_CONTINUE</dd>
+</dl>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def get(<i>self</i>, <i>query</i>, <i>*args</i>, <i>**kwargs</i>)</b>
+    <div class="docstring">
+    <p>Override the <cite>get</cite> method of the Query object.</p>
+<p>The return value of this method is used as the result of
+<tt class="docutils literal"><span class="pre">query.get()</span></tt> if the value is anything other than EXT_CONTINUE.</p>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def get_by(<i>self</i>, <i>query</i>, <i>*args</i>, <i>**kwargs</i>)</b>
+    <div class="docstring">
+    <p>Override the <cite>get_by</cite> method of the Query object.</p>
+<p>The return value of this method is used as the result of
+<tt class="docutils literal"><span class="pre">query.get_by()</span></tt> if the value is anything other than
+EXT_CONTINUE.</p>
+<p>DEPRECATED.</p>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def get_session(<i>self</i>)</b>
+    <div class="docstring">
+    <p>Retrieve a contextual Session instance with which to
+register a new object.</p>
+<p>Note: this is not called if a session is provided with the
+<cite>__init__</cite> params (i.e. <cite>_sa_session</cite>).</p>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def init_failed(<i>self</i>, <i>mapper</i>, <i>class_</i>, <i>oldinit</i>, <i>instance</i>, <i>args</i>, <i>kwargs</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def init_instance(<i>self</i>, <i>mapper</i>, <i>class_</i>, <i>oldinit</i>, <i>instance</i>, <i>args</i>, <i>kwargs</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def instrument_class(<i>self</i>, <i>mapper</i>, <i>class_</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def load(<i>self</i>, <i>query</i>, <i>*args</i>, <i>**kwargs</i>)</b>
+    <div class="docstring">
+    <p>Override the <cite>load</cite> method of the Query object.</p>
+<p>The return value of this method is used as the result of
+<tt class="docutils literal"><span class="pre">query.load()</span></tt> if the value is anything other than EXT_CONTINUE.</p>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def populate_instance(<i>self</i>, <i>mapper</i>, <i>selectcontext</i>, <i>row</i>, <i>instance</i>, <i>**flags</i>)</b>
+    <div class="docstring">
+    <p>Receive a newly-created instance before that instance has
+its attributes populated.</p>
+<p>The normal population of attributes is according to each
+attribute's corresponding MapperProperty (which includes
+column-based attributes as well as relationships to other
+classes).  If this method returns EXT_CONTINUE, instance
+population will proceed normally.  If any other value or None
+is returned, instance population will not proceed, giving this
+extension an opportunity to populate the instance itself, if
+desired.</p>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def select(<i>self</i>, <i>query</i>, <i>*args</i>, <i>**kwargs</i>)</b>
+    <div class="docstring">
+    <p>Override the <cite>select</cite> method of the Query object.</p>
+<p>The return value of this method is used as the result of
+<tt class="docutils literal"><span class="pre">query.select()</span></tt> if the value is anything other than
+EXT_CONTINUE.</p>
+<p>DEPRECATED.</p>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def select_by(<i>self</i>, <i>query</i>, <i>*args</i>, <i>**kwargs</i>)</b>
+    <div class="docstring">
+    <p>Override the <cite>select_by</cite> method of the Query object.</p>
+<p>The return value of this method is used as the result of
+<tt class="docutils literal"><span class="pre">query.select_by()</span></tt> if the value is anything other than
+EXT_CONTINUE.</p>
+<p>DEPRECATED.</p>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def translate_row(<i>self</i>, <i>mapper</i>, <i>context</i>, <i>row</i>)</b>
+    <div class="docstring">
+    <p>Perform pre-processing on the given result row and return a
+new row instance.</p>
+<p>This is called as the very first step in the <tt class="docutils literal"><span class="pre">_instance()</span></tt>
+method.</p>
+
+    </div>
+    </div>
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.orm.interfaces_MapperOption"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class MapperOption(object)</h3>
+    
+    
+    <div class="darkcell"><p>Describe a modification to a Query.</p>
+</div>
+    
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def process_query(<i>self</i>, <i>query</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def process_query_conditionally(<i>self</i>, <i>query</i>)</b>
+    <div class="docstring">
+    <p>same as process_query(), except that this option may not apply
+to the given query.</p>
+<p>Used when secondary loaders resend existing options to a new
+Query.</p>
+
+    </div>
+    </div>
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.orm.interfaces_MapperProperty"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class MapperProperty(object)</h3>
+    
+    
+    <div class="darkcell"><p>Manage the relationship of a <tt class="docutils literal"><span class="pre">Mapper</span></tt> to a single class
+attribute, as well as that attribute as it appears on individual
+instances of the class, including attribute instrumentation,
+attribute access, loading behavior, and dependency calculations.</p>
+</div>
+    
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def cascade_iterator(<i>self</i>, <i>type_</i>, <i>state</i>, <i>visited_instances=None</i>, <i>halt_on=None</i>)</b>
+    <div class="docstring">
+    <p>Iterate through instances related to the given instance for
+a particular 'cascade', starting with this MapperProperty.</p>
+<p>See PropertyLoader for the related instance implementation.</p>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def compare(<i>self</i>, <i>operator</i>, <i>value</i>)</b>
+    <div class="docstring">
+    <p>Return a compare operation for the columns represented by
+this <tt class="docutils literal"><span class="pre">MapperProperty</span></tt> to the given value, which may be a
+column value or an instance.  'operator' is an operator from
+the operators module, or from sql.Comparator.</p>
+<p>By default uses the PropComparator attached to this MapperProperty
+under the attribute name &quot;comparator&quot;.</p>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def create_row_processor(<i>self</i>, <i>selectcontext</i>, <i>mapper</i>, <i>row</i>)</b>
+    <div class="docstring">
+    <p>Return a 3-tuple consiting of two row processing functions and an instance post-processing function.</p>
+<p>Input arguments are the query.SelectionContext and the <em>first</em>
+applicable row of a result set obtained within
+query.Query.instances(), called only the first time a particular
+mapper's populate_instance() method is invoked for the overall result.</p>
+<p>The settings contained within the SelectionContext as well as the
+columns present in the row (which will be the same columns present in
+all rows) are used to determine the presence and behavior of the
+returned callables.  The callables will then be used to process all
+rows and to post-process all instances, respectively.</p>
+<p>Callables are of the following form:</p>
+<pre class="literal-block">
+def new_execute(instance, row, **flags):
+    # process incoming instance and given row.  the instance is
+    # &quot;new&quot; and was just created upon receipt of this row.
+    # flags is a dictionary containing at least the following
+    # attributes:
+    #   isnew - indicates if the instance was newly created as a
+    #           result of reading this row
+    #   instancekey - identity key of the instance
+    # optional attribute:
+    #   ispostselect - indicates if this row resulted from a
+    #                  'post' select of additional tables/columns
+
+def existing_execute(instance, row, **flags):
+    # process incoming instance and given row.  the instance is
+    # &quot;existing&quot; and was created based on a previous row.
+
+def post_execute(instance, **flags):
+    # process instance after all result rows have been processed.
+    # this function should be used to issue additional selections
+    # in order to eagerly load additional properties.
+
+return (new_execute, existing_execute, post_execute)
+</pre>
+<p>Either of the three tuples can be <tt class="docutils literal"><span class="pre">None</span></tt> in which case no function
+is called.</p>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def do_init(<i>self</i>)</b>
+    <div class="docstring">
+    <p>Perform subclass-specific initialization steps.</p>
+<p>This is a <em>template</em> method called by the
+<tt class="docutils literal"><span class="pre">MapperProperty</span></tt> object's init() method.</p>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def get_criterion(<i>self</i>, <i>query</i>, <i>key</i>, <i>value</i>)</b>
+    <div class="docstring">
+    <p>Return a <tt class="docutils literal"><span class="pre">WHERE</span></tt> clause suitable for this
+<tt class="docutils literal"><span class="pre">MapperProperty</span></tt> corresponding to the given key/value pair,
+where the key is a column or object property name, and value
+is a value to be matched.  This is only picked up by
+<tt class="docutils literal"><span class="pre">PropertyLoaders</span></tt>.</p>
+<p>This is called by a <tt class="docutils literal"><span class="pre">Query</span></tt>'s <tt class="docutils literal"><span class="pre">join_by</span></tt> method to formulate a set
+of key/value pairs into a <tt class="docutils literal"><span class="pre">WHERE</span></tt> criterion that spans multiple
+tables if needed.</p>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def init(<i>self</i>, <i>key</i>, <i>parent</i>)</b>
+    <div class="docstring">
+    <p>Called after all mappers are compiled to assemble
+relationships between mappers, establish instrumented class
+attributes.</p>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def is_primary(<i>self</i>)</b>
+    <div class="docstring">
+    <p>Return True if this <tt class="docutils literal"><span class="pre">MapperProperty</span></tt>'s mapper is the
+primary mapper for its class.</p>
+<p>This flag is used to indicate that the <tt class="docutils literal"><span class="pre">MapperProperty</span></tt> can
+define attribute instrumentation for the class at the class
+level (as opposed to the individual instance level).</p>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def merge(<i>self</i>, <i>session</i>, <i>source</i>, <i>dest</i>, <i>dont_load</i>, <i>_recursive</i>)</b>
+    <div class="docstring">
+    <p>Merge the attribute represented by this <tt class="docutils literal"><span class="pre">MapperProperty</span></tt>
+from source to destination object</p>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def register_dependencies(<i>self</i>, <i>*args</i>, <i>**kwargs</i>)</b>
+    <div class="docstring">
+    <p>Called by the <tt class="docutils literal"><span class="pre">Mapper</span></tt> in response to the UnitOfWork
+calling the <tt class="docutils literal"><span class="pre">Mapper</span></tt>'s register_dependencies operation.
+Should register with the UnitOfWork all inter-mapper
+dependencies as well as dependency processors (see UOW docs
+for more details).</p>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def set_parent(<i>self</i>, <i>parent</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def setup(<i>self</i>, <i>querycontext</i>, <i>**kwargs</i>)</b>
+    <div class="docstring">
+    <p>Called by Query for the purposes of constructing a SQL statement.</p>
+<p>Each MapperProperty associated with the target mapper processes the
+statement referenced by the query context, adding columns and/or
+criterion as appropriate.</p>
+
+    </div>
+    </div>
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.orm.interfaces_PropComparator"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class PropComparator(<a href="sqlalchemy_sql_expression.html#docstrings_sqlalchemy.sql.expression_ColumnOperators">ColumnOperators</a>)</h3>
+    
+    
+    <div class="darkcell"><p>defines comparison operations for MapperProperty objects.</p>
+<p>PropComparator instances should also define an accessor 'property'
+which returns the MapperProperty associated with this
+PropComparator.</p>
+</div>
+    
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def __init__(<i>self</i>, <i>prop</i>)</b>
+    <div class="docstring">
+    <p>Construct a new <tt class="docutils literal"><span class="pre">PropComparator</span></tt>.</p>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def any(<i>self</i>, <i>criterion=None</i>, <i>**kwargs</i>)</b>
+    <div class="docstring">
+    <p>Return true if this collection contains any member that meets the given criterion.</p>
+<dl class="docutils">
+<dt>criterion</dt>
+<dd>an optional ClauseElement formulated against the member class' table
+or attributes.</dd>
+<dt>**kwargs</dt>
+<dd>key/value pairs corresponding to member class attribute names which
+will be compared via equality to the corresponding values.</dd>
+</dl>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def contains(<i>self</i>, <i>other</i>)</b>
+    <div class="docstring">
+    <p>Return true if this collection contains other</p>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def expression_element(<i>self</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def has(<i>self</i>, <i>criterion=None</i>, <i>**kwargs</i>)</b>
+    <div class="docstring">
+    <p>Return true if this element references a member which meets the given criterion.</p>
+<dl class="docutils">
+<dt>criterion</dt>
+<dd>an optional ClauseElement formulated against the member class' table
+or attributes.</dd>
+<dt>**kwargs</dt>
+<dd>key/value pairs corresponding to member class attribute names which
+will be compared via equality to the corresponding values.</dd>
+</dl>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def of_type(<i>self</i>, <i>class_</i>)</b>
+    <div class="docstring">
+    <p>Redefine this object in terms of a polymorphic subclass.</p>
+<p>Returns a new PropComparator from which further criterion can be evaluated.</p>
+<p>e.g.:</p>
+<pre class="literal-block">
+query.join(Company.employees.of_type(Engineer)).\
+   filter(Engineer.name=='foo')
+</pre>
+<dl class="docutils">
+<dt>class_</dt>
+<dd>a class or mapper indicating that criterion will be against
+this specific subclass.</dd>
+</dl>
+
+    </div>
+    </div>
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.orm.interfaces_PropertyOption"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class PropertyOption(<a href="sqlalchemy_orm_interfaces.html#docstrings_sqlalchemy.orm.interfaces_MapperOption">MapperOption</a>)</h3>
+    
+    
+    <div class="darkcell"><p>A MapperOption that is applied to a property off the mapper or
+one of its child mappers, identified by a dot-separated key.</p>
+</div>
+    
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def __init__(<i>self</i>, <i>key</i>, <i>mapper=None</i>)</b>
+    <div class="docstring">
+    <p>Construct a new <tt class="docutils literal"><span class="pre">PropertyOption</span></tt>.</p>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def process_query(<i>self</i>, <i>query</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def process_query_conditionally(<i>self</i>, <i>query</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def process_query_property(<i>self</i>, <i>query</i>, <i>paths</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.orm.interfaces_StrategizedOption"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class StrategizedOption(<a href="sqlalchemy_orm_interfaces.html#docstrings_sqlalchemy.orm.interfaces_PropertyOption">PropertyOption</a>)</h3>
+    
+    
+    <div class="darkcell"><p>A MapperOption that affects which LoaderStrategy will be used
+for an operation by a StrategizedProperty.</p>
+</div>
+    
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def get_strategy_class(<i>self</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def is_chained(<i>self</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def process_query_property(<i>self</i>, <i>query</i>, <i>paths</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.orm.interfaces_StrategizedProperty"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class StrategizedProperty(<a href="sqlalchemy_orm_interfaces.html#docstrings_sqlalchemy.orm.interfaces_MapperProperty">MapperProperty</a>)</h3>
+    
+    
+    <div class="darkcell"><p>A MapperProperty which uses selectable strategies to affect
+loading behavior.</p>
+<p>There is a single default strategy selected by default.  Alternate
+strategies can be selected at Query time through the usage of
+<tt class="docutils literal"><span class="pre">StrategizedOption</span></tt> objects via the Query.options() method.</p>
+</div>
+    
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def create_row_processor(<i>self</i>, <i>selectcontext</i>, <i>mapper</i>, <i>row</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def do_init(<i>self</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def setup(<i>self</i>, <i>querycontext</i>, <i>**kwargs</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+    
+
+    </div>
+
+
+
+
+
+    <div class="bottomnav">
+        
+    <div class="prevnext">
+            Up: <a href="docstrings.html">API Documentation</a>
+
+               |   
+            Previous: <a href="sqlalchemy_orm_collections.html">module sqlalchemy.orm.collections</a>
+
+               |   
+            Next: <a href="sqlalchemy_orm_mapper.html">module sqlalchemy.orm.mapper</a>
+    </div>
+
+    </div>
+
+
+
+
+
+
+
+
+</body>
+</html>
+
+
+
+
+
+

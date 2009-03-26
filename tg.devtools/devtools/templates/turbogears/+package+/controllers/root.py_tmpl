@@ -1,0 +1,46 @@
+"""Main Controller"""
+from {{package}}.lib.base import BaseController
+from tg import expose, flash
+from pylons.i18n import ugettext as _
+#from tg import redirect, validate
+#from {{package}}.model import DBSession, metadata
+#from dbsprockets.dbmechanic.frameworks.tg2 import DBMechanic
+#from dbsprockets.saprovider import SAProvider
+
+{{if identity == "sqlalchemy"}}
+from tg.ext.repoze.who import authorize
+from {{package}}.controllers.secc import Secc
+{{endif}}
+
+class RootController(BaseController):
+    #admin = DBMechanic(SAProvider(metadata), '/admin')
+    {{if identity == "sqlalchemy"}}
+    secc = Secc()
+    {{endif}}
+
+    @expose('{{package}}.templates.index')
+    def index(self):
+        return dict(page='index')
+
+    @expose('{{package}}.templates.about')
+    def about(self):
+        return dict(page='about')
+
+
+{{if identity == "sqlalchemy"}}
+    @expose('{{package}}.templates.index')
+    @authorize.require(authorize.has_permission('manage'))
+    def manage_permission_only(self, **kw):
+        return dict(page='managers stuff')
+
+    @expose('{{package}}.templates.index')
+    @authorize.require(authorize.is_user('editor'))
+    def editor_user_only(self, **kw):
+        return dict(page='editor stuff')
+
+    @expose('{{package}}.templates.login')
+    def login(self, **kw):
+        came_from = kw.get('came_from', '/')
+        return dict(page='login', header=lambda *arg: None,
+                    footer=lambda *arg: None, came_from=came_from)
+{{endif}}

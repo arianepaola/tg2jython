@@ -1,0 +1,1068 @@
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<title>SQLAlchemy 0.4 Documentation - module sqlalchemy.orm.query</title>
+	
+    
+    <link rel="stylesheet" href="style.css"></link>
+    <link rel="stylesheet" href="docs.css"></link>
+    <link href="syntaxhighlight.css" rel="stylesheet" type="text/css"></link>
+    <script src="scripts.js"></script>
+
+    <link rel="stylesheet" href="docutil.css"></link>
+
+
+
+</head>
+<body>
+
+
+
+
+
+
+
+
+<div id="topanchor"><a name="top">&nbsp;</a></div>
+
+
+<h1>SQLAlchemy 0.4 Documentation</h1>
+
+<div id="pagecontrol"><a href="index.html">Multiple Pages</a> | <a href="documentation.html">One Page</a></div>
+
+<div class="versionheader">Version: 0.4.7p1   Last Updated: 07/31/08 11:09:56</div>
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class="topnav">
+
+    
+    <div class="navbanner">
+        <a href="index.html" class="totoc">Table of Contents</a>
+        
+    <div class="prevnext">
+            Up: <a href="docstrings.html">API Documentation</a>
+
+               |   
+            Previous: <a href="sqlalchemy_orm_properties.html">module sqlalchemy.orm.properties</a>
+
+               |   
+            Next: <a href="sqlalchemy_orm_session.html">module sqlalchemy.orm.session</a>
+    </div>
+
+        <h2>module sqlalchemy.orm.query</h2>
+    </div>
+
+	
+	
+    <ul>
+        
+        <li><a style="" href="sqlalchemy_orm_query.html#docstrings_sqlalchemy.orm.query_Query">class Query(object)</a></li>
+
+    </ul>
+
+	</div>
+
+
+
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.orm.query"></a>
+    
+    <div class="sectionL2">
+
+    <h3>module sqlalchemy.orm.query</h3>
+    
+    
+    <div class="darkcell"><p>The Query class and support.</p>
+<p>Defines the <a href="sqlalchemy_orm_query.html#docstrings_sqlalchemy.orm.query_Query">Query</a> class, the central construct used by
+the ORM to construct database queries.</p>
+<p>The <tt class="docutils literal"><span class="pre">Query</span></tt> class should not be confused with the
+<a href="sqlalchemy_sql_expression.html#docstrings_sqlalchemy.sql.expression_Select">Select</a> class, which defines database SELECT
+operations at the SQL (non-ORM) level.  <tt class="docutils literal"><span class="pre">Query</span></tt> differs from <tt class="docutils literal"><span class="pre">Select</span></tt> in
+that it returns ORM-mapped objects and interacts with an ORM session, whereas
+the <tt class="docutils literal"><span class="pre">Select</span></tt> construct interacts directly with the database to return
+iterable result sets.</p>
+</div>
+    
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.orm.query_Query"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class Query(object)</h3>
+    
+    
+    <div class="darkcell"><p>Encapsulates the object-fetching operations provided by Mappers.</p>
+</div>
+    
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def __init__(<i>self</i>, <i>class_or_mapper</i>, <i>session=None</i>, <i>entity_name=None</i>)</b>
+    <div class="docstring">
+    <p>Construct a new <tt class="docutils literal"><span class="pre">Query</span></tt>.</p>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def add_column(<i>self</i>, <i>column</i>, <i>id=None</i>)</b>
+    <div class="docstring">
+    <p>Add a SQL ColumnElement to the list of result columns to be returned.</p>
+<p>This will have the effect of all result-returning methods returning a
+tuple of results, the first element being an instance of the primary
+class for this Query, and subsequent elements matching columns or
+entities which were specified via add_column or add_entity.</p>
+<p>When adding columns to the result, its generally desirable to add
+limiting criterion to the query which can associate the primary entity
+of this Query along with the additional columns, if the column is
+based on a table or selectable that is not the primary mapped
+selectable.  The Query selects from all tables with no joining
+criterion by default.</p>
+<dl class="docutils">
+<dt>column</dt>
+<dd>a string column name or sql.ColumnElement to be added to the results.</dd>
+</dl>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def add_entity(<i>self</i>, <i>entity</i>, <i>alias=None</i>, <i>id=None</i>)</b>
+    <div class="docstring">
+    <p>add a mapped entity to the list of result columns to be returned.</p>
+<p>This will have the effect of all result-returning methods returning a tuple
+of results, the first element being an instance of the primary class for this
+Query, and subsequent elements matching columns or entities which were
+specified via add_column or add_entity.</p>
+<p>When adding entities to the result, its generally desirable to add
+limiting criterion to the query which can associate the primary entity
+of this Query along with the additional entities.  The Query selects
+from all tables with no joining criterion by default.</p>
+<blockquote>
+<dl class="docutils">
+<dt>entity</dt>
+<dd>a class or mapper which will be added to the results.</dd>
+<dt>alias</dt>
+<dd>a sqlalchemy.sql.Alias object which will be used to select rows.  this
+will match the usage of the given Alias in filter(), order_by(), etc. expressions</dd>
+<dt>id</dt>
+<dd>a string ID matching that given to query.join() or query.outerjoin(); rows will be
+selected from the aliased join created via those methods.</dd>
+</dl>
+</blockquote>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def all(<i>self</i>)</b>
+    <div class="docstring">
+    <p>Return the results represented by this <tt class="docutils literal"><span class="pre">Query</span></tt> as a list.</p>
+<p>This results in an execution of the underlying query.</p>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def apply_avg(<i>*args</i>, <i>**kwargs</i>)</b>
+    <div class="docstring">
+    <p>apply the SQL <tt class="docutils literal"><span class="pre">avg()</span></tt> function against the given column to the
+query and return the newly resulting <tt class="docutils literal"><span class="pre">Query</span></tt>.</p>
+<p>DEPRECATED.</p>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def apply_max(<i>*args</i>, <i>**kwargs</i>)</b>
+    <div class="docstring">
+    <p>apply the SQL <tt class="docutils literal"><span class="pre">max()</span></tt> function against the given column to the
+query and return the newly resulting <tt class="docutils literal"><span class="pre">Query</span></tt>.</p>
+<p>DEPRECATED.</p>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def apply_min(<i>*args</i>, <i>**kwargs</i>)</b>
+    <div class="docstring">
+    <p>apply the SQL <tt class="docutils literal"><span class="pre">min()</span></tt> function against the given column to the
+query and return the newly resulting <tt class="docutils literal"><span class="pre">Query</span></tt>.</p>
+<p>DEPRECATED.</p>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def apply_sum(<i>*args</i>, <i>**kwargs</i>)</b>
+    <div class="docstring">
+    <p>apply the SQL <tt class="docutils literal"><span class="pre">sum()</span></tt> function against the given column to the
+query and return the newly resulting <tt class="docutils literal"><span class="pre">Query</span></tt>.</p>
+<p>DEPRECATED.</p>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def autoflush(<i>self</i>, <i>setting</i>)</b>
+    <div class="docstring">
+    <p>Return a Query with a specific 'autoflush' setting.</p>
+<p>Note that a Session with autoflush=False will
+not autoflush, even if this flag is set to True at the
+Query level.  Therefore this flag is usually used only
+to disable autoflush for a specific Query.</p>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def avg(<i>self</i>, <i>col</i>)</b>
+    <div class="docstring">
+    <p>Execute the SQL <tt class="docutils literal"><span class="pre">avg()</span></tt> function against the given column.</p>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def compile(<i>self</i>)</b>
+    <div class="docstring">
+    <p>compiles and returns a SQL statement based on the criterion and conditions within this Query.</p>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def count(<i>self</i>, <i>whereclause=None</i>, <i>params=None</i>, <i>**kwargs</i>)</b>
+    <div class="docstring">
+    <p>Apply this query's criterion to a SELECT COUNT statement.</p>
+<p>the whereclause, params and **kwargs arguments are deprecated.  use filter()
+and other generative methods to establish modifiers.</p>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def count_by(<i>*args</i>, <i>**kwargs</i>)</b>
+    <div class="docstring">
+    <p>DEPRECATED.  use query.filter_by(**params).count()</p>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def distinct(<i>self</i>)</b>
+    <div class="docstring">
+    <p>Apply a <tt class="docutils literal"><span class="pre">DISTINCT</span></tt> to the query and return the newly resulting
+<tt class="docutils literal"><span class="pre">Query</span></tt>.</p>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def execute(<i>*args</i>, <i>**kwargs</i>)</b>
+    <div class="docstring">
+    <p>DEPRECATED.  use query.from_statement().all()</p>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def filter(<i>self</i>, <i>criterion</i>)</b>
+    <div class="docstring">
+    <p>apply the given filtering criterion to the query and return the newly resulting <tt class="docutils literal"><span class="pre">Query</span></tt></p>
+<p>the criterion is any sql.ClauseElement applicable to the WHERE clause of a select.</p>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def filter_by(<i>self</i>, <i>**kwargs</i>)</b>
+    <div class="docstring">
+    <p>apply the given filtering criterion to the query and return the newly resulting <tt class="docutils literal"><span class="pre">Query</span></tt>.</p>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def first(<i>self</i>)</b>
+    <div class="docstring">
+    <p>Return the first result of this <tt class="docutils literal"><span class="pre">Query</span></tt> or None if the result doesn't contain any row.</p>
+<p>This results in an execution of the underlying query.</p>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def from_statement(<i>self</i>, <i>statement</i>)</b>
+    <div class="docstring">
+    <p>Execute the given SELECT statement and return results.</p>
+<p>This method bypasses all internal statement compilation, and the
+statement is executed without modification.</p>
+<p>The statement argument is either a string, a <tt class="docutils literal"><span class="pre">select()</span></tt> construct,
+or a <tt class="docutils literal"><span class="pre">text()</span></tt> construct, and should return the set of columns
+appropriate to the entity class represented by this <tt class="docutils literal"><span class="pre">Query</span></tt>.</p>
+<p>Also see the <tt class="docutils literal"><span class="pre">instances()</span></tt> method.</p>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def get(<i>self</i>, <i>ident</i>, <i>**kwargs</i>)</b>
+    <div class="docstring">
+    <p>Return an instance of the object based on the given identifier, or None if not found.</p>
+<p>The <cite>ident</cite> argument is a scalar or tuple of primary key column values
+in the order of the table def's primary key columns.</p>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def get_by(<i>*args</i>, <i>**kwargs</i>)</b>
+    <div class="docstring">
+    <p>DEPRECATED.  use query.filter_by(**params).first()</p>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def having(<i>self</i>, <i>criterion</i>)</b>
+    <div class="docstring">
+    <p>apply a HAVING criterion to the query and return the newly resulting <tt class="docutils literal"><span class="pre">Query</span></tt>.</p>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def instances(<i>self</i>, <i>cursor</i>, <i>*mappers_or_columns</i>, <i>**kwargs</i>)</b>
+    <div class="docstring">
+    <p>Given a ResultProxy cursor as returned by connection.execute(), return an ORM result as a list.</p>
+<p>e.g.:</p>
+<pre class="literal-block">
+result = engine.execute(&quot;select * from users&quot;)
+users = session.query(User).instances(result)
+</pre>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def iterate_instances(<i>self</i>, <i>cursor</i>, <i>*mappers_or_columns</i>, <i>**kwargs</i>)</b>
+    <div class="docstring">
+    <p>Given a ResultProxy cursor as returned by connection.execute(), return an ORM result as an iterator.</p>
+<p>e.g.:</p>
+<pre class="literal-block">
+result = engine.execute(&quot;select * from users&quot;)
+for u in session.query(User).iterate_instances(result):
+    print u
+</pre>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def join(<i>self</i>, <i>prop</i>, <i>id=None</i>, <i>aliased=False</i>, <i>from_joinpoint=False</i>)</b>
+    <div class="docstring">
+    <p>Create a join against this <tt class="docutils literal"><span class="pre">Query</span></tt> object's criterion
+and apply generatively, retunring the newly resulting <tt class="docutils literal"><span class="pre">Query</span></tt>.</p>
+<dl class="docutils">
+<dt>'prop' may be one of:</dt>
+<dd><ul class="first last simple">
+<li>a string property name, i.e. &quot;rooms&quot;</li>
+<li>a class-mapped attribute, i.e. Houses.rooms</li>
+<li>a 2-tuple containing one of the above, combined with a selectable
+which derives from the properties' mapped table</li>
+<li>a list (not a tuple) containing a combination of any of the above.</li>
+</ul>
+</dd>
+</dl>
+<p>e.g.:</p>
+<pre class="literal-block">
+session.query(Company).join('employees')
+session.query(Company).join(['employees', 'tasks'])
+session.query(Houses).join([Colonials.rooms, Room.closets])
+session.query(Company).join([('employees', people.join(engineers)), Engineer.computers])
+</pre>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def join_by(<i>*args</i>, <i>**kwargs</i>)</b>
+    <div class="docstring">
+    <p>DEPRECATED. use join() to construct joins based on attribute names.</p>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def join_to(<i>*args</i>, <i>**kwargs</i>)</b>
+    <div class="docstring">
+    <p>DEPRECATED. use join() to create joins based on property names.</p>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def join_via(<i>*args</i>, <i>**kwargs</i>)</b>
+    <div class="docstring">
+    <p>DEPRECATED. use join() to create joins based on property names.</p>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def limit(<i>self</i>, <i>limit</i>)</b>
+    <div class="docstring">
+    <p>Apply a <tt class="docutils literal"><span class="pre">LIMIT</span></tt> to the query and return the newly resulting</p>
+<p><tt class="docutils literal"><span class="pre">Query</span></tt>.</p>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def list(<i>*args</i>, <i>**kwargs</i>)</b>
+    <div class="docstring">
+    <p>DEPRECATED.  use all()</p>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def load(<i>self</i>, <i>ident</i>, <i>raiseerr=True</i>, <i>**kwargs</i>)</b>
+    <div class="docstring">
+    <p>Return an instance of the object based on the given identifier.</p>
+<p>If not found, raises an exception.  The method will <strong>remove all
+pending changes</strong> to the object already existing in the Session.  The
+<cite>ident</cite> argument is a scalar or tuple of primary key column values in
+the order of the table def's primary key columns.</p>
+<p>DEPRECATED.  Use query.populate_existing().get() instead.</p>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def max(<i>self</i>, <i>col</i>)</b>
+    <div class="docstring">
+    <p>Execute the SQL <tt class="docutils literal"><span class="pre">max()</span></tt> function against the given column.</p>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def min(<i>self</i>, <i>col</i>)</b>
+    <div class="docstring">
+    <p>Execute the SQL <tt class="docutils literal"><span class="pre">min()</span></tt> function against the given column.</p>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def offset(<i>self</i>, <i>offset</i>)</b>
+    <div class="docstring">
+    <p>Apply an <tt class="docutils literal"><span class="pre">OFFSET</span></tt> to the query and return the newly resulting
+<tt class="docutils literal"><span class="pre">Query</span></tt>.</p>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def one(<i>self</i>)</b>
+    <div class="docstring">
+    <p>Return the first result, raising an exception unless exactly one row exists.</p>
+<p>This results in an execution of the underlying query.</p>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def options(<i>self</i>, <i>*args</i>)</b>
+    <div class="docstring">
+    <p>Return a new Query object, applying the given list of
+MapperOptions.</p>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def outerjoin(<i>self</i>, <i>prop</i>, <i>id=None</i>, <i>aliased=False</i>, <i>from_joinpoint=False</i>)</b>
+    <div class="docstring">
+    <p>Create a left outer join against this <tt class="docutils literal"><span class="pre">Query</span></tt> object's criterion
+and apply generatively, retunring the newly resulting <tt class="docutils literal"><span class="pre">Query</span></tt>.</p>
+<dl class="docutils">
+<dt>'prop' may be one of:</dt>
+<dd><ul class="first last simple">
+<li>a string property name, i.e. &quot;rooms&quot;</li>
+<li>a class-mapped attribute, i.e. Houses.rooms</li>
+<li>a 2-tuple containing one of the above, combined with a selectable
+which derives from the properties' mapped table</li>
+<li>a list (not a tuple) containing a combination of any of the above.</li>
+</ul>
+</dd>
+</dl>
+<p>e.g.:</p>
+<pre class="literal-block">
+session.query(Company).outerjoin('employees')
+session.query(Company).outerjoin(['employees', 'tasks'])
+session.query(Houses).outerjoin([Colonials.rooms, Room.closets])
+session.query(Company).join([('employees', people.join(engineers)), Engineer.computers])
+</pre>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def params(<i>self</i>, <i>*args</i>, <i>**kwargs</i>)</b>
+    <div class="docstring">
+    <p>add values for bind parameters which may have been specified in filter().</p>
+<p>parameters may be specified using **kwargs, or optionally a single dictionary
+as the first positional argument.  The reason for both is that **kwargs is
+convenient, however some parameter dictionaries contain unicode keys in which case
+**kwargs cannot be used.</p>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def populate_existing(<i>self</i>)</b>
+    <div class="docstring">
+    <p>Return a Query that will refresh all instances loaded.</p>
+<p>This includes all entities accessed from the database, including
+secondary entities, eagerly-loaded collection items.</p>
+<p>All changes present on entities which are already present in the
+session will be reset and the entities will all be marked &quot;clean&quot;.</p>
+<p>An alternative to populate_existing() is to expire the Session
+fully using session.expire_all().</p>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def query_from_parent(<i>cls</i>, <i>instance</i>, <i>property</i>, <i>**kwargs</i>)</b>
+    <div class="docstring">
+    <p>Return a new Query with criterion corresponding to a parent instance.</p>
+<p>Return a newly constructed Query object, with criterion corresponding
+to a relationship to the given parent instance.</p>
+<dl class="docutils">
+<dt>instance</dt>
+<dd><blockquote class="first">
+a persistent or detached instance which is related to class
+represented by this query.</blockquote>
+<dl class="last docutils">
+<dt>property</dt>
+<dd>string name of the property which relates this query's class to the
+instance.</dd>
+<dt>**kwargs</dt>
+<dd>all extra keyword arguments are propagated to the constructor of
+Query.</dd>
+</dl>
+</dd>
+</dl>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def reset_joinpoint(<i>self</i>)</b>
+    <div class="docstring">
+    <p>return a new Query reset the 'joinpoint' of this Query reset
+back to the starting mapper.  Subsequent generative calls will
+be constructed from the new joinpoint.</p>
+<p>Note that each call to join() or outerjoin() also starts from
+the root.</p>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def scalar(<i>*args</i>, <i>**kwargs</i>)</b>
+    <div class="docstring">
+    <p>DEPRECATED.  use first()</p>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def select(<i>*args</i>, <i>**kwargs</i>)</b>
+    <div class="docstring">
+    <p>DEPRECATED.  use query.filter(whereclause).all(), or query.from_statement(statement).all()</p>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def select_by(<i>*args</i>, <i>**kwargs</i>)</b>
+    <div class="docstring">
+    <p>DEPRECATED. use use query.filter_by(**params).all().</p>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def select_from(<i>self</i>, <i>from_obj</i>)</b>
+    <div class="docstring">
+    <p>Set the <cite>from_obj</cite> parameter of the query and return the newly
+resulting <tt class="docutils literal"><span class="pre">Query</span></tt>.  This replaces the table which this Query selects
+from with the given table.</p>
+<p><cite>from_obj</cite> is a single table or selectable.</p>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def select_statement(<i>*args</i>, <i>**kwargs</i>)</b>
+    <div class="docstring">
+    <p>DEPRECATED.  Use query.from_statement(statement)</p>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def select_text(<i>*args</i>, <i>**kwargs</i>)</b>
+    <div class="docstring">
+    <p>DEPRECATED.  Use query.from_statement(statement)</p>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def select_whereclause(<i>*args</i>, <i>**kwargs</i>)</b>
+    <div class="docstring">
+    <p>DEPRECATED.  use query.filter(whereclause).all()</p>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def selectfirst(<i>*args</i>, <i>**kwargs</i>)</b>
+    <div class="docstring">
+    <p>DEPRECATED.  use query.filter(whereclause).first()</p>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def selectfirst_by(<i>*args</i>, <i>**kwargs</i>)</b>
+    <div class="docstring">
+    <p>DEPRECATED. Use query.filter_by(**kwargs).first()</p>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def selectone(<i>*args</i>, <i>**kwargs</i>)</b>
+    <div class="docstring">
+    <p>DEPRECATED.  use query.filter(whereclause).one()</p>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def selectone_by(<i>*args</i>, <i>**kwargs</i>)</b>
+    <div class="docstring">
+    <p>DEPRECATED. Use query.filter_by(**kwargs).one()</p>
+
+    </div>
+    </div>
+
+                    
+         <div class="darkcell">
+         <A name=""></a>
+         <b>session = property()</b>
+         <div class="docstring">
+         
+         </div> 
+         </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def starargs_as_list(<i>self</i>, <i>*args</i>, <i>**kwargs</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def starargs_as_list(<i>self</i>, <i>*args</i>, <i>**kwargs</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+         <div class="darkcell">
+         <A name=""></a>
+         <b>statement = property()</b>
+         <div class="docstring">
+         <p>return the full SELECT statement represented by this Query.</p>
+
+         </div> 
+         </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def sum(<i>self</i>, <i>col</i>)</b>
+    <div class="docstring">
+    <p>Execute the SQL <tt class="docutils literal"><span class="pre">sum()</span></tt> function against the given column.</p>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def values(<i>self</i>, <i>*columns</i>)</b>
+    <div class="docstring">
+    <p>Return an iterator yielding result tuples corresponding to the given list of columns</p>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def values(<i>self</i>, <i>*columns</i>)</b>
+    <div class="docstring">
+    <p>Return an iterator yielding result tuples corresponding to the given list of columns</p>
+
+    </div>
+    </div>
+
+                    
+         <div class="darkcell">
+         <A name=""></a>
+         <b>whereclause = property()</b>
+         <div class="docstring">
+         <p>return the WHERE criterion for this Query.</p>
+
+         </div> 
+         </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def with_lockmode(<i>self</i>, <i>mode</i>)</b>
+    <div class="docstring">
+    <p>Return a new Query object with the specified locking mode.</p>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def with_parent(<i>self</i>, <i>instance</i>, <i>property=None</i>)</b>
+    <div class="docstring">
+    <p>add a join criterion corresponding to a relationship to the given parent instance.</p>
+<blockquote>
+<dl class="docutils">
+<dt>instance</dt>
+<dd>a persistent or detached instance which is related to class represented
+by this query.</dd>
+<dt>property</dt>
+<dd>string name of the property which relates this query's class to the
+instance.  if None, the method will attempt to find a suitable property.</dd>
+</dl>
+</blockquote>
+<p>currently, this method only works with immediate parent relationships, but in the
+future may be enhanced to work across a chain of parent mappers.</p>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def with_polymorphic(<i>self</i>, <i>cls_or_mappers</i>, <i>selectable=None</i>)</b>
+    <div class="docstring">
+    <p>Load columns for descendant mappers of this Query's mapper.</p>
+<p>Using this method will ensure that each descendant mapper's
+tables are included in the FROM clause, and will allow filter()
+criterion to be used against those tables.  The resulting
+instances will also have those columns already loaded so that
+no &quot;post fetch&quot; of those columns will be required.</p>
+<p><tt class="docutils literal"><span class="pre">cls_or_mappers</span></tt> is a single class or mapper, or list of class/mappers,
+which inherit from this Query's mapper.  Alternatively, it
+may also be the string <tt class="docutils literal"><span class="pre">'*'</span></tt>, in which case all descending
+mappers will be added to the FROM clause.</p>
+<p><tt class="docutils literal"><span class="pre">selectable</span></tt> is a table or select() statement that will
+be used in place of the generated FROM clause.  This argument
+is required if any of the desired mappers use concrete table
+inheritance, since SQLAlchemy currently cannot generate UNIONs
+among tables automatically.  If used, the <tt class="docutils literal"><span class="pre">selectable</span></tt>
+argument must represent the full set of tables and columns mapped
+by every desired mapper.  Otherwise, the unaccounted mapped columns
+will result in their table being appended directly to the FROM
+clause which will usually lead to incorrect results.</p>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def yield_per(<i>self</i>, <i>count</i>)</b>
+    <div class="docstring">
+    <p>Yield only <tt class="docutils literal"><span class="pre">count</span></tt> rows at a time.</p>
+<p>WARNING: use this method with caution; if the same instance is present
+in more than one batch of rows, end-user changes to attributes will be
+overwritten.</p>
+<p>In particular, it's usually impossible to use this setting with
+eagerly loaded collections (i.e. any lazy=False) since those
+collections will be cleared for a new load when encountered in a
+subsequent result batch.</p>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def __getitem__(<i>self</i>, <i>item</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def __iter__(<i>self</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+    
+
+    </div>
+
+
+
+
+
+    <div class="bottomnav">
+        
+    <div class="prevnext">
+            Up: <a href="docstrings.html">API Documentation</a>
+
+               |   
+            Previous: <a href="sqlalchemy_orm_properties.html">module sqlalchemy.orm.properties</a>
+
+               |   
+            Next: <a href="sqlalchemy_orm_session.html">module sqlalchemy.orm.session</a>
+    </div>
+
+    </div>
+
+
+
+
+
+
+
+
+</body>
+</html>
+
+
+
+
+
+

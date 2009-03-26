@@ -1,0 +1,47 @@
+Metadata-Version: 1.0
+Name: transaction
+Version: 1.0a1
+Summary: Transaction management for Python
+Home-page: http://www.zope.org/Products/ZODB
+Author: Zope Corporation
+Author-email: zodb-dev@zope.org
+License: ZPL 2.1
+Description: ============
+        Transactions
+        ============
+        
+        This package contains a generic transaction implementation for Python. It is
+        mainly used by the ZODB, though.
+        
+        Note that the data manager API, ``transaction.interfaces.IDataManager``,
+        is syntactically simple, but semantically complex.  The semantics
+        were not easy to express in the interface. This could probably use
+        more work.  The semantics are presented in detail through examples of
+        a sample data manager in ``transaction.tests.test_SampleDataManager``.
+        
+        
+        Changes
+        =======
+        
+        1.0 (unreleased)
+        ----------------
+        
+        * Initial release, branched from ZODB trunk on 2007-11-08 (aka
+        "3.9.0dev").
+        
+        * Remove (deprecated) support for beforeCommitHook alias to
+        addBeforeCommitHook.
+        
+        * Add weakset tests.
+        
+        * Remove unit tests that depend on ZODB.tests.utils from
+        test_transaction (these are actually integration tests).
+        
+Platform: any
+Classifier: Development Status :: 6 - Mature
+Classifier: License :: OSI Approved :: Zope Public License
+Classifier: Programming Language :: Python
+Classifier: Topic :: Database
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Classifier: Operating System :: Microsoft :: Windows
+Classifier: Operating System :: Unix

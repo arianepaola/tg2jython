@@ -1,0 +1,17 @@
+Metadata-Version: 1.0
+Name: DBSprockets
+Version: 0.2dev-r363
+Summary: A package for creation of web widgets directly from database definitions.
+Home-page: http://dbsprockets.googlecode.com/svn/dist
+Author: Christopher Perkins 2007
+Author-email: chris@percious.com
+License: MIT
+Description: UNKNOWN
+Platform: UNKNOWN
+Classifier: Development Status :: 4 - Beta
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python
+Classifier: Topic :: Internet :: WWW/HTTP
+Classifier: Topic :: Internet :: WWW/HTTP :: Dynamic Content
+Classifier: Topic :: Software Development :: Libraries :: Python Modules

@@ -1,0 +1,43 @@
+Tests that we can add WidgetsLists both as instances and classes.
+
+
+>>> from tw.api import WidgetsList, Widget
+>>> class List1(WidgetsList):
+...     a = Widget()
+...     b = Widget()
+...
+>>> class List2(WidgetsList):
+...     c = Widget()
+...     d = Widget()
+...
+
+Sanity Check
+
+>>> [w.id for w in List1()]
+['a', 'b']
+>>> [w.id for w in List2()]
+['c', 'd']
+
+Brute-force all permutations
+
+>>> [w.id for w in List1() + List2()]
+['a', 'b', 'c', 'd']
+>>> [w.id for w in List2() + List1()]
+['c', 'd', 'a', 'b']
+
+>>> [w.id for w in List1 + List2()]
+['a', 'b', 'c', 'd']
+>>> [w.id for w in List2 + List1()]
+['c', 'd', 'a', 'b']
+
+>>> [w.id for w in List1() + List2]
+['a', 'b', 'c', 'd']
+>>> [w.id for w in List2() + List1]
+['c', 'd', 'a', 'b']
+
+Finally, the prettiest syntax.
+
+>>> [w.id for w in List1 + List2]
+['a', 'b', 'c', 'd']
+>>> [w.id for w in List2 + List1]
+['c', 'd', 'a', 'b']

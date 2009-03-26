@@ -1,0 +1,567 @@
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<title>SQLAlchemy 0.4 Documentation - The Types System</title>
+	
+    <link rel="stylesheet" href="style.css"></link>
+    <link rel="stylesheet" href="docs.css"></link>
+    <link href="syntaxhighlight.css" rel="stylesheet" type="text/css"></link>
+    <script src="scripts.js"></script>
+
+
+
+</head>
+<body>
+
+
+
+
+
+
+
+
+<div id="topanchor"><a name="top">&nbsp;</a></div>
+
+
+<h1>SQLAlchemy 0.4 Documentation</h1>
+
+<div id="pagecontrol"><a href="index.html">Multiple Pages</a> | <a href="documentation.html">One Page</a></div>
+
+<div class="versionheader">Version: 0.4.7p1   Last Updated: 07/31/08 11:09:56</div>
+
+
+
+
+
+
+
+<A name=""></a>
+
+
+    <div class="topnav">
+
+    
+    <div class="navbanner">
+        <a href="index.html" class="totoc">Table of Contents</a>
+        
+    <div class="prevnext">
+
+            
+            Previous: <a href="metadata.html">Database Meta Data</a>
+
+               |   
+            Next: <a href="pooling.html">Connection Pooling</a>
+    </div>
+
+        <h2>The Types System</h2>
+    </div>
+
+	
+	
+    <ul>
+        
+        <li><a style="" href="types.html#types_standard">Built-in Types</a></li>
+
+	        <li>
+                
+    <ul>
+        
+        <li><a style="" href="types.html#types_standard_string">String</a></li>
+
+        
+        <li><a style="" href="types.html#types_standard_unicode">Unicode</a></li>
+
+        
+        <li><a style="" href="types.html#types_standard_text">Text / UnicodeText</a></li>
+
+        
+        <li><a style="" href="types.html#types_standard_numeric">Numeric</a></li>
+
+        
+        <li><a style="" href="types.html#types_standard_float">Float</a></li>
+
+        
+        <li><a style="" href="types.html#types_standard_datetime/date/time">Datetime/Date/Time</a></li>
+
+        
+        <li><a style="" href="types.html#types_standard_interval">Interval</a></li>
+
+        
+        <li><a style="" href="types.html#types_standard_binary">Binary</a></li>
+
+        
+        <li><a style="" href="types.html#types_standard_boolean">Boolean</a></li>
+
+        
+        <li><a style="" href="types.html#types_standard_pickletype">PickleType</a></li>
+
+        
+        <li><a style="" href="types.html#types_standard_sqlspecific">SQL-Specific Types</a></li>
+
+    </ul>
+
+	        </li>
+        
+        <li><a style="" href="types.html#types_dialect">Dialect Specific Types</a></li>
+
+        
+        <li><a style="" href="types.html#types_custom">Creating your Own Types</a></li>
+
+    </ul>
+
+	</div>
+
+
+
+
+
+
+
+
+
+
+
+    
+    <A name="types"></a>
+    
+    <div class="sectionL1">
+
+    
+    
+
+<p>The package <code>sqlalchemy.types</code> defines the datatype identifiers which may be used when defining <b>metadata</b>.  This package includes a set of generic types, a set of SQL-specific subclasses of those types, and a small extension system used by specific database connectors to adapt these generic types into database-specific type objects.
+</p>
+
+
+    
+    <A name="types_standard"></a>
+    
+    <div class="sectionL2">
+
+    <h3>Built-in Types</h3>
+    
+    
+
+<p>SQLAlchemy comes with a set of standard generic datatypes, which are defined as classes.  Types are usually used when defining tables, and can be left as a class or instantiated, for example:
+</p>
+
+    
+
+    <div class="sliding_code">
+        <pre>
+<span class="python_name">mytable </span><span class="python_operator">= </span><span class="python_name">Table</span><span class="python_enclosure">(</span><span class="python_literal">'mytable'</span><span class="python_operator">, </span><span class="python_name">metadata</span><span class="python_operator">,</span>
+    <span class="python_name">Column</span><span class="python_enclosure">(</span><span class="python_literal">'myid'</span><span class="python_operator">, </span><span class="python_name">Integer</span><span class="python_operator">, </span><span class="python_name">primary_key</span><span class="python_operator">=</span><span class="python_name">True</span><span class="python_enclosure">)</span><span class="python_operator">,</span>
+    <span class="python_name">Column</span><span class="python_enclosure">(</span><span class="python_literal">'data'</span><span class="python_operator">, </span><span class="python_name">String</span><span class="python_enclosure">(</span><span class="python_number">30</span><span class="python_enclosure">))</span><span class="python_operator">,</span>
+    <span class="python_name">Column</span><span class="python_enclosure">(</span><span class="python_literal">'info'</span><span class="python_operator">, </span><span class="python_name">Unicode</span><span class="python_enclosure">(</span><span class="python_number">100</span><span class="python_enclosure">))</span><span class="python_operator">,</span>
+    <span class="python_name">Column</span><span class="python_enclosure">(</span><span class="python_literal">'value'</span><span class="python_operator">, </span><span class="python_name">Number</span><span class="python_enclosure">(</span><span class="python_number">7</span><span class="python_operator">,</span><span class="python_number">4</span><span class="python_enclosure">)) </span>
+    <span class="python_enclosure">)</span><span class="python_operator">
+</span></pre>
+    </div>
+<p>Following is a rundown of the standard types.
+</p>
+
+
+    
+    <A name="types_standard_string"></a>
+    
+    <div class="sectionL3">
+
+    <h3>String</h3>
+    
+    
+
+<p>This type is the base type for all string and character types, such as <code>Unicode</code>, <code>TEXT</code>, <code>CLOB</code>, etc.  By default it generates a VARCHAR in DDL.  It includes an argument <code>length</code>, which indicates the length in characters of the type, as well as <code>convert_unicode</code> and <code>assert_unicode</code>, which are booleans.  <code>length</code> will be used as the length argument when generating DDL.  If <code>length</code> is omitted, the <code>String</code> type resolves into the <code>TEXT</code> type.
+</p>
+<p><code>convert_unicode=True</code> indicates that incoming strings, if they are Python <code>unicode</code> strings, will be encoded into a raw bytestring using the <code>encoding</code> attribute of the dialect (defaults to <code>utf-8</code>).  Similarly, raw bytestrings coming back from the database will be decoded into <code>unicode</code> objects on the way back.
+</p>
+<p><code>assert_unicode</code> is set to <code>None</code> by default. When <code>True</code>, it indicates that incoming bind parameters will be checked that they are in fact  <code>unicode</code> objects, else an error is raised.  A value of <code>'warn'</code> instead raises a warning.  Setting it to <code>None</code> indicates that the dialect-level <code>convert_unicode</code> setting should take place, whereas setting it to <code>False</code> disables it unconditionally  (this flag is new as of version 0.4.2).
+</p>
+<p>Both <code>convert_unicode</code> and <code>assert_unicode</code> may be set at the engine level as flags to <code>create_engine()</code>.
+</p>
+
+
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+    
+    <A name="types_standard_unicode"></a>
+    
+    <div class="sectionL3">
+
+    <h3>Unicode</h3>
+    
+    
+
+<p>The <code>Unicode</code> type is shorthand for <code>String</code> with <code>convert_unicode=True</code> and <code>assert_unicode='warn'</code>.  When writing a Unicode-aware application, it is strongly recommended that this type is used, and that only Unicode strings are used in the application.  By "Unicode string" we mean a string with a u, i.e. <code>u'hello'</code>.  Otherwise, particularly when using the ORM, data will be converted to Unicode when it returns from the database, but local data which was generated locally will not be in Unicode format, which can create confusion.
+</p>
+
+
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+    
+    <A name="types_standard_text"></a>
+    
+    <div class="sectionL3">
+
+    <h3>Text / UnicodeText</h3>
+    
+    
+
+<p>These are the "unbounded" versions of <code>String</code> and <code>Unicode</code>.  They have no "length" parameter, and generate a column type of TEXT or CLOB.
+</p>
+
+
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+    
+    <A name="types_standard_numeric"></a>
+    
+    <div class="sectionL3">
+
+    <h3>Numeric</h3>
+    
+    
+
+<p>Numeric types return <code>decimal.Decimal</code> objects by default.  The flag <code>asdecimal=False</code> may be specified which enables the type to pass data straight through.   Numeric also takes "precision" and "scale" arguments which are used when CREATE TABLE is issued.
+</p>
+
+
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+    
+    <A name="types_standard_float"></a>
+    
+    <div class="sectionL3">
+
+    <h3>Float</h3>
+    
+    
+
+<p>Float types return Python floats.  Float also takes a "precision" argument which is used when CREATE TABLE is issued.
+</p>
+
+
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+    
+    <A name="types_standard_datetime/date/time"></a>
+    
+    <div class="sectionL3">
+
+    <h3>Datetime/Date/Time</h3>
+    
+    
+
+<p>Date and time types return objects from the Python <code>datetime</code> module.  Most DBAPIs have built in support for the datetime module, with the noted exception of SQLite.  In the case of SQLite, date and time types are stored as strings which are then converted back to datetime objects when rows are returned.
+</p>
+
+
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+    
+    <A name="types_standard_interval"></a>
+    
+    <div class="sectionL3">
+
+    <h3>Interval</h3>
+    
+    
+
+<p>The Interval type deals with <code>datetime.timedelta</code> objects.  In Postgres, the native INTERVAL type is used; for others, the value is stored as a date which is relative to the "epoch" (Jan. 1, 1970).
+</p>
+
+
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+    
+    <A name="types_standard_binary"></a>
+    
+    <div class="sectionL3">
+
+    <h3>Binary</h3>
+    
+    
+
+<p>The Binary type generates BLOB or BYTEA when tables are created, and also converts incoming values using the <code>Binary</code> callable provided by each DBAPI.  <br></br>
+</p>
+
+
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+    
+    <A name="types_standard_boolean"></a>
+    
+    <div class="sectionL3">
+
+    <h3>Boolean</h3>
+    
+    
+
+<p>Boolean typically uses BOOLEAN or SMALLINT on the CREATE TABLE side, and returns Python <code>True</code> or <code>False</code>.
+</p>
+
+
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+    
+    <A name="types_standard_pickletype"></a>
+    
+    <div class="sectionL3">
+
+    <h3>PickleType</h3>
+    
+    
+
+<p>PickleType builds upon the Binary type to apply Python's <code>pickle.dumps()</code> to incoming objects, and <code>pickle.loads()</code> on the way out, allowing any pickleable Python object to be stored as a serialized binary field.
+</p>
+
+
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+    
+    <A name="types_standard_sqlspecific"></a>
+    
+    <div class="sectionL3">
+
+    <h3>SQL-Specific Types</h3>
+    
+    
+
+<p>These are subclasses of the generic types and include:
+</p>
+
+    
+
+    <div class="sliding_code">
+        <pre>
+<span class="python_keyword">class </span><span class="python_name">FLOAT</span><span class="python_enclosure">(</span><span class="python_name">Numeric</span><span class="python_enclosure">)</span><span class="python_operator">
+</span><span class="python_keyword">class </span><span class="python_name">TEXT</span><span class="python_enclosure">(</span><span class="python_name">String</span><span class="python_enclosure">)</span><span class="python_operator">
+</span><span class="python_keyword">class </span><span class="python_name">DECIMAL</span><span class="python_enclosure">(</span><span class="python_name">Numeric</span><span class="python_enclosure">)</span><span class="python_operator">
+</span><span class="python_keyword">class </span><span class="python_name">INT</span><span class="python_enclosure">(</span><span class="python_name">Integer</span><span class="python_enclosure">)</span><span class="python_operator">
+</span><span class="python_name">INTEGER </span><span class="python_operator">= </span><span class="python_name">INT</span><span class="python_operator">
+</span><span class="python_keyword">class </span><span class="python_name">TIMESTAMP</span><span class="python_enclosure">(</span><span class="python_name">DateTime</span><span class="python_enclosure">)</span><span class="python_operator">
+</span><span class="python_keyword">class </span><span class="python_name">DATETIME</span><span class="python_enclosure">(</span><span class="python_name">DateTime</span><span class="python_enclosure">)</span><span class="python_operator">
+</span><span class="python_keyword">class </span><span class="python_name">CLOB</span><span class="python_enclosure">(</span><span class="python_name">String</span><span class="python_enclosure">)</span><span class="python_operator">
+</span><span class="python_keyword">class </span><span class="python_name">VARCHAR</span><span class="python_enclosure">(</span><span class="python_name">String</span><span class="python_enclosure">)</span><span class="python_operator">
+</span><span class="python_keyword">class </span><span class="python_name">CHAR</span><span class="python_enclosure">(</span><span class="python_name">String</span><span class="python_enclosure">)</span><span class="python_operator">
+</span><span class="python_keyword">class </span><span class="python_name">BLOB</span><span class="python_enclosure">(</span><span class="python_name">Binary</span><span class="python_enclosure">)</span><span class="python_operator">
+</span><span class="python_keyword">class </span><span class="python_name">BOOLEAN</span><span class="python_enclosure">(</span><span class="python_name">Boolean</span><span class="python_enclosure">)</span><span class="python_operator">
+</span></pre>
+    </div>
+<p>The idea behind the SQL-specific types is that a CREATE TABLE statement would generate the exact type specified.  <br></br>
+</p>
+
+
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+
+    </div>
+
+
+
+    
+    <A name="types_dialect"></a>
+    
+    <div class="sectionL2">
+
+    <h3>Dialect Specific Types</h3>
+    
+    
+
+<p>Each dialect has its own set of types, many of which are available only within that dialect.  For example, MySQL has a <code>BigInteger</code> type and Postgres has an <code>Inet</code> type.  To use these, import them from the module explicitly:
+</p>
+
+    
+
+    <div class="sliding_code">
+        <pre>
+<span class="python_keyword">from </span><span class="python_name">sqlalchemy</span><span class="python_operator">.</span><span class="python_name">databases</span><span class="python_operator">.</span><span class="python_name">mysql </span><span class="python_keyword">import </span><span class="python_name">MSEnum</span><span class="python_operator">, </span><span class="python_name">MSBigInteger</span><span class="python_operator">
+</span>
+<span class="python_name">table </span><span class="python_operator">= </span><span class="python_name">Table</span><span class="python_enclosure">(</span><span class="python_literal">'foo'</span><span class="python_operator">, </span><span class="python_name">meta</span><span class="python_operator">,</span>
+    <span class="python_name">Column</span><span class="python_enclosure">(</span><span class="python_literal">'enumerates'</span><span class="python_operator">, </span><span class="python_name">MSEnum</span><span class="python_enclosure">(</span><span class="python_literal">'a'</span><span class="python_operator">, </span><span class="python_literal">'b'</span><span class="python_operator">, </span><span class="python_literal">'c'</span><span class="python_enclosure">))</span><span class="python_operator">,</span>
+    <span class="python_name">Column</span><span class="python_enclosure">(</span><span class="python_literal">'id'</span><span class="python_operator">, </span><span class="python_name">MSBigInteger</span><span class="python_enclosure">)</span>
+<span class="python_enclosure">)</span><span class="python_operator">
+</span></pre>
+    </div>
+<p>Or some postgres types:
+</p>
+
+    
+
+    <div class="sliding_code">
+        <pre>
+<span class="python_keyword">from </span><span class="python_name">sqlalchemy</span><span class="python_operator">.</span><span class="python_name">databases</span><span class="python_operator">.</span><span class="python_name">postgres </span><span class="python_keyword">import </span><span class="python_name">PGInet</span><span class="python_operator">, </span><span class="python_name">PGArray</span><span class="python_operator">
+</span>
+<span class="python_name">table </span><span class="python_operator">= </span><span class="python_name">Table</span><span class="python_enclosure">(</span><span class="python_literal">'foo'</span><span class="python_operator">, </span><span class="python_name">meta</span><span class="python_operator">,</span>
+    <span class="python_name">Column</span><span class="python_enclosure">(</span><span class="python_literal">'ipaddress'</span><span class="python_operator">, </span><span class="python_name">PGInet</span><span class="python_enclosure">)</span><span class="python_operator">,</span>
+    <span class="python_name">Column</span><span class="python_enclosure">(</span><span class="python_literal">'elements'</span><span class="python_operator">, </span><span class="python_name">PGArray</span><span class="python_enclosure">(</span><span class="python_name">str</span><span class="python_enclosure">))   </span><span class="python_comment"># PGArray is available in 0.4, and takes a type argument</span>
+    <span class="python_enclosure">)</span><span class="python_operator">
+</span></pre>
+    </div>
+
+
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+    
+    <A name="types_custom"></a>
+    
+    <div class="sectionL2">
+
+    <h3>Creating your Own Types</h3>
+    
+    
+
+<p>User-defined types can be created which can augment the bind parameter and result processing capabilities of the built in types.  This is usually achieved using the <code>TypeDecorator</code> class, which "decorates" the behavior of any existing type.  As of version 0.4.2, the new <code>process_bind_param()</code> and <code>process_result_value()</code> methods should be used:
+</p>
+
+    
+
+    <div class="sliding_code">
+        <pre>
+<span class="python_keyword">import </span><span class="python_name">sqlalchemy</span><span class="python_operator">.</span><span class="python_name">types </span><span class="python_keyword">as </span><span class="python_name">types</span><span class="python_operator">
+</span>
+<span class="python_keyword">class </span><span class="python_name">MyType</span><span class="python_enclosure">(</span><span class="python_name">types</span><span class="python_operator">.</span><span class="python_name">TypeDecorator</span><span class="python_enclosure">)</span><span class="python_operator">:
+    </span><span class="python_literal">"""a type that decorates Unicode, prefixes values with "PREFIX:" on 
+    the way in and strips it off on the way out."""</span><span class="python_operator">
+</span>
+    <span class="python_name">impl </span><span class="python_operator">= </span><span class="python_name">types</span><span class="python_operator">.</span><span class="python_name">Unicode</span><span class="python_operator">
+</span>
+    <span class="python_keyword">def </span><span class="python_name">process_bind_param</span><span class="python_enclosure">(</span><span class="python_name">self</span><span class="python_operator">, </span><span class="python_name">value</span><span class="python_operator">, </span><span class="python_name">engine</span><span class="python_enclosure">)</span><span class="python_operator">:
+        </span><span class="python_keyword">return </span><span class="python_literal">"PREFIX:" </span><span class="python_operator">+ </span><span class="python_name">value</span><span class="python_operator">
+</span>
+    <span class="python_operator"></span><span class="python_keyword">def </span><span class="python_name">process_result_value</span><span class="python_enclosure">(</span><span class="python_name">self</span><span class="python_operator">, </span><span class="python_name">value</span><span class="python_operator">, </span><span class="python_name">engine</span><span class="python_enclosure">)</span><span class="python_operator">:
+        </span><span class="python_keyword">return </span><span class="python_name">value</span><span class="python_enclosure">[</span><span class="python_number">7</span><span class="python_operator">:</span><span class="python_enclosure">]</span><span class="python_operator">
+</span>
+    <span class="python_operator"></span><span class="python_keyword">def </span><span class="python_name">copy</span><span class="python_enclosure">(</span><span class="python_name">self</span><span class="python_enclosure">)</span><span class="python_operator">:
+        </span><span class="python_keyword">return </span><span class="python_name">MyType</span><span class="python_enclosure">(</span><span class="python_name">self</span><span class="python_operator">.</span><span class="python_name">impl</span><span class="python_operator">.</span><span class="python_name">length</span><span class="python_enclosure">)</span><span class="python_operator">
+</span></pre>
+    </div>
+<p>Note that the "old" way to process bind parameters and result values, the <code>convert_bind_param()</code> and <code>convert_result_value()</code> methods, are still available.  The downside of these is that when using a type which already processes data such as the <code>Unicode</code> type, you need to call the superclass version of these methods directly.  Using <code>process_bind_param()</code> and <code>process_result_value()</code>, user-defined code can return and receive the desired Python data directly.
+</p>
+<p>As of version 0.4.2, <code>TypeDecorator</code> should generally be used for any user-defined type which redefines the behavior of another type, including other <code>TypeDecorator</code> subclasses such as <code>PickleType</code>, and the new <code>process_...()</code> methods described above should be used.  <br></br>
+</p>
+<p>To build a type object from scratch, which will not have a corresponding database-specific implementation, subclass <code>TypeEngine</code>:
+</p>
+
+    
+
+    <div class="sliding_code">
+        <pre>
+<span class="python_keyword">import </span><span class="python_name">sqlalchemy</span><span class="python_operator">.</span><span class="python_name">types </span><span class="python_keyword">as </span><span class="python_name">types</span><span class="python_operator">
+</span>
+<span class="python_keyword">class </span><span class="python_name">MyType</span><span class="python_enclosure">(</span><span class="python_name">types</span><span class="python_operator">.</span><span class="python_name">TypeEngine</span><span class="python_enclosure">)</span><span class="python_operator">:
+    </span><span class="python_keyword">def </span><span class="python_name">__init__</span><span class="python_enclosure">(</span><span class="python_name">self</span><span class="python_operator">, </span><span class="python_name">precision </span><span class="python_operator">= </span><span class="python_number">8</span><span class="python_enclosure">)</span><span class="python_operator">:
+        </span><span class="python_name">self</span><span class="python_operator">.</span><span class="python_name">precision </span><span class="python_operator">= </span><span class="python_name">precision</span><span class="python_operator">
+</span>
+    <span class="python_operator"></span><span class="python_keyword">def </span><span class="python_name">get_col_spec</span><span class="python_enclosure">(</span><span class="python_name">self</span><span class="python_enclosure">)</span><span class="python_operator">:
+        </span><span class="python_keyword">return </span><span class="python_literal">"MYTYPE(%s)" </span><span class="python_operator">% </span><span class="python_name">self</span><span class="python_operator">.</span><span class="python_name">precision</span><span class="python_operator">
+</span>
+    <span class="python_operator"></span><span class="python_keyword">def </span><span class="python_name">convert_bind_param</span><span class="python_enclosure">(</span><span class="python_name">self</span><span class="python_operator">, </span><span class="python_name">value</span><span class="python_operator">, </span><span class="python_name">engine</span><span class="python_enclosure">)</span><span class="python_operator">:
+        </span><span class="python_keyword">return </span><span class="python_name">value</span><span class="python_operator">
+</span>
+    <span class="python_operator"></span><span class="python_keyword">def </span><span class="python_name">convert_result_value</span><span class="python_enclosure">(</span><span class="python_name">self</span><span class="python_operator">, </span><span class="python_name">value</span><span class="python_operator">, </span><span class="python_name">engine</span><span class="python_enclosure">)</span><span class="python_operator">:
+        </span><span class="python_keyword">return </span><span class="python_name">value</span><span class="python_operator">
+</span></pre>
+    </div>
+<p>Once you make your type, it's immediately useable:
+</p>
+
+    
+
+    <div class="sliding_code">
+        <pre>
+<span class="python_name">table </span><span class="python_operator">= </span><span class="python_name">Table</span><span class="python_enclosure">(</span><span class="python_literal">'foo'</span><span class="python_operator">, </span><span class="python_name">meta</span><span class="python_operator">,</span>
+    <span class="python_name">Column</span><span class="python_enclosure">(</span><span class="python_literal">'id'</span><span class="python_operator">, </span><span class="python_name">Integer</span><span class="python_operator">, </span><span class="python_name">primary_key</span><span class="python_operator">=</span><span class="python_name">True</span><span class="python_enclosure">)</span><span class="python_operator">,</span>
+    <span class="python_name">Column</span><span class="python_enclosure">(</span><span class="python_literal">'data'</span><span class="python_operator">, </span><span class="python_name">MyType</span><span class="python_enclosure">(</span><span class="python_number">16</span><span class="python_enclosure">))</span>
+    <span class="python_enclosure">)</span><span class="python_operator">
+</span></pre>
+    </div>
+
+
+
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+
+    </div>
+
+
+
+
+
+    <div class="bottomnav">
+        
+    <div class="prevnext">
+
+            
+            Previous: <a href="metadata.html">Database Meta Data</a>
+
+               |   
+            Next: <a href="pooling.html">Connection Pooling</a>
+    </div>
+
+    </div>
+
+
+
+
+
+
+</body>
+</html>
+
+
+
+
+
+

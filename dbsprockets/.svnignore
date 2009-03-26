@@ -1,0 +1,4 @@
+*.pyc
+*.egg-info
+parser.out
+parsetab.py

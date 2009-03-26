@@ -1,0 +1,1006 @@
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<title>SQLAlchemy 0.4 Documentation - module sqlalchemy.databases.sybase</title>
+	
+    
+    <link rel="stylesheet" href="style.css"></link>
+    <link rel="stylesheet" href="docs.css"></link>
+    <link href="syntaxhighlight.css" rel="stylesheet" type="text/css"></link>
+    <script src="scripts.js"></script>
+
+    <link rel="stylesheet" href="docutil.css"></link>
+
+
+
+</head>
+<body>
+
+
+
+
+
+
+
+
+<div id="topanchor"><a name="top">&nbsp;</a></div>
+
+
+<h1>SQLAlchemy 0.4 Documentation</h1>
+
+<div id="pagecontrol"><a href="index.html">Multiple Pages</a> | <a href="documentation.html">One Page</a></div>
+
+<div class="versionheader">Version: 0.4.7p1   Last Updated: 07/31/08 11:09:56</div>
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class="topnav">
+
+    
+    <div class="navbanner">
+        <a href="index.html" class="totoc">Table of Contents</a>
+        
+    <div class="prevnext">
+            Up: <a href="docstrings.html">API Documentation</a>
+
+               |   
+            Previous: <a href="sqlalchemy_databases_firebird.html">module sqlalchemy.databases.firebird</a>
+
+               |   
+            Next: <a href="sqlalchemy_databases_access.html">module sqlalchemy.databases.access</a>
+    </div>
+
+        <h2>module sqlalchemy.databases.sybase</h2>
+    </div>
+
+	
+	
+    <ul>
+        
+        <li><a style="" href="sqlalchemy_databases_sybase.html#docstrings_sqlalchemy.databases.sybase_SybaseBigInteger">class SybaseBigInteger(SybaseInteger)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_sybase.html#docstrings_sqlalchemy.databases.sybase_SybaseBinary">class SybaseBinary(Binary)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_sybase.html#docstrings_sqlalchemy.databases.sybase_SybaseBoolean">class SybaseBoolean(Boolean)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_sybase.html#docstrings_sqlalchemy.databases.sybase_SybaseChar">class SybaseChar(CHAR)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_sybase.html#docstrings_sqlalchemy.databases.sybase_SybaseDateTime_mxodbc">class SybaseDateTime_mxodbc(DateTime)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_sybase.html#docstrings_sqlalchemy.databases.sybase_SybaseDateTime_pyodbc">class SybaseDateTime_pyodbc(DateTime)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_sybase.html#docstrings_sqlalchemy.databases.sybase_SybaseDate_mxodbc">class SybaseDate_mxodbc(Date)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_sybase.html#docstrings_sqlalchemy.databases.sybase_SybaseDate_pyodbc">class SybaseDate_pyodbc(Date)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_sybase.html#docstrings_sqlalchemy.databases.sybase_SybaseFloat">class SybaseFloat(FLOAT,SybaseNumeric)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_sybase.html#docstrings_sqlalchemy.databases.sybase_SybaseInteger">class SybaseInteger(Integer)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_sybase.html#docstrings_sqlalchemy.databases.sybase_SybaseMoney">class SybaseMoney(TypeEngine)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_sybase.html#docstrings_sqlalchemy.databases.sybase_SybaseSmallInteger">class SybaseSmallInteger(SybaseInteger)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_sybase.html#docstrings_sqlalchemy.databases.sybase_SybaseSmallMoney">class SybaseSmallMoney(SybaseMoney)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_sybase.html#docstrings_sqlalchemy.databases.sybase_SybaseString">class SybaseString(String)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_sybase.html#docstrings_sqlalchemy.databases.sybase_SybaseText">class SybaseText(Text)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_sybase.html#docstrings_sqlalchemy.databases.sybase_SybaseTimeStamp">class SybaseTimeStamp(TIMESTAMP)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_sybase.html#docstrings_sqlalchemy.databases.sybase_SybaseTime_mxodbc">class SybaseTime_mxodbc(Time)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_sybase.html#docstrings_sqlalchemy.databases.sybase_SybaseTime_pyodbc">class SybaseTime_pyodbc(Time)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_sybase.html#docstrings_sqlalchemy.databases.sybase_SybaseTinyInteger">class SybaseTinyInteger(SybaseInteger)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_sybase.html#docstrings_sqlalchemy.databases.sybase_SybaseUniqueIdentifier">class SybaseUniqueIdentifier(TypeEngine)</a></li>
+
+    </ul>
+
+	</div>
+
+
+
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.databases.sybase"></a>
+    
+    <div class="sectionL2">
+
+    <h3>module sqlalchemy.databases.sybase</h3>
+    
+    
+    <div class="darkcell"><p>Sybase database backend.</p>
+<p>Known issues / TODO:</p>
+<blockquote>
+<ul>
+<li><p class="first">Uses the mx.ODBC driver from egenix (version 2.1.0)</p>
+</li>
+<li><p class="first">The current version of sqlalchemy.databases.sybase only supports
+mx.ODBC.Windows (other platforms such as mx.ODBC.unixODBC still need
+some development)</p>
+</li>
+<li><p class="first">Support for pyodbc has been built in but is not yet complete (needs
+further development)</p>
+</li>
+<li><dl class="first docutils">
+<dt>Results of running tests/alltests.py:</dt>
+<dd><p class="first last">Ran 934 tests in 287.032s
+FAILED (failures=3, errors=1)</p>
+</dd>
+</dl>
+</li>
+<li><p class="first">Tested on 'Adaptive Server Anywhere 9' (version 9.0.1.1751)</p>
+</li>
+</ul>
+</blockquote>
+</div>
+    
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.databases.sybase_SybaseBigInteger"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class SybaseBigInteger(<a href="sqlalchemy_databases_sybase.html#docstrings_sqlalchemy.databases.sybase_SybaseInteger">SybaseInteger</a>)</h3>
+    
+    
+    
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def get_col_spec(<i>self</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.databases.sybase_SybaseBinary"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class SybaseBinary(<a href="sqlalchemy_types.html#docstrings_sqlalchemy.types_Binary">Binary</a>)</h3>
+    
+    
+    
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def get_col_spec(<i>self</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.databases.sybase_SybaseBoolean"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class SybaseBoolean(<a href="sqlalchemy_types.html#docstrings_sqlalchemy.types_Boolean">Boolean</a>)</h3>
+    
+    
+    
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def bind_processor(<i>self</i>, <i>dialect</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def get_col_spec(<i>self</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def result_processor(<i>self</i>, <i>dialect</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.databases.sybase_SybaseChar"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class SybaseChar(<a href="sqlalchemy_types.html#docstrings_sqlalchemy.types_CHAR">CHAR</a>)</h3>
+    
+    
+    
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def get_col_spec(<i>self</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.databases.sybase_SybaseDateTime_mxodbc"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class SybaseDateTime_mxodbc(<a href="sqlalchemy_types.html#docstrings_sqlalchemy.types_DateTime">DateTime</a>)</h3>
+    
+    
+    
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def __init__(<i>self</i>, <i>*a</i>, <i>**kw</i>)</b>
+    <div class="docstring">
+    <p>Construct a new <tt class="docutils literal"><span class="pre">SybaseDateTime_mxodbc</span></tt>.</p>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def get_col_spec(<i>self</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.databases.sybase_SybaseDateTime_pyodbc"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class SybaseDateTime_pyodbc(<a href="sqlalchemy_types.html#docstrings_sqlalchemy.types_DateTime">DateTime</a>)</h3>
+    
+    
+    
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def __init__(<i>self</i>, <i>*a</i>, <i>**kw</i>)</b>
+    <div class="docstring">
+    <p>Construct a new <tt class="docutils literal"><span class="pre">SybaseDateTime_pyodbc</span></tt>.</p>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def bind_processor(<i>self</i>, <i>dialect</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def get_col_spec(<i>self</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def result_processor(<i>self</i>, <i>dialect</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.databases.sybase_SybaseDate_mxodbc"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class SybaseDate_mxodbc(<a href="sqlalchemy_types.html#docstrings_sqlalchemy.types_Date">Date</a>)</h3>
+    
+    
+    
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def __init__(<i>self</i>, <i>*a</i>, <i>**kw</i>)</b>
+    <div class="docstring">
+    <p>Construct a new <tt class="docutils literal"><span class="pre">SybaseDate_mxodbc</span></tt>.</p>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def get_col_spec(<i>self</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.databases.sybase_SybaseDate_pyodbc"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class SybaseDate_pyodbc(<a href="sqlalchemy_types.html#docstrings_sqlalchemy.types_Date">Date</a>)</h3>
+    
+    
+    
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def __init__(<i>self</i>, <i>*a</i>, <i>**kw</i>)</b>
+    <div class="docstring">
+    <p>Construct a new <tt class="docutils literal"><span class="pre">SybaseDate_pyodbc</span></tt>.</p>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def get_col_spec(<i>self</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.databases.sybase_SybaseFloat"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class SybaseFloat(<a href="sqlalchemy_types.html#docstrings_sqlalchemy.types_FLOAT">FLOAT</a>,SybaseNumeric)</h3>
+    
+    
+    
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def __init__(<i>self</i>, <i>precision=10</i>, <i>asdecimal=False</i>, <i>length=2</i>, <i>**kwargs</i>)</b>
+    <div class="docstring">
+    <p>Construct a new <tt class="docutils literal"><span class="pre">SybaseFloat</span></tt>.</p>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def get_col_spec(<i>self</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def result_processor(<i>self</i>, <i>dialect</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.databases.sybase_SybaseInteger"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class SybaseInteger(<a href="sqlalchemy_types.html#docstrings_sqlalchemy.types_Integer">Integer</a>)</h3>
+    
+    
+    
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def get_col_spec(<i>self</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.databases.sybase_SybaseMoney"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class SybaseMoney(<a href="sqlalchemy_types.html#docstrings_sqlalchemy.types_TypeEngine">TypeEngine</a>)</h3>
+    
+    
+    
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def get_col_spec(<i>self</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.databases.sybase_SybaseSmallInteger"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class SybaseSmallInteger(<a href="sqlalchemy_databases_sybase.html#docstrings_sqlalchemy.databases.sybase_SybaseInteger">SybaseInteger</a>)</h3>
+    
+    
+    
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def get_col_spec(<i>self</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.databases.sybase_SybaseSmallMoney"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class SybaseSmallMoney(<a href="sqlalchemy_databases_sybase.html#docstrings_sqlalchemy.databases.sybase_SybaseMoney">SybaseMoney</a>)</h3>
+    
+    
+    
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def get_col_spec(<i>self</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.databases.sybase_SybaseString"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class SybaseString(<a href="sqlalchemy_types.html#docstrings_sqlalchemy.types_String">String</a>)</h3>
+    
+    
+    
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def get_col_spec(<i>self</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.databases.sybase_SybaseText"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class SybaseText(<a href="sqlalchemy_types.html#docstrings_sqlalchemy.types_Text">Text</a>)</h3>
+    
+    
+    
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def get_col_spec(<i>self</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.databases.sybase_SybaseTimeStamp"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class SybaseTimeStamp(<a href="sqlalchemy_types.html#docstrings_sqlalchemy.types_TIMESTAMP">TIMESTAMP</a>)</h3>
+    
+    
+    
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def get_col_spec(<i>self</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.databases.sybase_SybaseTime_mxodbc"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class SybaseTime_mxodbc(<a href="sqlalchemy_types.html#docstrings_sqlalchemy.types_Time">Time</a>)</h3>
+    
+    
+    
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def __init__(<i>self</i>, <i>*a</i>, <i>**kw</i>)</b>
+    <div class="docstring">
+    <p>Construct a new <tt class="docutils literal"><span class="pre">SybaseTime_mxodbc</span></tt>.</p>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def get_col_spec(<i>self</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def result_processor(<i>self</i>, <i>dialect</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.databases.sybase_SybaseTime_pyodbc"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class SybaseTime_pyodbc(<a href="sqlalchemy_types.html#docstrings_sqlalchemy.types_Time">Time</a>)</h3>
+    
+    
+    
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def __init__(<i>self</i>, <i>*a</i>, <i>**kw</i>)</b>
+    <div class="docstring">
+    <p>Construct a new <tt class="docutils literal"><span class="pre">SybaseTime_pyodbc</span></tt>.</p>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def bind_processor(<i>self</i>, <i>dialect</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def get_col_spec(<i>self</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def result_processor(<i>self</i>, <i>dialect</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.databases.sybase_SybaseTinyInteger"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class SybaseTinyInteger(<a href="sqlalchemy_databases_sybase.html#docstrings_sqlalchemy.databases.sybase_SybaseInteger">SybaseInteger</a>)</h3>
+    
+    
+    
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def get_col_spec(<i>self</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.databases.sybase_SybaseUniqueIdentifier"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class SybaseUniqueIdentifier(<a href="sqlalchemy_types.html#docstrings_sqlalchemy.types_TypeEngine">TypeEngine</a>)</h3>
+    
+    
+    
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def get_col_spec(<i>self</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+    
+
+    </div>
+
+
+
+
+
+    <div class="bottomnav">
+        
+    <div class="prevnext">
+            Up: <a href="docstrings.html">API Documentation</a>
+
+               |   
+            Previous: <a href="sqlalchemy_databases_firebird.html">module sqlalchemy.databases.firebird</a>
+
+               |   
+            Next: <a href="sqlalchemy_databases_access.html">module sqlalchemy.databases.access</a>
+    </div>
+
+    </div>
+
+
+
+
+
+
+
+
+</body>
+</html>
+
+
+
+
+
+

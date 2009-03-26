@@ -1,0 +1,1741 @@
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<title>SQLAlchemy 0.4 Documentation - module sqlalchemy.types</title>
+	
+    
+    <link rel="stylesheet" href="style.css"></link>
+    <link rel="stylesheet" href="docs.css"></link>
+    <link href="syntaxhighlight.css" rel="stylesheet" type="text/css"></link>
+    <script src="scripts.js"></script>
+
+    <link rel="stylesheet" href="docutil.css"></link>
+
+
+
+</head>
+<body>
+
+
+
+
+
+
+
+
+<div id="topanchor"><a name="top">&nbsp;</a></div>
+
+
+<h1>SQLAlchemy 0.4 Documentation</h1>
+
+<div id="pagecontrol"><a href="index.html">Multiple Pages</a> | <a href="documentation.html">One Page</a></div>
+
+<div class="versionheader">Version: 0.4.7p1   Last Updated: 07/31/08 11:09:56</div>
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class="topnav">
+
+    
+    <div class="navbanner">
+        <a href="index.html" class="totoc">Table of Contents</a>
+        
+    <div class="prevnext">
+            Up: <a href="docstrings.html">API Documentation</a>
+
+               |   
+            Previous: <a href="sqlalchemy_sql_expression.html">module sqlalchemy.sql.expression</a>
+
+               |   
+            Next: <a href="sqlalchemy_orm.html">module sqlalchemy.orm</a>
+    </div>
+
+        <h2>module sqlalchemy.types</h2>
+    </div>
+
+	
+	
+    <ul>
+        
+        <li><a style="" href="sqlalchemy_types.html#docstrings_sqlalchemy.types_AbstractType">class AbstractType(object)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_types.html#docstrings_sqlalchemy.types_BLOB">class BLOB(Binary)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_types.html#docstrings_sqlalchemy.types_BOOLEAN">class BOOLEAN(Boolean)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_types.html#docstrings_sqlalchemy.types_Binary">class Binary(TypeEngine)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_types.html#docstrings_sqlalchemy.types_Boolean">class Boolean(TypeEngine)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_types.html#docstrings_sqlalchemy.types_CHAR">class CHAR(String)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_types.html#docstrings_sqlalchemy.types_CLOB">class CLOB(Text)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_types.html#docstrings_sqlalchemy.types_DATE">class DATE(Date)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_types.html#docstrings_sqlalchemy.types_DATETIME">class DATETIME(DateTime)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_types.html#docstrings_sqlalchemy.types_DECIMAL">class DECIMAL(Numeric)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_types.html#docstrings_sqlalchemy.types_Date">class Date(TypeEngine)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_types.html#docstrings_sqlalchemy.types_DateTime">class DateTime(TypeEngine)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_types.html#docstrings_sqlalchemy.types_FLOAT">class FLOAT(Float)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_types.html#docstrings_sqlalchemy.types_Float">class Float(Numeric)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_types.html#docstrings_sqlalchemy.types_INT">class INT(Integer)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_types.html#docstrings_sqlalchemy.types_Integer">class Integer(TypeEngine)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_types.html#docstrings_sqlalchemy.types_Interval">class Interval(TypeDecorator)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_types.html#docstrings_sqlalchemy.types_NCHAR">class NCHAR(Unicode)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_types.html#docstrings_sqlalchemy.types_NUMERIC">class NUMERIC(Numeric)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_types.html#docstrings_sqlalchemy.types_Numeric">class Numeric(TypeEngine)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_types.html#docstrings_sqlalchemy.types_PickleType">class PickleType(MutableType,TypeDecorator)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_types.html#docstrings_sqlalchemy.types_SMALLINT">class SMALLINT(SmallInteger)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_types.html#docstrings_sqlalchemy.types_SmallInteger">class SmallInteger(Integer)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_types.html#docstrings_sqlalchemy.types_String">class String(Concatenable,TypeEngine)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_types.html#docstrings_sqlalchemy.types_TIME">class TIME(Time)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_types.html#docstrings_sqlalchemy.types_TIMESTAMP">class TIMESTAMP(DateTime)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_types.html#docstrings_sqlalchemy.types_Text">class Text(String)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_types.html#docstrings_sqlalchemy.types_Time">class Time(TypeEngine)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_types.html#docstrings_sqlalchemy.types_TypeDecorator">class TypeDecorator(AbstractType)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_types.html#docstrings_sqlalchemy.types_TypeEngine">class TypeEngine(AbstractType)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_types.html#docstrings_sqlalchemy.types_Unicode">class Unicode(String)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_types.html#docstrings_sqlalchemy.types_UnicodeText">class UnicodeText(Text)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_types.html#docstrings_sqlalchemy.types_VARCHAR">class VARCHAR(String)</a></li>
+
+    </ul>
+
+	</div>
+
+
+
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.types"></a>
+    
+    <div class="sectionL2">
+
+    <h3>module sqlalchemy.types</h3>
+    
+    
+    <div class="darkcell"><p>defines genericized SQL types, each represented by a subclass of
+<a href="sqlalchemy_types.html#docstrings_sqlalchemy.types_AbstractType">AbstractType</a>.  Dialects define further subclasses of these
+types.</p>
+<p>For more information see the SQLAlchemy documentation on types.</p>
+</div>
+    
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.types_AbstractType"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class AbstractType(object)</h3>
+    
+    
+    
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def __init__(<i>self</i>, <i>*args</i>, <i>**kwargs</i>)</b>
+    <div class="docstring">
+    <p>Construct a new <tt class="docutils literal"><span class="pre">AbstractType</span></tt>.</p>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def adapt_operator(<i>self</i>, <i>op</i>)</b>
+    <div class="docstring">
+    <p>given an operator from the sqlalchemy.sql.operators package,
+translate it to a new operator based on the semantics of this type.</p>
+<p>By default, returns the operator unchanged.</p>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def bind_processor(<i>self</i>, <i>dialect</i>)</b>
+    <div class="docstring">
+    <p>Defines a bind parameter processing function.</p>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def compare_values(<i>self</i>, <i>x</i>, <i>y</i>)</b>
+    <div class="docstring">
+    <p>compare two values for equality.</p>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def convert_bind_param(<i>self</i>, <i>value</i>, <i>dialect</i>)</b>
+    <div class="docstring">
+    <p>Legacy convert_bind_param() compatability method.</p>
+<p>This adapter method is provided for user-defined types that implement
+the older convert_* interface and need to call their super method.
+These calls are adapted behind the scenes to use the newer
+callable-based interface via bind_processor().</p>
+<p>Compatibility is configured on a case-by-case basis at class
+definition time by a legacy adapter metaclass.  This method is only
+available and functional if the concrete subclass implements the
+legacy interface.</p>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def convert_result_value(<i>self</i>, <i>value</i>, <i>dialect</i>)</b>
+    <div class="docstring">
+    <p>Legacy convert_result_value() compatibility method.</p>
+<p>This adapter method is provided for user-defined types that implement
+the older convert_* interface and need to call their super method.
+These calls are adapted behind the scenes to use the newer
+callable-based interface via result_processor().</p>
+<p>Compatibility is configured on a case-by-case basis at class
+definition time by a legacy adapter metaclass.  This method is only
+available and functional if the concrete subclass implements the
+legacy interface.</p>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def copy_value(<i>self</i>, <i>value</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def get_dbapi_type(<i>self</i>, <i>dbapi</i>)</b>
+    <div class="docstring">
+    <p>Return the corresponding type object from the underlying DB-API, if any.</p>
+<p>This can be useful for calling <tt class="docutils literal"><span class="pre">setinputsizes()</span></tt>, for example.</p>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def is_mutable(<i>self</i>)</b>
+    <div class="docstring">
+    <p>return True if the target Python type is 'mutable'.</p>
+<p>This allows systems like the ORM to know if an object
+can be considered 'not changed' by identity alone.</p>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def result_processor(<i>self</i>, <i>dialect</i>)</b>
+    <div class="docstring">
+    <p>Defines a result-column processing function.</p>
+
+    </div>
+    </div>
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.types_BLOB"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class BLOB(<a href="sqlalchemy_types.html#docstrings_sqlalchemy.types_Binary">Binary</a>)</h3>
+    
+    
+    
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.types_BOOLEAN"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class BOOLEAN(<a href="sqlalchemy_types.html#docstrings_sqlalchemy.types_Boolean">Boolean</a>)</h3>
+    
+    
+    
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.types_Binary"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class Binary(<a href="sqlalchemy_types.html#docstrings_sqlalchemy.types_TypeEngine">TypeEngine</a>)</h3>
+    
+    
+    
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def __init__(<i>self</i>, <i>length=None</i>)</b>
+    <div class="docstring">
+    <p>Construct a new <tt class="docutils literal"><span class="pre">Binary</span></tt>.</p>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def adapt(<i>self</i>, <i>impltype</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def bind_processor(<i>self</i>, <i>dialect</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def get_dbapi_type(<i>self</i>, <i>dbapi</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.types_Boolean"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class Boolean(<a href="sqlalchemy_types.html#docstrings_sqlalchemy.types_TypeEngine">TypeEngine</a>)</h3>
+    
+    
+    
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.types_CHAR"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class CHAR(<a href="sqlalchemy_types.html#docstrings_sqlalchemy.types_String">String</a>)</h3>
+    
+    
+    
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.types_CLOB"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class CLOB(<a href="sqlalchemy_types.html#docstrings_sqlalchemy.types_Text">Text</a>)</h3>
+    
+    
+    
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.types_DATE"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class DATE(<a href="sqlalchemy_types.html#docstrings_sqlalchemy.types_Date">Date</a>)</h3>
+    
+    
+    
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.types_DATETIME"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class DATETIME(<a href="sqlalchemy_types.html#docstrings_sqlalchemy.types_DateTime">DateTime</a>)</h3>
+    
+    
+    
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.types_DECIMAL"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class DECIMAL(<a href="sqlalchemy_types.html#docstrings_sqlalchemy.types_Numeric">Numeric</a>)</h3>
+    
+    
+    
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.types_Date"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class Date(<a href="sqlalchemy_types.html#docstrings_sqlalchemy.types_TypeEngine">TypeEngine</a>)</h3>
+    
+    
+    <div class="darkcell"><p>Implement a type for <tt class="docutils literal"><span class="pre">datetime.date()</span></tt> objects.</p>
+</div>
+    
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def get_dbapi_type(<i>self</i>, <i>dbapi</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.types_DateTime"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class DateTime(<a href="sqlalchemy_types.html#docstrings_sqlalchemy.types_TypeEngine">TypeEngine</a>)</h3>
+    
+    
+    <div class="darkcell"><p>Implement a type for <tt class="docutils literal"><span class="pre">datetime.datetime()</span></tt> objects.</p>
+</div>
+    
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def __init__(<i>self</i>, <i>timezone=False</i>)</b>
+    <div class="docstring">
+    <p>Construct a new <tt class="docutils literal"><span class="pre">DateTime</span></tt>.</p>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def adapt(<i>self</i>, <i>impltype</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def get_dbapi_type(<i>self</i>, <i>dbapi</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.types_FLOAT"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class FLOAT(<a href="sqlalchemy_types.html#docstrings_sqlalchemy.types_Float">Float</a>)</h3>
+    
+    
+    
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.types_Float"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class Float(<a href="sqlalchemy_types.html#docstrings_sqlalchemy.types_Numeric">Numeric</a>)</h3>
+    
+    
+    
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def __init__(<i>self</i>, <i>precision=10</i>, <i>asdecimal=False</i>, <i>**kwargs</i>)</b>
+    <div class="docstring">
+    <p>Construct a new <tt class="docutils literal"><span class="pre">Float</span></tt>.</p>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def adapt(<i>self</i>, <i>impltype</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.types_INT"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class INT(<a href="sqlalchemy_types.html#docstrings_sqlalchemy.types_Integer">Integer</a>)</h3>
+    
+    
+    
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.types_Integer"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class Integer(<a href="sqlalchemy_types.html#docstrings_sqlalchemy.types_TypeEngine">TypeEngine</a>)</h3>
+    
+    
+    <div class="darkcell"><p>Integer datatype.</p>
+</div>
+    
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def get_dbapi_type(<i>self</i>, <i>dbapi</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.types_Interval"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class Interval(<a href="sqlalchemy_types.html#docstrings_sqlalchemy.types_TypeDecorator">TypeDecorator</a>)</h3>
+    
+    
+    <div class="darkcell"><p>Type to be used in Column statements to store python timedeltas.</p>
+<p>If it's possible it uses native engine features to store timedeltas
+(now it's only PostgreSQL Interval type), if there is no such it
+fallbacks to DateTime storage with converting from/to timedelta on the fly</p>
+<p>Converting is very simple - just use epoch(zero timestamp, 01.01.1970) as
+base, so if we need to store timedelta = 1 day (24 hours) in database it
+will be stored as DateTime = '2nd Jan 1970 00:00', see bind_processor
+and result_processor to actual conversion code</p>
+</div>
+    
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def __init__(<i>self</i>)</b>
+    <div class="docstring">
+    <p>Construct a new <tt class="docutils literal"><span class="pre">Interval</span></tt>.</p>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def load_dialect_impl(<i>self</i>, <i>dialect</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def process_bind_param(<i>self</i>, <i>value</i>, <i>dialect</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def process_result_value(<i>self</i>, <i>value</i>, <i>dialect</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.types_NCHAR"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class NCHAR(<a href="sqlalchemy_types.html#docstrings_sqlalchemy.types_Unicode">Unicode</a>)</h3>
+    
+    
+    
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.types_NUMERIC"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class NUMERIC(<a href="sqlalchemy_types.html#docstrings_sqlalchemy.types_Numeric">Numeric</a>)</h3>
+    
+    
+    
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.types_Numeric"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class Numeric(<a href="sqlalchemy_types.html#docstrings_sqlalchemy.types_TypeEngine">TypeEngine</a>)</h3>
+    
+    
+    <div class="darkcell"><p>Numeric datatype, usually resolves to DECIMAL or NUMERIC.</p>
+</div>
+    
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def __init__(<i>self</i>, <i>precision=10</i>, <i>length=2</i>, <i>asdecimal=True</i>)</b>
+    <div class="docstring">
+    <p>Construct a new <tt class="docutils literal"><span class="pre">Numeric</span></tt>.</p>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def adapt(<i>self</i>, <i>impltype</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def bind_processor(<i>self</i>, <i>dialect</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def get_dbapi_type(<i>self</i>, <i>dbapi</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def result_processor(<i>self</i>, <i>dialect</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.types_PickleType"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class PickleType(MutableType,<a href="sqlalchemy_types.html#docstrings_sqlalchemy.types_TypeDecorator">TypeDecorator</a>)</h3>
+    
+    
+    
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def __init__(<i>self</i>, <i>protocol=2</i>, <i>pickler=None</i>, <i>mutable=True</i>, <i>comparator=None</i>)</b>
+    <div class="docstring">
+    <p>Construct a new <tt class="docutils literal"><span class="pre">PickleType</span></tt>.</p>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def compare_values(<i>self</i>, <i>x</i>, <i>y</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def copy_value(<i>self</i>, <i>value</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def is_mutable(<i>self</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def process_bind_param(<i>self</i>, <i>value</i>, <i>dialect</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def process_result_value(<i>self</i>, <i>value</i>, <i>dialect</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.types_SMALLINT"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class SMALLINT(<a href="sqlalchemy_types.html#docstrings_sqlalchemy.types_SmallInteger">SmallInteger</a>)</h3>
+    
+    
+    
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.types_SmallInteger"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class SmallInteger(<a href="sqlalchemy_types.html#docstrings_sqlalchemy.types_Integer">Integer</a>)</h3>
+    
+    
+    <div class="darkcell"><p>Smallint datatype.</p>
+</div>
+    
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.types_String"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class String(Concatenable,<a href="sqlalchemy_types.html#docstrings_sqlalchemy.types_TypeEngine">TypeEngine</a>)</h3>
+    
+    
+    <div class="darkcell"><p>A sized string type.</p>
+<p>Usually corresponds to VARCHAR.  Can also take Python unicode objects
+and encode to the database's encoding in bind params (and the reverse for
+result sets.)</p>
+<p>a String with no length will adapt itself automatically to a Text
+object at the dialect level (this behavior is deprecated in 0.4).</p>
+</div>
+    
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def __init__(<i>self</i>, <i>length=None</i>, <i>convert_unicode=False</i>, <i>assert_unicode=None</i>)</b>
+    <div class="docstring">
+    <p>Construct a new <tt class="docutils literal"><span class="pre">String</span></tt>.</p>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def adapt(<i>self</i>, <i>impltype</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def bind_processor(<i>self</i>, <i>dialect</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def dialect_impl(<i>self</i>, <i>dialect</i>, <i>**kwargs</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def get_dbapi_type(<i>self</i>, <i>dbapi</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def get_search_list(<i>self</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def result_processor(<i>self</i>, <i>dialect</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.types_TIME"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class TIME(<a href="sqlalchemy_types.html#docstrings_sqlalchemy.types_Time">Time</a>)</h3>
+    
+    
+    
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.types_TIMESTAMP"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class TIMESTAMP(<a href="sqlalchemy_types.html#docstrings_sqlalchemy.types_DateTime">DateTime</a>)</h3>
+    
+    
+    
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.types_Text"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class Text(<a href="sqlalchemy_types.html#docstrings_sqlalchemy.types_String">String</a>)</h3>
+    
+    
+    
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def dialect_impl(<i>self</i>, <i>dialect</i>, <i>**kwargs</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.types_Time"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class Time(<a href="sqlalchemy_types.html#docstrings_sqlalchemy.types_TypeEngine">TypeEngine</a>)</h3>
+    
+    
+    <div class="darkcell"><p>Implement a type for <tt class="docutils literal"><span class="pre">datetime.time()</span></tt> objects.</p>
+</div>
+    
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def __init__(<i>self</i>, <i>timezone=False</i>)</b>
+    <div class="docstring">
+    <p>Construct a new <tt class="docutils literal"><span class="pre">Time</span></tt>.</p>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def adapt(<i>self</i>, <i>impltype</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def get_dbapi_type(<i>self</i>, <i>dbapi</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.types_TypeDecorator"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class TypeDecorator(<a href="sqlalchemy_types.html#docstrings_sqlalchemy.types_AbstractType">AbstractType</a>)</h3>
+    
+    
+    <div class="darkcell"><p>Allows the creation of types which add additional functionality
+to an existing type.  Typical usage:</p>
+<pre class="literal-block">
+class MyCustomType(TypeDecorator):
+    impl = String
+
+    def process_bind_param(self, value, dialect):
+        return value + &quot;incoming string&quot;
+
+    def process_result_value(self, value, dialect):
+        return value[0:-16]
+</pre>
+<p>The class-level &quot;impl&quot; variable is required, and can reference any
+TypeEngine class.  Alternatively, the load_dialect_impl() method can
+be used to provide different type classes based on the dialect given;
+in this case, the &quot;impl&quot; variable can reference <tt class="docutils literal"><span class="pre">TypeEngine</span></tt> as a
+placeholder.</p>
+</div>
+    
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def __init__(<i>self</i>, <i>*args</i>, <i>**kwargs</i>)</b>
+    <div class="docstring">
+    <p>Construct a new <tt class="docutils literal"><span class="pre">TypeDecorator</span></tt>.</p>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def bind_processor(<i>self</i>, <i>dialect</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def compare_values(<i>self</i>, <i>x</i>, <i>y</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def copy(<i>self</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def copy_value(<i>self</i>, <i>value</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def dialect_impl(<i>self</i>, <i>dialect</i>, <i>**kwargs</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def get_col_spec(<i>self</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def get_dbapi_type(<i>self</i>, <i>dbapi</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def is_mutable(<i>self</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def load_dialect_impl(<i>self</i>, <i>dialect</i>)</b>
+    <div class="docstring">
+    <p>loads the dialect-specific implementation of this type.</p>
+<p>by default calls dialect.type_descriptor(self.impl), but
+can be overridden to provide different behavior.</p>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def process_bind_param(<i>self</i>, <i>value</i>, <i>dialect</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def process_result_value(<i>self</i>, <i>value</i>, <i>dialect</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def result_processor(<i>self</i>, <i>dialect</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def __getattr__(<i>self</i>, <i>key</i>)</b>
+    <div class="docstring">
+    <p>Proxy all other undefined accessors to the underlying implementation.</p>
+
+    </div>
+    </div>
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.types_TypeEngine"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class TypeEngine(<a href="sqlalchemy_types.html#docstrings_sqlalchemy.types_AbstractType">AbstractType</a>)</h3>
+    
+    
+    
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def adapt(<i>self</i>, <i>cls</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def bind_processor(<i>self</i>, <i>dialect</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def dialect_impl(<i>self</i>, <i>dialect</i>, <i>**kwargs</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def get_col_spec(<i>self</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def get_search_list(<i>self</i>)</b>
+    <div class="docstring">
+    <p>return a list of classes to test for a match
+when adapting this type to a dialect-specific type.</p>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def result_processor(<i>self</i>, <i>dialect</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.types_Unicode"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class Unicode(<a href="sqlalchemy_types.html#docstrings_sqlalchemy.types_String">String</a>)</h3>
+    
+    
+    <div class="darkcell"><p>A synonym for String(length, convert_unicode=True, assert_unicode='warn').</p>
+</div>
+    
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def __init__(<i>self</i>, <i>length=None</i>, <i>**kwargs</i>)</b>
+    <div class="docstring">
+    <p>Construct a new <tt class="docutils literal"><span class="pre">Unicode</span></tt>.</p>
+
+    </div>
+    </div>
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.types_UnicodeText"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class UnicodeText(<a href="sqlalchemy_types.html#docstrings_sqlalchemy.types_Text">Text</a>)</h3>
+    
+    
+    <div class="darkcell"><p>A synonym for Text(convert_unicode=True, assert_unicode='warn').</p>
+</div>
+    
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def __init__(<i>self</i>, <i>length=None</i>, <i>**kwargs</i>)</b>
+    <div class="docstring">
+    <p>Construct a new <tt class="docutils literal"><span class="pre">UnicodeText</span></tt>.</p>
+
+    </div>
+    </div>
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.types_VARCHAR"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class VARCHAR(<a href="sqlalchemy_types.html#docstrings_sqlalchemy.types_String">String</a>)</h3>
+    
+    
+    
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+    
+
+    </div>
+
+
+
+
+
+    <div class="bottomnav">
+        
+    <div class="prevnext">
+            Up: <a href="docstrings.html">API Documentation</a>
+
+               |   
+            Previous: <a href="sqlalchemy_sql_expression.html">module sqlalchemy.sql.expression</a>
+
+               |   
+            Next: <a href="sqlalchemy_orm.html">module sqlalchemy.orm</a>
+    </div>
+
+    </div>
+
+
+
+
+
+
+
+
+</body>
+</html>
+
+
+
+
+
+

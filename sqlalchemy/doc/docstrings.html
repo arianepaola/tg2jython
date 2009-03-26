@@ -1,0 +1,2030 @@
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<title>SQLAlchemy 0.4 Documentation - Modules and Classes</title>
+	
+    <link rel="stylesheet" href="style.css"></link>
+    <link rel="stylesheet" href="docs.css"></link>
+    <link href="syntaxhighlight.css" rel="stylesheet" type="text/css"></link>
+    <script src="scripts.js"></script>
+
+
+
+</head>
+<body>
+
+
+
+
+
+
+
+
+<div id="topanchor"><a name="top">&nbsp;</a></div>
+
+
+<h1>SQLAlchemy 0.4 Documentation</h1>
+
+<div id="pagecontrol"><a href="index.html">Multiple Pages</a> | <a href="documentation.html">One Page</a></div>
+
+<div class="versionheader">Version: 0.4.7p1   Last Updated: 07/31/08 11:09:56</div>
+
+
+
+
+
+
+
+<A name=""></a>
+
+
+    <div class="topnav">
+
+    
+    <div class="navbanner">
+        <a href="index.html" class="totoc">Table of Contents</a>
+        
+    <div class="prevnext">
+
+            
+            Previous: <a href="plugins.html">Plugins</a>
+
+               |   
+            Next: <a href="copyright.html">Appendix:  Copyright</a>
+    </div>
+
+        <h2>API Documentation</h2>
+    </div>
+
+	
+	
+    <ul>
+        
+        <li><a style="" href="sqlalchemy_engine.html">module sqlalchemy.engine</a></li>
+
+	        <li>
+                
+    <ul>
+        
+        <li><a style="" href="sqlalchemy_engine.html#docstrings_sqlalchemy.engine_modfunc">Module Functions</a></li>
+
+	        <li>
+                
+    <ul>
+        
+        <li><a style="" href="sqlalchemy_engine.html#docstrings_sqlalchemy.engine_modfunc_create_engine">create_engine()</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_engine.html#docstrings_sqlalchemy.engine_modfunc_engine_descriptors">engine_descriptors()</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_engine.html#docstrings_sqlalchemy.engine_modfunc_engine_from_config">engine_from_config()</a></li>
+
+    </ul>
+
+	        </li>
+        
+        <li><a style="" href="sqlalchemy_engine.html#docstrings_sqlalchemy.engine_BufferedColumnResultProxy">class BufferedColumnResultProxy(ResultProxy)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_engine.html#docstrings_sqlalchemy.engine_BufferedColumnRow">class BufferedColumnRow(RowProxy)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_engine.html#docstrings_sqlalchemy.engine_BufferedRowResultProxy">class BufferedRowResultProxy(ResultProxy)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_engine.html#docstrings_sqlalchemy.engine_Compiled">class Compiled(object)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_engine.html#docstrings_sqlalchemy.engine_Connectable">class Connectable(object)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_engine.html#docstrings_sqlalchemy.engine_Connection">class Connection(Connectable)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_engine.html#docstrings_sqlalchemy.engine_DefaultRunner">class DefaultRunner(SchemaVisitor)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_engine.html#docstrings_sqlalchemy.engine_Dialect">class Dialect(object)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_engine.html#docstrings_sqlalchemy.engine_Engine">class Engine(Connectable)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_engine.html#docstrings_sqlalchemy.engine_ExecutionContext">class ExecutionContext(object)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_engine.html#docstrings_sqlalchemy.engine_NestedTransaction">class NestedTransaction(Transaction)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_engine.html#docstrings_sqlalchemy.engine_ResultProxy">class ResultProxy(object)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_engine.html#docstrings_sqlalchemy.engine_RootTransaction">class RootTransaction(Transaction)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_engine.html#docstrings_sqlalchemy.engine_RowProxy">class RowProxy(object)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_engine.html#docstrings_sqlalchemy.engine_SchemaIterator">class SchemaIterator(SchemaVisitor)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_engine.html#docstrings_sqlalchemy.engine_Transaction">class Transaction(object)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_engine.html#docstrings_sqlalchemy.engine_TwoPhaseTransaction">class TwoPhaseTransaction(Transaction)</a></li>
+
+    </ul>
+
+	        </li>
+        
+        <li><a style="" href="sqlalchemy_engine_default.html">module sqlalchemy.engine.default</a></li>
+
+	        <li>
+                
+    <ul>
+        
+        <li><a style="" href="sqlalchemy_engine_default.html#docstrings_sqlalchemy.engine.default_DefaultDialect">class DefaultDialect(Dialect)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_engine_default.html#docstrings_sqlalchemy.engine.default_DefaultExecutionContext">class DefaultExecutionContext(ExecutionContext)</a></li>
+
+    </ul>
+
+	        </li>
+        
+        <li><a style="" href="sqlalchemy_engine_strategies.html">module sqlalchemy.engine.strategies</a></li>
+
+	        <li>
+                
+    <ul>
+        
+        <li><a style="" href="sqlalchemy_engine_strategies.html#docstrings_sqlalchemy.engine.strategies_DefaultEngineStrategy">class DefaultEngineStrategy(EngineStrategy)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_engine_strategies.html#docstrings_sqlalchemy.engine.strategies_EngineStrategy">class EngineStrategy(object)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_engine_strategies.html#docstrings_sqlalchemy.engine.strategies_MockEngineStrategy">class MockEngineStrategy(EngineStrategy)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_engine_strategies.html#docstrings_sqlalchemy.engine.strategies_PlainEngineStrategy">class PlainEngineStrategy(DefaultEngineStrategy)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_engine_strategies.html#docstrings_sqlalchemy.engine.strategies_ThreadLocalEngineStrategy">class ThreadLocalEngineStrategy(DefaultEngineStrategy)</a></li>
+
+    </ul>
+
+	        </li>
+        
+        <li><a style="" href="sqlalchemy_engine_threadlocal.html">module sqlalchemy.engine.threadlocal</a></li>
+
+	        <li>
+                
+    <ul>
+        
+        <li><a style="" href="sqlalchemy_engine_threadlocal.html#docstrings_sqlalchemy.engine.threadlocal_TLConnection">class TLConnection(Connection)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_engine_threadlocal.html#docstrings_sqlalchemy.engine.threadlocal_TLEngine">class TLEngine(Engine)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_engine_threadlocal.html#docstrings_sqlalchemy.engine.threadlocal_TLSession">class TLSession(object)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_engine_threadlocal.html#docstrings_sqlalchemy.engine.threadlocal_TLTransaction">class TLTransaction(Transaction)</a></li>
+
+    </ul>
+
+	        </li>
+        
+        <li><a style="" href="sqlalchemy_engine_url.html">module sqlalchemy.engine.url</a></li>
+
+	        <li>
+                
+    <ul>
+        
+        <li><a style="" href="sqlalchemy_engine_url.html#docstrings_sqlalchemy.engine.url_modfunc">Module Functions</a></li>
+
+	        <li>
+                
+    <ul>
+        
+        <li><a style="" href="sqlalchemy_engine_url.html#docstrings_sqlalchemy.engine.url_modfunc_make_url">make_url()</a></li>
+
+    </ul>
+
+	        </li>
+        
+        <li><a style="" href="sqlalchemy_engine_url.html#docstrings_sqlalchemy.engine.url_URL">class URL(object)</a></li>
+
+    </ul>
+
+	        </li>
+        
+        <li><a style="" href="sqlalchemy_exceptions.html">module sqlalchemy.exceptions</a></li>
+
+	        <li>
+                
+    <ul>
+        
+        <li><a style="" href="sqlalchemy_exceptions.html#docstrings_sqlalchemy.exceptions_ArgumentError">class ArgumentError(SQLAlchemyError)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_exceptions.html#docstrings_sqlalchemy.exceptions_AssertionError">class AssertionError(SQLAlchemyError)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_exceptions.html#docstrings_sqlalchemy.exceptions_CircularDependencyError">class CircularDependencyError(SQLAlchemyError)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_exceptions.html#docstrings_sqlalchemy.exceptions_CompileError">class CompileError(SQLAlchemyError)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_exceptions.html#docstrings_sqlalchemy.exceptions_ConcurrentModificationError">class ConcurrentModificationError(SQLAlchemyError)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_exceptions.html#docstrings_sqlalchemy.exceptions_DBAPIError">class DBAPIError(SQLAlchemyError)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_exceptions.html#docstrings_sqlalchemy.exceptions_DataError">class DataError(DatabaseError)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_exceptions.html#docstrings_sqlalchemy.exceptions_DatabaseError">class DatabaseError(DBAPIError)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_exceptions.html#docstrings_sqlalchemy.exceptions_DisconnectionError">class DisconnectionError(SQLAlchemyError)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_exceptions.html#docstrings_sqlalchemy.exceptions_FlushError">class FlushError(SQLAlchemyError)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_exceptions.html#docstrings_sqlalchemy.exceptions_IdentifierError">class IdentifierError(SQLAlchemyError)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_exceptions.html#docstrings_sqlalchemy.exceptions_IntegrityError">class IntegrityError(DatabaseError)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_exceptions.html#docstrings_sqlalchemy.exceptions_InterfaceError">class InterfaceError(DBAPIError)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_exceptions.html#docstrings_sqlalchemy.exceptions_InternalError">class InternalError(DatabaseError)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_exceptions.html#docstrings_sqlalchemy.exceptions_InvalidRequestError">class InvalidRequestError(SQLAlchemyError)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_exceptions.html#docstrings_sqlalchemy.exceptions_NoReferencedTableError">class NoReferencedTableError(InvalidRequestError)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_exceptions.html#docstrings_sqlalchemy.exceptions_NoSuchColumnError">class NoSuchColumnError(KeyError,SQLAlchemyError)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_exceptions.html#docstrings_sqlalchemy.exceptions_NoSuchTableError">class NoSuchTableError(InvalidRequestError)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_exceptions.html#docstrings_sqlalchemy.exceptions_NotSupportedError">class NotSupportedError(DatabaseError)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_exceptions.html#docstrings_sqlalchemy.exceptions_OperationalError">class OperationalError(DatabaseError)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_exceptions.html#docstrings_sqlalchemy.exceptions_ProgrammingError">class ProgrammingError(DatabaseError)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_exceptions.html#docstrings_sqlalchemy.exceptions_SADeprecationWarning">class SADeprecationWarning(DeprecationWarning)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_exceptions.html#docstrings_sqlalchemy.exceptions_SAPendingDeprecationWarning">class SAPendingDeprecationWarning(PendingDeprecationWarning)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_exceptions.html#docstrings_sqlalchemy.exceptions_SAWarning">class SAWarning(RuntimeWarning)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_exceptions.html#docstrings_sqlalchemy.exceptions_SQLAlchemyError">class SQLAlchemyError(Exception)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_exceptions.html#docstrings_sqlalchemy.exceptions_TimeoutError">class TimeoutError(SQLAlchemyError)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_exceptions.html#docstrings_sqlalchemy.exceptions_UnboundExecutionError">class UnboundExecutionError(InvalidRequestError)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_exceptions.html#docstrings_sqlalchemy.exceptions_UnmappedColumnError">class UnmappedColumnError(InvalidRequestError)</a></li>
+
+    </ul>
+
+	        </li>
+        
+        <li><a style="" href="sqlalchemy_interfaces.html">module sqlalchemy.interfaces</a></li>
+
+	        <li>
+                
+    <ul>
+        
+        <li><a style="" href="sqlalchemy_interfaces.html#docstrings_sqlalchemy.interfaces_PoolListener">class PoolListener(object)</a></li>
+
+    </ul>
+
+	        </li>
+        
+        <li><a style="" href="sqlalchemy_pool.html">module sqlalchemy.pool</a></li>
+
+	        <li>
+                
+    <ul>
+        
+        <li><a style="" href="sqlalchemy_pool.html#docstrings_sqlalchemy.pool_modfunc">Module Functions</a></li>
+
+	        <li>
+                
+    <ul>
+        
+        <li><a style="" href="sqlalchemy_pool.html#docstrings_sqlalchemy.pool_modfunc_as_interface">as_interface()</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_pool.html#docstrings_sqlalchemy.pool_modfunc_clear_managers">clear_managers()</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_pool.html#docstrings_sqlalchemy.pool_modfunc_manage">manage()</a></li>
+
+    </ul>
+
+	        </li>
+        
+        <li><a style="" href="sqlalchemy_pool.html#docstrings_sqlalchemy.pool_AssertionPool">class AssertionPool(Pool)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_pool.html#docstrings_sqlalchemy.pool_NullPool">class NullPool(Pool)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_pool.html#docstrings_sqlalchemy.pool_Pool">class Pool(object)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_pool.html#docstrings_sqlalchemy.pool_QueuePool">class QueuePool(Pool)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_pool.html#docstrings_sqlalchemy.pool_SingletonThreadPool">class SingletonThreadPool(Pool)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_pool.html#docstrings_sqlalchemy.pool_StaticPool">class StaticPool(Pool)</a></li>
+
+    </ul>
+
+	        </li>
+        
+        <li><a style="" href="sqlalchemy_schema.html">module sqlalchemy.schema</a></li>
+
+	        <li>
+                
+    <ul>
+        
+        <li><a style="" href="sqlalchemy_schema.html#docstrings_sqlalchemy.schema_CheckConstraint">class CheckConstraint(Constraint)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_schema.html#docstrings_sqlalchemy.schema_Column">class Column(SchemaItem,_ColumnClause)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_schema.html#docstrings_sqlalchemy.schema_ColumnDefault">class ColumnDefault(DefaultGenerator)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_schema.html#docstrings_sqlalchemy.schema_Constraint">class Constraint(SchemaItem)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_schema.html#docstrings_sqlalchemy.schema_DDL">class DDL(object)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_schema.html#docstrings_sqlalchemy.schema_DefaultGenerator">class DefaultGenerator(SchemaItem)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_schema.html#docstrings_sqlalchemy.schema_ForeignKey">class ForeignKey(SchemaItem)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_schema.html#docstrings_sqlalchemy.schema_ForeignKeyConstraint">class ForeignKeyConstraint(Constraint)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_schema.html#docstrings_sqlalchemy.schema_Index">class Index(SchemaItem)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_schema.html#docstrings_sqlalchemy.schema_MetaData">class MetaData(SchemaItem)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_schema.html#docstrings_sqlalchemy.schema_PassiveDefault">class PassiveDefault(DefaultGenerator)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_schema.html#docstrings_sqlalchemy.schema_PrimaryKeyConstraint">class PrimaryKeyConstraint(Constraint)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_schema.html#docstrings_sqlalchemy.schema_SchemaItem">class SchemaItem(object)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_schema.html#docstrings_sqlalchemy.schema_SchemaVisitor">class SchemaVisitor(ClauseVisitor)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_schema.html#docstrings_sqlalchemy.schema_Sequence">class Sequence(DefaultGenerator)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_schema.html#docstrings_sqlalchemy.schema_Table">class Table(SchemaItem,TableClause)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_schema.html#docstrings_sqlalchemy.schema_ThreadLocalMetaData">class ThreadLocalMetaData(MetaData)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_schema.html#docstrings_sqlalchemy.schema_UniqueConstraint">class UniqueConstraint(Constraint)</a></li>
+
+    </ul>
+
+	        </li>
+        
+        <li><a style="" href="sqlalchemy_sql_compiler.html">module sqlalchemy.sql.compiler</a></li>
+
+	        <li>
+                
+    <ul>
+        
+        <li><a style="" href="sqlalchemy_sql_compiler.html#docstrings_sqlalchemy.sql.compiler_DDLBase">class DDLBase(SchemaIterator)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_sql_compiler.html#docstrings_sqlalchemy.sql.compiler_DefaultCompiler">class DefaultCompiler(Compiled)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_sql_compiler.html#docstrings_sqlalchemy.sql.compiler_IdentifierPreparer">class IdentifierPreparer(object)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_sql_compiler.html#docstrings_sqlalchemy.sql.compiler_SchemaDropper">class SchemaDropper(DDLBase)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_sql_compiler.html#docstrings_sqlalchemy.sql.compiler_SchemaGenerator">class SchemaGenerator(DDLBase)</a></li>
+
+    </ul>
+
+	        </li>
+        
+        <li><a style="" href="sqlalchemy_sql_expression.html">module sqlalchemy.sql.expression</a></li>
+
+	        <li>
+                
+    <ul>
+        
+        <li><a style="" href="sqlalchemy_sql_expression.html#docstrings_sqlalchemy.sql.expression_modfunc">Module Functions</a></li>
+
+	        <li>
+                
+    <ul>
+        
+        <li><a style="" href="sqlalchemy_sql_expression.html#docstrings_sqlalchemy.sql.expression_modfunc_alias">alias()</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_sql_expression.html#docstrings_sqlalchemy.sql.expression_modfunc_and_">and_()</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_sql_expression.html#docstrings_sqlalchemy.sql.expression_modfunc_asc">asc()</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_sql_expression.html#docstrings_sqlalchemy.sql.expression_modfunc_between">between()</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_sql_expression.html#docstrings_sqlalchemy.sql.expression_modfunc_bindparam">bindparam()</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_sql_expression.html#docstrings_sqlalchemy.sql.expression_modfunc_case">case()</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_sql_expression.html#docstrings_sqlalchemy.sql.expression_modfunc_cast">cast()</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_sql_expression.html#docstrings_sqlalchemy.sql.expression_modfunc_collate">collate()</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_sql_expression.html#docstrings_sqlalchemy.sql.expression_modfunc_column">column()</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_sql_expression.html#docstrings_sqlalchemy.sql.expression_modfunc_delete">delete()</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_sql_expression.html#docstrings_sqlalchemy.sql.expression_modfunc_desc">desc()</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_sql_expression.html#docstrings_sqlalchemy.sql.expression_modfunc_distinct">distinct()</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_sql_expression.html#docstrings_sqlalchemy.sql.expression_modfunc_except_">except_()</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_sql_expression.html#docstrings_sqlalchemy.sql.expression_modfunc_except_all">except_all()</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_sql_expression.html#docstrings_sqlalchemy.sql.expression_modfunc_exists">exists()</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_sql_expression.html#docstrings_sqlalchemy.sql.expression_modfunc_extract">extract()</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_sql_expression.html#docstrings_sqlalchemy.sql.expression_modfunc_insert">insert()</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_sql_expression.html#docstrings_sqlalchemy.sql.expression_modfunc_intersect">intersect()</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_sql_expression.html#docstrings_sqlalchemy.sql.expression_modfunc_intersect_all">intersect_all()</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_sql_expression.html#docstrings_sqlalchemy.sql.expression_modfunc_is_column">is_column()</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_sql_expression.html#docstrings_sqlalchemy.sql.expression_modfunc_join">join()</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_sql_expression.html#docstrings_sqlalchemy.sql.expression_modfunc_label">label()</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_sql_expression.html#docstrings_sqlalchemy.sql.expression_modfunc_literal">literal()</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_sql_expression.html#docstrings_sqlalchemy.sql.expression_modfunc_literal_column">literal_column()</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_sql_expression.html#docstrings_sqlalchemy.sql.expression_modfunc_not_">not_()</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_sql_expression.html#docstrings_sqlalchemy.sql.expression_modfunc_null">null()</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_sql_expression.html#docstrings_sqlalchemy.sql.expression_modfunc_or_">or_()</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_sql_expression.html#docstrings_sqlalchemy.sql.expression_modfunc_outerjoin">outerjoin()</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_sql_expression.html#docstrings_sqlalchemy.sql.expression_modfunc_outparam">outparam()</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_sql_expression.html#docstrings_sqlalchemy.sql.expression_modfunc_select">select()</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_sql_expression.html#docstrings_sqlalchemy.sql.expression_modfunc_subquery">subquery()</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_sql_expression.html#docstrings_sqlalchemy.sql.expression_modfunc_table">table()</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_sql_expression.html#docstrings_sqlalchemy.sql.expression_modfunc_text">text()</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_sql_expression.html#docstrings_sqlalchemy.sql.expression_modfunc_union">union()</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_sql_expression.html#docstrings_sqlalchemy.sql.expression_modfunc_union_all">union_all()</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_sql_expression.html#docstrings_sqlalchemy.sql.expression_modfunc_update">update()</a></li>
+
+    </ul>
+
+	        </li>
+        
+        <li><a style="" href="sqlalchemy_sql_expression.html#docstrings_sqlalchemy.sql.expression_Alias">class Alias(FromClause)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_sql_expression.html#docstrings_sqlalchemy.sql.expression__BinaryExpression">class _BinaryExpression(ColumnElement)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_sql_expression.html#docstrings_sqlalchemy.sql.expression__BindParamClause">class _BindParamClause(ClauseElement,_CompareMixin)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_sql_expression.html#docstrings_sqlalchemy.sql.expression__CalculatedClause">class _CalculatedClause(ColumnElement)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_sql_expression.html#docstrings_sqlalchemy.sql.expression__Cast">class _Cast(ColumnElement)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_sql_expression.html#docstrings_sqlalchemy.sql.expression_ClauseElement">class ClauseElement(object)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_sql_expression.html#docstrings_sqlalchemy.sql.expression_ClauseList">class ClauseList(ClauseElement)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_sql_expression.html#docstrings_sqlalchemy.sql.expression__ColumnClause">class _ColumnClause(ColumnElement)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_sql_expression.html#docstrings_sqlalchemy.sql.expression_ColumnCollection">class ColumnCollection(OrderedProperties)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_sql_expression.html#docstrings_sqlalchemy.sql.expression_ColumnElement">class ColumnElement(ClauseElement,_CompareMixin)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_sql_expression.html#docstrings_sqlalchemy.sql.expression__ColumnElementAdapter">class _ColumnElementAdapter(ColumnElement)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_sql_expression.html#docstrings_sqlalchemy.sql.expression_ColumnOperators">class ColumnOperators(Operators)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_sql_expression.html#docstrings_sqlalchemy.sql.expression_ColumnSet">class ColumnSet(OrderedSet)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_sql_expression.html#docstrings_sqlalchemy.sql.expression__CompareMixin">class _CompareMixin(ColumnOperators)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_sql_expression.html#docstrings_sqlalchemy.sql.expression_CompoundSelect">class CompoundSelect(_SelectBaseMixin,FromClause)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_sql_expression.html#docstrings_sqlalchemy.sql.expression_Delete">class Delete(_UpdateBase)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_sql_expression.html#docstrings_sqlalchemy.sql.expression__Exists">class _Exists(_UnaryExpression)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_sql_expression.html#docstrings_sqlalchemy.sql.expression__FigureVisitName">class _FigureVisitName(type)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_sql_expression.html#docstrings_sqlalchemy.sql.expression_FromClause">class FromClause(Selectable)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_sql_expression.html#docstrings_sqlalchemy.sql.expression__FromGrouping">class _FromGrouping(FromClause)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_sql_expression.html#docstrings_sqlalchemy.sql.expression__Function">class _Function(_CalculatedClause,FromClause)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_sql_expression.html#docstrings_sqlalchemy.sql.expression__FunctionGenerator">class _FunctionGenerator(object)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_sql_expression.html#docstrings_sqlalchemy.sql.expression__Grouping">class _Grouping(_ColumnElementAdapter)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_sql_expression.html#docstrings_sqlalchemy.sql.expression__IdentifiedClause">class _IdentifiedClause(ClauseElement)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_sql_expression.html#docstrings_sqlalchemy.sql.expression_Insert">class Insert(_ValuesBase)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_sql_expression.html#docstrings_sqlalchemy.sql.expression_Join">class Join(FromClause)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_sql_expression.html#docstrings_sqlalchemy.sql.expression__Label">class _Label(ColumnElement)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_sql_expression.html#docstrings_sqlalchemy.sql.expression__Null">class _Null(ColumnElement)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_sql_expression.html#docstrings_sqlalchemy.sql.expression_Operators">class Operators(object)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_sql_expression.html#docstrings_sqlalchemy.sql.expression_ReleaseSavepointClause">class ReleaseSavepointClause(_IdentifiedClause)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_sql_expression.html#docstrings_sqlalchemy.sql.expression_RollbackToSavepointClause">class RollbackToSavepointClause(_IdentifiedClause)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_sql_expression.html#docstrings_sqlalchemy.sql.expression_SavepointClause">class SavepointClause(_IdentifiedClause)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_sql_expression.html#docstrings_sqlalchemy.sql.expression__ScalarSelect">class _ScalarSelect(_Grouping)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_sql_expression.html#docstrings_sqlalchemy.sql.expression_Select">class Select(_SelectBaseMixin,FromClause)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_sql_expression.html#docstrings_sqlalchemy.sql.expression__SelectBaseMixin">class _SelectBaseMixin(object)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_sql_expression.html#docstrings_sqlalchemy.sql.expression_Selectable">class Selectable(ClauseElement)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_sql_expression.html#docstrings_sqlalchemy.sql.expression_TableClause">class TableClause(FromClause)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_sql_expression.html#docstrings_sqlalchemy.sql.expression__TextClause">class _TextClause(ClauseElement)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_sql_expression.html#docstrings_sqlalchemy.sql.expression__TypeClause">class _TypeClause(ClauseElement)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_sql_expression.html#docstrings_sqlalchemy.sql.expression__UnaryExpression">class _UnaryExpression(ColumnElement)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_sql_expression.html#docstrings_sqlalchemy.sql.expression_Update">class Update(_ValuesBase)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_sql_expression.html#docstrings_sqlalchemy.sql.expression__UpdateBase">class _UpdateBase(ClauseElement)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_sql_expression.html#docstrings_sqlalchemy.sql.expression__ValuesBase">class _ValuesBase(_UpdateBase)</a></li>
+
+    </ul>
+
+	        </li>
+        
+        <li><a style="" href="sqlalchemy_types.html">module sqlalchemy.types</a></li>
+
+	        <li>
+                
+    <ul>
+        
+        <li><a style="" href="sqlalchemy_types.html#docstrings_sqlalchemy.types_AbstractType">class AbstractType(object)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_types.html#docstrings_sqlalchemy.types_BLOB">class BLOB(Binary)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_types.html#docstrings_sqlalchemy.types_BOOLEAN">class BOOLEAN(Boolean)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_types.html#docstrings_sqlalchemy.types_Binary">class Binary(TypeEngine)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_types.html#docstrings_sqlalchemy.types_Boolean">class Boolean(TypeEngine)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_types.html#docstrings_sqlalchemy.types_CHAR">class CHAR(String)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_types.html#docstrings_sqlalchemy.types_CLOB">class CLOB(Text)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_types.html#docstrings_sqlalchemy.types_DATE">class DATE(Date)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_types.html#docstrings_sqlalchemy.types_DATETIME">class DATETIME(DateTime)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_types.html#docstrings_sqlalchemy.types_DECIMAL">class DECIMAL(Numeric)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_types.html#docstrings_sqlalchemy.types_Date">class Date(TypeEngine)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_types.html#docstrings_sqlalchemy.types_DateTime">class DateTime(TypeEngine)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_types.html#docstrings_sqlalchemy.types_FLOAT">class FLOAT(Float)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_types.html#docstrings_sqlalchemy.types_Float">class Float(Numeric)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_types.html#docstrings_sqlalchemy.types_INT">class INT(Integer)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_types.html#docstrings_sqlalchemy.types_Integer">class Integer(TypeEngine)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_types.html#docstrings_sqlalchemy.types_Interval">class Interval(TypeDecorator)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_types.html#docstrings_sqlalchemy.types_NCHAR">class NCHAR(Unicode)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_types.html#docstrings_sqlalchemy.types_NUMERIC">class NUMERIC(Numeric)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_types.html#docstrings_sqlalchemy.types_Numeric">class Numeric(TypeEngine)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_types.html#docstrings_sqlalchemy.types_PickleType">class PickleType(MutableType,TypeDecorator)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_types.html#docstrings_sqlalchemy.types_SMALLINT">class SMALLINT(SmallInteger)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_types.html#docstrings_sqlalchemy.types_SmallInteger">class SmallInteger(Integer)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_types.html#docstrings_sqlalchemy.types_String">class String(Concatenable,TypeEngine)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_types.html#docstrings_sqlalchemy.types_TIME">class TIME(Time)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_types.html#docstrings_sqlalchemy.types_TIMESTAMP">class TIMESTAMP(DateTime)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_types.html#docstrings_sqlalchemy.types_Text">class Text(String)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_types.html#docstrings_sqlalchemy.types_Time">class Time(TypeEngine)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_types.html#docstrings_sqlalchemy.types_TypeDecorator">class TypeDecorator(AbstractType)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_types.html#docstrings_sqlalchemy.types_TypeEngine">class TypeEngine(AbstractType)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_types.html#docstrings_sqlalchemy.types_Unicode">class Unicode(String)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_types.html#docstrings_sqlalchemy.types_UnicodeText">class UnicodeText(Text)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_types.html#docstrings_sqlalchemy.types_VARCHAR">class VARCHAR(String)</a></li>
+
+    </ul>
+
+	        </li>
+        
+        <li><a style="" href="sqlalchemy_orm.html">module sqlalchemy.orm</a></li>
+
+	        <li>
+                
+    <ul>
+        
+        <li><a style="" href="sqlalchemy_orm.html#docstrings_sqlalchemy.orm_modfunc">Module Functions</a></li>
+
+	        <li>
+                
+    <ul>
+        
+        <li><a style="" href="sqlalchemy_orm.html#docstrings_sqlalchemy.orm_modfunc_backref">backref()</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_orm.html#docstrings_sqlalchemy.orm_modfunc_class_mapper">class_mapper()</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_orm.html#docstrings_sqlalchemy.orm_modfunc_clear_mappers">clear_mappers()</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_orm.html#docstrings_sqlalchemy.orm_modfunc_column_property">column_property()</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_orm.html#docstrings_sqlalchemy.orm_modfunc_comparable_property">comparable_property()</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_orm.html#docstrings_sqlalchemy.orm_modfunc_compile_mappers">compile_mappers()</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_orm.html#docstrings_sqlalchemy.orm_modfunc_composite">composite()</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_orm.html#docstrings_sqlalchemy.orm_modfunc_contains_alias">contains_alias()</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_orm.html#docstrings_sqlalchemy.orm_modfunc_contains_eager">contains_eager()</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_orm.html#docstrings_sqlalchemy.orm_modfunc_create_session">create_session()</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_orm.html#docstrings_sqlalchemy.orm_modfunc_defer">defer()</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_orm.html#docstrings_sqlalchemy.orm_modfunc_deferred">deferred()</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_orm.html#docstrings_sqlalchemy.orm_modfunc_dynamic_loader">dynamic_loader()</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_orm.html#docstrings_sqlalchemy.orm_modfunc_eagerload">eagerload()</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_orm.html#docstrings_sqlalchemy.orm_modfunc_eagerload_all">eagerload_all()</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_orm.html#docstrings_sqlalchemy.orm_modfunc_extension">extension()</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_orm.html#docstrings_sqlalchemy.orm_modfunc_lazyload">lazyload()</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_orm.html#docstrings_sqlalchemy.orm_modfunc_mapper">mapper()</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_orm.html#docstrings_sqlalchemy.orm_modfunc_noload">noload()</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_orm.html#docstrings_sqlalchemy.orm_modfunc_object_mapper">object_mapper()</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_orm.html#docstrings_sqlalchemy.orm_modfunc_object_session">object_session()</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_orm.html#docstrings_sqlalchemy.orm_modfunc_polymorphic_union">polymorphic_union()</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_orm.html#docstrings_sqlalchemy.orm_modfunc_relation">relation()</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_orm.html#docstrings_sqlalchemy.orm_modfunc_scoped_session">scoped_session()</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_orm.html#docstrings_sqlalchemy.orm_modfunc_sessionmaker">sessionmaker()</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_orm.html#docstrings_sqlalchemy.orm_modfunc_synonym">synonym()</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_orm.html#docstrings_sqlalchemy.orm_modfunc_undefer">undefer()</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_orm.html#docstrings_sqlalchemy.orm_modfunc_undefer_group">undefer_group()</a></li>
+
+    </ul>
+
+	        </li>
+        
+        <li><a style="" href="sqlalchemy_orm.html#docstrings_sqlalchemy.orm_AliasedClass">class AliasedClass(object)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_orm.html#docstrings_sqlalchemy.orm_MapperExtension">class MapperExtension(object)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_orm.html#docstrings_sqlalchemy.orm_PropComparator">class PropComparator(ColumnOperators)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_orm.html#docstrings_sqlalchemy.orm_Query">class Query(object)</a></li>
+
+    </ul>
+
+	        </li>
+        
+        <li><a style="" href="sqlalchemy_orm_collections.html">module sqlalchemy.orm.collections</a></li>
+
+	        <li>
+                
+    <ul>
+        
+        <li><a style="" href="sqlalchemy_orm_collections.html#docstrings_sqlalchemy.orm.collections_modfunc">Module Functions</a></li>
+
+	        <li>
+                
+    <ul>
+        
+        <li><a style="" href="sqlalchemy_orm_collections.html#docstrings_sqlalchemy.orm.collections_modfunc_attribute_mapped_collection">attribute_mapped_collection()</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_orm_collections.html#docstrings_sqlalchemy.orm.collections_modfunc_collection_adapter">collection_adapter()</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_orm_collections.html#docstrings_sqlalchemy.orm.collections_modfunc_column_mapped_collection">column_mapped_collection()</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_orm_collections.html#docstrings_sqlalchemy.orm.collections_modfunc_mapped_collection">mapped_collection()</a></li>
+
+    </ul>
+
+	        </li>
+        
+        <li><a style="" href="sqlalchemy_orm_collections.html#docstrings_sqlalchemy.orm.collections_collection">class collection(object)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_orm_collections.html#docstrings_sqlalchemy.orm.collections_MappedCollection">class MappedCollection(dict)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_orm_collections.html#docstrings_sqlalchemy.orm.collections_CollectionAdapter">class CollectionAdapter(object)</a></li>
+
+    </ul>
+
+	        </li>
+        
+        <li><a style="" href="sqlalchemy_orm_interfaces.html">module sqlalchemy.orm.interfaces</a></li>
+
+	        <li>
+                
+    <ul>
+        
+        <li><a style="" href="sqlalchemy_orm_interfaces.html#docstrings_sqlalchemy.orm.interfaces_modfunc">Module Functions</a></li>
+
+	        <li>
+                
+    <ul>
+        
+        <li><a style="" href="sqlalchemy_orm_interfaces.html#docstrings_sqlalchemy.orm.interfaces_modfunc_build_path">build_path()</a></li>
+
+    </ul>
+
+	        </li>
+        
+        <li><a style="" href="sqlalchemy_orm_interfaces.html#docstrings_sqlalchemy.orm.interfaces_AttributeExtension">class AttributeExtension(object)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_orm_interfaces.html#docstrings_sqlalchemy.orm.interfaces_ExtensionOption">class ExtensionOption(MapperOption)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_orm_interfaces.html#docstrings_sqlalchemy.orm.interfaces_LoaderStrategy">class LoaderStrategy(object)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_orm_interfaces.html#docstrings_sqlalchemy.orm.interfaces_MapperExtension">class MapperExtension(object)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_orm_interfaces.html#docstrings_sqlalchemy.orm.interfaces_MapperOption">class MapperOption(object)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_orm_interfaces.html#docstrings_sqlalchemy.orm.interfaces_MapperProperty">class MapperProperty(object)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_orm_interfaces.html#docstrings_sqlalchemy.orm.interfaces_PropComparator">class PropComparator(ColumnOperators)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_orm_interfaces.html#docstrings_sqlalchemy.orm.interfaces_PropertyOption">class PropertyOption(MapperOption)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_orm_interfaces.html#docstrings_sqlalchemy.orm.interfaces_StrategizedOption">class StrategizedOption(PropertyOption)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_orm_interfaces.html#docstrings_sqlalchemy.orm.interfaces_StrategizedProperty">class StrategizedProperty(MapperProperty)</a></li>
+
+    </ul>
+
+	        </li>
+        
+        <li><a style="" href="sqlalchemy_orm_mapper.html">module sqlalchemy.orm.mapper</a></li>
+
+	        <li>
+                
+    <ul>
+        
+        <li><a style="" href="sqlalchemy_orm_mapper.html#docstrings_sqlalchemy.orm.mapper_modfunc">Module Functions</a></li>
+
+	        <li>
+                
+    <ul>
+        
+        <li><a style="" href="sqlalchemy_orm_mapper.html#docstrings_sqlalchemy.orm.mapper_modfunc_class_mapper">class_mapper()</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_orm_mapper.html#docstrings_sqlalchemy.orm.mapper_modfunc_object_mapper">object_mapper()</a></li>
+
+    </ul>
+
+	        </li>
+        
+        <li><a style="" href="sqlalchemy_orm_mapper.html#docstrings_sqlalchemy.orm.mapper_Mapper">class Mapper(object)</a></li>
+
+    </ul>
+
+	        </li>
+        
+        <li><a style="" href="sqlalchemy_orm_properties.html">module sqlalchemy.orm.properties</a></li>
+
+	        <li>
+                
+    <ul>
+        
+        <li><a style="" href="sqlalchemy_orm_properties.html#docstrings_sqlalchemy.orm.properties_BackRef">class BackRef(object)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_orm_properties.html#docstrings_sqlalchemy.orm.properties_ColumnProperty">class ColumnProperty(StrategizedProperty)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_orm_properties.html#docstrings_sqlalchemy.orm.properties_ComparableProperty">class ComparableProperty(MapperProperty)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_orm_properties.html#docstrings_sqlalchemy.orm.properties_CompositeProperty">class CompositeProperty(ColumnProperty)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_orm_properties.html#docstrings_sqlalchemy.orm.properties_PropertyLoader">class PropertyLoader(StrategizedProperty)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_orm_properties.html#docstrings_sqlalchemy.orm.properties_SynonymProperty">class SynonymProperty(MapperProperty)</a></li>
+
+    </ul>
+
+	        </li>
+        
+        <li><a style="" href="sqlalchemy_orm_query.html">module sqlalchemy.orm.query</a></li>
+
+	        <li>
+                
+    <ul>
+        
+        <li><a style="" href="sqlalchemy_orm_query.html#docstrings_sqlalchemy.orm.query_Query">class Query(object)</a></li>
+
+    </ul>
+
+	        </li>
+        
+        <li><a style="" href="sqlalchemy_orm_session.html">module sqlalchemy.orm.session</a></li>
+
+	        <li>
+                
+    <ul>
+        
+        <li><a style="" href="sqlalchemy_orm_session.html#docstrings_sqlalchemy.orm.session_Session">class Session(object)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_orm_session.html#docstrings_sqlalchemy.orm.session_SessionExtension">class SessionExtension(object)</a></li>
+
+    </ul>
+
+	        </li>
+        
+        <li><a style="" href="sqlalchemy_orm_shard.html">module sqlalchemy.orm.shard</a></li>
+
+	        <li>
+                
+    <ul>
+        
+        <li><a style="" href="sqlalchemy_orm_shard.html#docstrings_sqlalchemy.orm.shard_ShardedQuery">class ShardedQuery(Query)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_orm_shard.html#docstrings_sqlalchemy.orm.shard_ShardedSession">class ShardedSession(Session)</a></li>
+
+    </ul>
+
+	        </li>
+        
+        <li><a style="" href="sqlalchemy_ext_declarative.html">module sqlalchemy.ext.declarative</a></li>
+
+	        <li>
+                
+    <ul>
+        
+        <li><a style="" href="sqlalchemy_ext_declarative.html#docstrings_sqlalchemy.ext.declarative_modfunc">Module Functions</a></li>
+
+	        <li>
+                
+    <ul>
+        
+        <li><a style="" href="sqlalchemy_ext_declarative.html#docstrings_sqlalchemy.ext.declarative_modfunc_comparable_using">comparable_using()</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_ext_declarative.html#docstrings_sqlalchemy.ext.declarative_modfunc_declarative_base">declarative_base()</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_ext_declarative.html#docstrings_sqlalchemy.ext.declarative_modfunc_declared_synonym">declared_synonym()</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_ext_declarative.html#docstrings_sqlalchemy.ext.declarative_modfunc_synonym_for">synonym_for()</a></li>
+
+    </ul>
+
+	        </li>
+    </ul>
+
+	        </li>
+        
+        <li><a style="" href="sqlalchemy_ext_associationproxy.html">module sqlalchemy.ext.associationproxy</a></li>
+
+	        <li>
+                
+    <ul>
+        
+        <li><a style="" href="sqlalchemy_ext_associationproxy.html#docstrings_sqlalchemy.ext.associationproxy_modfunc">Module Functions</a></li>
+
+	        <li>
+                
+    <ul>
+        
+        <li><a style="" href="sqlalchemy_ext_associationproxy.html#docstrings_sqlalchemy.ext.associationproxy_modfunc_association_proxy">association_proxy()</a></li>
+
+    </ul>
+
+	        </li>
+        
+        <li><a style="" href="sqlalchemy_ext_associationproxy.html#docstrings_sqlalchemy.ext.associationproxy_AssociationProxy">class AssociationProxy(object)</a></li>
+
+    </ul>
+
+	        </li>
+        
+        <li><a style="" href="sqlalchemy_ext_orderinglist.html">module sqlalchemy.ext.orderinglist</a></li>
+
+	        <li>
+                
+    <ul>
+        
+        <li><a style="" href="sqlalchemy_ext_orderinglist.html#docstrings_sqlalchemy.ext.orderinglist_modfunc">Module Functions</a></li>
+
+	        <li>
+                
+    <ul>
+        
+        <li><a style="" href="sqlalchemy_ext_orderinglist.html#docstrings_sqlalchemy.ext.orderinglist_modfunc_ordering_list">ordering_list()</a></li>
+
+    </ul>
+
+	        </li>
+        
+        <li><a style="" href="sqlalchemy_ext_orderinglist.html#docstrings_sqlalchemy.ext.orderinglist_OrderingList">class OrderingList(list)</a></li>
+
+    </ul>
+
+	        </li>
+        
+        <li><a style="" href="sqlalchemy_ext_sqlsoup.html">module sqlalchemy.ext.sqlsoup</a></li>
+
+	        <li>
+                
+    <ul>
+        
+        <li><a style="" href="sqlalchemy_ext_sqlsoup.html#docstrings_sqlalchemy.ext.sqlsoup_PKNotFoundError">class PKNotFoundError(SQLAlchemyError)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_ext_sqlsoup.html#docstrings_sqlalchemy.ext.sqlsoup_SqlSoup">class SqlSoup()</a></li>
+
+    </ul>
+
+	        </li>
+        
+        <li><a style="" href="sqlalchemy_databases_sqlite.html">module sqlalchemy.databases.sqlite</a></li>
+
+	        <li>
+                
+    <ul>
+        
+        <li><a style="" href="sqlalchemy_databases_sqlite.html#docstrings_sqlalchemy.databases.sqlite_modfunc">Module Functions</a></li>
+
+	        <li>
+                
+    <ul>
+        
+        <li><a style="" href="sqlalchemy_databases_sqlite.html#docstrings_sqlalchemy.databases.sqlite_modfunc_descriptor">descriptor()</a></li>
+
+    </ul>
+
+	        </li>
+        
+        <li><a style="" href="sqlalchemy_databases_sqlite.html#docstrings_sqlalchemy.databases.sqlite_DateTimeMixin">class DateTimeMixin(object)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_sqlite.html#docstrings_sqlalchemy.databases.sqlite_PassiveDefault">class PassiveDefault(DefaultGenerator)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_sqlite.html#docstrings_sqlalchemy.databases.sqlite_SLBinary">class SLBinary(Binary)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_sqlite.html#docstrings_sqlalchemy.databases.sqlite_SLBoolean">class SLBoolean(Boolean)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_sqlite.html#docstrings_sqlalchemy.databases.sqlite_SLChar">class SLChar(CHAR)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_sqlite.html#docstrings_sqlalchemy.databases.sqlite_SLDate">class SLDate(DateTimeMixin,Date)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_sqlite.html#docstrings_sqlalchemy.databases.sqlite_SLDateTime">class SLDateTime(DateTimeMixin,DateTime)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_sqlite.html#docstrings_sqlalchemy.databases.sqlite_SLFloat">class SLFloat(Float)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_sqlite.html#docstrings_sqlalchemy.databases.sqlite_SLInteger">class SLInteger(Integer)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_sqlite.html#docstrings_sqlalchemy.databases.sqlite_SLNumeric">class SLNumeric(Numeric)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_sqlite.html#docstrings_sqlalchemy.databases.sqlite_SLSmallInteger">class SLSmallInteger(SmallInteger)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_sqlite.html#docstrings_sqlalchemy.databases.sqlite_SLString">class SLString(String)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_sqlite.html#docstrings_sqlalchemy.databases.sqlite_SLText">class SLText(Text)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_sqlite.html#docstrings_sqlalchemy.databases.sqlite_SLTime">class SLTime(DateTimeMixin,Time)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_sqlite.html#docstrings_sqlalchemy.databases.sqlite_SQLiteCompiler">class SQLiteCompiler(DefaultCompiler)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_sqlite.html#docstrings_sqlalchemy.databases.sqlite_SQLiteDialect">class SQLiteDialect(DefaultDialect)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_sqlite.html#docstrings_sqlalchemy.databases.sqlite_SQLiteExecutionContext">class SQLiteExecutionContext(DefaultExecutionContext)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_sqlite.html#docstrings_sqlalchemy.databases.sqlite_SQLiteIdentifierPreparer">class SQLiteIdentifierPreparer(IdentifierPreparer)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_sqlite.html#docstrings_sqlalchemy.databases.sqlite_SQLiteSchemaDropper">class SQLiteSchemaDropper(SchemaDropper)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_sqlite.html#docstrings_sqlalchemy.databases.sqlite_SQLiteSchemaGenerator">class SQLiteSchemaGenerator(SchemaGenerator)</a></li>
+
+    </ul>
+
+	        </li>
+        
+        <li><a style="" href="sqlalchemy_databases_postgres.html">module sqlalchemy.databases.postgres</a></li>
+
+	        <li>
+                
+    <ul>
+        
+        <li><a style="" href="sqlalchemy_databases_postgres.html#docstrings_sqlalchemy.databases.postgres_modfunc">Module Functions</a></li>
+
+	        <li>
+                
+    <ul>
+        
+        <li><a style="" href="sqlalchemy_databases_postgres.html#docstrings_sqlalchemy.databases.postgres_modfunc_descriptor">descriptor()</a></li>
+
+    </ul>
+
+	        </li>
+        
+        <li><a style="" href="sqlalchemy_databases_postgres.html#docstrings_sqlalchemy.databases.postgres_PGArray">class PGArray(MutableType,Concatenable,TypeEngine)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_postgres.html#docstrings_sqlalchemy.databases.postgres_PGBigInteger">class PGBigInteger(PGInteger)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_postgres.html#docstrings_sqlalchemy.databases.postgres_PGBinary">class PGBinary(Binary)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_postgres.html#docstrings_sqlalchemy.databases.postgres_PGBoolean">class PGBoolean(Boolean)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_postgres.html#docstrings_sqlalchemy.databases.postgres_PGChar">class PGChar(CHAR)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_postgres.html#docstrings_sqlalchemy.databases.postgres_PGCidr">class PGCidr(TypeEngine)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_postgres.html#docstrings_sqlalchemy.databases.postgres_PGCompiler">class PGCompiler(DefaultCompiler)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_postgres.html#docstrings_sqlalchemy.databases.postgres_PGDate">class PGDate(Date)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_postgres.html#docstrings_sqlalchemy.databases.postgres_PGDateTime">class PGDateTime(DateTime)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_postgres.html#docstrings_sqlalchemy.databases.postgres_PGDefaultRunner">class PGDefaultRunner(DefaultRunner)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_postgres.html#docstrings_sqlalchemy.databases.postgres_PGDialect">class PGDialect(DefaultDialect)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_postgres.html#docstrings_sqlalchemy.databases.postgres_PGExecutionContext">class PGExecutionContext(DefaultExecutionContext)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_postgres.html#docstrings_sqlalchemy.databases.postgres_PGFloat">class PGFloat(Float)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_postgres.html#docstrings_sqlalchemy.databases.postgres_PGIdentifierPreparer">class PGIdentifierPreparer(IdentifierPreparer)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_postgres.html#docstrings_sqlalchemy.databases.postgres_PGInet">class PGInet(TypeEngine)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_postgres.html#docstrings_sqlalchemy.databases.postgres_PGInteger">class PGInteger(Integer)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_postgres.html#docstrings_sqlalchemy.databases.postgres_PGInterval">class PGInterval(TypeEngine)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_postgres.html#docstrings_sqlalchemy.databases.postgres_PGMacAddr">class PGMacAddr(TypeEngine)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_postgres.html#docstrings_sqlalchemy.databases.postgres_PGNumeric">class PGNumeric(Numeric)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_postgres.html#docstrings_sqlalchemy.databases.postgres_PGSchemaDropper">class PGSchemaDropper(SchemaDropper)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_postgres.html#docstrings_sqlalchemy.databases.postgres_PGSchemaGenerator">class PGSchemaGenerator(SchemaGenerator)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_postgres.html#docstrings_sqlalchemy.databases.postgres_PGSmallInteger">class PGSmallInteger(SmallInteger)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_postgres.html#docstrings_sqlalchemy.databases.postgres_PGString">class PGString(String)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_postgres.html#docstrings_sqlalchemy.databases.postgres_PGText">class PGText(Text)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_postgres.html#docstrings_sqlalchemy.databases.postgres_PGTime">class PGTime(Time)</a></li>
+
+    </ul>
+
+	        </li>
+        
+        <li><a style="" href="sqlalchemy_databases_mysql.html">module sqlalchemy.databases.mysql</a></li>
+
+	        <li>
+                
+    <ul>
+        
+        <li><a style="" href="sqlalchemy_databases_mysql.html#docstrings_sqlalchemy.databases.mysql_MSBigInteger">class MSBigInteger(MSInteger)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_mysql.html#docstrings_sqlalchemy.databases.mysql_MSBinary">class MSBinary(_BinaryType)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_mysql.html#docstrings_sqlalchemy.databases.mysql_MSBit">class MSBit(TypeEngine)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_mysql.html#docstrings_sqlalchemy.databases.mysql_MSBlob">class MSBlob(_BinaryType)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_mysql.html#docstrings_sqlalchemy.databases.mysql_MSBoolean">class MSBoolean(Boolean)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_mysql.html#docstrings_sqlalchemy.databases.mysql_MSChar">class MSChar(_StringType,CHAR)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_mysql.html#docstrings_sqlalchemy.databases.mysql_MSDate">class MSDate(Date)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_mysql.html#docstrings_sqlalchemy.databases.mysql_MSDateTime">class MSDateTime(DateTime)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_mysql.html#docstrings_sqlalchemy.databases.mysql_MSDecimal">class MSDecimal(MSNumeric)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_mysql.html#docstrings_sqlalchemy.databases.mysql_MSDouble">class MSDouble(Float,_NumericType)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_mysql.html#docstrings_sqlalchemy.databases.mysql_MSEnum">class MSEnum(MSString)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_mysql.html#docstrings_sqlalchemy.databases.mysql_MSFloat">class MSFloat(Float,_NumericType)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_mysql.html#docstrings_sqlalchemy.databases.mysql_MSInteger">class MSInteger(Integer,_NumericType)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_mysql.html#docstrings_sqlalchemy.databases.mysql_MSLongBlob">class MSLongBlob(MSBlob)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_mysql.html#docstrings_sqlalchemy.databases.mysql_MSLongText">class MSLongText(MSText)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_mysql.html#docstrings_sqlalchemy.databases.mysql_MSMediumBlob">class MSMediumBlob(MSBlob)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_mysql.html#docstrings_sqlalchemy.databases.mysql_MSMediumText">class MSMediumText(MSText)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_mysql.html#docstrings_sqlalchemy.databases.mysql_MSNChar">class MSNChar(_StringType,CHAR)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_mysql.html#docstrings_sqlalchemy.databases.mysql_MSNVarChar">class MSNVarChar(_StringType,String)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_mysql.html#docstrings_sqlalchemy.databases.mysql_MSNumeric">class MSNumeric(Numeric,_NumericType)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_mysql.html#docstrings_sqlalchemy.databases.mysql_MSSet">class MSSet(MSString)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_mysql.html#docstrings_sqlalchemy.databases.mysql_MSSmallInteger">class MSSmallInteger(SmallInteger,MSInteger)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_mysql.html#docstrings_sqlalchemy.databases.mysql_MSString">class MSString(_StringType,String)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_mysql.html#docstrings_sqlalchemy.databases.mysql_MSText">class MSText(_StringType,Text)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_mysql.html#docstrings_sqlalchemy.databases.mysql_MSTime">class MSTime(Time)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_mysql.html#docstrings_sqlalchemy.databases.mysql_MSTimeStamp">class MSTimeStamp(TIMESTAMP)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_mysql.html#docstrings_sqlalchemy.databases.mysql_MSTinyBlob">class MSTinyBlob(MSBlob)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_mysql.html#docstrings_sqlalchemy.databases.mysql_MSTinyInteger">class MSTinyInteger(MSInteger)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_mysql.html#docstrings_sqlalchemy.databases.mysql_MSTinyText">class MSTinyText(MSText)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_mysql.html#docstrings_sqlalchemy.databases.mysql_MSVarBinary">class MSVarBinary(_BinaryType)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_mysql.html#docstrings_sqlalchemy.databases.mysql_MSYear">class MSYear(TypeEngine)</a></li>
+
+    </ul>
+
+	        </li>
+        
+        <li><a style="" href="sqlalchemy_databases_oracle.html">module sqlalchemy.databases.oracle</a></li>
+
+	        <li>
+                
+    <ul>
+        
+        <li><a style="" href="sqlalchemy_databases_oracle.html#docstrings_sqlalchemy.databases.oracle_modfunc">Module Functions</a></li>
+
+	        <li>
+                
+    <ul>
+        
+        <li><a style="" href="sqlalchemy_databases_oracle.html#docstrings_sqlalchemy.databases.oracle_modfunc_descriptor">descriptor()</a></li>
+
+    </ul>
+
+	        </li>
+        
+        <li><a style="" href="sqlalchemy_databases_oracle.html#docstrings_sqlalchemy.databases.oracle_OracleBinary">class OracleBinary(Binary)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_oracle.html#docstrings_sqlalchemy.databases.oracle_OracleBoolean">class OracleBoolean(Boolean)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_oracle.html#docstrings_sqlalchemy.databases.oracle_OracleChar">class OracleChar(CHAR)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_oracle.html#docstrings_sqlalchemy.databases.oracle_OracleCompiler">class OracleCompiler(DefaultCompiler)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_oracle.html#docstrings_sqlalchemy.databases.oracle_OracleDate">class OracleDate(Date)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_oracle.html#docstrings_sqlalchemy.databases.oracle_OracleDateTime">class OracleDateTime(DateTime)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_oracle.html#docstrings_sqlalchemy.databases.oracle_OracleDefaultRunner">class OracleDefaultRunner(DefaultRunner)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_oracle.html#docstrings_sqlalchemy.databases.oracle_OracleDialect">class OracleDialect(DefaultDialect)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_oracle.html#docstrings_sqlalchemy.databases.oracle_OracleExecutionContext">class OracleExecutionContext(DefaultExecutionContext)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_oracle.html#docstrings_sqlalchemy.databases.oracle_OracleIdentifierPreparer">class OracleIdentifierPreparer(IdentifierPreparer)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_oracle.html#docstrings_sqlalchemy.databases.oracle_OracleInteger">class OracleInteger(Integer)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_oracle.html#docstrings_sqlalchemy.databases.oracle_OracleNumeric">class OracleNumeric(Numeric)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_oracle.html#docstrings_sqlalchemy.databases.oracle_OracleRaw">class OracleRaw(OracleBinary)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_oracle.html#docstrings_sqlalchemy.databases.oracle_OracleSchemaDropper">class OracleSchemaDropper(SchemaDropper)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_oracle.html#docstrings_sqlalchemy.databases.oracle_OracleSchemaGenerator">class OracleSchemaGenerator(SchemaGenerator)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_oracle.html#docstrings_sqlalchemy.databases.oracle_OracleSmallInteger">class OracleSmallInteger(SmallInteger)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_oracle.html#docstrings_sqlalchemy.databases.oracle_OracleString">class OracleString(String)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_oracle.html#docstrings_sqlalchemy.databases.oracle_OracleText">class OracleText(Text)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_oracle.html#docstrings_sqlalchemy.databases.oracle_OracleTimestamp">class OracleTimestamp(TIMESTAMP)</a></li>
+
+    </ul>
+
+	        </li>
+        
+        <li><a style="" href="sqlalchemy_databases_mssql.html">module sqlalchemy.databases.mssql</a></li>
+
+	        <li>
+                
+    <ul>
+        
+        <li><a style="" href="sqlalchemy_databases_mssql.html#docstrings_sqlalchemy.databases.mssql_modfunc">Module Functions</a></li>
+
+	        <li>
+                
+    <ul>
+        
+        <li><a style="" href="sqlalchemy_databases_mssql.html#docstrings_sqlalchemy.databases.mssql_modfunc_descriptor">descriptor()</a></li>
+
+    </ul>
+
+	        </li>
+        
+        <li><a style="" href="sqlalchemy_databases_mssql.html#docstrings_sqlalchemy.databases.mssql_AdoMSNVarchar">class AdoMSNVarchar(MSNVarchar)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_mssql.html#docstrings_sqlalchemy.databases.mssql_Decimal">class Decimal(object)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_mssql.html#docstrings_sqlalchemy.databases.mssql_MSBigInteger">class MSBigInteger(MSInteger)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_mssql.html#docstrings_sqlalchemy.databases.mssql_MSBinary">class MSBinary(Binary)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_mssql.html#docstrings_sqlalchemy.databases.mssql_MSBoolean">class MSBoolean(Boolean)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_mssql.html#docstrings_sqlalchemy.databases.mssql_MSChar">class MSChar(CHAR)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_mssql.html#docstrings_sqlalchemy.databases.mssql_MSDate">class MSDate(Date)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_mssql.html#docstrings_sqlalchemy.databases.mssql_MSDateTime">class MSDateTime(DateTime)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_mssql.html#docstrings_sqlalchemy.databases.mssql_MSDateTime_adodbapi">class MSDateTime_adodbapi(MSDateTime)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_mssql.html#docstrings_sqlalchemy.databases.mssql_MSDateTime_pyodbc">class MSDateTime_pyodbc(MSDateTime)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_mssql.html#docstrings_sqlalchemy.databases.mssql_MSDate_pyodbc">class MSDate_pyodbc(MSDate)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_mssql.html#docstrings_sqlalchemy.databases.mssql_MSFloat">class MSFloat(Float)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_mssql.html#docstrings_sqlalchemy.databases.mssql_MSInteger">class MSInteger(Integer)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_mssql.html#docstrings_sqlalchemy.databases.mssql_MSMoney">class MSMoney(TypeEngine)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_mssql.html#docstrings_sqlalchemy.databases.mssql_MSNChar">class MSNChar(NCHAR)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_mssql.html#docstrings_sqlalchemy.databases.mssql_MSNVarchar">class MSNVarchar(Unicode)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_mssql.html#docstrings_sqlalchemy.databases.mssql_MSNumeric">class MSNumeric(Numeric)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_mssql.html#docstrings_sqlalchemy.databases.mssql_MSSQLCompiler">class MSSQLCompiler(DefaultCompiler)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_mssql.html#docstrings_sqlalchemy.databases.mssql_MSSQLDefaultRunner">class MSSQLDefaultRunner(DefaultRunner)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_mssql.html#docstrings_sqlalchemy.databases.mssql_MSSQLDialect">class MSSQLDialect(DefaultDialect)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_mssql.html#docstrings_sqlalchemy.databases.mssql_MSSQLDialect_adodbapi">class MSSQLDialect_adodbapi(MSSQLDialect)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_mssql.html#docstrings_sqlalchemy.databases.mssql_MSSQLDialect_pymssql">class MSSQLDialect_pymssql(MSSQLDialect)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_mssql.html#docstrings_sqlalchemy.databases.mssql_MSSQLDialect_pyodbc">class MSSQLDialect_pyodbc(MSSQLDialect)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_mssql.html#docstrings_sqlalchemy.databases.mssql_MSSQLExecutionContext">class MSSQLExecutionContext(DefaultExecutionContext)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_mssql.html#docstrings_sqlalchemy.databases.mssql_MSSQLExecutionContext_pyodbc">class MSSQLExecutionContext_pyodbc(MSSQLExecutionContext)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_mssql.html#docstrings_sqlalchemy.databases.mssql_MSSQLIdentifierPreparer">class MSSQLIdentifierPreparer(IdentifierPreparer)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_mssql.html#docstrings_sqlalchemy.databases.mssql_MSSQLSchemaDropper">class MSSQLSchemaDropper(SchemaDropper)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_mssql.html#docstrings_sqlalchemy.databases.mssql_MSSQLSchemaGenerator">class MSSQLSchemaGenerator(SchemaGenerator)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_mssql.html#docstrings_sqlalchemy.databases.mssql_MSSmallDate">class MSSmallDate(Date)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_mssql.html#docstrings_sqlalchemy.databases.mssql_MSSmallInteger">class MSSmallInteger(MSInteger)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_mssql.html#docstrings_sqlalchemy.databases.mssql_MSSmallMoney">class MSSmallMoney(MSMoney)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_mssql.html#docstrings_sqlalchemy.databases.mssql_MSString">class MSString(String)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_mssql.html#docstrings_sqlalchemy.databases.mssql_MSText">class MSText(Text)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_mssql.html#docstrings_sqlalchemy.databases.mssql_MSTime">class MSTime(Time)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_mssql.html#docstrings_sqlalchemy.databases.mssql_MSTimeStamp">class MSTimeStamp(TIMESTAMP)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_mssql.html#docstrings_sqlalchemy.databases.mssql_MSTinyInteger">class MSTinyInteger(MSInteger)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_mssql.html#docstrings_sqlalchemy.databases.mssql_MSUniqueIdentifier">class MSUniqueIdentifier(TypeEngine)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_mssql.html#docstrings_sqlalchemy.databases.mssql_MSVariant">class MSVariant(TypeEngine)</a></li>
+
+    </ul>
+
+	        </li>
+        
+        <li><a style="" href="sqlalchemy_databases_firebird.html">module sqlalchemy.databases.firebird</a></li>
+
+	        <li>
+                
+    <ul>
+        
+        <li><a style="" href="sqlalchemy_databases_firebird.html#docstrings_sqlalchemy.databases.firebird_modfunc">Module Functions</a></li>
+
+	        <li>
+                
+    <ul>
+        
+        <li><a style="" href="sqlalchemy_databases_firebird.html#docstrings_sqlalchemy.databases.firebird_modfunc_descriptor">descriptor()</a></li>
+
+    </ul>
+
+	        </li>
+        
+        <li><a style="" href="sqlalchemy_databases_firebird.html#docstrings_sqlalchemy.databases.firebird_FBBinary">class FBBinary(Binary)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_firebird.html#docstrings_sqlalchemy.databases.firebird_FBBoolean">class FBBoolean(Boolean)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_firebird.html#docstrings_sqlalchemy.databases.firebird_FBChar">class FBChar(CHAR)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_firebird.html#docstrings_sqlalchemy.databases.firebird_FBCompiler">class FBCompiler(DefaultCompiler)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_firebird.html#docstrings_sqlalchemy.databases.firebird_FBDate">class FBDate(DateTime)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_firebird.html#docstrings_sqlalchemy.databases.firebird_FBDateTime">class FBDateTime(DateTime)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_firebird.html#docstrings_sqlalchemy.databases.firebird_FBDefaultRunner">class FBDefaultRunner(DefaultRunner)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_firebird.html#docstrings_sqlalchemy.databases.firebird_FBDialect">class FBDialect(DefaultDialect)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_firebird.html#docstrings_sqlalchemy.databases.firebird_FBExecutionContext">class FBExecutionContext(DefaultExecutionContext)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_firebird.html#docstrings_sqlalchemy.databases.firebird_FBFloat">class FBFloat(Float)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_firebird.html#docstrings_sqlalchemy.databases.firebird_FBIdentifierPreparer">class FBIdentifierPreparer(IdentifierPreparer)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_firebird.html#docstrings_sqlalchemy.databases.firebird_FBInteger">class FBInteger(Integer)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_firebird.html#docstrings_sqlalchemy.databases.firebird_FBNumeric">class FBNumeric(Numeric)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_firebird.html#docstrings_sqlalchemy.databases.firebird_FBSchemaDropper">class FBSchemaDropper(SchemaDropper)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_firebird.html#docstrings_sqlalchemy.databases.firebird_FBSchemaGenerator">class FBSchemaGenerator(SchemaGenerator)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_firebird.html#docstrings_sqlalchemy.databases.firebird_FBSmallInteger">class FBSmallInteger(SmallInteger)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_firebird.html#docstrings_sqlalchemy.databases.firebird_FBString">class FBString(String)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_firebird.html#docstrings_sqlalchemy.databases.firebird_FBText">class FBText(Text)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_firebird.html#docstrings_sqlalchemy.databases.firebird_FBTime">class FBTime(Time)</a></li>
+
+    </ul>
+
+	        </li>
+        
+        <li><a style="" href="sqlalchemy_databases_sybase.html">module sqlalchemy.databases.sybase</a></li>
+
+	        <li>
+                
+    <ul>
+        
+        <li><a style="" href="sqlalchemy_databases_sybase.html#docstrings_sqlalchemy.databases.sybase_SybaseBigInteger">class SybaseBigInteger(SybaseInteger)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_sybase.html#docstrings_sqlalchemy.databases.sybase_SybaseBinary">class SybaseBinary(Binary)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_sybase.html#docstrings_sqlalchemy.databases.sybase_SybaseBoolean">class SybaseBoolean(Boolean)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_sybase.html#docstrings_sqlalchemy.databases.sybase_SybaseChar">class SybaseChar(CHAR)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_sybase.html#docstrings_sqlalchemy.databases.sybase_SybaseDateTime_mxodbc">class SybaseDateTime_mxodbc(DateTime)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_sybase.html#docstrings_sqlalchemy.databases.sybase_SybaseDateTime_pyodbc">class SybaseDateTime_pyodbc(DateTime)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_sybase.html#docstrings_sqlalchemy.databases.sybase_SybaseDate_mxodbc">class SybaseDate_mxodbc(Date)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_sybase.html#docstrings_sqlalchemy.databases.sybase_SybaseDate_pyodbc">class SybaseDate_pyodbc(Date)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_sybase.html#docstrings_sqlalchemy.databases.sybase_SybaseFloat">class SybaseFloat(FLOAT,SybaseNumeric)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_sybase.html#docstrings_sqlalchemy.databases.sybase_SybaseInteger">class SybaseInteger(Integer)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_sybase.html#docstrings_sqlalchemy.databases.sybase_SybaseMoney">class SybaseMoney(TypeEngine)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_sybase.html#docstrings_sqlalchemy.databases.sybase_SybaseSmallInteger">class SybaseSmallInteger(SybaseInteger)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_sybase.html#docstrings_sqlalchemy.databases.sybase_SybaseSmallMoney">class SybaseSmallMoney(SybaseMoney)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_sybase.html#docstrings_sqlalchemy.databases.sybase_SybaseString">class SybaseString(String)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_sybase.html#docstrings_sqlalchemy.databases.sybase_SybaseText">class SybaseText(Text)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_sybase.html#docstrings_sqlalchemy.databases.sybase_SybaseTimeStamp">class SybaseTimeStamp(TIMESTAMP)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_sybase.html#docstrings_sqlalchemy.databases.sybase_SybaseTime_mxodbc">class SybaseTime_mxodbc(Time)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_sybase.html#docstrings_sqlalchemy.databases.sybase_SybaseTime_pyodbc">class SybaseTime_pyodbc(Time)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_sybase.html#docstrings_sqlalchemy.databases.sybase_SybaseTinyInteger">class SybaseTinyInteger(SybaseInteger)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_sybase.html#docstrings_sqlalchemy.databases.sybase_SybaseUniqueIdentifier">class SybaseUniqueIdentifier(TypeEngine)</a></li>
+
+    </ul>
+
+	        </li>
+        
+        <li><a style="" href="sqlalchemy_databases_access.html">module sqlalchemy.databases.access</a></li>
+
+	        <li>
+                
+    <ul>
+        
+        <li><a style="" href="sqlalchemy_databases_access.html#docstrings_sqlalchemy.databases.access_modfunc">Module Functions</a></li>
+
+	        <li>
+                
+    <ul>
+        
+        <li><a style="" href="sqlalchemy_databases_access.html#docstrings_sqlalchemy.databases.access_modfunc_descriptor">descriptor()</a></li>
+
+    </ul>
+
+	        </li>
+        
+        <li><a style="" href="sqlalchemy_databases_access.html#docstrings_sqlalchemy.databases.access_AcBinary">class AcBinary(Binary)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_access.html#docstrings_sqlalchemy.databases.access_AcBoolean">class AcBoolean(Boolean)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_access.html#docstrings_sqlalchemy.databases.access_AcChar">class AcChar(CHAR)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_access.html#docstrings_sqlalchemy.databases.access_AcDate">class AcDate(Date)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_access.html#docstrings_sqlalchemy.databases.access_AcDateTime">class AcDateTime(DateTime)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_access.html#docstrings_sqlalchemy.databases.access_AcFloat">class AcFloat(Float)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_access.html#docstrings_sqlalchemy.databases.access_AcInteger">class AcInteger(Integer)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_access.html#docstrings_sqlalchemy.databases.access_AcNumeric">class AcNumeric(Numeric)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_access.html#docstrings_sqlalchemy.databases.access_AcSmallInteger">class AcSmallInteger(SmallInteger)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_access.html#docstrings_sqlalchemy.databases.access_AcString">class AcString(String)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_access.html#docstrings_sqlalchemy.databases.access_AcText">class AcText(Text)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_access.html#docstrings_sqlalchemy.databases.access_AcTimeStamp">class AcTimeStamp(TIMESTAMP)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_access.html#docstrings_sqlalchemy.databases.access_AcTinyInteger">class AcTinyInteger(Integer)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_access.html#docstrings_sqlalchemy.databases.access_AcUnicode">class AcUnicode(Unicode)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_access.html#docstrings_sqlalchemy.databases.access_AccessCompiler">class AccessCompiler(DefaultCompiler)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_access.html#docstrings_sqlalchemy.databases.access_AccessDefaultRunner">class AccessDefaultRunner(DefaultRunner)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_access.html#docstrings_sqlalchemy.databases.access_AccessDialect">class AccessDialect(DefaultDialect)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_access.html#docstrings_sqlalchemy.databases.access_AccessExecutionContext">class AccessExecutionContext(DefaultExecutionContext)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_access.html#docstrings_sqlalchemy.databases.access_AccessIdentifierPreparer">class AccessIdentifierPreparer(IdentifierPreparer)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_access.html#docstrings_sqlalchemy.databases.access_AccessSchemaDropper">class AccessSchemaDropper(SchemaDropper)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_access.html#docstrings_sqlalchemy.databases.access_AccessSchemaGenerator">class AccessSchemaGenerator(SchemaGenerator)</a></li>
+
+    </ul>
+
+	        </li>
+        
+        <li><a style="" href="sqlalchemy_databases_maxdb.html">module sqlalchemy.databases.maxdb</a></li>
+
+	        <li>
+                
+    <ul>
+        
+        <li><a style="" href="sqlalchemy_databases_maxdb.html#docstrings_sqlalchemy.databases.maxdb_MaxBlob">class MaxBlob(Binary)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_maxdb.html#docstrings_sqlalchemy.databases.maxdb_MaxBoolean">class MaxBoolean(Boolean)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_maxdb.html#docstrings_sqlalchemy.databases.maxdb_MaxChar">class MaxChar(_StringType)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_maxdb.html#docstrings_sqlalchemy.databases.maxdb_MaxDate">class MaxDate(Date)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_maxdb.html#docstrings_sqlalchemy.databases.maxdb_MaxFloat">class MaxFloat(Float)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_maxdb.html#docstrings_sqlalchemy.databases.maxdb_MaxInteger">class MaxInteger(Integer)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_maxdb.html#docstrings_sqlalchemy.databases.maxdb_MaxNumeric">class MaxNumeric(Numeric)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_maxdb.html#docstrings_sqlalchemy.databases.maxdb_MaxSmallInteger">class MaxSmallInteger(MaxInteger)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_maxdb.html#docstrings_sqlalchemy.databases.maxdb_MaxString">class MaxString(_StringType)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_maxdb.html#docstrings_sqlalchemy.databases.maxdb_MaxText">class MaxText(_StringType)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_maxdb.html#docstrings_sqlalchemy.databases.maxdb_MaxTime">class MaxTime(Time)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_maxdb.html#docstrings_sqlalchemy.databases.maxdb_MaxTimestamp">class MaxTimestamp(DateTime)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_maxdb.html#docstrings_sqlalchemy.databases.maxdb_MaxUnicode">class MaxUnicode(_StringType)</a></li>
+
+    </ul>
+
+	        </li>
+    </ul>
+
+	</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class="bottomnav">
+        
+    <div class="prevnext">
+
+            
+            Previous: <a href="plugins.html">Plugins</a>
+
+               |   
+            Next: <a href="copyright.html">Appendix:  Copyright</a>
+    </div>
+
+    </div>
+
+
+
+
+
+
+</body>
+</html>
+
+
+
+
+
+

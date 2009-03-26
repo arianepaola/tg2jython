@@ -1,0 +1,89 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:py="http://genshi.edgewall.org/"
+      xmlns:xi="http://www.w3.org/2001/XInclude">
+<xi:include href="master.html" />
+<head></head>
+<body>
+      <div class="tableList" style="background-color:#aaddff; float:left; clear:left; border:1px solid; margin:0px 5px 0px 0px; padding:10px;">
+            <b>Tables</b>
+            ${c.w.databaseView(value=c.databaseValue, controller=c.controller)}
+      </div>
+      <div class="mainView" style="bg-color:#ffffff;">
+            <py:if test="not isinstance(c.tableName, Undefined)">
+                  <h2 style="margin: 0px 5px 0px 0px;">$c.tableName</h2>
+                  <div style="float:left;">
+                        <div style="float:left; padding-right:10px;"><a href="../addRecord/$c.tableName">AddRecord</a></div>
+                        <div style="float:left; padding-right:10px;"><a href="../tableView/$c.tableName">TableView</a></div>
+                        <div style="float:left; padding-right:10px;"><a href="../tableDef/$c.tableName">TableDef</a></div>
+                  </div>
+            </py:if>
+            <div style="float:right">
+                  <?python
+                        if c.recordsPerPage != 0:
+                              pages = c.mainCount//c.recordsPerPage
+                              if c.mainCount%c.recordsPerPage:
+                                    pages+=1
+                        else:
+                              pages = 1
+                              
+                        startPage = c.page-1
+                        endPage = c.page+2
+                        
+                        if endPage>pages:
+                             endPage = pages
+                           
+                        if startPage>pages:
+                             startPage=c.page
+                        
+                        if startPage<=0:
+                             startPage=1
+
+                        print startPage, endPage
+                        pagelist = range(startPage, endPage)
+
+                        if pages > endPage:
+                              pagelist.append('...')
+                        
+                        
+                        prevPage = c.page - 1
+                        if prevPage < 1:
+                              prevPage = pages
+                        nextPage = c.page + 1
+                        if nextPage > pages:
+                              nextPage = 0
+                        
+                  ?>
+                  <a href="${c.controller}/tableView/$c.tableName?page=0&amp;recordsPerPage=$c.recordsPerPage">&lt;&lt;</a>
+                  <a href="${c.controller}/tableView/$c.tableName?page=${prevPage}&amp;recordsPerPage=$c.recordsPerPage">&lt;</a> 
+                  <py:for each="i in pagelist">
+                        <py:if test='i == "..."'>
+                              ...
+                        </py:if>
+                        <py:if test='i == c.page'>
+                              $page
+                        </py:if>
+                        <py:if test='i!="..." and i!=c.page'>
+                              <a href="${c.controller}/tableView/$c.tableName?page=$i&amp;recordsPerPage=$c.recordsPerPage">$i</a>
+                        </py:if>
+                  </py:for>
+                  <a href="${c.controller}/tableView/$c.tableName?page=${pages}&amp;recordsPerPage=$c.recordsPerPage">$pages</a>
+                  <a href="${c.controller}/tableView/$c.tableName?page=${nextPage}&amp;recordsPerPage=$c.recordsPerPage">&gt;</a>
+                  <a href="${c.controller}/tableView/$c.tableName?page=${pages}&amp;recordsPerPage=$c.recordsPerPage">&gt;&gt;</a>
+            </div>
+            <div style="float:clear"><br/></div>
+            <py:if test="mainView is not None">
+                  ${c.w.mainView(value=c.mainValue)}
+            </py:if>
+            <div style="float:clear"/>
+            <div style="float:right">
+                  Records Per Page:
+                  <a href="${c.controller}/tableView/$c.tableName?page=1&amp;recordsPerPage=10">10</a> 
+                  <a href="${c.controller}/tableView/$c.tableName?page=1&amp;recordsPerPage=25">25</a> 
+                  <a href="${c.controller}/tableView/$c.tableName?page=1&amp;recordsPerPage=50">50</a> 
+                  <a href="${c.controller}/tableView/$c.tableName?page=1&amp;recordsPerPage=100">100</a> 
+            </div>
+      </div>
+</body>
+</html>

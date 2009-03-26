@@ -1,0 +1,388 @@
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<title>SQLAlchemy 0.4 Documentation - module sqlalchemy.ext.orderinglist</title>
+	
+    
+    <link rel="stylesheet" href="style.css"></link>
+    <link rel="stylesheet" href="docs.css"></link>
+    <link href="syntaxhighlight.css" rel="stylesheet" type="text/css"></link>
+    <script src="scripts.js"></script>
+
+    <link rel="stylesheet" href="docutil.css"></link>
+
+
+
+</head>
+<body>
+
+
+
+
+
+
+
+
+<div id="topanchor"><a name="top">&nbsp;</a></div>
+
+
+<h1>SQLAlchemy 0.4 Documentation</h1>
+
+<div id="pagecontrol"><a href="index.html">Multiple Pages</a> | <a href="documentation.html">One Page</a></div>
+
+<div class="versionheader">Version: 0.4.7p1   Last Updated: 07/31/08 11:09:56</div>
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class="topnav">
+
+    
+    <div class="navbanner">
+        <a href="index.html" class="totoc">Table of Contents</a>
+        
+    <div class="prevnext">
+            Up: <a href="docstrings.html">API Documentation</a>
+
+               |   
+            Previous: <a href="sqlalchemy_ext_associationproxy.html">module sqlalchemy.ext.associationproxy</a>
+
+               |   
+            Next: <a href="sqlalchemy_ext_sqlsoup.html">module sqlalchemy.ext.sqlsoup</a>
+    </div>
+
+        <h2>module sqlalchemy.ext.orderinglist</h2>
+    </div>
+
+	
+	
+    <ul>
+        
+        <li><a style="" href="sqlalchemy_ext_orderinglist.html#docstrings_sqlalchemy.ext.orderinglist_modfunc">Module Functions</a></li>
+
+	        <li>
+                
+    <ul>
+        
+        <li><a style="" href="sqlalchemy_ext_orderinglist.html#docstrings_sqlalchemy.ext.orderinglist_modfunc_ordering_list">ordering_list()</a></li>
+
+    </ul>
+
+	        </li>
+        
+        <li><a style="" href="sqlalchemy_ext_orderinglist.html#docstrings_sqlalchemy.ext.orderinglist_OrderingList">class OrderingList(list)</a></li>
+
+    </ul>
+
+	</div>
+
+
+
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.ext.orderinglist"></a>
+    
+    <div class="sectionL2">
+
+    <h3>module sqlalchemy.ext.orderinglist</h3>
+    
+    
+    <div class="darkcell"><p>A custom list that manages index/position information for its children.</p>
+<p><tt class="docutils literal"><span class="pre">orderinglist</span></tt> is a custom list collection implementation for mapped relations
+that keeps an arbitrary &quot;position&quot; attribute on contained objects in sync with
+each object's position in the Python list.</p>
+<p>The collection acts just like a normal Python <tt class="docutils literal"><span class="pre">list</span></tt>, with the added
+behavior that as you manipulate the list (via <tt class="docutils literal"><span class="pre">insert</span></tt>, <tt class="docutils literal"><span class="pre">pop</span></tt>, assignment,
+deletion, what have you), each of the objects it contains is updated as needed
+to reflect its position.  This is very useful for managing ordered relations
+which have a user-defined, serialized order:</p>
+<pre class="literal-block">
+from sqlalchemy.ext.orderinglist import ordering_list
+
+users = Table('users', metadata,
+              Column('id', Integer, primary_key=True))
+blurbs = Table('user_top_ten_list', metadata,
+               Column('id', Integer, primary_key=True),
+               Column('user_id', Integer, ForeignKey('users.id')),
+               Column('position', Integer),
+               Column('blurb', String(80)))
+
+class User(object): pass
+class Blurb(object):
+    def __init__(self, blurb):
+        self.blurb = blurb
+
+mapper(User, users, properties={
+  'topten': relation(Blurb, collection_class=ordering_list('position'),
+                     order_by=[blurbs.c.position])
+})
+mapper(Blurb, blurbs)
+
+u = User()
+u.topten.append(Blurb('Number one!'))
+u.topten.append(Blurb('Number two!'))
+
+# Like magic.
+assert [blurb.position for blurb in u.topten] == [0, 1]
+
+# The objects will be renumbered automaticaly after any list-changing
+# operation, for example an insert:
+u.topten.insert(1, Blurb('I am the new Number Two.'))
+
+assert [blurb.position for blurb in u.topten] == [0, 1, 2]
+assert u.topten[1].blurb == 'I am the new Number Two.'
+assert u.topten[1].position == 1
+</pre>
+<p>Numbering and serialization are both highly configurable.  See the docstrings
+in this module and the main SQLAlchemy documentation for more information and
+examples.</p>
+<p>The <b>ordering_list</b> function is the ORM-compatible
+constructor for OrderingList instances.</p>
+</div>
+    
+
+        
+    
+    <A name="docstrings_sqlalchemy.ext.orderinglist_modfunc"></a>
+    
+    <div class="sectionL3">
+
+    <h3>Module Functions</h3>
+    
+    
+                
+    <div class="darkcell">
+    
+    <A name="docstrings_sqlalchemy.ext.orderinglist_modfunc_ordering_list"></a>
+    <b>def ordering_list(<i>attr</i>, <i>count_from=None</i>, <i>**kw</i>)</b>
+    <div class="docstring">
+    <p>Prepares an OrderingList factory for use in mapper definitions.</p>
+<p>Returns an object suitable for use as an argument to a Mapper relation's
+<tt class="docutils literal"><span class="pre">collection_class</span></tt> option.  Arguments are:</p>
+<dl class="docutils">
+<dt>attr</dt>
+<dd>Name of the mapped attribute to use for storage and retrieval of
+ordering information</dd>
+<dt>count_from (optional)</dt>
+<dd>Set up an integer-based ordering, starting at <tt class="docutils literal"><span class="pre">count_from</span></tt>.  For
+example, <tt class="docutils literal"><span class="pre">ordering_list('pos',</span> <span class="pre">count_from=1)</span></tt> would create a 1-based
+list in SQL, storing the value in the 'pos' column.  Ignored if
+<tt class="docutils literal"><span class="pre">ordering_func</span></tt> is supplied.</dd>
+</dl>
+<p>Passes along any keyword arguments to <tt class="docutils literal"><span class="pre">OrderingList</span></tt> constructor.</p>
+
+    </div>
+    </div>
+
+        
+
+    </div>
+
+
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.ext.orderinglist_OrderingList"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class OrderingList(list)</h3>
+    
+    
+    <div class="darkcell"><p>A custom list that manages position information for its children.</p>
+<p>See the module and __init__ documentation for more details.  The
+<tt class="docutils literal"><span class="pre">ordering_list</span></tt> function is used to configure <tt class="docutils literal"><span class="pre">OrderingList</span></tt>
+collections in <tt class="docutils literal"><span class="pre">mapper</span></tt> relation definitions.</p>
+</div>
+    
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def __init__(<i>self</i>, <i>ordering_attr=None</i>, <i>ordering_func=None</i>, <i>reorder_on_append=False</i>)</b>
+    <div class="docstring">
+    <p>A custom list that manages position information for its children.</p>
+<p><tt class="docutils literal"><span class="pre">OrderingList</span></tt> is a <tt class="docutils literal"><span class="pre">collection_class</span></tt> list implementation that
+syncs position in a Python list with a position attribute on the
+mapped objects.</p>
+<p>This implementation relies on the list starting in the proper order,
+so be <strong>sure</strong> to put an <tt class="docutils literal"><span class="pre">order_by</span></tt> on your relation.</p>
+<dl class="docutils">
+<dt>ordering_attr</dt>
+<dd>Name of the attribute that stores the object's order in the relation.</dd>
+<dt>ordering_func</dt>
+<dd><p class="first">Optional.  A function that maps the position in the Python list to a
+value to store in the <tt class="docutils literal"><span class="pre">ordering_attr</span></tt>.  Values returned are usually
+(but need not be!) integers.</p>
+<p>An <tt class="docutils literal"><span class="pre">ordering_func</span></tt> is called with two positional parameters: the
+index of the element in the list, and the list itself.</p>
+<p class="last">If omitted, Python list indexes are used for the attribute values.
+Two basic pre-built numbering functions are provided in this module:
+<tt class="docutils literal"><span class="pre">count_from_0</span></tt> and <tt class="docutils literal"><span class="pre">count_from_1</span></tt>.  For more exotic examples
+like stepped numbering, alphabetical and Fibonacci numbering, see
+the unit tests.</p>
+</dd>
+<dt>reorder_on_append</dt>
+<dd><p class="first">Default False.  When appending an object with an existing (non-None)
+ordering value, that value will be left untouched unless
+<tt class="docutils literal"><span class="pre">reorder_on_append</span></tt> is true.  This is an optimization to avoid a
+variety of dangerous unexpected database writes.</p>
+<p>SQLAlchemy will add instances to the list via append() when your
+object loads.  If for some reason the result set from the database
+skips a step in the ordering (say, row '1' is missing but you get
+'2', '3', and '4'), reorder_on_append=True would immediately
+renumber the items to '1', '2', '3'.  If you have multiple sessions
+making changes, any of whom happen to load this collection even in
+passing, all of the sessions would try to &quot;clean up&quot; the numbering
+in their commits, possibly causing all but one to fail with a
+concurrent modification error.  Spooky action at a distance.</p>
+<p class="last">Recommend leaving this with the default of False, and just call
+<tt class="docutils literal"><span class="pre">_reorder()</span></tt> if you're doing <tt class="docutils literal"><span class="pre">append()</span></tt> operations with
+previously ordered instances or when doing some housekeeping after
+manual sql operations.</p>
+</dd>
+</dl>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def append(<i>self</i>, <i>entity</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def insert(<i>self</i>, <i>index</i>, <i>entity</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def pop(<i>self</i>, <i>index=-1</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def remove(<i>self</i>, <i>entity</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def __delitem__(<i>self</i>, <i>index</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def __delslice__(<i>self</i>, <i>start</i>, <i>end</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def __setitem__(<i>self</i>, <i>index</i>, <i>entity</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def __setslice__(<i>self</i>, <i>start</i>, <i>end</i>, <i>values</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+    
+
+    </div>
+
+
+
+
+
+    <div class="bottomnav">
+        
+    <div class="prevnext">
+            Up: <a href="docstrings.html">API Documentation</a>
+
+               |   
+            Previous: <a href="sqlalchemy_ext_associationproxy.html">module sqlalchemy.ext.associationproxy</a>
+
+               |   
+            Next: <a href="sqlalchemy_ext_sqlsoup.html">module sqlalchemy.ext.sqlsoup</a>
+    </div>
+
+    </div>
+
+
+
+
+
+
+
+
+</body>
+</html>
+
+
+
+
+
+

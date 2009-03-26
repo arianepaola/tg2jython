@@ -1,0 +1,650 @@
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<title>SQLAlchemy 0.4 Documentation - module sqlalchemy.orm.properties</title>
+	
+    
+    <link rel="stylesheet" href="style.css"></link>
+    <link rel="stylesheet" href="docs.css"></link>
+    <link href="syntaxhighlight.css" rel="stylesheet" type="text/css"></link>
+    <script src="scripts.js"></script>
+
+    <link rel="stylesheet" href="docutil.css"></link>
+
+
+
+</head>
+<body>
+
+
+
+
+
+
+
+
+<div id="topanchor"><a name="top">&nbsp;</a></div>
+
+
+<h1>SQLAlchemy 0.4 Documentation</h1>
+
+<div id="pagecontrol"><a href="index.html">Multiple Pages</a> | <a href="documentation.html">One Page</a></div>
+
+<div class="versionheader">Version: 0.4.7p1   Last Updated: 07/31/08 11:09:56</div>
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class="topnav">
+
+    
+    <div class="navbanner">
+        <a href="index.html" class="totoc">Table of Contents</a>
+        
+    <div class="prevnext">
+            Up: <a href="docstrings.html">API Documentation</a>
+
+               |   
+            Previous: <a href="sqlalchemy_orm_mapper.html">module sqlalchemy.orm.mapper</a>
+
+               |   
+            Next: <a href="sqlalchemy_orm_query.html">module sqlalchemy.orm.query</a>
+    </div>
+
+        <h2>module sqlalchemy.orm.properties</h2>
+    </div>
+
+	
+	
+    <ul>
+        
+        <li><a style="" href="sqlalchemy_orm_properties.html#docstrings_sqlalchemy.orm.properties_BackRef">class BackRef(object)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_orm_properties.html#docstrings_sqlalchemy.orm.properties_ColumnProperty">class ColumnProperty(StrategizedProperty)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_orm_properties.html#docstrings_sqlalchemy.orm.properties_ComparableProperty">class ComparableProperty(MapperProperty)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_orm_properties.html#docstrings_sqlalchemy.orm.properties_CompositeProperty">class CompositeProperty(ColumnProperty)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_orm_properties.html#docstrings_sqlalchemy.orm.properties_PropertyLoader">class PropertyLoader(StrategizedProperty)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_orm_properties.html#docstrings_sqlalchemy.orm.properties_SynonymProperty">class SynonymProperty(MapperProperty)</a></li>
+
+    </ul>
+
+	</div>
+
+
+
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.orm.properties"></a>
+    
+    <div class="sectionL2">
+
+    <h3>module sqlalchemy.orm.properties</h3>
+    
+    
+    <div class="darkcell"><p>MapperProperty implementations.</p>
+<p>This is a private module which defines the behavior of
+invidual ORM-mapped attributes.</p>
+</div>
+    
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.orm.properties_BackRef"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class BackRef(object)</h3>
+    
+    
+    <div class="darkcell"><p>Attached to a PropertyLoader to indicate a complementary reverse relationship.</p>
+<p>Can optionally create the complementing PropertyLoader if one does not exist already.</p>
+</div>
+    
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def __init__(<i>self</i>, <i>key</i>, <i>_prop=None</i>, <i>**kwargs</i>)</b>
+    <div class="docstring">
+    <p>Construct a new <tt class="docutils literal"><span class="pre">BackRef</span></tt>.</p>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def compile(<i>self</i>, <i>prop</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def get_extension(<i>self</i>)</b>
+    <div class="docstring">
+    <p>Return an attribute extension to use with this backreference.</p>
+
+    </div>
+    </div>
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.orm.properties_ColumnProperty"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class ColumnProperty(<a href="sqlalchemy_orm_interfaces.html#docstrings_sqlalchemy.orm.interfaces_StrategizedProperty">StrategizedProperty</a>)</h3>
+    
+    
+    <div class="darkcell"><p>Describes an object attribute that corresponds to a table column.</p>
+</div>
+    
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def __init__(<i>self</i>, <i>*columns</i>, <i>**kwargs</i>)</b>
+    <div class="docstring">
+    <p>The list of <cite>columns</cite> describes a single object
+property. If there are multiple tables joined together for the
+mapper, this list represents the equivalent column as it
+appears across each table.</p>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def copy(<i>self</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def do_init(<i>self</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def get_col_value(<i>self</i>, <i>column</i>, <i>value</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def getattr(<i>self</i>, <i>state</i>, <i>column</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def getcommitted(<i>self</i>, <i>state</i>, <i>column</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def merge(<i>self</i>, <i>session</i>, <i>source</i>, <i>dest</i>, <i>dont_load</i>, <i>_recursive</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def setattr(<i>self</i>, <i>state</i>, <i>value</i>, <i>column</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.orm.properties_ComparableProperty"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class ComparableProperty(<a href="sqlalchemy_orm_interfaces.html#docstrings_sqlalchemy.orm.interfaces_MapperProperty">MapperProperty</a>)</h3>
+    
+    
+    <div class="darkcell"><p>Instruments a Python property for use in query expressions.</p>
+</div>
+    
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def __init__(<i>self</i>, <i>comparator_factory</i>, <i>descriptor=None</i>)</b>
+    <div class="docstring">
+    <p>Construct a new <tt class="docutils literal"><span class="pre">ComparableProperty</span></tt>.</p>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def create_row_processor(<i>self</i>, <i>selectcontext</i>, <i>mapper</i>, <i>row</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def do_init(<i>self</i>)</b>
+    <div class="docstring">
+    <p>Set up a proxy to the unmanaged descriptor.</p>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def merge(<i>self</i>, <i>session</i>, <i>source</i>, <i>dest</i>, <i>dont_load</i>, <i>_recursive</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def setup(<i>self</i>, <i>querycontext</i>, <i>**kwargs</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.orm.properties_CompositeProperty"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class CompositeProperty(<a href="sqlalchemy_orm_properties.html#docstrings_sqlalchemy.orm.properties_ColumnProperty">ColumnProperty</a>)</h3>
+    
+    
+    <div class="darkcell"><p>subclasses ColumnProperty to provide composite type support.</p>
+</div>
+    
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def __init__(<i>self</i>, <i>class_</i>, <i>*columns</i>, <i>**kwargs</i>)</b>
+    <div class="docstring">
+    <p>Construct a new <tt class="docutils literal"><span class="pre">CompositeProperty</span></tt>.</p>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def copy(<i>self</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def do_init(<i>self</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def get_col_value(<i>self</i>, <i>column</i>, <i>value</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def getattr(<i>self</i>, <i>state</i>, <i>column</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def getcommitted(<i>self</i>, <i>state</i>, <i>column</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def setattr(<i>self</i>, <i>state</i>, <i>value</i>, <i>column</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.orm.properties_PropertyLoader"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class PropertyLoader(<a href="sqlalchemy_orm_interfaces.html#docstrings_sqlalchemy.orm.interfaces_StrategizedProperty">StrategizedProperty</a>)</h3>
+    
+    
+    <div class="darkcell"><p>Describes an object property that holds a single item or list
+of items that correspond to a related database table.</p>
+</div>
+    
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def __init__(<i>self</i>, <i>argument</i>, <i>secondary=None</i>, <i>primaryjoin=None</i>, <i>secondaryjoin=None</i>, <i>entity_name=None</i>, <i>foreign_keys=None</i>, <i>foreignkey=None</i>, <i>uselist=None</i>, <i>private=False</i>, <i>association=None</i>, <i>order_by=False</i>, <i>attributeext=None</i>, <i>backref=None</i>, <i>is_backref=False</i>, <i>post_update=False</i>, <i>cascade=None</i>, <i>viewonly=False</i>, <i>lazy=True</i>, <i>collection_class=None</i>, <i>passive_deletes=False</i>, <i>passive_updates=True</i>, <i>remote_side=None</i>, <i>enable_typechecks=True</i>, <i>join_depth=None</i>, <i>strategy_class=None</i>, <i>_local_remote_pairs=None</i>)</b>
+    <div class="docstring">
+    <p>Construct a new <tt class="docutils literal"><span class="pre">PropertyLoader</span></tt>.</p>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def cascade_iterator(<i>self</i>, <i>type_</i>, <i>state</i>, <i>visited_instances</i>, <i>halt_on=None</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def compare(<i>self</i>, <i>op</i>, <i>value</i>, <i>value_is_parent=False</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def do_init(<i>self</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def merge(<i>self</i>, <i>session</i>, <i>source</i>, <i>dest</i>, <i>dont_load</i>, <i>_recursive</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+         <div class="darkcell">
+         <A name=""></a>
+         <b>private = property()</b>
+         <div class="docstring">
+         
+         </div> 
+         </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def register_dependencies(<i>self</i>, <i>uowcommit</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.orm.properties_SynonymProperty"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class SynonymProperty(<a href="sqlalchemy_orm_interfaces.html#docstrings_sqlalchemy.orm.interfaces_MapperProperty">MapperProperty</a>)</h3>
+    
+    
+    
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def __init__(<i>self</i>, <i>name</i>, <i>map_column=None</i>, <i>descriptor=None</i>)</b>
+    <div class="docstring">
+    <p>Construct a new <tt class="docutils literal"><span class="pre">SynonymProperty</span></tt>.</p>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def create_row_processor(<i>self</i>, <i>selectcontext</i>, <i>mapper</i>, <i>row</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def do_init(<i>self</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def merge(<i>self</i>, <i>session</i>, <i>source</i>, <i>dest</i>, <i>dont_load</i>, <i>_recursive</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def setup(<i>self</i>, <i>querycontext</i>, <i>**kwargs</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+    
+
+    </div>
+
+
+
+
+
+    <div class="bottomnav">
+        
+    <div class="prevnext">
+            Up: <a href="docstrings.html">API Documentation</a>
+
+               |   
+            Previous: <a href="sqlalchemy_orm_mapper.html">module sqlalchemy.orm.mapper</a>
+
+               |   
+            Next: <a href="sqlalchemy_orm_query.html">module sqlalchemy.orm.query</a>
+    </div>
+
+    </div>
+
+
+
+
+
+
+
+
+</body>
+</html>
+
+
+
+
+
+

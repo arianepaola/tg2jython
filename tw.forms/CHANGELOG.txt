@@ -1,0 +1,77 @@
+tw.forms Changelog
+==================
+
+0.9.2 (unreleased)
+-------------------
+* Removed fieldfactory.py since it depends on RuleDispatch which we no longer
+  depend on and wasn't actively maintained. If you still need it you can grab
+  it form earlier revisions in the repository.
+* Reverted EGG to being zip-unsafe since mako templates cannot be located
+  otherwise.
+
+* :class:`tw.forms.InputWidget` now has a ``strip_name`` parameter which can
+  be set to True to indicate that the name if this field (which **must** have
+  children) will not be used to build fully-qualified names.
+  This is useful to "flatten-out" nested fieldsets which otheriwise would
+  need/provide a nested dict.
+* Removed the ``strip_name_if_root_container`` since it is redundant now what
+  there is a ``strip_name`` parameter.
+
+0.9.1 (Jun, 8 2008)
+-------------------
+
+* Made tw.forms EGG zip safe now that TW can serve static resources from inside
+  zipped EGGS
+
+0.9 (Jun, 1 2008)
+------------------
+
+* Calendars can now set calendar_lang dynamically. This change requires
+  TW >= 0.9
+
+0.8.1.2 (May, 30 2008)
+-----------------------
+
+* Included static resources in MANIFEST.in
+
+0.8.1.1 (May, 30 2008)
+-----------------------
+
+* removed Unneeded import from dispatch
+
+0.8.1 (May, 29 2008)
+---------------------
+
+* Removed use of RuleDispatch
+
+0.8
+---
+
+* Changed package structure and changed imports for the namespace change in TW
+
+0.2rc2 (unreleased)
+----------------------
+
+* Fixed bug in SelectionField where value was not properly selected on redisplay
+  after failed validation when using validators other than (Unicode)String.
+* Addition of Spacer and Label widgets. These are currently derive from 
+  FormField, although this is not ideal as they don't generate input.
+* Inclusion of an id field in the container element around a form field and it's 
+  label.
+* Addition of show_labels options to TableForm, TableFieldSet, ListForm, 
+  ListFieldSet
+* Display of form-wide errors on TableForm, TableFieldSet, ListForm, ListFieldSet
+
+
+0.2rc1 (Nov. 19 2007)
+----------------------
+
+* Many small bugs and rough edges have been polished.
+* fieldfactory now available to introspect models and generate fields. Thanks
+  to Timothy Sweetser.
+* Mako templates are now available for every FormField and the DataGrid. This
+  makes twForms not depend on Genshi. Thanks to patch #1484 by Roger Demetrescu.
+* Errors for hidden fields are now displayed, thanks to patch at #1331 by
+  Pauli Virtanen.
+* There's a new ``SecureFormMixin`` to protect against CSRF attacks, thanks to
+  patch at #1331 by Pauli Virtanen.

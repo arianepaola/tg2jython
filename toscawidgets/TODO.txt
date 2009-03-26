@@ -1,0 +1,11 @@
+Things TO-DO before 1.0 is released:
+
+* Documentation, specially in the format of easily digested tutorials for
+  tw.forms, is badly needed. 
+
+  We would *really* appreciate any help in this area. Please drop a line at
+  toscawidgets-discuss Google group if you want to lend a hand.
+
+* Remove some miscelaneous cruft, feeders.py comes to mind...
+
+That's about all.

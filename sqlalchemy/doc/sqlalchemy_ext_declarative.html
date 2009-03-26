@@ -1,0 +1,409 @@
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<title>SQLAlchemy 0.4 Documentation - module sqlalchemy.ext.declarative</title>
+	
+    
+    <link rel="stylesheet" href="style.css"></link>
+    <link rel="stylesheet" href="docs.css"></link>
+    <link href="syntaxhighlight.css" rel="stylesheet" type="text/css"></link>
+    <script src="scripts.js"></script>
+
+    <link rel="stylesheet" href="docutil.css"></link>
+
+
+
+</head>
+<body>
+
+
+
+
+
+
+
+
+<div id="topanchor"><a name="top">&nbsp;</a></div>
+
+
+<h1>SQLAlchemy 0.4 Documentation</h1>
+
+<div id="pagecontrol"><a href="index.html">Multiple Pages</a> | <a href="documentation.html">One Page</a></div>
+
+<div class="versionheader">Version: 0.4.7p1   Last Updated: 07/31/08 11:09:56</div>
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class="topnav">
+
+    
+    <div class="navbanner">
+        <a href="index.html" class="totoc">Table of Contents</a>
+        
+    <div class="prevnext">
+            Up: <a href="docstrings.html">API Documentation</a>
+
+               |   
+            Previous: <a href="sqlalchemy_orm_shard.html">module sqlalchemy.orm.shard</a>
+
+               |   
+            Next: <a href="sqlalchemy_ext_associationproxy.html">module sqlalchemy.ext.associationproxy</a>
+    </div>
+
+        <h2>module sqlalchemy.ext.declarative</h2>
+    </div>
+
+	
+	
+    <ul>
+        
+        <li><a style="" href="sqlalchemy_ext_declarative.html#docstrings_sqlalchemy.ext.declarative_modfunc">Module Functions</a></li>
+
+	        <li>
+                
+    <ul>
+        
+        <li><a style="" href="sqlalchemy_ext_declarative.html#docstrings_sqlalchemy.ext.declarative_modfunc_comparable_using">comparable_using()</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_ext_declarative.html#docstrings_sqlalchemy.ext.declarative_modfunc_declarative_base">declarative_base()</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_ext_declarative.html#docstrings_sqlalchemy.ext.declarative_modfunc_declared_synonym">declared_synonym()</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_ext_declarative.html#docstrings_sqlalchemy.ext.declarative_modfunc_synonym_for">synonym_for()</a></li>
+
+    </ul>
+
+	        </li>
+    </ul>
+
+	</div>
+
+
+
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.ext.declarative"></a>
+    
+    <div class="sectionL2">
+
+    <h3>module sqlalchemy.ext.declarative</h3>
+    
+    
+    <div class="darkcell"><p>A simple declarative layer for SQLAlchemy ORM.</p>
+<p>SQLAlchemy object-relational configuration involves the usage of Table,
+mapper(), and class objects to define the three areas of configuration.
+declarative moves these three types of configuration underneath the
+individual mapped class.  Regular SQLAlchemy schema and ORM constructs are
+used in most cases:</p>
+<pre class="literal-block">
+from sqlalchemy.ext.declarative import declarative_base
+
+Base = declarative_base()
+
+class SomeClass(Base):
+    __tablename__ = 'some_table'
+    id = Column('id', Integer, primary_key=True)
+    name =  Column('name', String(50))
+</pre>
+<p>Above, the <tt class="docutils literal"><span class="pre">declarative_base</span></tt> callable produces a new base class from
+which all mapped classes inherit from.  When the class definition is
+completed, a new <tt class="docutils literal"><span class="pre">Table</span></tt> and <tt class="docutils literal"><span class="pre">mapper()</span></tt> have been generated, accessible
+via the <tt class="docutils literal"><span class="pre">__table__</span></tt> and <tt class="docutils literal"><span class="pre">__mapper__</span></tt> attributes on the <tt class="docutils literal"><span class="pre">SomeClass</span></tt>
+class.</p>
+<p>You may omit the names from the Column definitions.  Declarative will fill
+them in for you:</p>
+<pre class="literal-block">
+class SomeClass(Base):
+    __tablename__ = 'some_table'
+    id = Column(Integer, primary_key=True)
+    name = Column(String(50))
+</pre>
+<p>Attributes may be added to the class after its construction, and they will
+be added to the underlying <tt class="docutils literal"><span class="pre">Table</span></tt> and <tt class="docutils literal"><span class="pre">mapper()</span></tt> definitions as
+appropriate:</p>
+<pre class="literal-block">
+SomeClass.data = Column('data', Unicode)
+SomeClass.related = relation(RelatedInfo)
+</pre>
+<p>Classes which are mapped explicitly using <tt class="docutils literal"><span class="pre">mapper()</span></tt> can interact freely
+with declarative classes.</p>
+<p>The <tt class="docutils literal"><span class="pre">declarative_base</span></tt> base class contains a
+<tt class="docutils literal"><span class="pre">MetaData</span></tt> object where newly defined <tt class="docutils literal"><span class="pre">Table</span></tt> objects are collected.
+This is accessed via the <tt class="docutils literal"><span class="pre">metadata</span></tt> class level accessor, so to
+create tables we can say:</p>
+<pre class="literal-block">
+engine = create_engine('sqlite://')
+Base.metadata.create_all(engine)
+</pre>
+<p>The <tt class="docutils literal"><span class="pre">Engine</span></tt> created above may also be directly associated with the
+declarative base class using the <tt class="docutils literal"><span class="pre">engine</span></tt> keyword argument, where it will
+be associated with the underlying <tt class="docutils literal"><span class="pre">MetaData</span></tt> object and allow SQL
+operations involving that metadata and its tables to make use of that
+engine automatically:</p>
+<pre class="literal-block">
+Base = declarative_base(engine=create_engine('sqlite://'))
+</pre>
+<p>Or, as <tt class="docutils literal"><span class="pre">MetaData</span></tt> allows, at any time using the <tt class="docutils literal"><span class="pre">bind</span></tt> attribute:</p>
+<pre class="literal-block">
+Base.metadata.bind = create_engine('sqlite://')
+</pre>
+<p>The <tt class="docutils literal"><span class="pre">declarative_base</span></tt> can also receive a pre-created <tt class="docutils literal"><span class="pre">MetaData</span></tt>
+object, which allows a declarative setup to be associated with an already existing traditional collection of <tt class="docutils literal"><span class="pre">Table</span></tt> objects:</p>
+<pre class="literal-block">
+mymetadata = MetaData()
+Base = declarative_base(metadata=mymetadata)
+</pre>
+<p>Relations to other classes are done in the usual way, with the added feature
+that the class specified to <tt class="docutils literal"><span class="pre">relation()</span></tt> may be a string name.  The &quot;class
+registry&quot; associated with <tt class="docutils literal"><span class="pre">Base</span></tt> is used at mapper compilation time to
+resolve the name into the actual class object, which is expected to have
+been defined once the mapper configuration is used:</p>
+<pre class="literal-block">
+class User(Base):
+    __tablename__ = 'users'
+
+    id = Column(Integer, primary_key=True)
+    name = Column(String(50))
+    addresses = relation(&quot;Address&quot;, backref=&quot;user&quot;)
+
+class Address(Base):
+    __tablename__ = 'addresses'
+
+    id = Column(Integer, primary_key=True)
+    email = Column(String(50))
+    user_id = Column(Integer, ForeignKey('users.id'))
+</pre>
+<p>Column constructs, since they are just that, are immediately usable, as
+below where we define a primary join condition on the <tt class="docutils literal"><span class="pre">Address</span></tt> class
+using them:</p>
+<pre class="literal-block">
+class Address(Base)
+    __tablename__ = 'addresses'
+
+    id = Column(Integer, primary_key=True)
+    email = Column(String(50))
+    user_id = Column(Integer, ForeignKey('users.id'))
+    user = relation(User, primaryjoin=user_id==User.id)
+</pre>
+<p>When an explicit join condition or other configuration which depends
+on multiple classes cannot be defined immediately due to some classes
+not yet being available, these can be defined after all classes have
+been created.  Attributes which are added to the class after
+its creation are associated with the Table/mapping in the same
+way as if they had been defined inline:</p>
+<pre class="literal-block">
+User.addresses = relation(Address, primaryjoin=Address.user_id==User.id)
+</pre>
+<p>Synonyms are one area where <tt class="docutils literal"><span class="pre">declarative</span></tt> needs to slightly change the
+usual SQLAlchemy configurational syntax.  To define a getter/setter which
+proxies to an underlying attribute, use <tt class="docutils literal"><span class="pre">synonym</span></tt> with the <tt class="docutils literal"><span class="pre">descriptor</span></tt>
+argument:</p>
+<pre class="literal-block">
+class MyClass(Base):
+    __tablename__ = 'sometable'
+
+    _attr = Column('attr', String)
+
+    def _get_attr(self):
+        return self._some_attr
+    def _set_attr(self, attr)
+        self._some_attr = attr
+    attr = synonym('_attr', descriptor=property(_get_attr, _set_attr))
+</pre>
+<p>The above synonym is then usable as an instance attribute as well as a
+class-level expression construct:</p>
+<pre class="literal-block">
+x = MyClass()
+x.attr = &quot;some value&quot;
+session.query(MyClass).filter(MyClass.attr == 'some other value').all()
+</pre>
+<p>As an alternative to <tt class="docutils literal"><span class="pre">__tablename__</span></tt>, a direct <tt class="docutils literal"><span class="pre">Table</span></tt> construct may be
+used.  The <tt class="docutils literal"><span class="pre">Column</span></tt> objects, which in this case require their names,
+will be added to the mapping just like a regular mapping to a table:</p>
+<pre class="literal-block">
+class MyClass(Base):
+    __table__ = Table('my_table', Base.metadata,
+        Column('id', Integer, primary_key=True),
+        Column('name', String(50))
+    )
+</pre>
+<p>This is the preferred approach when using reflected tables, as below:</p>
+<pre class="literal-block">
+class MyClass(Base):
+    __table__ = Table('my_table', Base.metadata, autoload=True)
+</pre>
+<p>Mapper arguments are specified using the <tt class="docutils literal"><span class="pre">__mapper_args__</span></tt> class variable.
+Note that the column objects declared on the class are immediately usable,
+as in this joined-table inheritance example:</p>
+<pre class="literal-block">
+class Person(Base):
+    __tablename__ = 'people'
+    id = Column(Integer, primary_key=True)
+    discriminator = Column(String(50))
+    __mapper_args__ = {'polymorphic_on':discriminator}
+
+class Engineer(Person):
+    __tablename__ = 'engineers'
+    __mapper_args__ = {'polymorphic_identity':'engineer'}
+    id = Column(Integer, ForeignKey('people.id'), primary_key=True)
+    primary_language = Column(String(50))
+</pre>
+<p>For single-table inheritance, the <tt class="docutils literal"><span class="pre">__tablename__</span></tt> and <tt class="docutils literal"><span class="pre">__table__</span></tt> class
+variables are optional on a class when the class inherits from another
+mapped class.</p>
+<p>As a convenience feature, the <tt class="docutils literal"><span class="pre">declarative_base()</span></tt> sets a default
+constructor on classes which takes keyword arguments, and assigns them to
+the named attributes:</p>
+<pre class="literal-block">
+e = Engineer(primary_language='python')
+</pre>
+<p>Note that <tt class="docutils literal"><span class="pre">declarative</span></tt> has no integration built in with sessions, and is
+only intended as an optional syntax for the regular usage of mappers and
+Table objects.  A typical application setup using <tt class="docutils literal"><span class="pre">scoped_session</span></tt> might
+look like:</p>
+<pre class="literal-block">
+engine = create_engine('postgres://scott:tiger&#64;localhost/test')
+Session = scoped_session(sessionmaker(transactional=True, autoflush=False, bind=engine))
+Base = declarative_base()
+</pre>
+<p>Mapped instances then make usage of <tt class="docutils literal"><span class="pre">Session</span></tt> in the usual way.</p>
+</div>
+    
+
+        
+    
+    <A name="docstrings_sqlalchemy.ext.declarative_modfunc"></a>
+    
+    <div class="sectionL3">
+
+    <h3>Module Functions</h3>
+    
+    
+                
+    <div class="darkcell">
+    
+    <A name="docstrings_sqlalchemy.ext.declarative_modfunc_comparable_using"></a>
+    <b>def comparable_using(<i>comparator_factory</i>)</b>
+    <div class="docstring">
+    <p>Decorator, allow a Python &#64;property to be used in query criteria.</p>
+<p>A decorator front end to <a href="sqlalchemy_orm.html#docstrings_sqlalchemy.orm_modfunc_comparable_property">comparable_property()</a>, passes
+throgh the comparator_factory and the function being decorated:</p>
+<pre class="literal-block">
+&#64;comparable_using(MyComparatorType)
+&#64;property
+def prop(self):
+    return 'special sauce'
+</pre>
+<p>The regular <tt class="docutils literal"><span class="pre">comparable_property()</span></tt> is also usable directly in a
+declarative setting and may be convenient for read/write properties:</p>
+<pre class="literal-block">
+prop = comparable_property(MyComparatorType)
+</pre>
+
+    </div>
+    </div>
+
+                
+    <div class="darkcell">
+    
+    <A name="docstrings_sqlalchemy.ext.declarative_modfunc_declarative_base"></a>
+    <b>def declarative_base(<i>engine=None</i>, <i>metadata=None</i>, <i>mapper=None</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                
+    <div class="darkcell">
+    
+    <A name="docstrings_sqlalchemy.ext.declarative_modfunc_declared_synonym"></a>
+    <b>def declared_synonym(<i>*args</i>, <i>**kwargs</i>)</b>
+    <div class="docstring">
+    <p>Deprecated.  Use synonym(name, descriptor=prop).</p>
+
+    </div>
+    </div>
+
+                
+    <div class="darkcell">
+    
+    <A name="docstrings_sqlalchemy.ext.declarative_modfunc_synonym_for"></a>
+    <b>def synonym_for(<i>name</i>, <i>map_column=False</i>)</b>
+    <div class="docstring">
+    <p>Decorator, make a Python &#64;property a query synonym for a column.</p>
+<p>A decorator version of <a href="sqlalchemy_orm.html#docstrings_sqlalchemy.orm_modfunc_synonym">synonym()</a>.  The function being
+decorated is the 'descriptor', otherwise passes its arguments through
+to synonym():</p>
+<pre class="literal-block">
+&#64;synonym_for('col')
+&#64;property
+def prop(self):
+    return 'special sauce'
+</pre>
+<p>The regular <tt class="docutils literal"><span class="pre">synonym()</span></tt> is also usable directly in a declarative
+setting and may be convenient for read/write properties:</p>
+<pre class="literal-block">
+prop = synonym('col', descriptor=property(_read_prop, _write_prop))
+</pre>
+
+    </div>
+    </div>
+
+        
+
+    </div>
+
+
+
+
+    
+
+    </div>
+
+
+
+
+
+    <div class="bottomnav">
+        
+    <div class="prevnext">
+            Up: <a href="docstrings.html">API Documentation</a>
+
+               |   
+            Previous: <a href="sqlalchemy_orm_shard.html">module sqlalchemy.orm.shard</a>
+
+               |   
+            Next: <a href="sqlalchemy_ext_associationproxy.html">module sqlalchemy.ext.associationproxy</a>
+    </div>
+
+    </div>
+
+
+
+
+
+
+
+
+</body>
+</html>
+
+
+
+
+
+

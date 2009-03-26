@@ -1,0 +1,30 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:py="http://genshi.edgewall.org/"
+      xmlns:xi="http://www.w3.org/2001/XInclude">
+<xi:include href="master.html" />
+<head></head>
+<body>
+      <div class="tableList" style="background-color:#aaddff; float:left; clear:left; border:1px solid; margin:0px 5px 0px 0px; padding:10px;">
+            <b>Tables</b>
+            
+            ${tmpl_context.databaseView(value=databaseValue, controller=controller)}
+      </div>
+      <div class="mainView" style="bg-color:#ffffff;">
+            <py:if test="defined('tableName')">
+                  <h2 style="margin: 0px 5px 0px 0px;">$tableName</h2>
+                  <div style="float:left;">
+                        <div style="float:left; padding-right:10px;"><a href="../addRecord/$tableName">AddRecord</a></div>
+                        <div style="float:left; padding-right:10px;"><a href="../tableView/$tableName">TableView</a></div>
+                        <div style="float:left; padding-right:10px;"><a href="../tableDef/$tableName">TableDef</a></div>
+                  </div>
+                  <br/>
+            </py:if>
+                  
+            <py:if test="defined('tmpl_context') and defined('mainView')">
+                  ${tmpl_context.mainView(value=mainValue)}
+            </py:if>
+      </div>
+</body>
+</html>

@@ -1,0 +1,15 @@
+Check that Genshi is installed.
+
+>>> from tw.api import EngineManager
+>>> engines = EngineManager()
+>>> engines.load_engine('toscawidgets')
+>>> 'toscawidgets' in engines
+True
+
+Try to load a template from a string
+
+>>> template = "<h1>${msg}</h1>"
+>>> name = 'toscawidgets'
+>>> tpl = engines.load_template(template, name)
+>>> engines[name].render({'msg':'Hello!'}, template=tpl)
+'<h1>Hello!</h1>'

@@ -1,0 +1,241 @@
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<title>SQLAlchemy 0.4 Documentation - module sqlalchemy.interfaces</title>
+	
+    
+    <link rel="stylesheet" href="style.css"></link>
+    <link rel="stylesheet" href="docs.css"></link>
+    <link href="syntaxhighlight.css" rel="stylesheet" type="text/css"></link>
+    <script src="scripts.js"></script>
+
+    <link rel="stylesheet" href="docutil.css"></link>
+
+
+
+</head>
+<body>
+
+
+
+
+
+
+
+
+<div id="topanchor"><a name="top">&nbsp;</a></div>
+
+
+<h1>SQLAlchemy 0.4 Documentation</h1>
+
+<div id="pagecontrol"><a href="index.html">Multiple Pages</a> | <a href="documentation.html">One Page</a></div>
+
+<div class="versionheader">Version: 0.4.7p1   Last Updated: 07/31/08 11:09:56</div>
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class="topnav">
+
+    
+    <div class="navbanner">
+        <a href="index.html" class="totoc">Table of Contents</a>
+        
+    <div class="prevnext">
+            Up: <a href="docstrings.html">API Documentation</a>
+
+               |   
+            Previous: <a href="sqlalchemy_exceptions.html">module sqlalchemy.exceptions</a>
+
+               |   
+            Next: <a href="sqlalchemy_pool.html">module sqlalchemy.pool</a>
+    </div>
+
+        <h2>module sqlalchemy.interfaces</h2>
+    </div>
+
+	
+	
+    <ul>
+        
+        <li><a style="" href="sqlalchemy_interfaces.html#docstrings_sqlalchemy.interfaces_PoolListener">class PoolListener(object)</a></li>
+
+    </ul>
+
+	</div>
+
+
+
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.interfaces"></a>
+    
+    <div class="sectionL2">
+
+    <h3>module sqlalchemy.interfaces</h3>
+    
+    
+    <div class="darkcell"><p>Interfaces and abstract types.</p>
+</div>
+    
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.interfaces_PoolListener"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class PoolListener(object)</h3>
+    
+    
+    <div class="darkcell"><p>Hooks into the lifecycle of connections in a <tt class="docutils literal"><span class="pre">Pool</span></tt>.</p>
+<p>All of the standard connection <a href="sqlalchemy_pool.html#docstrings_sqlalchemy.pool_Pool">Pool</a> types can
+accept event listeners for key connection lifecycle events:
+creation, pool check-out and check-in.  There are no events fired
+when a connection closes.</p>
+<p>For any given DB-API connection, there will be one <tt class="docutils literal"><span class="pre">connect</span></tt>
+event, <cite>n</cite> number of <tt class="docutils literal"><span class="pre">checkout</span></tt> events, and either <cite>n</cite> or <cite>n - 1</cite>
+<tt class="docutils literal"><span class="pre">checkin</span></tt> events.  (If a <tt class="docutils literal"><span class="pre">Connection</span></tt> is detached from its
+pool via the <tt class="docutils literal"><span class="pre">detach()</span></tt> method, it won't be checked back in.)</p>
+<p>These are low-level events for low-level objects: raw Python
+DB-API connections, without the conveniences of the SQLAlchemy
+<tt class="docutils literal"><span class="pre">Connection</span></tt> wrapper, <tt class="docutils literal"><span class="pre">Dialect</span></tt> services or <tt class="docutils literal"><span class="pre">ClauseElement</span></tt>
+execution.  If you execute SQL through the connection, explicitly
+closing all cursors and other resources is recommended.</p>
+<p>Events also receive a <tt class="docutils literal"><span class="pre">_ConnectionRecord</span></tt>, a long-lived internal
+<tt class="docutils literal"><span class="pre">Pool</span></tt> object that basically represents a &quot;slot&quot; in the
+connection pool.  <tt class="docutils literal"><span class="pre">_ConnectionRecord</span></tt> objects have one public
+attribute of note: <tt class="docutils literal"><span class="pre">info</span></tt>, a dictionary whose contents are
+scoped to the lifetime of the DB-API connection managed by the
+record.  You can use this shared storage area however you like.</p>
+<p>There is no need to subclass <tt class="docutils literal"><span class="pre">PoolListener</span></tt> to handle events.
+Any class that implements one or more of these methods can be used
+as a pool listener.  The <tt class="docutils literal"><span class="pre">Pool</span></tt> will inspect the methods
+provided by a listener object and add the listener to one or more
+internal event queues based on its capabilities.  In terms of
+efficiency and function call overhead, you're much better off only
+providing implementations for the hooks you'll be using.</p>
+</div>
+    
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def checkin(<i>self</i>, <i>dbapi_con</i>, <i>con_record</i>)</b>
+    <div class="docstring">
+    <p>Called when a connection returns to the pool.</p>
+<p>Note that the connection may be closed, and may be None if the
+connection has been invalidated.  <tt class="docutils literal"><span class="pre">checkin</span></tt> will not be called
+for detached connections.  (They do not return to the pool.)</p>
+<dl class="docutils">
+<dt>dbapi_con</dt>
+<dd>A raw DB-API connection</dd>
+<dt>con_record</dt>
+<dd>The <tt class="docutils literal"><span class="pre">_ConnectionRecord</span></tt> that persistently manages the connection</dd>
+</dl>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def checkout(<i>self</i>, <i>dbapi_con</i>, <i>con_record</i>, <i>con_proxy</i>)</b>
+    <div class="docstring">
+    <p>Called when a connection is retrieved from the Pool.</p>
+<dl class="docutils">
+<dt>dbapi_con</dt>
+<dd>A raw DB-API connection</dd>
+<dt>con_record</dt>
+<dd>The <tt class="docutils literal"><span class="pre">_ConnectionRecord</span></tt> that persistently manages the connection</dd>
+<dt>con_proxy</dt>
+<dd>The <tt class="docutils literal"><span class="pre">_ConnectionFairy</span></tt> which manages the connection for the span of
+the current checkout.</dd>
+</dl>
+<p>If you raise an <tt class="docutils literal"><span class="pre">exceptions.DisconnectionError</span></tt>, the current
+connection will be disposed and a fresh connection retrieved.
+Processing of all checkout listeners will abort and restart
+using the new connection.</p>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def connect(<i>self</i>, <i>dbapi_con</i>, <i>con_record</i>)</b>
+    <div class="docstring">
+    <p>Called once for each new DB-API connection or Pool's <tt class="docutils literal"><span class="pre">creator()</span></tt>.</p>
+<dl class="docutils">
+<dt>dbapi_con</dt>
+<dd>A newly connected raw DB-API connection (not a SQLAlchemy
+<tt class="docutils literal"><span class="pre">Connection</span></tt> wrapper).</dd>
+<dt>con_record</dt>
+<dd>The <tt class="docutils literal"><span class="pre">_ConnectionRecord</span></tt> that persistently manages the connection</dd>
+</dl>
+
+    </div>
+    </div>
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+    
+
+    </div>
+
+
+
+
+
+    <div class="bottomnav">
+        
+    <div class="prevnext">
+            Up: <a href="docstrings.html">API Documentation</a>
+
+               |   
+            Previous: <a href="sqlalchemy_exceptions.html">module sqlalchemy.exceptions</a>
+
+               |   
+            Next: <a href="sqlalchemy_pool.html">module sqlalchemy.pool</a>
+    </div>
+
+    </div>
+
+
+
+
+
+
+
+
+</body>
+</html>
+
+
+
+
+
+

@@ -1,0 +1,724 @@
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<title>SQLAlchemy 0.4 Documentation - module sqlalchemy.databases.maxdb</title>
+	
+    
+    <link rel="stylesheet" href="style.css"></link>
+    <link rel="stylesheet" href="docs.css"></link>
+    <link href="syntaxhighlight.css" rel="stylesheet" type="text/css"></link>
+    <script src="scripts.js"></script>
+
+    <link rel="stylesheet" href="docutil.css"></link>
+
+
+
+</head>
+<body>
+
+
+
+
+
+
+
+
+<div id="topanchor"><a name="top">&nbsp;</a></div>
+
+
+<h1>SQLAlchemy 0.4 Documentation</h1>
+
+<div id="pagecontrol"><a href="index.html">Multiple Pages</a> | <a href="documentation.html">One Page</a></div>
+
+<div class="versionheader">Version: 0.4.7p1   Last Updated: 07/31/08 11:09:56</div>
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class="topnav">
+
+    
+    <div class="navbanner">
+        <a href="index.html" class="totoc">Table of Contents</a>
+        
+    <div class="prevnext">
+            Up: <a href="docstrings.html">API Documentation</a>
+
+               |   
+            Previous: <a href="sqlalchemy_databases_access.html">module sqlalchemy.databases.access</a>
+
+    </div>
+
+        <h2>module sqlalchemy.databases.maxdb</h2>
+    </div>
+
+	
+	
+    <ul>
+        
+        <li><a style="" href="sqlalchemy_databases_maxdb.html#docstrings_sqlalchemy.databases.maxdb_MaxBlob">class MaxBlob(Binary)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_maxdb.html#docstrings_sqlalchemy.databases.maxdb_MaxBoolean">class MaxBoolean(Boolean)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_maxdb.html#docstrings_sqlalchemy.databases.maxdb_MaxChar">class MaxChar(_StringType)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_maxdb.html#docstrings_sqlalchemy.databases.maxdb_MaxDate">class MaxDate(Date)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_maxdb.html#docstrings_sqlalchemy.databases.maxdb_MaxFloat">class MaxFloat(Float)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_maxdb.html#docstrings_sqlalchemy.databases.maxdb_MaxInteger">class MaxInteger(Integer)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_maxdb.html#docstrings_sqlalchemy.databases.maxdb_MaxNumeric">class MaxNumeric(Numeric)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_maxdb.html#docstrings_sqlalchemy.databases.maxdb_MaxSmallInteger">class MaxSmallInteger(MaxInteger)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_maxdb.html#docstrings_sqlalchemy.databases.maxdb_MaxString">class MaxString(_StringType)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_maxdb.html#docstrings_sqlalchemy.databases.maxdb_MaxText">class MaxText(_StringType)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_maxdb.html#docstrings_sqlalchemy.databases.maxdb_MaxTime">class MaxTime(Time)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_maxdb.html#docstrings_sqlalchemy.databases.maxdb_MaxTimestamp">class MaxTimestamp(DateTime)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_databases_maxdb.html#docstrings_sqlalchemy.databases.maxdb_MaxUnicode">class MaxUnicode(_StringType)</a></li>
+
+    </ul>
+
+	</div>
+
+
+
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.databases.maxdb"></a>
+    
+    <div class="sectionL2">
+
+    <h3>module sqlalchemy.databases.maxdb</h3>
+    
+    
+    <div class="darkcell"><p>Support for the MaxDB database.</p>
+<p>TODO: More module docs!  MaxDB support is currently experimental.</p>
+<div class="section">
+<h1><a id="overview" name="overview">Overview</a></h1>
+<p>The <tt class="docutils literal"><span class="pre">maxdb</span></tt> dialect is <strong>experimental</strong> and has only been tested on 7.6.03.007
+and 7.6.00.037.  Of these, <strong>only 7.6.03.007 will work</strong> with SQLAlchemy's ORM.
+The earlier version has severe <tt class="docutils literal"><span class="pre">LEFT</span> <span class="pre">JOIN</span></tt> limitations and will return
+incorrect results from even very simple ORM queries.</p>
+<p>Only the native Python DB-API is currently supported.  ODBC driver support
+is a future enhancement.</p>
+</div>
+<div class="section">
+<h1><a id="connecting" name="connecting">Connecting</a></h1>
+<p>The username is case-sensitive.  If you usually connect to the
+database with sqlcli and other tools in lower case, you likely need to
+use upper case for DB-API.</p>
+</div>
+<div class="section">
+<h1><a id="implementation-notes" name="implementation-notes">Implementation Notes</a></h1>
+<p>Also check the DatabaseNotes page on the wiki for detailed information.</p>
+<p>With the 7.6.00.37 driver and Python 2.5, it seems that all DB-API
+generated exceptions are broken and can cause Python to crash.</p>
+<p>For 'somecol.in_([])' to work, the IN operator's generation must be changed
+to cast 'NULL' to a numeric, i.e. NUM(NULL).  The DB-API doesn't accept a
+bind parameter there, so that particular generation must inline the NULL value,
+which depends on [ticket:807].</p>
+<p>The DB-API is very picky about where bind params may be used in queries.</p>
+<p>Bind params for some functions (e.g. MOD) need type information supplied.
+The dialect does not yet do this automatically.</p>
+<p>Max will occasionally throw up 'bad sql, compile again' exceptions for
+perfectly valid SQL.  The dialect does not currently handle these, more
+research is needed.</p>
+<p>MaxDB 7.5 and Sap DB &lt;= 7.4 reportedly do not support schemas.  A very
+slightly different version of this dialect would be required to support
+those versions, and can easily be added if there is demand.  Some other
+required components such as an Max-aware 'old oracle style' join compiler
+(thetas with (+) outer indicators) are already done and available for
+integration- email the devel list if you're interested in working on
+this.</p>
+</div>
+</div>
+    
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.databases.maxdb_MaxBlob"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class MaxBlob(<a href="sqlalchemy_types.html#docstrings_sqlalchemy.types_Binary">Binary</a>)</h3>
+    
+    
+    
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def bind_processor(<i>self</i>, <i>dialect</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def get_col_spec(<i>self</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def result_processor(<i>self</i>, <i>dialect</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.databases.maxdb_MaxBoolean"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class MaxBoolean(<a href="sqlalchemy_types.html#docstrings_sqlalchemy.types_Boolean">Boolean</a>)</h3>
+    
+    
+    
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def get_col_spec(<i>self</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.databases.maxdb_MaxChar"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class MaxChar(_StringType)</h3>
+    
+    
+    
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.databases.maxdb_MaxDate"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class MaxDate(<a href="sqlalchemy_types.html#docstrings_sqlalchemy.types_Date">Date</a>)</h3>
+    
+    
+    
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def bind_processor(<i>self</i>, <i>dialect</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def get_col_spec(<i>self</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def result_processor(<i>self</i>, <i>dialect</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.databases.maxdb_MaxFloat"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class MaxFloat(<a href="sqlalchemy_types.html#docstrings_sqlalchemy.types_Float">Float</a>)</h3>
+    
+    
+    <div class="darkcell"><p>The FLOAT data type.</p>
+</div>
+    
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def get_col_spec(<i>self</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.databases.maxdb_MaxInteger"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class MaxInteger(<a href="sqlalchemy_types.html#docstrings_sqlalchemy.types_Integer">Integer</a>)</h3>
+    
+    
+    
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def get_col_spec(<i>self</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.databases.maxdb_MaxNumeric"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class MaxNumeric(<a href="sqlalchemy_types.html#docstrings_sqlalchemy.types_Numeric">Numeric</a>)</h3>
+    
+    
+    <div class="darkcell"><p>The FIXED (also NUMERIC, DECIMAL) data type.</p>
+</div>
+    
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def __init__(<i>self</i>, <i>precision=None</i>, <i>length=None</i>, <i>**kw</i>)</b>
+    <div class="docstring">
+    <p>Construct a new <tt class="docutils literal"><span class="pre">MaxNumeric</span></tt>.</p>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def bind_processor(<i>self</i>, <i>dialect</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def get_col_spec(<i>self</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.databases.maxdb_MaxSmallInteger"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class MaxSmallInteger(<a href="sqlalchemy_databases_maxdb.html#docstrings_sqlalchemy.databases.maxdb_MaxInteger">MaxInteger</a>)</h3>
+    
+    
+    
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def get_col_spec(<i>self</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.databases.maxdb_MaxString"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class MaxString(_StringType)</h3>
+    
+    
+    
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def __init__(<i>self</i>, <i>*a</i>, <i>**kw</i>)</b>
+    <div class="docstring">
+    <p>Construct a new <tt class="docutils literal"><span class="pre">MaxString</span></tt>.</p>
+
+    </div>
+    </div>
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.databases.maxdb_MaxText"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class MaxText(_StringType)</h3>
+    
+    
+    
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def __init__(<i>self</i>, <i>*a</i>, <i>**kw</i>)</b>
+    <div class="docstring">
+    <p>Construct a new <tt class="docutils literal"><span class="pre">MaxText</span></tt>.</p>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def get_col_spec(<i>self</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.databases.maxdb_MaxTime"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class MaxTime(<a href="sqlalchemy_types.html#docstrings_sqlalchemy.types_Time">Time</a>)</h3>
+    
+    
+    
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def bind_processor(<i>self</i>, <i>dialect</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def get_col_spec(<i>self</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def result_processor(<i>self</i>, <i>dialect</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.databases.maxdb_MaxTimestamp"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class MaxTimestamp(<a href="sqlalchemy_types.html#docstrings_sqlalchemy.types_DateTime">DateTime</a>)</h3>
+    
+    
+    
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def bind_processor(<i>self</i>, <i>dialect</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def get_col_spec(<i>self</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def result_processor(<i>self</i>, <i>dialect</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.databases.maxdb_MaxUnicode"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class MaxUnicode(_StringType)</h3>
+    
+    
+    
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def __init__(<i>self</i>, <i>length=None</i>, <i>**kw</i>)</b>
+    <div class="docstring">
+    <p>Construct a new <tt class="docutils literal"><span class="pre">MaxUnicode</span></tt>.</p>
+
+    </div>
+    </div>
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+    
+
+    </div>
+
+
+
+
+
+    <div class="bottomnav">
+        
+    <div class="prevnext">
+            Up: <a href="docstrings.html">API Documentation</a>
+
+               |   
+            Previous: <a href="sqlalchemy_databases_access.html">module sqlalchemy.databases.access</a>
+
+    </div>
+
+    </div>
+
+
+
+
+
+
+
+
+</body>
+</html>
+
+
+
+
+
+

@@ -1,0 +1,281 @@
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<title>SQLAlchemy 0.4 Documentation - module sqlalchemy.orm.shard</title>
+	
+    
+    <link rel="stylesheet" href="style.css"></link>
+    <link rel="stylesheet" href="docs.css"></link>
+    <link href="syntaxhighlight.css" rel="stylesheet" type="text/css"></link>
+    <script src="scripts.js"></script>
+
+    <link rel="stylesheet" href="docutil.css"></link>
+
+
+
+</head>
+<body>
+
+
+
+
+
+
+
+
+<div id="topanchor"><a name="top">&nbsp;</a></div>
+
+
+<h1>SQLAlchemy 0.4 Documentation</h1>
+
+<div id="pagecontrol"><a href="index.html">Multiple Pages</a> | <a href="documentation.html">One Page</a></div>
+
+<div class="versionheader">Version: 0.4.7p1   Last Updated: 07/31/08 11:09:56</div>
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class="topnav">
+
+    
+    <div class="navbanner">
+        <a href="index.html" class="totoc">Table of Contents</a>
+        
+    <div class="prevnext">
+            Up: <a href="docstrings.html">API Documentation</a>
+
+               |   
+            Previous: <a href="sqlalchemy_orm_session.html">module sqlalchemy.orm.session</a>
+
+               |   
+            Next: <a href="sqlalchemy_ext_declarative.html">module sqlalchemy.ext.declarative</a>
+    </div>
+
+        <h2>module sqlalchemy.orm.shard</h2>
+    </div>
+
+	
+	
+    <ul>
+        
+        <li><a style="" href="sqlalchemy_orm_shard.html#docstrings_sqlalchemy.orm.shard_ShardedQuery">class ShardedQuery(Query)</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_orm_shard.html#docstrings_sqlalchemy.orm.shard_ShardedSession">class ShardedSession(Session)</a></li>
+
+    </ul>
+
+	</div>
+
+
+
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.orm.shard"></a>
+    
+    <div class="sectionL2">
+
+    <h3>module sqlalchemy.orm.shard</h3>
+    
+    
+    <div class="darkcell"><p>Defines a rudimental 'horizontal sharding' system which allows a
+Session to distribute queries and persistence operations across multiple
+databases.</p>
+<p>For a usage example, see the example <tt class="docutils literal"><span class="pre">examples/sharding/attribute_shard.py</span></tt>.</p>
+</div>
+    
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.orm.shard_ShardedQuery"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class ShardedQuery(<a href="sqlalchemy_orm_query.html#docstrings_sqlalchemy.orm.query_Query">Query</a>)</h3>
+    
+    
+    
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def __init__(<i>self</i>, <i>*args</i>, <i>**kwargs</i>)</b>
+    <div class="docstring">
+    <p>Construct a new <tt class="docutils literal"><span class="pre">ShardedQuery</span></tt>.</p>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def get(<i>self</i>, <i>ident</i>, <i>**kwargs</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def load(<i>self</i>, <i>ident</i>, <i>**kwargs</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def set_shard(<i>self</i>, <i>shard_id</i>)</b>
+    <div class="docstring">
+    <p>return a new query, limited to a single shard ID.</p>
+<p>all subsequent operations with the returned query will
+be against the single shard regardless of other state.</p>
+
+    </div>
+    </div>
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.orm.shard_ShardedSession"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class ShardedSession(<a href="sqlalchemy_orm_session.html#docstrings_sqlalchemy.orm.session_Session">Session</a>)</h3>
+    
+    
+    
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def __init__(<i>self</i>, <i>shard_chooser</i>, <i>id_chooser</i>, <i>query_chooser</i>, <i>shards=None</i>, <i>**kwargs</i>)</b>
+    <div class="docstring">
+    <p>construct a ShardedSession.</p>
+<dl class="docutils">
+<dt>shard_chooser</dt>
+<dd>a callable which, passed a Mapper, a mapped instance, and possibly a
+SQL clause, returns a shard ID. this id may be based off of the
+attributes present within the object, or on some round-robin scheme. If
+the scheme is based on a selection, it should set whatever state on the
+instance to mark it in the future as participating in that shard.</dd>
+<dt>id_chooser</dt>
+<dd>a callable, passed a query and a tuple of identity values,
+which should return a list of shard ids where the ID might
+reside.  The databases will be queried in the order of this
+listing.</dd>
+<dt>query_chooser</dt>
+<dd>for a given Query, returns the list of shard_ids where the query
+should be issued.  Results from all shards returned will be
+combined together into a single listing.</dd>
+</dl>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def bind_shard(<i>self</i>, <i>shard_id</i>, <i>bind</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def connection(<i>self</i>, <i>mapper=None</i>, <i>instance=None</i>, <i>shard_id=None</i>, <i>**kwargs</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def get_bind(<i>self</i>, <i>mapper</i>, <i>shard_id=None</i>, <i>instance=None</i>, <i>clause=None</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+    
+
+    </div>
+
+
+
+
+
+    <div class="bottomnav">
+        
+    <div class="prevnext">
+            Up: <a href="docstrings.html">API Documentation</a>
+
+               |   
+            Previous: <a href="sqlalchemy_orm_session.html">module sqlalchemy.orm.session</a>
+
+               |   
+            Next: <a href="sqlalchemy_ext_declarative.html">module sqlalchemy.ext.declarative</a>
+    </div>
+
+    </div>
+
+
+
+
+
+
+
+
+</body>
+</html>
+
+
+
+
+
+

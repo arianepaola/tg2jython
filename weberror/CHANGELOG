@@ -1,0 +1,23 @@
+WebError Changelog
+==================
+
+0.10 (**tip**)
+* Making main page links more accessible to browsers with no JS on per
+  Pylons Trac ticket #489.
+
+0.9 (07/08/2008)
+* Switched to using Pygments for highlighting.
+* Added better handling of exceptions that don't cleanly convert to str().
+* Added dependency library listings for XML output.
+
+0.8 (06/12/2008)
+* Added fairly basic pdbcapture system.
+* Fixed errors in unicode handling and exception displaying.
+* Updated JS to use jQuery where applicable. Updated jQuery lib and added
+  jQuery hotkeys plugin.
+* Refactored to a flatter layout.
+
+0.8a (02/27/2008)
+* Fixed error in email due to restructuring of project.
+* Added xml formattor output.
+* Added try/except in case an objects repr throws an exception.

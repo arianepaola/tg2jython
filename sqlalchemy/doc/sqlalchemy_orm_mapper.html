@@ -1,0 +1,526 @@
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<title>SQLAlchemy 0.4 Documentation - module sqlalchemy.orm.mapper</title>
+	
+    
+    <link rel="stylesheet" href="style.css"></link>
+    <link rel="stylesheet" href="docs.css"></link>
+    <link href="syntaxhighlight.css" rel="stylesheet" type="text/css"></link>
+    <script src="scripts.js"></script>
+
+    <link rel="stylesheet" href="docutil.css"></link>
+
+
+
+</head>
+<body>
+
+
+
+
+
+
+
+
+<div id="topanchor"><a name="top">&nbsp;</a></div>
+
+
+<h1>SQLAlchemy 0.4 Documentation</h1>
+
+<div id="pagecontrol"><a href="index.html">Multiple Pages</a> | <a href="documentation.html">One Page</a></div>
+
+<div class="versionheader">Version: 0.4.7p1   Last Updated: 07/31/08 11:09:56</div>
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class="topnav">
+
+    
+    <div class="navbanner">
+        <a href="index.html" class="totoc">Table of Contents</a>
+        
+    <div class="prevnext">
+            Up: <a href="docstrings.html">API Documentation</a>
+
+               |   
+            Previous: <a href="sqlalchemy_orm_interfaces.html">module sqlalchemy.orm.interfaces</a>
+
+               |   
+            Next: <a href="sqlalchemy_orm_properties.html">module sqlalchemy.orm.properties</a>
+    </div>
+
+        <h2>module sqlalchemy.orm.mapper</h2>
+    </div>
+
+	
+	
+    <ul>
+        
+        <li><a style="" href="sqlalchemy_orm_mapper.html#docstrings_sqlalchemy.orm.mapper_modfunc">Module Functions</a></li>
+
+	        <li>
+                
+    <ul>
+        
+        <li><a style="" href="sqlalchemy_orm_mapper.html#docstrings_sqlalchemy.orm.mapper_modfunc_class_mapper">class_mapper()</a></li>
+
+        
+        <li><a style="" href="sqlalchemy_orm_mapper.html#docstrings_sqlalchemy.orm.mapper_modfunc_object_mapper">object_mapper()</a></li>
+
+    </ul>
+
+	        </li>
+        
+        <li><a style="" href="sqlalchemy_orm_mapper.html#docstrings_sqlalchemy.orm.mapper_Mapper">class Mapper(object)</a></li>
+
+    </ul>
+
+	</div>
+
+
+
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.orm.mapper"></a>
+    
+    <div class="sectionL2">
+
+    <h3>module sqlalchemy.orm.mapper</h3>
+    
+    
+    <div class="darkcell"><p>Defines the <a href="sqlalchemy_orm_mapper.html#docstrings_sqlalchemy.orm.mapper_Mapper">Mapper</a> class, the central configurational
+unit which associates a class with a database table.</p>
+<p>This is a semi-private module; the main configurational API of the ORM is
+available in <a href="sqlalchemy_orm.html#docstrings_sqlalchemy.orm">module sqlalchemy.orm</a>.</p>
+</div>
+    
+
+        
+    
+    <A name="docstrings_sqlalchemy.orm.mapper_modfunc"></a>
+    
+    <div class="sectionL3">
+
+    <h3>Module Functions</h3>
+    
+    
+                
+    <div class="darkcell">
+    
+    <A name="docstrings_sqlalchemy.orm.mapper_modfunc_class_mapper"></a>
+    <b>def class_mapper(<i>class_</i>, <i>entity_name=None</i>, <i>compile=True</i>, <i>raiseerror=True</i>)</b>
+    <div class="docstring">
+    <p>Given a class and optional entity_name, return the primary Mapper associated with the key.</p>
+<p>If no mapper can be located, raises <tt class="docutils literal"><span class="pre">InvalidRequestError</span></tt>.</p>
+
+    </div>
+    </div>
+
+                
+    <div class="darkcell">
+    
+    <A name="docstrings_sqlalchemy.orm.mapper_modfunc_object_mapper"></a>
+    <b>def object_mapper(<i>object</i>, <i>entity_name=None</i>, <i>raiseerror=True</i>)</b>
+    <div class="docstring">
+    <p>Given an object, return the primary Mapper associated with the object instance.</p>
+<dl class="docutils">
+<dt>object</dt>
+<dd>The object instance.</dd>
+<dt>entity_name</dt>
+<dd>Entity name of the mapper to retrieve, if the given instance is
+transient.  Otherwise uses the entity name already associated
+with the instance.</dd>
+<dt>raiseerror</dt>
+<dd>Defaults to True: raise an <tt class="docutils literal"><span class="pre">InvalidRequestError</span></tt> if no mapper can
+be located.  If False, return None.</dd>
+</dl>
+
+    </div>
+    </div>
+
+        
+
+    </div>
+
+
+
+
+            
+    
+
+    
+    
+    <A name="docstrings_sqlalchemy.orm.mapper_Mapper"></a>
+    
+    <div class="sectionL3">
+
+    <h3>class Mapper(object)</h3>
+    
+    
+    <div class="darkcell"><p>Define the correlation of class attributes to database table
+columns.</p>
+<p>Instances of this class should be constructed via the
+<a href="sqlalchemy_orm.html#docstrings_sqlalchemy.orm_modfunc_mapper">mapper()</a> function.</p>
+</div>
+    
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def __init__(<i>self</i>, <i>class_</i>, <i>local_table</i>, <i>properties=None</i>, <i>primary_key=None</i>, <i>non_primary=False</i>, <i>inherits=None</i>, <i>inherit_condition=None</i>, <i>inherit_foreign_keys=None</i>, <i>extension=None</i>, <i>order_by=False</i>, <i>allow_column_override=False</i>, <i>entity_name=None</i>, <i>always_refresh=False</i>, <i>version_id_col=None</i>, <i>polymorphic_on=None</i>, <i>_polymorphic_map=None</i>, <i>polymorphic_identity=None</i>, <i>polymorphic_fetch=None</i>, <i>concrete=False</i>, <i>select_table=None</i>, <i>with_polymorphic=None</i>, <i>allow_null_pks=False</i>, <i>batch=True</i>, <i>column_prefix=None</i>, <i>include_properties=None</i>, <i>exclude_properties=None</i>, <i>eager_defaults=False</i>)</b>
+    <div class="docstring">
+    <p>Construct a new mapper.</p>
+<p>Mappers are normally constructed via the <a href="sqlalchemy_orm.html#docstrings_sqlalchemy.orm_modfunc_mapper">mapper()</a>
+function.  See for details.</p>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def add_properties(<i>self</i>, <i>dict_of_properties</i>)</b>
+    <div class="docstring">
+    <p>Add the given dictionary of properties to this mapper,
+using <cite>add_property</cite>.</p>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def add_property(<i>self</i>, <i>key</i>, <i>prop</i>)</b>
+    <div class="docstring">
+    <p>Add an individual MapperProperty to this mapper.</p>
+<p>If the mapper has not been compiled yet, just adds the
+property to the initial properties dictionary sent to the
+constructor.  If this Mapper has already been compiled, then
+the given MapperProperty is compiled immediately.</p>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def cascade_iterator(<i>self</i>, <i>type_</i>, <i>state</i>, <i>halt_on=None</i>)</b>
+    <div class="docstring">
+    <p>Iterate each element and its mapper in an object graph,
+for all relations that meet the given cascade rule.</p>
+<dl class="docutils">
+<dt>type_</dt>
+<dd>The name of the cascade rule (i.e. save-update, delete,
+etc.)</dd>
+<dt>state</dt>
+<dd>The lead InstanceState.  child items will be processed per
+the relations defined for this object's mapper.</dd>
+</dl>
+<p>the return value are object instances; this provides a strong
+reference so that they don't fall out of scope immediately.</p>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def common_parent(<i>self</i>, <i>other</i>)</b>
+    <div class="docstring">
+    <p>Return true if the given mapper shares a common inherited parent as this mapper.</p>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def compile(<i>self</i>)</b>
+    <div class="docstring">
+    <p>Compile this mapper and all other non-compiled mappers.</p>
+<p>This method checks the local compiled status as well as for
+any new mappers that have been defined, and is safe to call
+repeatedly.</p>
+
+    </div>
+    </div>
+
+                    
+         <div class="darkcell">
+         <A name=""></a>
+         <b>compiled = property()</b>
+         <div class="docstring">
+         <p>return True if this mapper is compiled</p>
+
+         </div> 
+         </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def dispose(<i>self</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def do_with_cache(<i>self</i>, <i>*args</i>, <i>**kwargs</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def do_with_cache(<i>self</i>, <i>*args</i>, <i>**kwargs</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def get_property(<i>self</i>, <i>key</i>, <i>resolve_synonyms=False</i>, <i>raiseerr=True</i>)</b>
+    <div class="docstring">
+    <p>return a MapperProperty associated with the given key.</p>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def get_session(<i>self</i>)</b>
+    <div class="docstring">
+    <p>Return the contextual session provided by the mapper
+extension chain, if any.</p>
+<p>Raise <tt class="docutils literal"><span class="pre">InvalidRequestError</span></tt> if a session cannot be retrieved
+from the extension chain.</p>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def identity_key_from_instance(<i>self</i>, <i>instance</i>)</b>
+    <div class="docstring">
+    <p>Return the identity key for the given instance, based on
+its primary key attributes.</p>
+<p>This value is typically also found on the instance itself
+under the attribute name <cite>_instance_key</cite>.</p>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def identity_key_from_primary_key(<i>self</i>, <i>primary_key</i>)</b>
+    <div class="docstring">
+    <p>Return an identity-map key for use in storing/retrieving an
+item from an identity map.</p>
+<dl class="docutils">
+<dt>primary_key</dt>
+<dd>A list of values indicating the identifier.</dd>
+</dl>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def identity_key_from_row(<i>self</i>, <i>row</i>)</b>
+    <div class="docstring">
+    <p>Return an identity-map key for use in storing/retrieving an
+item from the identity map.</p>
+<dl class="docutils">
+<dt>row</dt>
+<dd>A <tt class="docutils literal"><span class="pre">sqlalchemy.engine.base.RowProxy</span></tt> instance or a
+dictionary corresponding result-set <tt class="docutils literal"><span class="pre">ColumnElement</span></tt>
+instances to their values within a row.</dd>
+</dl>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def instances(<i>*args</i>, <i>**kwargs</i>)</b>
+    <div class="docstring">
+    <p>Return a list of mapped instances corresponding to the rows
+in a given ResultProxy.</p>
+<p>DEPRECATED.</p>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def isa(<i>self</i>, <i>other</i>)</b>
+    <div class="docstring">
+    <p>Return True if the given mapper inherits from this mapper.</p>
+
+    </div>
+    </div>
+
+                    
+         <div class="darkcell">
+         <A name=""></a>
+         <b>iterate_properties = property()</b>
+         <div class="docstring">
+         <p>returns an iterator of all MapperProperty objects.</p>
+
+         </div> 
+         </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def iterate_to_root(<i>self</i>)</b>
+    <div class="docstring">
+    
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def polymorphic_iterator(<i>self</i>)</b>
+    <div class="docstring">
+    <p>Iterate through the collection including this mapper and
+all descendant mappers.</p>
+<p>This includes not just the immediately inheriting mappers but
+all their inheriting mappers as well.</p>
+<p>To iterate through an entire hierarchy, use
+<tt class="docutils literal"><span class="pre">mapper.base_mapper.polymorphic_iterator()</span></tt>.</p>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def populate_instance(<i>self</i>, <i>selectcontext</i>, <i>instance</i>, <i>row</i>, <i>ispostselect=None</i>, <i>isnew=False</i>, <i>only_load_props=None</i>, <i>**flags</i>)</b>
+    <div class="docstring">
+    <p>populate an instance from a result row.</p>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def primary_key_from_instance(<i>self</i>, <i>instance</i>)</b>
+    <div class="docstring">
+    <p>Return the list of primary key values for the given
+instance.</p>
+
+    </div>
+    </div>
+
+                    
+    <div class="darkcell">
+    
+    <A name=""></a>
+    <b>def primary_mapper(<i>self</i>)</b>
+    <div class="docstring">
+    <p>Return the primary mapper corresponding to this mapper's class key (class + entity_name).</p>
+
+    </div>
+    </div>
+
+                    
+         <div class="darkcell">
+         <A name=""></a>
+         <b>properties = property()</b>
+         <div class="docstring">
+         
+         </div> 
+         </div>
+
+
+    
+
+            <a href="#top" class="totoc">back to section top</a>
+    </div>
+
+
+
+    
+
+    </div>
+
+
+
+
+
+    <div class="bottomnav">
+        
+    <div class="prevnext">
+            Up: <a href="docstrings.html">API Documentation</a>
+
+               |   
+            Previous: <a href="sqlalchemy_orm_interfaces.html">module sqlalchemy.orm.interfaces</a>
+
+               |   
+            Next: <a href="sqlalchemy_orm_properties.html">module sqlalchemy.orm.properties</a>
+    </div>
+
+    </div>
+
+
+
+
+
+
+
+
+</body>
+</html>
+
+
+
+
+
+
