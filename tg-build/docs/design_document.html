@@ -1,0 +1,614 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="Docutils 0.4: http://docutils.sourceforge.net/" />
+<title>Design document: TurboGears QA initiative</title>
+<meta name="author" content="Steven Mohr" />
+<meta name="date" content="2008-07-27" />
+<style type="text/css">
+
+/*
+:Author: David Goodger
+:Contact: goodger@users.sourceforge.net
+:Date: $Date: 2005-12-18 01:56:14 +0100 (Sun, 18 Dec 2005) $
+:Revision: $Revision: 4224 $
+:Copyright: This stylesheet has been placed in the public domain.
+
+Default cascading style sheet for the HTML output of Docutils.
+
+See http://docutils.sf.net/docs/howto/html-stylesheets.html for how to
+customize this style sheet.
+*/
+
+/* used to remove borders from tables and images */
+.borderless, table.borderless td, table.borderless th {
+  border: 0 }
+
+table.borderless td, table.borderless th {
+  /* Override padding for "table.docutils td" with "! important".
+     The right padding separates the table cells. */
+  padding: 0 0.5em 0 0 ! important }
+
+.first {
+  /* Override more specific margin styles with "! important". */
+  margin-top: 0 ! important }
+
+.last, .with-subtitle {
+  margin-bottom: 0 ! important }
+
+.hidden {
+  display: none }
+
+a.toc-backref {
+  text-decoration: none ;
+  color: black }
+
+blockquote.epigraph {
+  margin: 2em 5em ; }
+
+dl.docutils dd {
+  margin-bottom: 0.5em }
+
+/* Uncomment (and remove this text!) to get bold-faced definition list terms
+dl.docutils dt {
+  font-weight: bold }
+*/
+
+div.abstract {
+  margin: 2em 5em }
+
+div.abstract p.topic-title {
+  font-weight: bold ;
+  text-align: center }
+
+div.admonition, div.attention, div.caution, div.danger, div.error,
+div.hint, div.important, div.note, div.tip, div.warning {
+  margin: 2em ;
+  border: medium outset ;
+  padding: 1em }
+
+div.admonition p.admonition-title, div.hint p.admonition-title,
+div.important p.admonition-title, div.note p.admonition-title,
+div.tip p.admonition-title {
+  font-weight: bold ;
+  font-family: sans-serif }
+
+div.attention p.admonition-title, div.caution p.admonition-title,
+div.danger p.admonition-title, div.error p.admonition-title,
+div.warning p.admonition-title {
+  color: red ;
+  font-weight: bold ;
+  font-family: sans-serif }
+
+/* Uncomment (and remove this text!) to get reduced vertical space in
+   compound paragraphs.
+div.compound .compound-first, div.compound .compound-middle {
+  margin-bottom: 0.5em }
+
+div.compound .compound-last, div.compound .compound-middle {
+  margin-top: 0.5em }
+*/
+
+div.dedication {
+  margin: 2em 5em ;
+  text-align: center ;
+  font-style: italic }
+
+div.dedication p.topic-title {
+  font-weight: bold ;
+  font-style: normal }
+
+div.figure {
+  margin-left: 2em ;
+  margin-right: 2em }
+
+div.footer, div.header {
+  clear: both;
+  font-size: smaller }
+
+div.line-block {
+  display: block ;
+  margin-top: 1em ;
+  margin-bottom: 1em }
+
+div.line-block div.line-block {
+  margin-top: 0 ;
+  margin-bottom: 0 ;
+  margin-left: 1.5em }
+
+div.sidebar {
+  margin-left: 1em ;
+  border: medium outset ;
+  padding: 1em ;
+  background-color: #ffffee ;
+  width: 40% ;
+  float: right ;
+  clear: right }
+
+div.sidebar p.rubric {
+  font-family: sans-serif ;
+  font-size: medium }
+
+div.system-messages {
+  margin: 5em }
+
+div.system-messages h1 {
+  color: red }
+
+div.system-message {
+  border: medium outset ;
+  padding: 1em }
+
+div.system-message p.system-message-title {
+  color: red ;
+  font-weight: bold }
+
+div.topic {
+  margin: 2em }
+
+h1.section-subtitle, h2.section-subtitle, h3.section-subtitle,
+h4.section-subtitle, h5.section-subtitle, h6.section-subtitle {
+  margin-top: 0.4em }
+
+h1.title {
+  text-align: center }
+
+h2.subtitle {
+  text-align: center }
+
+hr.docutils {
+  width: 75% }
+
+img.align-left {
+  clear: left }
+
+img.align-right {
+  clear: right }
+
+ol.simple, ul.simple {
+  margin-bottom: 1em }
+
+ol.arabic {
+  list-style: decimal }
+
+ol.loweralpha {
+  list-style: lower-alpha }
+
+ol.upperalpha {
+  list-style: upper-alpha }
+
+ol.lowerroman {
+  list-style: lower-roman }
+
+ol.upperroman {
+  list-style: upper-roman }
+
+p.attribution {
+  text-align: right ;
+  margin-left: 50% }
+
+p.caption {
+  font-style: italic }
+
+p.credits {
+  font-style: italic ;
+  font-size: smaller }
+
+p.label {
+  white-space: nowrap }
+
+p.rubric {
+  font-weight: bold ;
+  font-size: larger ;
+  color: maroon ;
+  text-align: center }
+
+p.sidebar-title {
+  font-family: sans-serif ;
+  font-weight: bold ;
+  font-size: larger }
+
+p.sidebar-subtitle {
+  font-family: sans-serif ;
+  font-weight: bold }
+
+p.topic-title {
+  font-weight: bold }
+
+pre.address {
+  margin-bottom: 0 ;
+  margin-top: 0 ;
+  font-family: serif ;
+  font-size: 100% }
+
+pre.literal-block, pre.doctest-block {
+  margin-left: 2em ;
+  margin-right: 2em ;
+  background-color: #eeeeee }
+
+span.classifier {
+  font-family: sans-serif ;
+  font-style: oblique }
+
+span.classifier-delimiter {
+  font-family: sans-serif ;
+  font-weight: bold }
+
+span.interpreted {
+  font-family: sans-serif }
+
+span.option {
+  white-space: nowrap }
+
+span.pre {
+  white-space: pre }
+
+span.problematic {
+  color: red }
+
+span.section-subtitle {
+  /* font-size relative to parent (h1..h6 element) */
+  font-size: 80% }
+
+table.citation {
+  border-left: solid 1px gray;
+  margin-left: 1px }
+
+table.docinfo {
+  margin: 2em 4em }
+
+table.docutils {
+  margin-top: 0.5em ;
+  margin-bottom: 0.5em }
+
+table.footnote {
+  border-left: solid 1px black;
+  margin-left: 1px }
+
+table.docutils td, table.docutils th,
+table.docinfo td, table.docinfo th {
+  padding-left: 0.5em ;
+  padding-right: 0.5em ;
+  vertical-align: top }
+
+table.docutils th.field-name, table.docinfo th.docinfo-name {
+  font-weight: bold ;
+  text-align: left ;
+  white-space: nowrap ;
+  padding-left: 0 }
+
+h1 tt.docutils, h2 tt.docutils, h3 tt.docutils,
+h4 tt.docutils, h5 tt.docutils, h6 tt.docutils {
+  font-size: 100% }
+
+tt.docutils {
+  background-color: #eeeeee }
+
+ul.auto-toc {
+  list-style-type: none }
+
+</style>
+</head>
+<body>
+<div class="document" id="design-document-turbogears-qa-initiative">
+<h1 class="title">Design document: TurboGears QA initiative</h1>
+<table class="docinfo" frame="void" rules="none">
+<col class="docinfo-name" />
+<col class="docinfo-content" />
+<tbody valign="top">
+<tr><th class="docinfo-name">Author:</th>
+<td>Steven Mohr</td></tr>
+<tr><th class="docinfo-name">Date:</th>
+<td>2008-07-27</td></tr>
+<tr><th class="docinfo-name">Revision:</th>
+<td>5043</td></tr>
+<tr><th class="docinfo-name">Status:</th>
+<td>Draft</td></tr>
+</tbody>
+</table>
+<div class="contents topic">
+<p class="topic-title first"><a id="table-of-contents" name="table-of-contents">Table of Contents</a></p>
+<ul class="simple">
+<li><a class="reference" href="#project-description" id="id11" name="id11">Project description</a></li>
+<li><a class="reference" href="#test-and-build-environment" id="id12" name="id12">Test and build environment</a><ul>
+<li><a class="reference" href="#supported-os-architectures" id="id13" name="id13">Supported OS / architectures</a></li>
+<li><a class="reference" href="#involved-persons" id="id14" name="id14">Involved persons</a></li>
+<li><a class="reference" href="#used-components" id="id15" name="id15">Used components</a><ul>
+<li><a class="reference" href="#software" id="id16" name="id16">Software</a><ul>
+<li><a class="reference" href="#buildbot" id="id17" name="id17">BuildBot</a></li>
+<li><a class="reference" href="#virtualenv" id="id18" name="id18">VirtualEnv</a></li>
+<li><a class="reference" href="#nose" id="id19" name="id19">Nose</a></li>
+<li><a class="reference" href="#build-master" id="id20" name="id20">Build master</a></li>
+<li><a class="reference" href="#build-slaves" id="id21" name="id21">Build slaves</a></li>
+</ul>
+</li>
+<li><a class="reference" href="#build-tasks" id="id22" name="id22">Build tasks</a><ul>
+<li><a class="reference" href="#creation-of-binary-eggs-for-all-dependencies" id="id23" name="id23">Creation of binary eggs for all dependencies</a></li>
+<li><a class="reference" href="#creation-of-binary-eggs-for-tg" id="id24" name="id24">Creation of binary eggs for TG</a></li>
+<li><a class="reference" href="#upload-to-tg-server" id="id25" name="id25">Upload to TG server</a></li>
+<li><a class="reference" href="#nightly-build-of-turbogears-documentation" id="id26" name="id26">Nightly build of TurboGears documentation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference" href="#buildbot-webinterface" id="id27" name="id27">BuildBot webinterface</a></li>
+<li><a class="reference" href="#svnchecker" id="id28" name="id28">SVNChecker</a></li>
+<li><a class="reference" href="#references" id="id29" name="id29">References</a></li>
+</ul>
+</div>
+<div class="section">
+<h1><a class="toc-backref" href="#id11" id="project-description" name="project-description">Project description</a></h1>
+<p>The goal of the project is to create a system enviroment which automates the
+core tests and the creation of new TurboGears <a class="footnote-reference" href="#second" id="id1" name="id1">[2]</a> eggs. It should also
+create eggs <a class="footnote-reference" href="#fifth" id="id2" name="id2">[5]</a> for the dependencies. The second goal was to install
+SVNChecker <a class="footnote-reference" href="#first" id="id3" name="id3">[1]</a> and to configure it. This goal was replaced by the
+creation of a webinterface which should be used to create new build tasks.
+SVN Checker will be installed after Google Summer of Code.</p>
+<img alt="TG-Plan_sm.jpg" src="TG-Plan_sm.jpg" />
+</div>
+<div class="section">
+<h1><a class="toc-backref" href="#id12" id="test-and-build-environment" name="test-and-build-environment">Test and build environment</a></h1>
+<p>To create this test and build environment we use BuildBot <a class="footnote-reference" href="#bb" id="id4" name="id4">[7]</a>. With BuildBot
+you have one machine, called buildmaster, and a lot of other machines called
+build slaves. For every supported OS or hardware arcitecture we need three
+slaves: one for Python 2.3, one for 2.4 and one for 2.5.</p>
+<div class="section">
+<h2><a class="toc-backref" href="#id13" id="supported-os-architectures" name="supported-os-architectures">Supported OS / architectures</a></h2>
+<ul class="simple">
+<li>Buildmaster (24h online)</li>
+<li>Buildslaves (often online)<ul>
+<li>WinXP</li>
+<li>Win2k(3)</li>
+<li>Windows Vista</li>
+<li>Debianx86, Ubuntu64</li>
+<li>Solaris (x86)</li>
+<li>MacOS</li>
+</ul>
+</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="30%" />
+<col width="23%" />
+<col width="23%" />
+<col width="23%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">OS</th>
+<th class="head">Python2.3</th>
+<th class="head">Python2.4</th>
+<th class="head">Python2.5</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td>Debian x86</td>
+<td>X</td>
+<td>X</td>
+<td>X</td>
+</tr>
+<tr><td>Ubuntu x64</td>
+<td>X</td>
+<td>X</td>
+<td>X</td>
+</tr>
+<tr><td>Solaris</td>
+<td>o</td>
+<td>X</td>
+<td>X</td>
+</tr>
+<tr><td>Windows XP</td>
+<td>X</td>
+<td>X</td>
+<td>X</td>
+</tr>
+<tr><td>Windows 2003</td>
+<td>X</td>
+<td>X</td>
+<td>X</td>
+</tr>
+<tr><td>Windows Vista</td>
+<td>X</td>
+<td>X</td>
+<td>X</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section">
+<h2><a class="toc-backref" href="#id14" id="involved-persons" name="involved-persons">Involved persons</a></h2>
+<dl class="docutils">
+<dt>Buildmaster admin:</dt>
+<dd>Adds and changes buildtasks</dd>
+<dt>Buildslave admin:</dt>
+<dd>Installs all needed depenpencies on the slave to guarantee proper builds</dd>
+<dt>Report manager:</dt>
+<dd>Manages trac tickets created by the build master and answer questions of the
+community according to them.</dd>
+<dt>Developer:</dt>
+<dd>Commits source to the repo which activates a build; gets build reports via a
+special mailing list</dd>
+</dl>
+</div>
+<div class="section">
+<h2><a class="toc-backref" href="#id15" id="used-components" name="used-components">Used components</a></h2>
+<div class="section">
+<h3><a class="toc-backref" href="#id16" id="software" name="software">Software</a></h3>
+<div class="section">
+<h4><a class="toc-backref" href="#id17" id="buildbot" name="buildbot">BuildBot</a></h4>
+<p>BuildBot creates and manages the bot system.</p>
+</div>
+<div class="section">
+<h4><a class="toc-backref" href="#id18" id="virtualenv" name="virtualenv">VirtualEnv</a></h4>
+<p>VirtualEnv <a class="footnote-reference" href="#third" id="id5" name="id5">[3]</a> creates independent python installations to isolate the
+build enviroment from the rest of the system. So it
+guarantees proper build results.</p>
+</div>
+<div class="section">
+<h4><a class="toc-backref" href="#id19" id="nose" name="nose">Nose</a></h4>
+<p>Nose <a class="footnote-reference" href="#fourth" id="id6" name="id6">[4]</a> is an unittest framework for python. The unit tests are
+important to keep the code valid.</p>
+</div>
+<div class="section">
+<h4><a class="toc-backref" href="#id20" id="build-master" name="build-master">Build master</a></h4>
+<p>The build master starts the builds and sends the signal to start to its slaves.
+It also collects the results and presents them via a webinterface <a class="footnote-reference" href="#six" id="id7" name="id7">[6]</a>. This
+interface also allows to start builds manually. The build master will be
+created as a part of this project.</p>
+</div>
+<div class="section">
+<h4><a class="toc-backref" href="#id21" id="build-slaves" name="build-slaves">Build slaves</a></h4>
+<p>The build slave is the component where the build takes place. It downloads all
+needed files from SVN (e.g. source or scripts) and distributes the results
+(uploads created eggs) and publishes build reports in wiki <a class="footnote-reference" href="#wiki" id="id8" name="id8">[10]</a>.</p>
+</div>
+</div>
+<div class="section">
+<h3><a class="toc-backref" href="#id22" id="build-tasks" name="build-tasks">Build tasks</a></h3>
+<div class="section">
+<h4><a class="toc-backref" href="#id23" id="creation-of-binary-eggs-for-all-dependencies" name="creation-of-binary-eggs-for-all-dependencies">Creation of binary eggs for all dependencies</a></h4>
+<p>This is the way the eggs are created:</p>
+<ol class="arabic simple">
+<li>SVN check out or source download via easy_install</li>
+<li>Creation of the egg</li>
+<li>Running of core tests (if aviaible)</li>
+<li>Upload to TurboGears EggBasket server</li>
+</ol>
+<p>Binary eggs will be created for the following dependencies:</p>
+<ul class="simple">
+<li>Cheetah</li>
+<li>Webhelper</li>
+<li>Pylons</li>
+<li>RuleDispatch</li>
+<li>simplejson</li>
+<li>pysqlite (Python 2.4)</li>
+<li>PyProtocols</li>
+<li>cElementTree (Python 2.4)</li>
+</ul>
+</div>
+<div class="section">
+<h4><a class="toc-backref" href="#id24" id="creation-of-binary-eggs-for-tg" name="creation-of-binary-eggs-for-tg">Creation of binary eggs for TG</a></h4>
+<p>The build system creates eggs for TG 1.0, 1.1 and 2.0</p>
+<p>This is the way the eggs are created:</p>
+<ol class="arabic simple">
+<li>Setting up a virtual environment</li>
+<li>TG source check out <a class="footnote-reference" href="#svn" id="id9" name="id9">[9]</a></li>
+<li>Installation of external dependencies</li>
+<li>Installation of TG</li>
+<li>Running unit tests (a failure will stop the build)</li>
+<li>Creation of all possible quick start projects</li>
+<li>Running unit test of quickstart projects</li>
+<li>If unit tests fail, create a trac ticket (if applicable)</li>
+<li>Creation of the egg and upload to TG server</li>
+</ol>
+<img alt="TG-BuildBot.jpg" src="TG-BuildBot.jpg" />
+</div>
+<div class="section">
+<h4><a class="toc-backref" href="#id25" id="upload-to-tg-server" name="upload-to-tg-server">Upload to TG server</a></h4>
+<p>The eggs will be uploaded to a TurboGears EggBasket <a class="footnote-reference" href="#eggbasket" id="id10" name="id10">[8]</a> instance.</p>
+</div>
+<div class="section">
+<h4><a class="toc-backref" href="#id26" id="nightly-build-of-turbogears-documentation" name="nightly-build-of-turbogears-documentation">Nightly build of TurboGears documentation</a></h4>
+<p>The BuildBot system should also create the TurboGears documentation.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="section">
+<h1><a class="toc-backref" href="#id27" id="buildbot-webinterface" name="buildbot-webinterface">BuildBot webinterface</a></h1>
+<p>The concept of the web interface is described in a different file (svn.turbogears.org/build/notes/bb_config.pdf)</p>
+</div>
+<div class="section">
+<h1><a class="toc-backref" href="#id28" id="svnchecker" name="svnchecker">SVNChecker</a></h1>
+<p>SVNChecker is a framework which was designed to assist users to create hook
+scripts for SVN. SVNChecker has a number of predefined classes which allow an easy
+integration of bug tracking systems or coding style checkers. If a critical
+test fails, the check in will be rejected.</p>
+<p>Functions:</p>
+<dl class="docutils">
+<dt>Pylint</dt>
+<dd>New code will be checked for correctness and conformance of coding standards.</dd>
+<dt>XMLValidator</dt>
+<dd>Validates the xml code.</dd>
+<dt>Interaction with trac</dt>
+<dd>(will be added when trac functions are implemented)</dd>
+<dt>minimum log lenght</dt>
+<dd>each check-in log has to have a minimum lenght f.e. 15 characters</dd>
+</dl>
+</div>
+<div class="section">
+<h1><a class="toc-backref" href="#id29" id="references" name="references">References</a></h1>
+<ul class="simple">
+<li>Project schedule TurboGears QA initiative (<tt class="docutils literal"><span class="pre">project_schedule.rst</span></tt>)</li>
+<li>Buildslave documentation (<tt class="docutils literal"><span class="pre">buildslave.rst</span></tt>)</li>
+<li>Buildmaster documentation (<tt class="docutils literal"><span class="pre">buildmaster.rst</span></tt>)</li>
+<li>Steven's blog: <a class="reference" href="http://stevenmohr.wordpress.com">http://stevenmohr.wordpress.com</a></li>
+<li>Agile Testing: <a class="reference" href="http://agiletesting.blogspot.com">http://agiletesting.blogspot.com</a></li>
+</ul>
+<table class="docutils footnote" frame="void" id="first" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id3" name="first">[1]</a></td><td><a class="reference" href="http://www.svnchecker.tigris.org">http://www.svnchecker.tigris.org</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="second" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id1" name="second">[2]</a></td><td><a class="reference" href="http://www.turbogears.org">http://www.turbogears.org</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="third" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id5" name="third">[3]</a></td><td><a class="reference" href="http://pypi.python.org/pypi/virtualenv">http://pypi.python.org/pypi/virtualenv</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="fourth" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id6" name="fourth">[4]</a></td><td><a class="reference" href="http://www.somethingaboutorange.com/mrl/projects/nose/">http://www.somethingaboutorange.com/mrl/projects/nose/</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="fifth" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id2" name="fifth">[5]</a></td><td><a class="reference" href="http://peak.telecommunity.com/DevCenter/setuptools">http://peak.telecommunity.com/DevCenter/setuptools</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="six" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id7" name="six">[6]</a></td><td>will be added</td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="bb" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id4" name="bb">[7]</a></td><td><a class="reference" href="http://www.buildbot.net">http://www.buildbot.net</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="eggbasket" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id10" name="eggbasket">[8]</a></td><td><a class="reference" href="http://www.chrisarndt.de/projects/eggbasket/">http://www.chrisarndt.de/projects/eggbasket/</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="svn" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id9" name="svn">[9]</a></td><td><a class="reference" href="http://svn.turbogears.org/">http://svn.turbogears.org/</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="wiki" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id8" name="wiki">[10]</a></td><td><a class="reference" href="http://docs.turbogears.org/">http://docs.turbogears.org/</a></td></tr>
+</tbody>
+</table>
+</div>
+</div>
+</body>
+</html>

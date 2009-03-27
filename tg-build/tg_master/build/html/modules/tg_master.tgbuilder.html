@@ -1,0 +1,240 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>tg_master.tgbuilder &mdash; TurboGears BuildBot Master v0.1.0.1 documentation</title>
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+          URL_ROOT:    '../',
+          VERSION:     '0.1.0.1',
+          COLLAPSE_MODINDEX: false,
+          FILE_SUFFIX: ''
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/interface.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="contents" title="Global table of contents" href="../contents.html" />
+    <link rel="index" title="Global index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="top" title="TurboGears BuildBot Master v0.1.0.1 documentation" href="../index.html" />
+    <link rel="prev" title="tg_master.tgbuilder" href="tg_master.ppath.html" />
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../modindex.html" title="Global Module Index"
+             accesskey="M">modules</a> |</li>
+        <li class="right" >
+          <a href="tg_master.ppath.html" title="tg_master.tgbuilder"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">TurboGears BuildBot Master v0.1.0.1 documentation</a> &raquo;</li>
+      </ul>
+    </div>
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  
+  <div class="section" id="module-tg_master.tgbuilder">
+<h1 id="module-tg_master.tgbuilder"><tt class="xref docutils literal"><span class="pre">tg_master.tgbuilder</span></tt><a class="headerlink" href="#module-tg_master.tgbuilder" title="Permalink to this headline">¶</a></h1>
+<p>This module contains functions to automate creation of BuildFactories and
+other helpful functions to use in master.cfg</p>
+<dl class="function">
+<dt id="tg_master.tgbuilder.createnamelist">
+<!--[tg_master.tgbuilder.createnamelist]--><tt class="descclassname">tg_master.tgbuilder.</tt><tt class="descname">createnamelist</tt><big>(</big><em>namelist</em>, <em>string</em><big>)</big><a class="headerlink" href="#tg_master.tgbuilder.createnamelist" title="Permalink to this definition">¶</a></dt>
+<dd><p>createnamelist creates a list of slaves names which name contains string</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><em>namelist</em> (list of strings) &#8211; List of slave names</li>
+<li><em>string</em> (string) &#8211; part of slave name to look for</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="tg_master.tgbuilder.createslavelist">
+<!--[tg_master.tgbuilder.createslavelist]--><tt class="descclassname">tg_master.tgbuilder.</tt><tt class="descname">createslavelist</tt><big>(</big><big>)</big><a class="headerlink" href="#tg_master.tgbuilder.createslavelist" title="Permalink to this definition">¶</a></dt>
+<dd><p>creates a list of slaves from the slaves.cfg file</p>
+<blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">return:</th><td class="field-body">returns list of names of the slave and 
+list of BuildSlave objects</td>
+</tr>
+</tbody>
+</table>
+</blockquote>
+</dd></dl>
+
+<dl class="function">
+<dt id="tg_master.tgbuilder.dependencybuilderee">
+<!--[tg_master.tgbuilder.dependencybuilderee]--><tt class="descclassname">tg_master.tgbuilder.</tt><tt class="descname">dependencybuilderee</tt><big>(</big><em>name</em>, <em>pythonpath</em><big>)</big><a class="headerlink" href="#tg_master.tgbuilder.dependencybuilderee" title="Permalink to this definition">¶</a></dt>
+<dd>dependencybuilderee creates a build factory which downloads the
+source of the dependency via easy_install and builds the egg.</dd></dl>
+
+<dl class="function">
+<dt id="tg_master.tgbuilder.dependencybuildersvn">
+<!--[tg_master.tgbuilder.dependencybuildersvn]--><tt class="descclassname">tg_master.tgbuilder.</tt><tt class="descname">dependencybuildersvn</tt><big>(</big><em>svn_url</em>, <em>pythonpath</em>, <em>name</em>, <em>dependencyfromtg=None</em><big>)</big><a class="headerlink" href="#tg_master.tgbuilder.dependencybuildersvn" title="Permalink to this definition">¶</a></dt>
+<dd>dependencybuildersvn creates a build factory which does a 
+checkout from svnURL, downloads the dependencies specified 
+in DependencyFromTG from the TurboGears server,
+runs setup.py and builds the egg.</dd></dl>
+
+<dl class="function">
+<dt id="tg_master.tgbuilder.doc_builder">
+<!--[tg_master.tgbuilder.doc_builder]--><tt class="descclassname">tg_master.tgbuilder.</tt><tt class="descname">doc_builder</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#tg_master.tgbuilder.doc_builder" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates documentation of a project. doc_builder takes an package name or
+an SVN repository as a source.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><em>framework</em> (string) &#8211; specifies the framework to use: sphinx or epydoc</li>
+<li><em>doc_dir</em> (string) &#8211; path to the files that should be documentated</li>
+<li><em>package</em> (string) &#8211; Use this package as source 
+(DocBuilder downloads it from pypi.python.org)</li>
+<li><em>svnurl</em> (string) &#8211; Use this repository as source</li>
+<li><em>needed_conf_file</em> (string) &#8211; path to a needed config file 
+that has to be downloaded from the build master</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="tg_master.tgbuilder.tg10builder">
+<!--[tg_master.tgbuilder.tg10builder]--><tt class="descclassname">tg_master.tgbuilder.</tt><tt class="descname">tg10builder</tt><big>(</big><em>pythonpath</em>, <em>quick=False</em><big>)</big><a class="headerlink" href="#tg_master.tgbuilder.tg10builder" title="Permalink to this definition">¶</a></dt>
+<dd><p>tg10builder returns a BuildFactory which downloads TG1.0 from SVN,
+installs all dependencies, runs the core tests, creates all posible  
+quickstart projects, runs the tests for all of this projects and  
+builds the egg.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><em>pythonpath</em> (string) &#8211; This is the path, which is used for all
+python scripts. pythonpath must fit the pattern: &#8220;binDir:libDir&#8221;.</li>
+<li><em>quick</em> (boolean) &#8211; Sets quick build mode</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="tg_master.tgbuilder.tg11builder">
+<!--[tg_master.tgbuilder.tg11builder]--><tt class="descclassname">tg_master.tgbuilder.</tt><tt class="descname">tg11builder</tt><big>(</big><em>pythonpath</em>, <em>quick=False</em><big>)</big><a class="headerlink" href="#tg_master.tgbuilder.tg11builder" title="Permalink to this definition">¶</a></dt>
+<dd><p>tg11builder returns a BuildFactory which downloads TG1.1 from SVN, 
+installs all dependencies,runs the core tests, creates all posible 
+quickstart projects, runs the tests for all of this projects and builds 
+the egg.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><em>pythonpath</em> (string) &#8211; This is the path, which is used for all python 
+scripts. pythonpath must fit the pattern: &#8220;binDir:libDir&#8221;.</li>
+<li><em>quick</em> (boolean) &#8211; Sets quick build mode</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="tg_master.tgbuilder.tg2builder">
+<!--[tg_master.tgbuilder.tg2builder]--><tt class="descclassname">tg_master.tgbuilder.</tt><tt class="descname">tg2builder</tt><big>(</big><em>pythonpath</em>, <em>quick=False</em><big>)</big><a class="headerlink" href="#tg_master.tgbuilder.tg2builder" title="Permalink to this definition">¶</a></dt>
+<dd><p>tg2builder returns a BuildFactory which downloads TG2 from SVN, 
+downloads pylons from mercurial, installs all dependencies, 
+runs the core tests, creates all posible quickstart projects,runs 
+the tests for all of this projects and builds the egg.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><em>pythonpath</em> (string) &#8211; This is the path, which is used for all  
+python scripts. pythonpath must fit the pattern: &#8220;binDir:libDir&#8221;.</li>
+<li><em>quick</em> (boolean) &#8211; Sets quick build mode</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="tg_master.tgbuilder.tg_ng_setupbuilder">
+<!--[tg_master.tgbuilder.tg_ng_setupbuilder]--><tt class="descclassname">tg_master.tgbuilder.</tt><tt class="descname">tg_ng_setupbuilder</tt><big>(</big><big>)</big><a class="headerlink" href="#tg_master.tgbuilder.tg_ng_setupbuilder" title="Permalink to this definition">¶</a></dt>
+<dd>Tests next generation install scipt</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h4>Previous topic</h4>
+            <p class="topless"><a href="tg_master.ppath.html" title="previous chapter"><tt class="docutils literal"><span class="pre">tg_master.tgbuilder</span></tt></a></p>
+            <h3>This Page</h3>
+            <ul class="this-page-menu">
+              <li><a href="../_sources/modules/tg_master.tgbuilder.txt">Show Source</a></li>
+            </ul>
+            <h3>Quick search</h3>
+            <form class="search" action="../search.html" method="get">
+              <input type="text" name="q" size="18" /> <input type="submit" value="Go" />
+              <input type="hidden" name="check_keywords" value="yes" />
+              <input type="hidden" name="area" value="default" />
+            </form>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../modindex.html" title="Global Module Index"
+             accesskey="M">modules</a> |</li>
+        <li class="right" >
+          <a href="tg_master.ppath.html" title="tg_master.tgbuilder"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">TurboGears BuildBot Master v0.1.0.1 documentation</a> &raquo;</li>
+      </ul>
+    </div>
+    <div class="footer">
+      &copy; Copyright 2008, Steven Mohr.
+      Last updated on Oct 09, 2008.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a>.
+    </div>
+  </body>
+</html>

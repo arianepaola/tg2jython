@@ -1,0 +1,9 @@
+setup.py
+TG_Master.egg-info/PKG-INFO
+TG_Master.egg-info/SOURCES.txt
+TG_Master.egg-info/dependency_links.txt
+TG_Master.egg-info/top_level.txt
+tg_master/__init__.py
+tg_master/ppath.py
+tg_master/tg_mbuildsteps.py
+tg_master/tgbuilder.py

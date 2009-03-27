@@ -1,0 +1,163 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>tg_master.ppath &mdash; TurboGears BuildBot Master v0.1.0.1 documentation</title>
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+          URL_ROOT:    '../',
+          VERSION:     '0.1.0.1',
+          COLLAPSE_MODINDEX: false,
+          FILE_SUFFIX: ''
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/interface.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="contents" title="Global table of contents" href="../contents.html" />
+    <link rel="index" title="Global index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="top" title="TurboGears BuildBot Master v0.1.0.1 documentation" href="../index.html" />
+    <link rel="next" title="tg_master.tgbuilder" href="tg_master.tgbuilder.html" />
+    <link rel="prev" title="tg_master" href="tg_master.html" />
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../modindex.html" title="Global Module Index"
+             accesskey="M">modules</a> |</li>
+        <li class="right" >
+          <a href="tg_master.tgbuilder.html" title="tg_master.tgbuilder"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="tg_master.html" title="tg_master"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">TurboGears BuildBot Master v0.1.0.1 documentation</a> &raquo;</li>
+      </ul>
+    </div>
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  
+  <div class="section" id="module-tg_master.ppath">
+<h1 id="module-tg_master.ppath"><tt class="xref docutils literal"><span class="pre">tg_master.ppath</span></tt><a class="headerlink" href="#module-tg_master.ppath" title="Permalink to this headline">¶</a></h1>
+<p>This module contains functions to create and modify PYTHONPATHs</p>
+<dl class="function">
+<dt id="tg_master.ppath.splitppath">
+<!--[tg_master.ppath.splitppath]--><tt class="descclassname">tg_master.ppath.</tt><tt class="descname">splitppath</tt><big>(</big><em>ppath</em><big>)</big><a class="headerlink" href="#tg_master.ppath.splitppath" title="Permalink to this definition">¶</a></dt>
+<dd><p>Splits the input at the colon and returns the parts</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><em>ppath</em> (string) &#8211; pythonpath that should be splitted</li>
+</ul>
+</td>
+</tr>
+<tr class="field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">parts of the pythonpath</p>
+</td>
+</tr>
+<tr class="field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">list with two elements: bin/script directory and
+lib directory</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Usage</strong></p>
+<div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">splitppath</span><span class="p">(</span><span class="s">&quot;bin:lib&quot;</span><span class="p">)</span>
+<span class="go">[&#39;bin&#39;, &#39;lib&#39;]</span>
+</pre></div>
+<div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">splitppath</span><span class="p">(</span><span class="s">&quot;../bin:../lib&quot;</span><span class="p">)</span>
+<span class="go">[&#39;../bin&#39;, &#39;../lib&#39;]</span>
+</pre></div>
+</dd></dl>
+
+<dl class="function">
+<dt id="tg_master.ppath.modifyppath">
+<!--[tg_master.ppath.modifyppath]--><tt class="descclassname">tg_master.ppath.</tt><tt class="descname">modifyppath</tt><big>(</big><em>ppath</em>, <em>folder</em><big>)</big><a class="headerlink" href="#tg_master.ppath.modifyppath" title="Permalink to this definition">¶</a></dt>
+<dd><p>Joins the pythonpath and the folder.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><em>ppath</em> (string) &#8211; pythonpath that should be extended</li>
+<li><em>folder</em> (string) &#8211; folder that extends the python path</li>
+</ul>
+</td>
+</tr>
+<tr class="field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">joined pythonpath</p>
+</td>
+</tr>
+<tr class="field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">string</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Usage</strong></p>
+<div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">modifyppath</span><span class="p">(</span><span class="s">&quot;bin:lib&quot;</span><span class="p">,</span> <span class="s">&quot;..&quot;</span><span class="p">)</span>
+<span class="go">&#39;../bin:../lib&#39;</span>
+</pre></div>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h4>Previous topic</h4>
+            <p class="topless"><a href="tg_master.html" title="previous chapter"><tt class="docutils literal docutils literal"><span class="pre">tg_master</span></tt></a></p>
+            <h4>Next topic</h4>
+            <p class="topless"><a href="tg_master.tgbuilder.html" title="next chapter"><tt class="docutils literal"><span class="pre">tg_master.tgbuilder</span></tt></a></p>
+            <h3>This Page</h3>
+            <ul class="this-page-menu">
+              <li><a href="../_sources/modules/tg_master.ppath.txt">Show Source</a></li>
+            </ul>
+            <h3>Quick search</h3>
+            <form class="search" action="../search.html" method="get">
+              <input type="text" name="q" size="18" /> <input type="submit" value="Go" />
+              <input type="hidden" name="check_keywords" value="yes" />
+              <input type="hidden" name="area" value="default" />
+            </form>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../modindex.html" title="Global Module Index"
+             accesskey="M">modules</a> |</li>
+        <li class="right" >
+          <a href="tg_master.tgbuilder.html" title="tg_master.tgbuilder"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="tg_master.html" title="tg_master"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">TurboGears BuildBot Master v0.1.0.1 documentation</a> &raquo;</li>
+      </ul>
+    </div>
+    <div class="footer">
+      &copy; Copyright 2008, Steven Mohr.
+      Last updated on Oct 09, 2008.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a>.
+    </div>
+  </body>
+</html>

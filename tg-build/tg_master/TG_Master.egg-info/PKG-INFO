@@ -1,0 +1,11 @@
+Metadata-Version: 1.0
+Name: TG-Master
+Version: 0.1.0.1
+Summary: This package contains some builders and functions used by    TurboGears' BuildBot. It also contains the server-side representation of    the build steps included in the tg_buildbot_extensions package.
+Home-page: http://code.google.com/p/tg-buildbot-extensions/
+Author: Steven Mohr
+Author-email: opensource@stevenmohr.de
+License: MIT
+Description: UNKNOWN
+Keywords: BuildBot TurboGears extensions
+Platform: UNKNOWN

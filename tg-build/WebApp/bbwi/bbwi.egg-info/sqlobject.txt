@@ -1,0 +1,2 @@
+db_module=bbwi.model
+history_dir=$base/bbwi/sqlobject-history

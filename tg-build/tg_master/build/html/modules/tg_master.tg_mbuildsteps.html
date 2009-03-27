@@ -1,0 +1,1795 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>tg_master.tg_mbuildsteps &mdash; TurboGears BuildBot Master v0.1.0.1 documentation</title>
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+          URL_ROOT:    '../',
+          VERSION:     '0.1.0.1',
+          COLLAPSE_MODINDEX: false,
+          FILE_SUFFIX: ''
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/interface.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="contents" title="Global table of contents" href="../contents.html" />
+    <link rel="index" title="Global index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="top" title="TurboGears BuildBot Master v0.1.0.1 documentation" href="../index.html" />
+    <link rel="next" title="tg_master.tgbuilder" href="tg_master.tgbuilder.html" />
+    <link rel="prev" title="tg_master.ppath" href="tg_master.ppath.html" />
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../modindex.html" title="Global Module Index"
+             accesskey="M">modules</a> |</li>
+        <li class="right" >
+          <a href="tg_master.tgbuilder.html" title="tg_master.tgbuilder"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="tg_master.ppath.html" title="tg_master.ppath"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">TurboGears BuildBot Master v0.1.0.1 documentation</a> &raquo;</li>
+      </ul>
+    </div>
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  
+  <div class="section" id="module-tg_master.tg_mbuildsteps">
+<h1 id="module-tg_master.tg_mbuildsteps"><tt class="xref docutils literal"><span class="pre">tg_master.tg_mbuildsteps</span></tt><a class="headerlink" href="#module-tg_master.tg_mbuildsteps" title="Permalink to this headline">¶</a></h1>
+<p>This module contains all TG-specific master-side part of the new build steps</p>
+<dl class="class">
+<dt id="tg_master.tg_mbuildsteps.BaseStep">
+<!--[tg_master.tg_mbuildsteps.BaseStep]-->class <tt class="descclassname">tg_master.tg_mbuildsteps.</tt><tt class="descname">BaseStep</tt><big>(</big><em>slave_name</em>, <em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#tg_master.tg_mbuildsteps.BaseStep" title="Permalink to this definition">¶</a></dt>
+<dd><p>Base class for all new build steps</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><em>description</em> (string) &#8211; description of build step while working</li>
+<li><em>descriptionDone</em> (string) &#8211; description of build step when finished</li>
+<li><em>env</em> (dict of string:string) &#8211; enviroment variables</li>
+<li><em>workdir</em> (string) &#8211; workdir to work in</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="tg_master.tg_mbuildsteps.BaseStep.addURL">
+<!--[tg_master.tg_mbuildsteps.BaseStep.addURL]--><tt class="descname">addURL</tt><big>(</big><em>name</em>, <em>url</em><big>)</big><a class="headerlink" href="#tg_master.tg_mbuildsteps.BaseStep.addURL" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add a BuildStep URL to this step.</p>
+<p>An HREF to this URL will be added to any HTML representations of this
+step. This allows a step to provide links to external web pages,
+perhaps to provide detailed HTML code coverage results or other forms
+of build status.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tg_master.tg_mbuildsteps.BaseStep.commandComplete">
+<!--[tg_master.tg_mbuildsteps.BaseStep.commandComplete]--><tt class="descname">commandComplete</tt><big>(</big><em>cmd</em><big>)</big><a class="headerlink" href="#tg_master.tg_mbuildsteps.BaseStep.commandComplete" title="Permalink to this definition">¶</a></dt>
+<dd>This is a general-purpose hook method for subclasses. It will be
+called after the remote command has finished, but before any of the
+other hook functions are called.</dd></dl>
+
+<dl class="method">
+<dt id="tg_master.tg_mbuildsteps.BaseStep.createSummary">
+<!--[tg_master.tg_mbuildsteps.BaseStep.createSummary]--><tt class="descname">createSummary</tt><big>(</big><em>log</em><big>)</big><a class="headerlink" href="#tg_master.tg_mbuildsteps.BaseStep.createSummary" title="Permalink to this definition">¶</a></dt>
+<dd>To create summary logs, do something like this:
+warnings = grep(&#8216;^Warning:&#8217;, log.getText())
+self.addCompleteLog(&#8216;warnings&#8217;, warnings)</dd></dl>
+
+<dl class="method">
+<dt id="tg_master.tg_mbuildsteps.BaseStep.evaluateCommand">
+<!--[tg_master.tg_mbuildsteps.BaseStep.evaluateCommand]--><tt class="descname">evaluateCommand</tt><big>(</big><em>cmd</em><big>)</big><a class="headerlink" href="#tg_master.tg_mbuildsteps.BaseStep.evaluateCommand" title="Permalink to this definition">¶</a></dt>
+<dd>Decide whether the command was SUCCESS, WARNINGS, or FAILURE.
+Override this to, say, declare WARNINGS if there is any stderr
+activity, or to say that rc!=0 is not actually an error.</dd></dl>
+
+<dl class="method">
+<dt id="tg_master.tg_mbuildsteps.BaseStep.getText2">
+<!--[tg_master.tg_mbuildsteps.BaseStep.getText2]--><tt class="descname">getText2</tt><big>(</big><em>cmd</em>, <em>results</em><big>)</big><a class="headerlink" href="#tg_master.tg_mbuildsteps.BaseStep.getText2" title="Permalink to this definition">¶</a></dt>
+<dd>We have decided to add a short note about ourselves to the overall
+build description, probably because something went wrong. Return a
+short list of short strings. If your subclass counts test failures or
+warnings of some sort, this is a good place to announce the count.</dd></dl>
+
+<dl class="method">
+<dt id="tg_master.tg_mbuildsteps.BaseStep.setProgress">
+<!--[tg_master.tg_mbuildsteps.BaseStep.setProgress]--><tt class="descname">setProgress</tt><big>(</big><em>metric</em>, <em>value</em><big>)</big><a class="headerlink" href="#tg_master.tg_mbuildsteps.BaseStep.setProgress" title="Permalink to this definition">¶</a></dt>
+<dd>BuildSteps can call self.setProgress() to announce progress along
+some metric.</dd></dl>
+
+<dl class="method">
+<dt id="tg_master.tg_mbuildsteps.BaseStep.setupLogfiles">
+<!--[tg_master.tg_mbuildsteps.BaseStep.setupLogfiles]--><tt class="descname">setupLogfiles</tt><big>(</big><em>cmd</em>, <em>logfiles</em><big>)</big><a class="headerlink" href="#tg_master.tg_mbuildsteps.BaseStep.setupLogfiles" title="Permalink to this definition">¶</a></dt>
+<dd>Set up any additional logfiles= logs.</dd></dl>
+
+<dl class="method">
+<dt id="tg_master.tg_mbuildsteps.BaseStep.slaveVersion">
+<!--[tg_master.tg_mbuildsteps.BaseStep.slaveVersion]--><tt class="descname">slaveVersion</tt><big>(</big><em>command</em>, <em>oldversion=None</em><big>)</big><a class="headerlink" href="#tg_master.tg_mbuildsteps.BaseStep.slaveVersion" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the version number of the given slave command. For the
+commands defined in buildbot.slave.commands, this is the value of
+&#8216;cvs_ver&#8217; at the top of that file. Non-existent commands will return
+a value of None. Buildslaves running buildbot-0.5.0 or earlier did
+not respond to the version query: commands on those slaves will
+return a value of OLDVERSION, so you can distinguish between old
+buildslaves and missing commands.</p>
+<p>If you know that &lt;=0.5.0 buildslaves have the command you want (CVS
+and SVN existed back then, but none of the other VC systems), then it
+makes sense to call this with oldversion=&#8217;old&#8217;. If the command you
+want is newer than that, just leave oldversion= unspecified, and the
+command will return None for a buildslave that does not implement the
+command.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tg_master.tg_mbuildsteps.BaseStep.startCommand">
+<!--[tg_master.tg_mbuildsteps.BaseStep.startCommand]--><tt class="descname">startCommand</tt><big>(</big><em>cmd</em>, <em>errorMessages=</em><span class="optional">[</span><span class="optional">]</span><big>)</big><a class="headerlink" href="#tg_master.tg_mbuildsteps.BaseStep.startCommand" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="docutils">
+<dt>&#64;param cmd: a suitable RemoteCommand which will be launched, with</dt>
+<dd>all output being put into our self.stdio_log LogFile</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="tg_master.tg_mbuildsteps.BaseStep.startStep">
+<!--[tg_master.tg_mbuildsteps.BaseStep.startStep]--><tt class="descname">startStep</tt><big>(</big><em>remote</em><big>)</big><a class="headerlink" href="#tg_master.tg_mbuildsteps.BaseStep.startStep" title="Permalink to this definition">¶</a></dt>
+<dd><p>Begin the step. This returns a Deferred that will fire when the
+step finishes.</p>
+<p>This deferred fires with a tuple of (result, [extra text]), although
+older steps used to return just the &#8216;result&#8217; value, so the receiving
+L{base.Build} needs to be prepared to handle that too. C{result} is
+one of the SUCCESS/WARNINGS/FAILURE/SKIPPED constants from
+L{buildbot.status.builder}, and the extra text is a list of short
+strings which should be appended to the Build&#8217;s text results. This
+text allows a test-case step which fails to append B{17 tests} to the
+Build&#8217;s status, in addition to marking the build as failing.</p>
+<p>The deferred will errback if the step encounters an exception,
+including an exception on the slave side (or if the slave goes away
+altogether). Failures in shell commands (rc!=0) will B{not} cause an
+errback, in general the BuildStep will evaluate the results and
+decide whether to treat it as a WARNING or FAILURE.</p>
+<p>&#64;type remote: L{twisted.spread.pb.RemoteReference}
+&#64;param remote: a reference to the slave&#8217;s</p>
+<div class="system-message">
+<p class="system-message-title">System Message: ERROR/3 (<tt class="docutils">/home/steven/TurboGears/test_system/tg_master/tg_master/tg_mbuildsteps.py:docstring of tg_master.tg_mbuildsteps.BaseStep</tt>, line 11)</p>
+Unexpected indentation.</div>
+<blockquote>
+L{buildbot.slave.bot.SlaveBuilder} instance where any
+RemoteCommands may be run</blockquote>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="tg_master.tg_mbuildsteps.BuildDocEpy">
+<!--[tg_master.tg_mbuildsteps.BuildDocEpy]-->class <tt class="descclassname">tg_master.tg_mbuildsteps.</tt><tt class="descname">BuildDocEpy</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#tg_master.tg_mbuildsteps.BuildDocEpy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Builds documentation from files contained in doc_dir. 
+This step uses epydoc.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><em>doc_dir</em> (string) &#8211; directory which contains documentation files</li>
+<li><em>needed_conf_file</em> (string) &#8211; path to a needed config file that has
+to be downloaded from the build master</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="tg_master.tg_mbuildsteps.BuildDocEpy.addURL">
+<!--[tg_master.tg_mbuildsteps.BuildDocEpy.addURL]--><tt class="descname">addURL</tt><big>(</big><em>name</em>, <em>url</em><big>)</big><a class="headerlink" href="#tg_master.tg_mbuildsteps.BuildDocEpy.addURL" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add a BuildStep URL to this step.</p>
+<p>An HREF to this URL will be added to any HTML representations of this
+step. This allows a step to provide links to external web pages,
+perhaps to provide detailed HTML code coverage results or other forms
+of build status.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tg_master.tg_mbuildsteps.BuildDocEpy.commandComplete">
+<!--[tg_master.tg_mbuildsteps.BuildDocEpy.commandComplete]--><tt class="descname">commandComplete</tt><big>(</big><em>cmd</em><big>)</big><a class="headerlink" href="#tg_master.tg_mbuildsteps.BuildDocEpy.commandComplete" title="Permalink to this definition">¶</a></dt>
+<dd>This is a general-purpose hook method for subclasses. It will be
+called after the remote command has finished, but before any of the
+other hook functions are called.</dd></dl>
+
+<dl class="method">
+<dt id="tg_master.tg_mbuildsteps.BuildDocEpy.createSummary">
+<!--[tg_master.tg_mbuildsteps.BuildDocEpy.createSummary]--><tt class="descname">createSummary</tt><big>(</big><em>log</em><big>)</big><a class="headerlink" href="#tg_master.tg_mbuildsteps.BuildDocEpy.createSummary" title="Permalink to this definition">¶</a></dt>
+<dd>To create summary logs, do something like this:
+warnings = grep(&#8216;^Warning:&#8217;, log.getText())
+self.addCompleteLog(&#8216;warnings&#8217;, warnings)</dd></dl>
+
+<dl class="method">
+<dt id="tg_master.tg_mbuildsteps.BuildDocEpy.evaluateCommand">
+<!--[tg_master.tg_mbuildsteps.BuildDocEpy.evaluateCommand]--><tt class="descname">evaluateCommand</tt><big>(</big><em>cmd</em><big>)</big><a class="headerlink" href="#tg_master.tg_mbuildsteps.BuildDocEpy.evaluateCommand" title="Permalink to this definition">¶</a></dt>
+<dd>Decide whether the command was SUCCESS, WARNINGS, or FAILURE.
+Override this to, say, declare WARNINGS if there is any stderr
+activity, or to say that rc!=0 is not actually an error.</dd></dl>
+
+<dl class="method">
+<dt id="tg_master.tg_mbuildsteps.BuildDocEpy.getText2">
+<!--[tg_master.tg_mbuildsteps.BuildDocEpy.getText2]--><tt class="descname">getText2</tt><big>(</big><em>cmd</em>, <em>results</em><big>)</big><a class="headerlink" href="#tg_master.tg_mbuildsteps.BuildDocEpy.getText2" title="Permalink to this definition">¶</a></dt>
+<dd>We have decided to add a short note about ourselves to the overall
+build description, probably because something went wrong. Return a
+short list of short strings. If your subclass counts test failures or
+warnings of some sort, this is a good place to announce the count.</dd></dl>
+
+<dl class="method">
+<dt id="tg_master.tg_mbuildsteps.BuildDocEpy.setProgress">
+<!--[tg_master.tg_mbuildsteps.BuildDocEpy.setProgress]--><tt class="descname">setProgress</tt><big>(</big><em>metric</em>, <em>value</em><big>)</big><a class="headerlink" href="#tg_master.tg_mbuildsteps.BuildDocEpy.setProgress" title="Permalink to this definition">¶</a></dt>
+<dd>BuildSteps can call self.setProgress() to announce progress along
+some metric.</dd></dl>
+
+<dl class="method">
+<dt id="tg_master.tg_mbuildsteps.BuildDocEpy.setupLogfiles">
+<!--[tg_master.tg_mbuildsteps.BuildDocEpy.setupLogfiles]--><tt class="descname">setupLogfiles</tt><big>(</big><em>cmd</em>, <em>logfiles</em><big>)</big><a class="headerlink" href="#tg_master.tg_mbuildsteps.BuildDocEpy.setupLogfiles" title="Permalink to this definition">¶</a></dt>
+<dd>Set up any additional logfiles= logs.</dd></dl>
+
+<dl class="method">
+<dt id="tg_master.tg_mbuildsteps.BuildDocEpy.slaveVersion">
+<!--[tg_master.tg_mbuildsteps.BuildDocEpy.slaveVersion]--><tt class="descname">slaveVersion</tt><big>(</big><em>command</em>, <em>oldversion=None</em><big>)</big><a class="headerlink" href="#tg_master.tg_mbuildsteps.BuildDocEpy.slaveVersion" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the version number of the given slave command. For the
+commands defined in buildbot.slave.commands, this is the value of
+&#8216;cvs_ver&#8217; at the top of that file. Non-existent commands will return
+a value of None. Buildslaves running buildbot-0.5.0 or earlier did
+not respond to the version query: commands on those slaves will
+return a value of OLDVERSION, so you can distinguish between old
+buildslaves and missing commands.</p>
+<p>If you know that &lt;=0.5.0 buildslaves have the command you want (CVS
+and SVN existed back then, but none of the other VC systems), then it
+makes sense to call this with oldversion=&#8217;old&#8217;. If the command you
+want is newer than that, just leave oldversion= unspecified, and the
+command will return None for a buildslave that does not implement the
+command.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tg_master.tg_mbuildsteps.BuildDocEpy.startCommand">
+<!--[tg_master.tg_mbuildsteps.BuildDocEpy.startCommand]--><tt class="descname">startCommand</tt><big>(</big><em>cmd</em>, <em>errorMessages=</em><span class="optional">[</span><span class="optional">]</span><big>)</big><a class="headerlink" href="#tg_master.tg_mbuildsteps.BuildDocEpy.startCommand" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="docutils">
+<dt>&#64;param cmd: a suitable RemoteCommand which will be launched, with</dt>
+<dd>all output being put into our self.stdio_log LogFile</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="tg_master.tg_mbuildsteps.BuildDocEpy.startStep">
+<!--[tg_master.tg_mbuildsteps.BuildDocEpy.startStep]--><tt class="descname">startStep</tt><big>(</big><em>remote</em><big>)</big><a class="headerlink" href="#tg_master.tg_mbuildsteps.BuildDocEpy.startStep" title="Permalink to this definition">¶</a></dt>
+<dd><p>Begin the step. This returns a Deferred that will fire when the
+step finishes.</p>
+<p>This deferred fires with a tuple of (result, [extra text]), although
+older steps used to return just the &#8216;result&#8217; value, so the receiving
+L{base.Build} needs to be prepared to handle that too. C{result} is
+one of the SUCCESS/WARNINGS/FAILURE/SKIPPED constants from
+L{buildbot.status.builder}, and the extra text is a list of short
+strings which should be appended to the Build&#8217;s text results. This
+text allows a test-case step which fails to append B{17 tests} to the
+Build&#8217;s status, in addition to marking the build as failing.</p>
+<p>The deferred will errback if the step encounters an exception,
+including an exception on the slave side (or if the slave goes away
+altogether). Failures in shell commands (rc!=0) will B{not} cause an
+errback, in general the BuildStep will evaluate the results and
+decide whether to treat it as a WARNING or FAILURE.</p>
+<p>&#64;type remote: L{twisted.spread.pb.RemoteReference}
+&#64;param remote: a reference to the slave&#8217;s</p>
+<div class="system-message">
+<p class="system-message-title">System Message: ERROR/3 (<tt class="docutils">/home/steven/TurboGears/test_system/tg_master/tg_master/tg_mbuildsteps.py:docstring of tg_master.tg_mbuildsteps.BaseStep</tt>, line 11)</p>
+Unexpected indentation.</div>
+<blockquote>
+L{buildbot.slave.bot.SlaveBuilder} instance where any
+RemoteCommands may be run</blockquote>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="tg_master.tg_mbuildsteps.BuildDocSphinx">
+<!--[tg_master.tg_mbuildsteps.BuildDocSphinx]-->class <tt class="descclassname">tg_master.tg_mbuildsteps.</tt><tt class="descname">BuildDocSphinx</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#tg_master.tg_mbuildsteps.BuildDocSphinx" title="Permalink to this definition">¶</a></dt>
+<dd><p>Builds documentation from files contained in doc_dir.
+This step uses sphinx.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><em>doc_dir</em> (string) &#8211; directory which contains documentation files</li>
+<li><em>needed_conf_file</em> (string) &#8211; path to a needed config file that has to be 
+downloaded from the build master</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="tg_master.tg_mbuildsteps.BuildDocSphinx.addURL">
+<!--[tg_master.tg_mbuildsteps.BuildDocSphinx.addURL]--><tt class="descname">addURL</tt><big>(</big><em>name</em>, <em>url</em><big>)</big><a class="headerlink" href="#tg_master.tg_mbuildsteps.BuildDocSphinx.addURL" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add a BuildStep URL to this step.</p>
+<p>An HREF to this URL will be added to any HTML representations of this
+step. This allows a step to provide links to external web pages,
+perhaps to provide detailed HTML code coverage results or other forms
+of build status.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tg_master.tg_mbuildsteps.BuildDocSphinx.commandComplete">
+<!--[tg_master.tg_mbuildsteps.BuildDocSphinx.commandComplete]--><tt class="descname">commandComplete</tt><big>(</big><em>cmd</em><big>)</big><a class="headerlink" href="#tg_master.tg_mbuildsteps.BuildDocSphinx.commandComplete" title="Permalink to this definition">¶</a></dt>
+<dd>This is a general-purpose hook method for subclasses. It will be
+called after the remote command has finished, but before any of the
+other hook functions are called.</dd></dl>
+
+<dl class="method">
+<dt id="tg_master.tg_mbuildsteps.BuildDocSphinx.createSummary">
+<!--[tg_master.tg_mbuildsteps.BuildDocSphinx.createSummary]--><tt class="descname">createSummary</tt><big>(</big><em>log</em><big>)</big><a class="headerlink" href="#tg_master.tg_mbuildsteps.BuildDocSphinx.createSummary" title="Permalink to this definition">¶</a></dt>
+<dd>To create summary logs, do something like this:
+warnings = grep(&#8216;^Warning:&#8217;, log.getText())
+self.addCompleteLog(&#8216;warnings&#8217;, warnings)</dd></dl>
+
+<dl class="method">
+<dt id="tg_master.tg_mbuildsteps.BuildDocSphinx.evaluateCommand">
+<!--[tg_master.tg_mbuildsteps.BuildDocSphinx.evaluateCommand]--><tt class="descname">evaluateCommand</tt><big>(</big><em>cmd</em><big>)</big><a class="headerlink" href="#tg_master.tg_mbuildsteps.BuildDocSphinx.evaluateCommand" title="Permalink to this definition">¶</a></dt>
+<dd>Decide whether the command was SUCCESS, WARNINGS, or FAILURE.
+Override this to, say, declare WARNINGS if there is any stderr
+activity, or to say that rc!=0 is not actually an error.</dd></dl>
+
+<dl class="method">
+<dt id="tg_master.tg_mbuildsteps.BuildDocSphinx.getText2">
+<!--[tg_master.tg_mbuildsteps.BuildDocSphinx.getText2]--><tt class="descname">getText2</tt><big>(</big><em>cmd</em>, <em>results</em><big>)</big><a class="headerlink" href="#tg_master.tg_mbuildsteps.BuildDocSphinx.getText2" title="Permalink to this definition">¶</a></dt>
+<dd>We have decided to add a short note about ourselves to the overall
+build description, probably because something went wrong. Return a
+short list of short strings. If your subclass counts test failures or
+warnings of some sort, this is a good place to announce the count.</dd></dl>
+
+<dl class="method">
+<dt id="tg_master.tg_mbuildsteps.BuildDocSphinx.setProgress">
+<!--[tg_master.tg_mbuildsteps.BuildDocSphinx.setProgress]--><tt class="descname">setProgress</tt><big>(</big><em>metric</em>, <em>value</em><big>)</big><a class="headerlink" href="#tg_master.tg_mbuildsteps.BuildDocSphinx.setProgress" title="Permalink to this definition">¶</a></dt>
+<dd>BuildSteps can call self.setProgress() to announce progress along
+some metric.</dd></dl>
+
+<dl class="method">
+<dt id="tg_master.tg_mbuildsteps.BuildDocSphinx.setupLogfiles">
+<!--[tg_master.tg_mbuildsteps.BuildDocSphinx.setupLogfiles]--><tt class="descname">setupLogfiles</tt><big>(</big><em>cmd</em>, <em>logfiles</em><big>)</big><a class="headerlink" href="#tg_master.tg_mbuildsteps.BuildDocSphinx.setupLogfiles" title="Permalink to this definition">¶</a></dt>
+<dd>Set up any additional logfiles= logs.</dd></dl>
+
+<dl class="method">
+<dt id="tg_master.tg_mbuildsteps.BuildDocSphinx.slaveVersion">
+<!--[tg_master.tg_mbuildsteps.BuildDocSphinx.slaveVersion]--><tt class="descname">slaveVersion</tt><big>(</big><em>command</em>, <em>oldversion=None</em><big>)</big><a class="headerlink" href="#tg_master.tg_mbuildsteps.BuildDocSphinx.slaveVersion" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the version number of the given slave command. For the
+commands defined in buildbot.slave.commands, this is the value of
+&#8216;cvs_ver&#8217; at the top of that file. Non-existent commands will return
+a value of None. Buildslaves running buildbot-0.5.0 or earlier did
+not respond to the version query: commands on those slaves will
+return a value of OLDVERSION, so you can distinguish between old
+buildslaves and missing commands.</p>
+<p>If you know that &lt;=0.5.0 buildslaves have the command you want (CVS
+and SVN existed back then, but none of the other VC systems), then it
+makes sense to call this with oldversion=&#8217;old&#8217;. If the command you
+want is newer than that, just leave oldversion= unspecified, and the
+command will return None for a buildslave that does not implement the
+command.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tg_master.tg_mbuildsteps.BuildDocSphinx.startCommand">
+<!--[tg_master.tg_mbuildsteps.BuildDocSphinx.startCommand]--><tt class="descname">startCommand</tt><big>(</big><em>cmd</em>, <em>errorMessages=</em><span class="optional">[</span><span class="optional">]</span><big>)</big><a class="headerlink" href="#tg_master.tg_mbuildsteps.BuildDocSphinx.startCommand" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="docutils">
+<dt>&#64;param cmd: a suitable RemoteCommand which will be launched, with</dt>
+<dd>all output being put into our self.stdio_log LogFile</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="tg_master.tg_mbuildsteps.BuildDocSphinx.startStep">
+<!--[tg_master.tg_mbuildsteps.BuildDocSphinx.startStep]--><tt class="descname">startStep</tt><big>(</big><em>remote</em><big>)</big><a class="headerlink" href="#tg_master.tg_mbuildsteps.BuildDocSphinx.startStep" title="Permalink to this definition">¶</a></dt>
+<dd><p>Begin the step. This returns a Deferred that will fire when the
+step finishes.</p>
+<p>This deferred fires with a tuple of (result, [extra text]), although
+older steps used to return just the &#8216;result&#8217; value, so the receiving
+L{base.Build} needs to be prepared to handle that too. C{result} is
+one of the SUCCESS/WARNINGS/FAILURE/SKIPPED constants from
+L{buildbot.status.builder}, and the extra text is a list of short
+strings which should be appended to the Build&#8217;s text results. This
+text allows a test-case step which fails to append B{17 tests} to the
+Build&#8217;s status, in addition to marking the build as failing.</p>
+<p>The deferred will errback if the step encounters an exception,
+including an exception on the slave side (or if the slave goes away
+altogether). Failures in shell commands (rc!=0) will B{not} cause an
+errback, in general the BuildStep will evaluate the results and
+decide whether to treat it as a WARNING or FAILURE.</p>
+<p>&#64;type remote: L{twisted.spread.pb.RemoteReference}
+&#64;param remote: a reference to the slave&#8217;s</p>
+<div class="system-message">
+<p class="system-message-title">System Message: ERROR/3 (<tt class="docutils">/home/steven/TurboGears/test_system/tg_master/tg_master/tg_mbuildsteps.py:docstring of tg_master.tg_mbuildsteps.BaseStep</tt>, line 11)</p>
+Unexpected indentation.</div>
+<blockquote>
+L{buildbot.slave.bot.SlaveBuilder} instance where any
+RemoteCommands may be run</blockquote>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="tg_master.tg_mbuildsteps.BuildEgg">
+<!--[tg_master.tg_mbuildsteps.BuildEgg]-->class <tt class="descclassname">tg_master.tg_mbuildsteps.</tt><tt class="descname">BuildEgg</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#tg_master.tg_mbuildsteps.BuildEgg" title="Permalink to this definition">¶</a></dt>
+<dd><p>Builds an egg. It uses setup.py in workdir with bdist_egg parameter</p>
+<dl class="method">
+<dt id="tg_master.tg_mbuildsteps.BuildEgg.addURL">
+<!--[tg_master.tg_mbuildsteps.BuildEgg.addURL]--><tt class="descname">addURL</tt><big>(</big><em>name</em>, <em>url</em><big>)</big><a class="headerlink" href="#tg_master.tg_mbuildsteps.BuildEgg.addURL" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add a BuildStep URL to this step.</p>
+<p>An HREF to this URL will be added to any HTML representations of this
+step. This allows a step to provide links to external web pages,
+perhaps to provide detailed HTML code coverage results or other forms
+of build status.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tg_master.tg_mbuildsteps.BuildEgg.commandComplete">
+<!--[tg_master.tg_mbuildsteps.BuildEgg.commandComplete]--><tt class="descname">commandComplete</tt><big>(</big><em>cmd</em><big>)</big><a class="headerlink" href="#tg_master.tg_mbuildsteps.BuildEgg.commandComplete" title="Permalink to this definition">¶</a></dt>
+<dd>This is a general-purpose hook method for subclasses. It will be
+called after the remote command has finished, but before any of the
+other hook functions are called.</dd></dl>
+
+<dl class="method">
+<dt id="tg_master.tg_mbuildsteps.BuildEgg.createSummary">
+<!--[tg_master.tg_mbuildsteps.BuildEgg.createSummary]--><tt class="descname">createSummary</tt><big>(</big><em>log</em><big>)</big><a class="headerlink" href="#tg_master.tg_mbuildsteps.BuildEgg.createSummary" title="Permalink to this definition">¶</a></dt>
+<dd>To create summary logs, do something like this:
+warnings = grep(&#8216;^Warning:&#8217;, log.getText())
+self.addCompleteLog(&#8216;warnings&#8217;, warnings)</dd></dl>
+
+<dl class="method">
+<dt id="tg_master.tg_mbuildsteps.BuildEgg.evaluateCommand">
+<!--[tg_master.tg_mbuildsteps.BuildEgg.evaluateCommand]--><tt class="descname">evaluateCommand</tt><big>(</big><em>cmd</em><big>)</big><a class="headerlink" href="#tg_master.tg_mbuildsteps.BuildEgg.evaluateCommand" title="Permalink to this definition">¶</a></dt>
+<dd>Decide whether the command was SUCCESS, WARNINGS, or FAILURE.
+Override this to, say, declare WARNINGS if there is any stderr
+activity, or to say that rc!=0 is not actually an error.</dd></dl>
+
+<dl class="method">
+<dt id="tg_master.tg_mbuildsteps.BuildEgg.getText2">
+<!--[tg_master.tg_mbuildsteps.BuildEgg.getText2]--><tt class="descname">getText2</tt><big>(</big><em>cmd</em>, <em>results</em><big>)</big><a class="headerlink" href="#tg_master.tg_mbuildsteps.BuildEgg.getText2" title="Permalink to this definition">¶</a></dt>
+<dd>We have decided to add a short note about ourselves to the overall
+build description, probably because something went wrong. Return a
+short list of short strings. If your subclass counts test failures or
+warnings of some sort, this is a good place to announce the count.</dd></dl>
+
+<dl class="method">
+<dt id="tg_master.tg_mbuildsteps.BuildEgg.setProgress">
+<!--[tg_master.tg_mbuildsteps.BuildEgg.setProgress]--><tt class="descname">setProgress</tt><big>(</big><em>metric</em>, <em>value</em><big>)</big><a class="headerlink" href="#tg_master.tg_mbuildsteps.BuildEgg.setProgress" title="Permalink to this definition">¶</a></dt>
+<dd>BuildSteps can call self.setProgress() to announce progress along
+some metric.</dd></dl>
+
+<dl class="method">
+<dt id="tg_master.tg_mbuildsteps.BuildEgg.setupLogfiles">
+<!--[tg_master.tg_mbuildsteps.BuildEgg.setupLogfiles]--><tt class="descname">setupLogfiles</tt><big>(</big><em>cmd</em>, <em>logfiles</em><big>)</big><a class="headerlink" href="#tg_master.tg_mbuildsteps.BuildEgg.setupLogfiles" title="Permalink to this definition">¶</a></dt>
+<dd>Set up any additional logfiles= logs.</dd></dl>
+
+<dl class="method">
+<dt id="tg_master.tg_mbuildsteps.BuildEgg.slaveVersion">
+<!--[tg_master.tg_mbuildsteps.BuildEgg.slaveVersion]--><tt class="descname">slaveVersion</tt><big>(</big><em>command</em>, <em>oldversion=None</em><big>)</big><a class="headerlink" href="#tg_master.tg_mbuildsteps.BuildEgg.slaveVersion" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the version number of the given slave command. For the
+commands defined in buildbot.slave.commands, this is the value of
+&#8216;cvs_ver&#8217; at the top of that file. Non-existent commands will return
+a value of None. Buildslaves running buildbot-0.5.0 or earlier did
+not respond to the version query: commands on those slaves will
+return a value of OLDVERSION, so you can distinguish between old
+buildslaves and missing commands.</p>
+<p>If you know that &lt;=0.5.0 buildslaves have the command you want (CVS
+and SVN existed back then, but none of the other VC systems), then it
+makes sense to call this with oldversion=&#8217;old&#8217;. If the command you
+want is newer than that, just leave oldversion= unspecified, and the
+command will return None for a buildslave that does not implement the
+command.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tg_master.tg_mbuildsteps.BuildEgg.startCommand">
+<!--[tg_master.tg_mbuildsteps.BuildEgg.startCommand]--><tt class="descname">startCommand</tt><big>(</big><em>cmd</em>, <em>errorMessages=</em><span class="optional">[</span><span class="optional">]</span><big>)</big><a class="headerlink" href="#tg_master.tg_mbuildsteps.BuildEgg.startCommand" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="docutils">
+<dt>&#64;param cmd: a suitable RemoteCommand which will be launched, with</dt>
+<dd>all output being put into our self.stdio_log LogFile</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="tg_master.tg_mbuildsteps.BuildEgg.startStep">
+<!--[tg_master.tg_mbuildsteps.BuildEgg.startStep]--><tt class="descname">startStep</tt><big>(</big><em>remote</em><big>)</big><a class="headerlink" href="#tg_master.tg_mbuildsteps.BuildEgg.startStep" title="Permalink to this definition">¶</a></dt>
+<dd><p>Begin the step. This returns a Deferred that will fire when the
+step finishes.</p>
+<p>This deferred fires with a tuple of (result, [extra text]), although
+older steps used to return just the &#8216;result&#8217; value, so the receiving
+L{base.Build} needs to be prepared to handle that too. C{result} is
+one of the SUCCESS/WARNINGS/FAILURE/SKIPPED constants from
+L{buildbot.status.builder}, and the extra text is a list of short
+strings which should be appended to the Build&#8217;s text results. This
+text allows a test-case step which fails to append B{17 tests} to the
+Build&#8217;s status, in addition to marking the build as failing.</p>
+<p>The deferred will errback if the step encounters an exception,
+including an exception on the slave side (or if the slave goes away
+altogether). Failures in shell commands (rc!=0) will B{not} cause an
+errback, in general the BuildStep will evaluate the results and
+decide whether to treat it as a WARNING or FAILURE.</p>
+<p>&#64;type remote: L{twisted.spread.pb.RemoteReference}
+&#64;param remote: a reference to the slave&#8217;s</p>
+<div class="system-message">
+<p class="system-message-title">System Message: ERROR/3 (<tt class="docutils">/home/steven/TurboGears/test_system/tg_master/tg_master/tg_mbuildsteps.py:docstring of tg_master.tg_mbuildsteps.BaseStep</tt>, line 11)</p>
+Unexpected indentation.</div>
+<blockquote>
+L{buildbot.slave.bot.SlaveBuilder} instance where any
+RemoteCommands may be run</blockquote>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="tg_master.tg_mbuildsteps.BuildEggEE">
+<!--[tg_master.tg_mbuildsteps.BuildEggEE]-->class <tt class="descclassname">tg_master.tg_mbuildsteps.</tt><tt class="descname">BuildEggEE</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#tg_master.tg_mbuildsteps.BuildEggEE" title="Permalink to this definition">¶</a></dt>
+<dd><p>BuildEggEE builds an egg. It downloads the source from PyPi and builds an egg.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><em>package</em> (string) &#8211; name of the package</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="tg_master.tg_mbuildsteps.BuildEggEE.addURL">
+<!--[tg_master.tg_mbuildsteps.BuildEggEE.addURL]--><tt class="descname">addURL</tt><big>(</big><em>name</em>, <em>url</em><big>)</big><a class="headerlink" href="#tg_master.tg_mbuildsteps.BuildEggEE.addURL" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add a BuildStep URL to this step.</p>
+<p>An HREF to this URL will be added to any HTML representations of this
+step. This allows a step to provide links to external web pages,
+perhaps to provide detailed HTML code coverage results or other forms
+of build status.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tg_master.tg_mbuildsteps.BuildEggEE.commandComplete">
+<!--[tg_master.tg_mbuildsteps.BuildEggEE.commandComplete]--><tt class="descname">commandComplete</tt><big>(</big><em>cmd</em><big>)</big><a class="headerlink" href="#tg_master.tg_mbuildsteps.BuildEggEE.commandComplete" title="Permalink to this definition">¶</a></dt>
+<dd>This is a general-purpose hook method for subclasses. It will be
+called after the remote command has finished, but before any of the
+other hook functions are called.</dd></dl>
+
+<dl class="method">
+<dt id="tg_master.tg_mbuildsteps.BuildEggEE.createSummary">
+<!--[tg_master.tg_mbuildsteps.BuildEggEE.createSummary]--><tt class="descname">createSummary</tt><big>(</big><em>log</em><big>)</big><a class="headerlink" href="#tg_master.tg_mbuildsteps.BuildEggEE.createSummary" title="Permalink to this definition">¶</a></dt>
+<dd>To create summary logs, do something like this:
+warnings = grep(&#8216;^Warning:&#8217;, log.getText())
+self.addCompleteLog(&#8216;warnings&#8217;, warnings)</dd></dl>
+
+<dl class="method">
+<dt id="tg_master.tg_mbuildsteps.BuildEggEE.evaluateCommand">
+<!--[tg_master.tg_mbuildsteps.BuildEggEE.evaluateCommand]--><tt class="descname">evaluateCommand</tt><big>(</big><em>cmd</em><big>)</big><a class="headerlink" href="#tg_master.tg_mbuildsteps.BuildEggEE.evaluateCommand" title="Permalink to this definition">¶</a></dt>
+<dd>Decide whether the command was SUCCESS, WARNINGS, or FAILURE.
+Override this to, say, declare WARNINGS if there is any stderr
+activity, or to say that rc!=0 is not actually an error.</dd></dl>
+
+<dl class="method">
+<dt id="tg_master.tg_mbuildsteps.BuildEggEE.getText2">
+<!--[tg_master.tg_mbuildsteps.BuildEggEE.getText2]--><tt class="descname">getText2</tt><big>(</big><em>cmd</em>, <em>results</em><big>)</big><a class="headerlink" href="#tg_master.tg_mbuildsteps.BuildEggEE.getText2" title="Permalink to this definition">¶</a></dt>
+<dd>We have decided to add a short note about ourselves to the overall
+build description, probably because something went wrong. Return a
+short list of short strings. If your subclass counts test failures or
+warnings of some sort, this is a good place to announce the count.</dd></dl>
+
+<dl class="method">
+<dt id="tg_master.tg_mbuildsteps.BuildEggEE.setProgress">
+<!--[tg_master.tg_mbuildsteps.BuildEggEE.setProgress]--><tt class="descname">setProgress</tt><big>(</big><em>metric</em>, <em>value</em><big>)</big><a class="headerlink" href="#tg_master.tg_mbuildsteps.BuildEggEE.setProgress" title="Permalink to this definition">¶</a></dt>
+<dd>BuildSteps can call self.setProgress() to announce progress along
+some metric.</dd></dl>
+
+<dl class="method">
+<dt id="tg_master.tg_mbuildsteps.BuildEggEE.setupLogfiles">
+<!--[tg_master.tg_mbuildsteps.BuildEggEE.setupLogfiles]--><tt class="descname">setupLogfiles</tt><big>(</big><em>cmd</em>, <em>logfiles</em><big>)</big><a class="headerlink" href="#tg_master.tg_mbuildsteps.BuildEggEE.setupLogfiles" title="Permalink to this definition">¶</a></dt>
+<dd>Set up any additional logfiles= logs.</dd></dl>
+
+<dl class="method">
+<dt id="tg_master.tg_mbuildsteps.BuildEggEE.slaveVersion">
+<!--[tg_master.tg_mbuildsteps.BuildEggEE.slaveVersion]--><tt class="descname">slaveVersion</tt><big>(</big><em>command</em>, <em>oldversion=None</em><big>)</big><a class="headerlink" href="#tg_master.tg_mbuildsteps.BuildEggEE.slaveVersion" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the version number of the given slave command. For the
+commands defined in buildbot.slave.commands, this is the value of
+&#8216;cvs_ver&#8217; at the top of that file. Non-existent commands will return
+a value of None. Buildslaves running buildbot-0.5.0 or earlier did
+not respond to the version query: commands on those slaves will
+return a value of OLDVERSION, so you can distinguish between old
+buildslaves and missing commands.</p>
+<p>If you know that &lt;=0.5.0 buildslaves have the command you want (CVS
+and SVN existed back then, but none of the other VC systems), then it
+makes sense to call this with oldversion=&#8217;old&#8217;. If the command you
+want is newer than that, just leave oldversion= unspecified, and the
+command will return None for a buildslave that does not implement the
+command.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tg_master.tg_mbuildsteps.BuildEggEE.startCommand">
+<!--[tg_master.tg_mbuildsteps.BuildEggEE.startCommand]--><tt class="descname">startCommand</tt><big>(</big><em>cmd</em>, <em>errorMessages=</em><span class="optional">[</span><span class="optional">]</span><big>)</big><a class="headerlink" href="#tg_master.tg_mbuildsteps.BuildEggEE.startCommand" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="docutils">
+<dt>&#64;param cmd: a suitable RemoteCommand which will be launched, with</dt>
+<dd>all output being put into our self.stdio_log LogFile</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="tg_master.tg_mbuildsteps.BuildEggEE.startStep">
+<!--[tg_master.tg_mbuildsteps.BuildEggEE.startStep]--><tt class="descname">startStep</tt><big>(</big><em>remote</em><big>)</big><a class="headerlink" href="#tg_master.tg_mbuildsteps.BuildEggEE.startStep" title="Permalink to this definition">¶</a></dt>
+<dd><p>Begin the step. This returns a Deferred that will fire when the
+step finishes.</p>
+<p>This deferred fires with a tuple of (result, [extra text]), although
+older steps used to return just the &#8216;result&#8217; value, so the receiving
+L{base.Build} needs to be prepared to handle that too. C{result} is
+one of the SUCCESS/WARNINGS/FAILURE/SKIPPED constants from
+L{buildbot.status.builder}, and the extra text is a list of short
+strings which should be appended to the Build&#8217;s text results. This
+text allows a test-case step which fails to append B{17 tests} to the
+Build&#8217;s status, in addition to marking the build as failing.</p>
+<p>The deferred will errback if the step encounters an exception,
+including an exception on the slave side (or if the slave goes away
+altogether). Failures in shell commands (rc!=0) will B{not} cause an
+errback, in general the BuildStep will evaluate the results and
+decide whether to treat it as a WARNING or FAILURE.</p>
+<p>&#64;type remote: L{twisted.spread.pb.RemoteReference}
+&#64;param remote: a reference to the slave&#8217;s</p>
+<div class="system-message">
+<p class="system-message-title">System Message: ERROR/3 (<tt class="docutils">/home/steven/TurboGears/test_system/tg_master/tg_master/tg_mbuildsteps.py:docstring of tg_master.tg_mbuildsteps.BaseStep</tt>, line 11)</p>
+Unexpected indentation.</div>
+<blockquote>
+L{buildbot.slave.bot.SlaveBuilder} instance where any
+RemoteCommands may be run</blockquote>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="tg_master.tg_mbuildsteps.CleanDir">
+<!--[tg_master.tg_mbuildsteps.CleanDir]-->class <tt class="descclassname">tg_master.tg_mbuildsteps.</tt><tt class="descname">CleanDir</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#tg_master.tg_mbuildsteps.CleanDir" title="Permalink to this definition">¶</a></dt>
+<dd><p>Deletes all files and directories in workdir</p>
+<dl class="method">
+<dt id="tg_master.tg_mbuildsteps.CleanDir.addURL">
+<!--[tg_master.tg_mbuildsteps.CleanDir.addURL]--><tt class="descname">addURL</tt><big>(</big><em>name</em>, <em>url</em><big>)</big><a class="headerlink" href="#tg_master.tg_mbuildsteps.CleanDir.addURL" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add a BuildStep URL to this step.</p>
+<p>An HREF to this URL will be added to any HTML representations of this
+step. This allows a step to provide links to external web pages,
+perhaps to provide detailed HTML code coverage results or other forms
+of build status.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tg_master.tg_mbuildsteps.CleanDir.commandComplete">
+<!--[tg_master.tg_mbuildsteps.CleanDir.commandComplete]--><tt class="descname">commandComplete</tt><big>(</big><em>cmd</em><big>)</big><a class="headerlink" href="#tg_master.tg_mbuildsteps.CleanDir.commandComplete" title="Permalink to this definition">¶</a></dt>
+<dd>This is a general-purpose hook method for subclasses. It will be
+called after the remote command has finished, but before any of the
+other hook functions are called.</dd></dl>
+
+<dl class="method">
+<dt id="tg_master.tg_mbuildsteps.CleanDir.createSummary">
+<!--[tg_master.tg_mbuildsteps.CleanDir.createSummary]--><tt class="descname">createSummary</tt><big>(</big><em>log</em><big>)</big><a class="headerlink" href="#tg_master.tg_mbuildsteps.CleanDir.createSummary" title="Permalink to this definition">¶</a></dt>
+<dd>To create summary logs, do something like this:
+warnings = grep(&#8216;^Warning:&#8217;, log.getText())
+self.addCompleteLog(&#8216;warnings&#8217;, warnings)</dd></dl>
+
+<dl class="method">
+<dt id="tg_master.tg_mbuildsteps.CleanDir.evaluateCommand">
+<!--[tg_master.tg_mbuildsteps.CleanDir.evaluateCommand]--><tt class="descname">evaluateCommand</tt><big>(</big><em>cmd</em><big>)</big><a class="headerlink" href="#tg_master.tg_mbuildsteps.CleanDir.evaluateCommand" title="Permalink to this definition">¶</a></dt>
+<dd>Decide whether the command was SUCCESS, WARNINGS, or FAILURE.
+Override this to, say, declare WARNINGS if there is any stderr
+activity, or to say that rc!=0 is not actually an error.</dd></dl>
+
+<dl class="method">
+<dt id="tg_master.tg_mbuildsteps.CleanDir.getText2">
+<!--[tg_master.tg_mbuildsteps.CleanDir.getText2]--><tt class="descname">getText2</tt><big>(</big><em>cmd</em>, <em>results</em><big>)</big><a class="headerlink" href="#tg_master.tg_mbuildsteps.CleanDir.getText2" title="Permalink to this definition">¶</a></dt>
+<dd>We have decided to add a short note about ourselves to the overall
+build description, probably because something went wrong. Return a
+short list of short strings. If your subclass counts test failures or
+warnings of some sort, this is a good place to announce the count.</dd></dl>
+
+<dl class="method">
+<dt id="tg_master.tg_mbuildsteps.CleanDir.setProgress">
+<!--[tg_master.tg_mbuildsteps.CleanDir.setProgress]--><tt class="descname">setProgress</tt><big>(</big><em>metric</em>, <em>value</em><big>)</big><a class="headerlink" href="#tg_master.tg_mbuildsteps.CleanDir.setProgress" title="Permalink to this definition">¶</a></dt>
+<dd>BuildSteps can call self.setProgress() to announce progress along
+some metric.</dd></dl>
+
+<dl class="method">
+<dt id="tg_master.tg_mbuildsteps.CleanDir.setupLogfiles">
+<!--[tg_master.tg_mbuildsteps.CleanDir.setupLogfiles]--><tt class="descname">setupLogfiles</tt><big>(</big><em>cmd</em>, <em>logfiles</em><big>)</big><a class="headerlink" href="#tg_master.tg_mbuildsteps.CleanDir.setupLogfiles" title="Permalink to this definition">¶</a></dt>
+<dd>Set up any additional logfiles= logs.</dd></dl>
+
+<dl class="method">
+<dt id="tg_master.tg_mbuildsteps.CleanDir.slaveVersion">
+<!--[tg_master.tg_mbuildsteps.CleanDir.slaveVersion]--><tt class="descname">slaveVersion</tt><big>(</big><em>command</em>, <em>oldversion=None</em><big>)</big><a class="headerlink" href="#tg_master.tg_mbuildsteps.CleanDir.slaveVersion" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the version number of the given slave command. For the
+commands defined in buildbot.slave.commands, this is the value of
+&#8216;cvs_ver&#8217; at the top of that file. Non-existent commands will return
+a value of None. Buildslaves running buildbot-0.5.0 or earlier did
+not respond to the version query: commands on those slaves will
+return a value of OLDVERSION, so you can distinguish between old
+buildslaves and missing commands.</p>
+<p>If you know that &lt;=0.5.0 buildslaves have the command you want (CVS
+and SVN existed back then, but none of the other VC systems), then it
+makes sense to call this with oldversion=&#8217;old&#8217;. If the command you
+want is newer than that, just leave oldversion= unspecified, and the
+command will return None for a buildslave that does not implement the
+command.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tg_master.tg_mbuildsteps.CleanDir.startCommand">
+<!--[tg_master.tg_mbuildsteps.CleanDir.startCommand]--><tt class="descname">startCommand</tt><big>(</big><em>cmd</em>, <em>errorMessages=</em><span class="optional">[</span><span class="optional">]</span><big>)</big><a class="headerlink" href="#tg_master.tg_mbuildsteps.CleanDir.startCommand" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="docutils">
+<dt>&#64;param cmd: a suitable RemoteCommand which will be launched, with</dt>
+<dd>all output being put into our self.stdio_log LogFile</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="tg_master.tg_mbuildsteps.CleanDir.startStep">
+<!--[tg_master.tg_mbuildsteps.CleanDir.startStep]--><tt class="descname">startStep</tt><big>(</big><em>remote</em><big>)</big><a class="headerlink" href="#tg_master.tg_mbuildsteps.CleanDir.startStep" title="Permalink to this definition">¶</a></dt>
+<dd><p>Begin the step. This returns a Deferred that will fire when the
+step finishes.</p>
+<p>This deferred fires with a tuple of (result, [extra text]), although
+older steps used to return just the &#8216;result&#8217; value, so the receiving
+L{base.Build} needs to be prepared to handle that too. C{result} is
+one of the SUCCESS/WARNINGS/FAILURE/SKIPPED constants from
+L{buildbot.status.builder}, and the extra text is a list of short
+strings which should be appended to the Build&#8217;s text results. This
+text allows a test-case step which fails to append B{17 tests} to the
+Build&#8217;s status, in addition to marking the build as failing.</p>
+<p>The deferred will errback if the step encounters an exception,
+including an exception on the slave side (or if the slave goes away
+altogether). Failures in shell commands (rc!=0) will B{not} cause an
+errback, in general the BuildStep will evaluate the results and
+decide whether to treat it as a WARNING or FAILURE.</p>
+<p>&#64;type remote: L{twisted.spread.pb.RemoteReference}
+&#64;param remote: a reference to the slave&#8217;s</p>
+<div class="system-message">
+<p class="system-message-title">System Message: ERROR/3 (<tt class="docutils">/home/steven/TurboGears/test_system/tg_master/tg_master/tg_mbuildsteps.py:docstring of tg_master.tg_mbuildsteps.BaseStep</tt>, line 11)</p>
+Unexpected indentation.</div>
+<blockquote>
+L{buildbot.slave.bot.SlaveBuilder} instance where any
+RemoteCommands may be run</blockquote>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="tg_master.tg_mbuildsteps.EasyInstall">
+<!--[tg_master.tg_mbuildsteps.EasyInstall]-->class <tt class="descclassname">tg_master.tg_mbuildsteps.</tt><tt class="descname">EasyInstall</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#tg_master.tg_mbuildsteps.EasyInstall" title="Permalink to this definition">¶</a></dt>
+<dd><p>Runs easy_install script</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><em>package</em> (list of string) &#8211; package to install</li>
+<li><em>URL</em> (string) &#8211; location to download egg from</li>
+<li><em>localinstall</em> (boolean) &#8211; search in workdir and workdir/dist for an egg</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="tg_master.tg_mbuildsteps.EasyInstall.addURL">
+<!--[tg_master.tg_mbuildsteps.EasyInstall.addURL]--><tt class="descname">addURL</tt><big>(</big><em>name</em>, <em>url</em><big>)</big><a class="headerlink" href="#tg_master.tg_mbuildsteps.EasyInstall.addURL" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add a BuildStep URL to this step.</p>
+<p>An HREF to this URL will be added to any HTML representations of this
+step. This allows a step to provide links to external web pages,
+perhaps to provide detailed HTML code coverage results or other forms
+of build status.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tg_master.tg_mbuildsteps.EasyInstall.commandComplete">
+<!--[tg_master.tg_mbuildsteps.EasyInstall.commandComplete]--><tt class="descname">commandComplete</tt><big>(</big><em>cmd</em><big>)</big><a class="headerlink" href="#tg_master.tg_mbuildsteps.EasyInstall.commandComplete" title="Permalink to this definition">¶</a></dt>
+<dd>This is a general-purpose hook method for subclasses. It will be
+called after the remote command has finished, but before any of the
+other hook functions are called.</dd></dl>
+
+<dl class="method">
+<dt id="tg_master.tg_mbuildsteps.EasyInstall.createSummary">
+<!--[tg_master.tg_mbuildsteps.EasyInstall.createSummary]--><tt class="descname">createSummary</tt><big>(</big><em>log</em><big>)</big><a class="headerlink" href="#tg_master.tg_mbuildsteps.EasyInstall.createSummary" title="Permalink to this definition">¶</a></dt>
+<dd>To create summary logs, do something like this:
+warnings = grep(&#8216;^Warning:&#8217;, log.getText())
+self.addCompleteLog(&#8216;warnings&#8217;, warnings)</dd></dl>
+
+<dl class="method">
+<dt id="tg_master.tg_mbuildsteps.EasyInstall.evaluateCommand">
+<!--[tg_master.tg_mbuildsteps.EasyInstall.evaluateCommand]--><tt class="descname">evaluateCommand</tt><big>(</big><em>cmd</em><big>)</big><a class="headerlink" href="#tg_master.tg_mbuildsteps.EasyInstall.evaluateCommand" title="Permalink to this definition">¶</a></dt>
+<dd>Decide whether the command was SUCCESS, WARNINGS, or FAILURE.
+Override this to, say, declare WARNINGS if there is any stderr
+activity, or to say that rc!=0 is not actually an error.</dd></dl>
+
+<dl class="method">
+<dt id="tg_master.tg_mbuildsteps.EasyInstall.getText2">
+<!--[tg_master.tg_mbuildsteps.EasyInstall.getText2]--><tt class="descname">getText2</tt><big>(</big><em>cmd</em>, <em>results</em><big>)</big><a class="headerlink" href="#tg_master.tg_mbuildsteps.EasyInstall.getText2" title="Permalink to this definition">¶</a></dt>
+<dd>We have decided to add a short note about ourselves to the overall
+build description, probably because something went wrong. Return a
+short list of short strings. If your subclass counts test failures or
+warnings of some sort, this is a good place to announce the count.</dd></dl>
+
+<dl class="method">
+<dt id="tg_master.tg_mbuildsteps.EasyInstall.setProgress">
+<!--[tg_master.tg_mbuildsteps.EasyInstall.setProgress]--><tt class="descname">setProgress</tt><big>(</big><em>metric</em>, <em>value</em><big>)</big><a class="headerlink" href="#tg_master.tg_mbuildsteps.EasyInstall.setProgress" title="Permalink to this definition">¶</a></dt>
+<dd>BuildSteps can call self.setProgress() to announce progress along
+some metric.</dd></dl>
+
+<dl class="method">
+<dt id="tg_master.tg_mbuildsteps.EasyInstall.setupLogfiles">
+<!--[tg_master.tg_mbuildsteps.EasyInstall.setupLogfiles]--><tt class="descname">setupLogfiles</tt><big>(</big><em>cmd</em>, <em>logfiles</em><big>)</big><a class="headerlink" href="#tg_master.tg_mbuildsteps.EasyInstall.setupLogfiles" title="Permalink to this definition">¶</a></dt>
+<dd>Set up any additional logfiles= logs.</dd></dl>
+
+<dl class="method">
+<dt id="tg_master.tg_mbuildsteps.EasyInstall.slaveVersion">
+<!--[tg_master.tg_mbuildsteps.EasyInstall.slaveVersion]--><tt class="descname">slaveVersion</tt><big>(</big><em>command</em>, <em>oldversion=None</em><big>)</big><a class="headerlink" href="#tg_master.tg_mbuildsteps.EasyInstall.slaveVersion" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the version number of the given slave command. For the
+commands defined in buildbot.slave.commands, this is the value of
+&#8216;cvs_ver&#8217; at the top of that file. Non-existent commands will return
+a value of None. Buildslaves running buildbot-0.5.0 or earlier did
+not respond to the version query: commands on those slaves will
+return a value of OLDVERSION, so you can distinguish between old
+buildslaves and missing commands.</p>
+<p>If you know that &lt;=0.5.0 buildslaves have the command you want (CVS
+and SVN existed back then, but none of the other VC systems), then it
+makes sense to call this with oldversion=&#8217;old&#8217;. If the command you
+want is newer than that, just leave oldversion= unspecified, and the
+command will return None for a buildslave that does not implement the
+command.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tg_master.tg_mbuildsteps.EasyInstall.startCommand">
+<!--[tg_master.tg_mbuildsteps.EasyInstall.startCommand]--><tt class="descname">startCommand</tt><big>(</big><em>cmd</em>, <em>errorMessages=</em><span class="optional">[</span><span class="optional">]</span><big>)</big><a class="headerlink" href="#tg_master.tg_mbuildsteps.EasyInstall.startCommand" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="docutils">
+<dt>&#64;param cmd: a suitable RemoteCommand which will be launched, with</dt>
+<dd>all output being put into our self.stdio_log LogFile</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="tg_master.tg_mbuildsteps.EasyInstall.startStep">
+<!--[tg_master.tg_mbuildsteps.EasyInstall.startStep]--><tt class="descname">startStep</tt><big>(</big><em>remote</em><big>)</big><a class="headerlink" href="#tg_master.tg_mbuildsteps.EasyInstall.startStep" title="Permalink to this definition">¶</a></dt>
+<dd><p>Begin the step. This returns a Deferred that will fire when the
+step finishes.</p>
+<p>This deferred fires with a tuple of (result, [extra text]), although
+older steps used to return just the &#8216;result&#8217; value, so the receiving
+L{base.Build} needs to be prepared to handle that too. C{result} is
+one of the SUCCESS/WARNINGS/FAILURE/SKIPPED constants from
+L{buildbot.status.builder}, and the extra text is a list of short
+strings which should be appended to the Build&#8217;s text results. This
+text allows a test-case step which fails to append B{17 tests} to the
+Build&#8217;s status, in addition to marking the build as failing.</p>
+<p>The deferred will errback if the step encounters an exception,
+including an exception on the slave side (or if the slave goes away
+altogether). Failures in shell commands (rc!=0) will B{not} cause an
+errback, in general the BuildStep will evaluate the results and
+decide whether to treat it as a WARNING or FAILURE.</p>
+<p>&#64;type remote: L{twisted.spread.pb.RemoteReference}
+&#64;param remote: a reference to the slave&#8217;s</p>
+<div class="system-message">
+<p class="system-message-title">System Message: ERROR/3 (<tt class="docutils">/home/steven/TurboGears/test_system/tg_master/tg_master/tg_mbuildsteps.py:docstring of tg_master.tg_mbuildsteps.BaseStep</tt>, line 11)</p>
+Unexpected indentation.</div>
+<blockquote>
+L{buildbot.slave.bot.SlaveBuilder} instance where any
+RemoteCommands may be run</blockquote>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="tg_master.tg_mbuildsteps.InterOSShellCommand">
+<!--[tg_master.tg_mbuildsteps.InterOSShellCommand]-->class <tt class="descclassname">tg_master.tg_mbuildsteps.</tt><tt class="descname">InterOSShellCommand</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#tg_master.tg_mbuildsteps.InterOSShellCommand" title="Permalink to this definition">¶</a></dt>
+<dd><p>InterOSShellCommand does the same as ShellCommand. The only difference is
+that InterOSShellCommand corrects separators.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><em>command</em> (list of strings) &#8211; command to execute</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="tg_master.tg_mbuildsteps.InterOSShellCommand.addURL">
+<!--[tg_master.tg_mbuildsteps.InterOSShellCommand.addURL]--><tt class="descname">addURL</tt><big>(</big><em>name</em>, <em>url</em><big>)</big><a class="headerlink" href="#tg_master.tg_mbuildsteps.InterOSShellCommand.addURL" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add a BuildStep URL to this step.</p>
+<p>An HREF to this URL will be added to any HTML representations of this
+step. This allows a step to provide links to external web pages,
+perhaps to provide detailed HTML code coverage results or other forms
+of build status.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tg_master.tg_mbuildsteps.InterOSShellCommand.commandComplete">
+<!--[tg_master.tg_mbuildsteps.InterOSShellCommand.commandComplete]--><tt class="descname">commandComplete</tt><big>(</big><em>cmd</em><big>)</big><a class="headerlink" href="#tg_master.tg_mbuildsteps.InterOSShellCommand.commandComplete" title="Permalink to this definition">¶</a></dt>
+<dd>This is a general-purpose hook method for subclasses. It will be
+called after the remote command has finished, but before any of the
+other hook functions are called.</dd></dl>
+
+<dl class="method">
+<dt id="tg_master.tg_mbuildsteps.InterOSShellCommand.createSummary">
+<!--[tg_master.tg_mbuildsteps.InterOSShellCommand.createSummary]--><tt class="descname">createSummary</tt><big>(</big><em>log</em><big>)</big><a class="headerlink" href="#tg_master.tg_mbuildsteps.InterOSShellCommand.createSummary" title="Permalink to this definition">¶</a></dt>
+<dd>To create summary logs, do something like this:
+warnings = grep(&#8216;^Warning:&#8217;, log.getText())
+self.addCompleteLog(&#8216;warnings&#8217;, warnings)</dd></dl>
+
+<dl class="method">
+<dt id="tg_master.tg_mbuildsteps.InterOSShellCommand.evaluateCommand">
+<!--[tg_master.tg_mbuildsteps.InterOSShellCommand.evaluateCommand]--><tt class="descname">evaluateCommand</tt><big>(</big><em>cmd</em><big>)</big><a class="headerlink" href="#tg_master.tg_mbuildsteps.InterOSShellCommand.evaluateCommand" title="Permalink to this definition">¶</a></dt>
+<dd>Decide whether the command was SUCCESS, WARNINGS, or FAILURE.
+Override this to, say, declare WARNINGS if there is any stderr
+activity, or to say that rc!=0 is not actually an error.</dd></dl>
+
+<dl class="method">
+<dt id="tg_master.tg_mbuildsteps.InterOSShellCommand.getText2">
+<!--[tg_master.tg_mbuildsteps.InterOSShellCommand.getText2]--><tt class="descname">getText2</tt><big>(</big><em>cmd</em>, <em>results</em><big>)</big><a class="headerlink" href="#tg_master.tg_mbuildsteps.InterOSShellCommand.getText2" title="Permalink to this definition">¶</a></dt>
+<dd>We have decided to add a short note about ourselves to the overall
+build description, probably because something went wrong. Return a
+short list of short strings. If your subclass counts test failures or
+warnings of some sort, this is a good place to announce the count.</dd></dl>
+
+<dl class="method">
+<dt id="tg_master.tg_mbuildsteps.InterOSShellCommand.setProgress">
+<!--[tg_master.tg_mbuildsteps.InterOSShellCommand.setProgress]--><tt class="descname">setProgress</tt><big>(</big><em>metric</em>, <em>value</em><big>)</big><a class="headerlink" href="#tg_master.tg_mbuildsteps.InterOSShellCommand.setProgress" title="Permalink to this definition">¶</a></dt>
+<dd>BuildSteps can call self.setProgress() to announce progress along
+some metric.</dd></dl>
+
+<dl class="method">
+<dt id="tg_master.tg_mbuildsteps.InterOSShellCommand.setupLogfiles">
+<!--[tg_master.tg_mbuildsteps.InterOSShellCommand.setupLogfiles]--><tt class="descname">setupLogfiles</tt><big>(</big><em>cmd</em>, <em>logfiles</em><big>)</big><a class="headerlink" href="#tg_master.tg_mbuildsteps.InterOSShellCommand.setupLogfiles" title="Permalink to this definition">¶</a></dt>
+<dd>Set up any additional logfiles= logs.</dd></dl>
+
+<dl class="method">
+<dt id="tg_master.tg_mbuildsteps.InterOSShellCommand.slaveVersion">
+<!--[tg_master.tg_mbuildsteps.InterOSShellCommand.slaveVersion]--><tt class="descname">slaveVersion</tt><big>(</big><em>command</em>, <em>oldversion=None</em><big>)</big><a class="headerlink" href="#tg_master.tg_mbuildsteps.InterOSShellCommand.slaveVersion" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the version number of the given slave command. For the
+commands defined in buildbot.slave.commands, this is the value of
+&#8216;cvs_ver&#8217; at the top of that file. Non-existent commands will return
+a value of None. Buildslaves running buildbot-0.5.0 or earlier did
+not respond to the version query: commands on those slaves will
+return a value of OLDVERSION, so you can distinguish between old
+buildslaves and missing commands.</p>
+<p>If you know that &lt;=0.5.0 buildslaves have the command you want (CVS
+and SVN existed back then, but none of the other VC systems), then it
+makes sense to call this with oldversion=&#8217;old&#8217;. If the command you
+want is newer than that, just leave oldversion= unspecified, and the
+command will return None for a buildslave that does not implement the
+command.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tg_master.tg_mbuildsteps.InterOSShellCommand.startCommand">
+<!--[tg_master.tg_mbuildsteps.InterOSShellCommand.startCommand]--><tt class="descname">startCommand</tt><big>(</big><em>cmd</em>, <em>errorMessages=</em><span class="optional">[</span><span class="optional">]</span><big>)</big><a class="headerlink" href="#tg_master.tg_mbuildsteps.InterOSShellCommand.startCommand" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="docutils">
+<dt>&#64;param cmd: a suitable RemoteCommand which will be launched, with</dt>
+<dd>all output being put into our self.stdio_log LogFile</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="tg_master.tg_mbuildsteps.InterOSShellCommand.startStep">
+<!--[tg_master.tg_mbuildsteps.InterOSShellCommand.startStep]--><tt class="descname">startStep</tt><big>(</big><em>remote</em><big>)</big><a class="headerlink" href="#tg_master.tg_mbuildsteps.InterOSShellCommand.startStep" title="Permalink to this definition">¶</a></dt>
+<dd><p>Begin the step. This returns a Deferred that will fire when the
+step finishes.</p>
+<p>This deferred fires with a tuple of (result, [extra text]), although
+older steps used to return just the &#8216;result&#8217; value, so the receiving
+L{base.Build} needs to be prepared to handle that too. C{result} is
+one of the SUCCESS/WARNINGS/FAILURE/SKIPPED constants from
+L{buildbot.status.builder}, and the extra text is a list of short
+strings which should be appended to the Build&#8217;s text results. This
+text allows a test-case step which fails to append B{17 tests} to the
+Build&#8217;s status, in addition to marking the build as failing.</p>
+<p>The deferred will errback if the step encounters an exception,
+including an exception on the slave side (or if the slave goes away
+altogether). Failures in shell commands (rc!=0) will B{not} cause an
+errback, in general the BuildStep will evaluate the results and
+decide whether to treat it as a WARNING or FAILURE.</p>
+<p>&#64;type remote: L{twisted.spread.pb.RemoteReference}
+&#64;param remote: a reference to the slave&#8217;s</p>
+<div class="system-message">
+<p class="system-message-title">System Message: ERROR/3 (<tt class="docutils">/home/steven/TurboGears/test_system/tg_master/tg_master/tg_mbuildsteps.py:docstring of tg_master.tg_mbuildsteps.BaseStep</tt>, line 11)</p>
+Unexpected indentation.</div>
+<blockquote>
+L{buildbot.slave.bot.SlaveBuilder} instance where any
+RemoteCommands may be run</blockquote>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="tg_master.tg_mbuildsteps.Nose">
+<!--[tg_master.tg_mbuildsteps.Nose]-->class <tt class="descclassname">tg_master.tg_mbuildsteps.</tt><tt class="descname">Nose</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#tg_master.tg_mbuildsteps.Nose" title="Permalink to this definition">¶</a></dt>
+<dd><p>Nose runs nosetests in testdir</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><em>verbose</em> (boolean) &#8211; sets verbose flag</li>
+<li><em>testdir</em> (string) &#8211; directory relative to workdir where nosetests searchs for tests</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="tg_master.tg_mbuildsteps.Nose.addURL">
+<!--[tg_master.tg_mbuildsteps.Nose.addURL]--><tt class="descname">addURL</tt><big>(</big><em>name</em>, <em>url</em><big>)</big><a class="headerlink" href="#tg_master.tg_mbuildsteps.Nose.addURL" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add a BuildStep URL to this step.</p>
+<p>An HREF to this URL will be added to any HTML representations of this
+step. This allows a step to provide links to external web pages,
+perhaps to provide detailed HTML code coverage results or other forms
+of build status.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tg_master.tg_mbuildsteps.Nose.commandComplete">
+<!--[tg_master.tg_mbuildsteps.Nose.commandComplete]--><tt class="descname">commandComplete</tt><big>(</big><em>cmd</em><big>)</big><a class="headerlink" href="#tg_master.tg_mbuildsteps.Nose.commandComplete" title="Permalink to this definition">¶</a></dt>
+<dd>This is a general-purpose hook method for subclasses. It will be
+called after the remote command has finished, but before any of the
+other hook functions are called.</dd></dl>
+
+<dl class="method">
+<dt id="tg_master.tg_mbuildsteps.Nose.createSummary">
+<!--[tg_master.tg_mbuildsteps.Nose.createSummary]--><tt class="descname">createSummary</tt><big>(</big><em>log</em><big>)</big><a class="headerlink" href="#tg_master.tg_mbuildsteps.Nose.createSummary" title="Permalink to this definition">¶</a></dt>
+<dd>To create summary logs, do something like this:
+warnings = grep(&#8216;^Warning:&#8217;, log.getText())
+self.addCompleteLog(&#8216;warnings&#8217;, warnings)</dd></dl>
+
+<dl class="method">
+<dt id="tg_master.tg_mbuildsteps.Nose.evaluateCommand">
+<!--[tg_master.tg_mbuildsteps.Nose.evaluateCommand]--><tt class="descname">evaluateCommand</tt><big>(</big><em>cmd</em><big>)</big><a class="headerlink" href="#tg_master.tg_mbuildsteps.Nose.evaluateCommand" title="Permalink to this definition">¶</a></dt>
+<dd>Decide whether the command was SUCCESS, WARNINGS, or FAILURE.
+Override this to, say, declare WARNINGS if there is any stderr
+activity, or to say that rc!=0 is not actually an error.</dd></dl>
+
+<dl class="method">
+<dt id="tg_master.tg_mbuildsteps.Nose.getText2">
+<!--[tg_master.tg_mbuildsteps.Nose.getText2]--><tt class="descname">getText2</tt><big>(</big><em>cmd</em>, <em>results</em><big>)</big><a class="headerlink" href="#tg_master.tg_mbuildsteps.Nose.getText2" title="Permalink to this definition">¶</a></dt>
+<dd>We have decided to add a short note about ourselves to the overall
+build description, probably because something went wrong. Return a
+short list of short strings. If your subclass counts test failures or
+warnings of some sort, this is a good place to announce the count.</dd></dl>
+
+<dl class="method">
+<dt id="tg_master.tg_mbuildsteps.Nose.setProgress">
+<!--[tg_master.tg_mbuildsteps.Nose.setProgress]--><tt class="descname">setProgress</tt><big>(</big><em>metric</em>, <em>value</em><big>)</big><a class="headerlink" href="#tg_master.tg_mbuildsteps.Nose.setProgress" title="Permalink to this definition">¶</a></dt>
+<dd>BuildSteps can call self.setProgress() to announce progress along
+some metric.</dd></dl>
+
+<dl class="method">
+<dt id="tg_master.tg_mbuildsteps.Nose.setupLogfiles">
+<!--[tg_master.tg_mbuildsteps.Nose.setupLogfiles]--><tt class="descname">setupLogfiles</tt><big>(</big><em>cmd</em>, <em>logfiles</em><big>)</big><a class="headerlink" href="#tg_master.tg_mbuildsteps.Nose.setupLogfiles" title="Permalink to this definition">¶</a></dt>
+<dd>Set up any additional logfiles= logs.</dd></dl>
+
+<dl class="method">
+<dt id="tg_master.tg_mbuildsteps.Nose.slaveVersion">
+<!--[tg_master.tg_mbuildsteps.Nose.slaveVersion]--><tt class="descname">slaveVersion</tt><big>(</big><em>command</em>, <em>oldversion=None</em><big>)</big><a class="headerlink" href="#tg_master.tg_mbuildsteps.Nose.slaveVersion" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the version number of the given slave command. For the
+commands defined in buildbot.slave.commands, this is the value of
+&#8216;cvs_ver&#8217; at the top of that file. Non-existent commands will return
+a value of None. Buildslaves running buildbot-0.5.0 or earlier did
+not respond to the version query: commands on those slaves will
+return a value of OLDVERSION, so you can distinguish between old
+buildslaves and missing commands.</p>
+<p>If you know that &lt;=0.5.0 buildslaves have the command you want (CVS
+and SVN existed back then, but none of the other VC systems), then it
+makes sense to call this with oldversion=&#8217;old&#8217;. If the command you
+want is newer than that, just leave oldversion= unspecified, and the
+command will return None for a buildslave that does not implement the
+command.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tg_master.tg_mbuildsteps.Nose.startCommand">
+<!--[tg_master.tg_mbuildsteps.Nose.startCommand]--><tt class="descname">startCommand</tt><big>(</big><em>cmd</em>, <em>errorMessages=</em><span class="optional">[</span><span class="optional">]</span><big>)</big><a class="headerlink" href="#tg_master.tg_mbuildsteps.Nose.startCommand" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="docutils">
+<dt>&#64;param cmd: a suitable RemoteCommand which will be launched, with</dt>
+<dd>all output being put into our self.stdio_log LogFile</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="tg_master.tg_mbuildsteps.Nose.startStep">
+<!--[tg_master.tg_mbuildsteps.Nose.startStep]--><tt class="descname">startStep</tt><big>(</big><em>remote</em><big>)</big><a class="headerlink" href="#tg_master.tg_mbuildsteps.Nose.startStep" title="Permalink to this definition">¶</a></dt>
+<dd><p>Begin the step. This returns a Deferred that will fire when the
+step finishes.</p>
+<p>This deferred fires with a tuple of (result, [extra text]), although
+older steps used to return just the &#8216;result&#8217; value, so the receiving
+L{base.Build} needs to be prepared to handle that too. C{result} is
+one of the SUCCESS/WARNINGS/FAILURE/SKIPPED constants from
+L{buildbot.status.builder}, and the extra text is a list of short
+strings which should be appended to the Build&#8217;s text results. This
+text allows a test-case step which fails to append B{17 tests} to the
+Build&#8217;s status, in addition to marking the build as failing.</p>
+<p>The deferred will errback if the step encounters an exception,
+including an exception on the slave side (or if the slave goes away
+altogether). Failures in shell commands (rc!=0) will B{not} cause an
+errback, in general the BuildStep will evaluate the results and
+decide whether to treat it as a WARNING or FAILURE.</p>
+<p>&#64;type remote: L{twisted.spread.pb.RemoteReference}
+&#64;param remote: a reference to the slave&#8217;s</p>
+<div class="system-message">
+<p class="system-message-title">System Message: ERROR/3 (<tt class="docutils">/home/steven/TurboGears/test_system/tg_master/tg_master/tg_mbuildsteps.py:docstring of tg_master.tg_mbuildsteps.BaseStep</tt>, line 11)</p>
+Unexpected indentation.</div>
+<blockquote>
+L{buildbot.slave.bot.SlaveBuilder} instance where any
+RemoteCommands may be run</blockquote>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="tg_master.tg_mbuildsteps.Paver">
+<!--[tg_master.tg_mbuildsteps.Paver]-->class <tt class="descclassname">tg_master.tg_mbuildsteps.</tt><tt class="descname">Paver</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#tg_master.tg_mbuildsteps.Paver" title="Permalink to this definition">¶</a></dt>
+<dd><p>Runs the paver script</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><em>mode</em> (string) &#8211; paver mode</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="tg_master.tg_mbuildsteps.Paver.addURL">
+<!--[tg_master.tg_mbuildsteps.Paver.addURL]--><tt class="descname">addURL</tt><big>(</big><em>name</em>, <em>url</em><big>)</big><a class="headerlink" href="#tg_master.tg_mbuildsteps.Paver.addURL" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add a BuildStep URL to this step.</p>
+<p>An HREF to this URL will be added to any HTML representations of this
+step. This allows a step to provide links to external web pages,
+perhaps to provide detailed HTML code coverage results or other forms
+of build status.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tg_master.tg_mbuildsteps.Paver.commandComplete">
+<!--[tg_master.tg_mbuildsteps.Paver.commandComplete]--><tt class="descname">commandComplete</tt><big>(</big><em>cmd</em><big>)</big><a class="headerlink" href="#tg_master.tg_mbuildsteps.Paver.commandComplete" title="Permalink to this definition">¶</a></dt>
+<dd>This is a general-purpose hook method for subclasses. It will be
+called after the remote command has finished, but before any of the
+other hook functions are called.</dd></dl>
+
+<dl class="method">
+<dt id="tg_master.tg_mbuildsteps.Paver.createSummary">
+<!--[tg_master.tg_mbuildsteps.Paver.createSummary]--><tt class="descname">createSummary</tt><big>(</big><em>log</em><big>)</big><a class="headerlink" href="#tg_master.tg_mbuildsteps.Paver.createSummary" title="Permalink to this definition">¶</a></dt>
+<dd>To create summary logs, do something like this:
+warnings = grep(&#8216;^Warning:&#8217;, log.getText())
+self.addCompleteLog(&#8216;warnings&#8217;, warnings)</dd></dl>
+
+<dl class="method">
+<dt id="tg_master.tg_mbuildsteps.Paver.evaluateCommand">
+<!--[tg_master.tg_mbuildsteps.Paver.evaluateCommand]--><tt class="descname">evaluateCommand</tt><big>(</big><em>cmd</em><big>)</big><a class="headerlink" href="#tg_master.tg_mbuildsteps.Paver.evaluateCommand" title="Permalink to this definition">¶</a></dt>
+<dd>Decide whether the command was SUCCESS, WARNINGS, or FAILURE.
+Override this to, say, declare WARNINGS if there is any stderr
+activity, or to say that rc!=0 is not actually an error.</dd></dl>
+
+<dl class="method">
+<dt id="tg_master.tg_mbuildsteps.Paver.getText2">
+<!--[tg_master.tg_mbuildsteps.Paver.getText2]--><tt class="descname">getText2</tt><big>(</big><em>cmd</em>, <em>results</em><big>)</big><a class="headerlink" href="#tg_master.tg_mbuildsteps.Paver.getText2" title="Permalink to this definition">¶</a></dt>
+<dd>We have decided to add a short note about ourselves to the overall
+build description, probably because something went wrong. Return a
+short list of short strings. If your subclass counts test failures or
+warnings of some sort, this is a good place to announce the count.</dd></dl>
+
+<dl class="method">
+<dt id="tg_master.tg_mbuildsteps.Paver.setProgress">
+<!--[tg_master.tg_mbuildsteps.Paver.setProgress]--><tt class="descname">setProgress</tt><big>(</big><em>metric</em>, <em>value</em><big>)</big><a class="headerlink" href="#tg_master.tg_mbuildsteps.Paver.setProgress" title="Permalink to this definition">¶</a></dt>
+<dd>BuildSteps can call self.setProgress() to announce progress along
+some metric.</dd></dl>
+
+<dl class="method">
+<dt id="tg_master.tg_mbuildsteps.Paver.setupLogfiles">
+<!--[tg_master.tg_mbuildsteps.Paver.setupLogfiles]--><tt class="descname">setupLogfiles</tt><big>(</big><em>cmd</em>, <em>logfiles</em><big>)</big><a class="headerlink" href="#tg_master.tg_mbuildsteps.Paver.setupLogfiles" title="Permalink to this definition">¶</a></dt>
+<dd>Set up any additional logfiles= logs.</dd></dl>
+
+<dl class="method">
+<dt id="tg_master.tg_mbuildsteps.Paver.slaveVersion">
+<!--[tg_master.tg_mbuildsteps.Paver.slaveVersion]--><tt class="descname">slaveVersion</tt><big>(</big><em>command</em>, <em>oldversion=None</em><big>)</big><a class="headerlink" href="#tg_master.tg_mbuildsteps.Paver.slaveVersion" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the version number of the given slave command. For the
+commands defined in buildbot.slave.commands, this is the value of
+&#8216;cvs_ver&#8217; at the top of that file. Non-existent commands will return
+a value of None. Buildslaves running buildbot-0.5.0 or earlier did
+not respond to the version query: commands on those slaves will
+return a value of OLDVERSION, so you can distinguish between old
+buildslaves and missing commands.</p>
+<p>If you know that &lt;=0.5.0 buildslaves have the command you want (CVS
+and SVN existed back then, but none of the other VC systems), then it
+makes sense to call this with oldversion=&#8217;old&#8217;. If the command you
+want is newer than that, just leave oldversion= unspecified, and the
+command will return None for a buildslave that does not implement the
+command.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tg_master.tg_mbuildsteps.Paver.startCommand">
+<!--[tg_master.tg_mbuildsteps.Paver.startCommand]--><tt class="descname">startCommand</tt><big>(</big><em>cmd</em>, <em>errorMessages=</em><span class="optional">[</span><span class="optional">]</span><big>)</big><a class="headerlink" href="#tg_master.tg_mbuildsteps.Paver.startCommand" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="docutils">
+<dt>&#64;param cmd: a suitable RemoteCommand which will be launched, with</dt>
+<dd>all output being put into our self.stdio_log LogFile</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="tg_master.tg_mbuildsteps.Paver.startStep">
+<!--[tg_master.tg_mbuildsteps.Paver.startStep]--><tt class="descname">startStep</tt><big>(</big><em>remote</em><big>)</big><a class="headerlink" href="#tg_master.tg_mbuildsteps.Paver.startStep" title="Permalink to this definition">¶</a></dt>
+<dd><p>Begin the step. This returns a Deferred that will fire when the
+step finishes.</p>
+<p>This deferred fires with a tuple of (result, [extra text]), although
+older steps used to return just the &#8216;result&#8217; value, so the receiving
+L{base.Build} needs to be prepared to handle that too. C{result} is
+one of the SUCCESS/WARNINGS/FAILURE/SKIPPED constants from
+L{buildbot.status.builder}, and the extra text is a list of short
+strings which should be appended to the Build&#8217;s text results. This
+text allows a test-case step which fails to append B{17 tests} to the
+Build&#8217;s status, in addition to marking the build as failing.</p>
+<p>The deferred will errback if the step encounters an exception,
+including an exception on the slave side (or if the slave goes away
+altogether). Failures in shell commands (rc!=0) will B{not} cause an
+errback, in general the BuildStep will evaluate the results and
+decide whether to treat it as a WARNING or FAILURE.</p>
+<p>&#64;type remote: L{twisted.spread.pb.RemoteReference}
+&#64;param remote: a reference to the slave&#8217;s</p>
+<div class="system-message">
+<p class="system-message-title">System Message: ERROR/3 (<tt class="docutils">/home/steven/TurboGears/test_system/tg_master/tg_master/tg_mbuildsteps.py:docstring of tg_master.tg_mbuildsteps.BaseStep</tt>, line 11)</p>
+Unexpected indentation.</div>
+<blockquote>
+L{buildbot.slave.bot.SlaveBuilder} instance where any
+RemoteCommands may be run</blockquote>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="tg_master.tg_mbuildsteps.Python">
+<!--[tg_master.tg_mbuildsteps.Python]-->class <tt class="descclassname">tg_master.tg_mbuildsteps.</tt><tt class="descname">Python</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#tg_master.tg_mbuildsteps.Python" title="Permalink to this definition">¶</a></dt>
+<dd><p>Runs a python script</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><em>script</em> (string) &#8211; path to python script</li>
+<li><em>script_args</em> (string) &#8211; arguments passed to script</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="tg_master.tg_mbuildsteps.Python.addURL">
+<!--[tg_master.tg_mbuildsteps.Python.addURL]--><tt class="descname">addURL</tt><big>(</big><em>name</em>, <em>url</em><big>)</big><a class="headerlink" href="#tg_master.tg_mbuildsteps.Python.addURL" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add a BuildStep URL to this step.</p>
+<p>An HREF to this URL will be added to any HTML representations of this
+step. This allows a step to provide links to external web pages,
+perhaps to provide detailed HTML code coverage results or other forms
+of build status.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tg_master.tg_mbuildsteps.Python.commandComplete">
+<!--[tg_master.tg_mbuildsteps.Python.commandComplete]--><tt class="descname">commandComplete</tt><big>(</big><em>cmd</em><big>)</big><a class="headerlink" href="#tg_master.tg_mbuildsteps.Python.commandComplete" title="Permalink to this definition">¶</a></dt>
+<dd>This is a general-purpose hook method for subclasses. It will be
+called after the remote command has finished, but before any of the
+other hook functions are called.</dd></dl>
+
+<dl class="method">
+<dt id="tg_master.tg_mbuildsteps.Python.createSummary">
+<!--[tg_master.tg_mbuildsteps.Python.createSummary]--><tt class="descname">createSummary</tt><big>(</big><em>log</em><big>)</big><a class="headerlink" href="#tg_master.tg_mbuildsteps.Python.createSummary" title="Permalink to this definition">¶</a></dt>
+<dd>To create summary logs, do something like this:
+warnings = grep(&#8216;^Warning:&#8217;, log.getText())
+self.addCompleteLog(&#8216;warnings&#8217;, warnings)</dd></dl>
+
+<dl class="method">
+<dt id="tg_master.tg_mbuildsteps.Python.evaluateCommand">
+<!--[tg_master.tg_mbuildsteps.Python.evaluateCommand]--><tt class="descname">evaluateCommand</tt><big>(</big><em>cmd</em><big>)</big><a class="headerlink" href="#tg_master.tg_mbuildsteps.Python.evaluateCommand" title="Permalink to this definition">¶</a></dt>
+<dd>Decide whether the command was SUCCESS, WARNINGS, or FAILURE.
+Override this to, say, declare WARNINGS if there is any stderr
+activity, or to say that rc!=0 is not actually an error.</dd></dl>
+
+<dl class="method">
+<dt id="tg_master.tg_mbuildsteps.Python.getText2">
+<!--[tg_master.tg_mbuildsteps.Python.getText2]--><tt class="descname">getText2</tt><big>(</big><em>cmd</em>, <em>results</em><big>)</big><a class="headerlink" href="#tg_master.tg_mbuildsteps.Python.getText2" title="Permalink to this definition">¶</a></dt>
+<dd>We have decided to add a short note about ourselves to the overall
+build description, probably because something went wrong. Return a
+short list of short strings. If your subclass counts test failures or
+warnings of some sort, this is a good place to announce the count.</dd></dl>
+
+<dl class="method">
+<dt id="tg_master.tg_mbuildsteps.Python.setProgress">
+<!--[tg_master.tg_mbuildsteps.Python.setProgress]--><tt class="descname">setProgress</tt><big>(</big><em>metric</em>, <em>value</em><big>)</big><a class="headerlink" href="#tg_master.tg_mbuildsteps.Python.setProgress" title="Permalink to this definition">¶</a></dt>
+<dd>BuildSteps can call self.setProgress() to announce progress along
+some metric.</dd></dl>
+
+<dl class="method">
+<dt id="tg_master.tg_mbuildsteps.Python.setupLogfiles">
+<!--[tg_master.tg_mbuildsteps.Python.setupLogfiles]--><tt class="descname">setupLogfiles</tt><big>(</big><em>cmd</em>, <em>logfiles</em><big>)</big><a class="headerlink" href="#tg_master.tg_mbuildsteps.Python.setupLogfiles" title="Permalink to this definition">¶</a></dt>
+<dd>Set up any additional logfiles= logs.</dd></dl>
+
+<dl class="method">
+<dt id="tg_master.tg_mbuildsteps.Python.slaveVersion">
+<!--[tg_master.tg_mbuildsteps.Python.slaveVersion]--><tt class="descname">slaveVersion</tt><big>(</big><em>command</em>, <em>oldversion=None</em><big>)</big><a class="headerlink" href="#tg_master.tg_mbuildsteps.Python.slaveVersion" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the version number of the given slave command. For the
+commands defined in buildbot.slave.commands, this is the value of
+&#8216;cvs_ver&#8217; at the top of that file. Non-existent commands will return
+a value of None. Buildslaves running buildbot-0.5.0 or earlier did
+not respond to the version query: commands on those slaves will
+return a value of OLDVERSION, so you can distinguish between old
+buildslaves and missing commands.</p>
+<p>If you know that &lt;=0.5.0 buildslaves have the command you want (CVS
+and SVN existed back then, but none of the other VC systems), then it
+makes sense to call this with oldversion=&#8217;old&#8217;. If the command you
+want is newer than that, just leave oldversion= unspecified, and the
+command will return None for a buildslave that does not implement the
+command.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tg_master.tg_mbuildsteps.Python.startCommand">
+<!--[tg_master.tg_mbuildsteps.Python.startCommand]--><tt class="descname">startCommand</tt><big>(</big><em>cmd</em>, <em>errorMessages=</em><span class="optional">[</span><span class="optional">]</span><big>)</big><a class="headerlink" href="#tg_master.tg_mbuildsteps.Python.startCommand" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="docutils">
+<dt>&#64;param cmd: a suitable RemoteCommand which will be launched, with</dt>
+<dd>all output being put into our self.stdio_log LogFile</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="tg_master.tg_mbuildsteps.Python.startStep">
+<!--[tg_master.tg_mbuildsteps.Python.startStep]--><tt class="descname">startStep</tt><big>(</big><em>remote</em><big>)</big><a class="headerlink" href="#tg_master.tg_mbuildsteps.Python.startStep" title="Permalink to this definition">¶</a></dt>
+<dd><p>Begin the step. This returns a Deferred that will fire when the
+step finishes.</p>
+<p>This deferred fires with a tuple of (result, [extra text]), although
+older steps used to return just the &#8216;result&#8217; value, so the receiving
+L{base.Build} needs to be prepared to handle that too. C{result} is
+one of the SUCCESS/WARNINGS/FAILURE/SKIPPED constants from
+L{buildbot.status.builder}, and the extra text is a list of short
+strings which should be appended to the Build&#8217;s text results. This
+text allows a test-case step which fails to append B{17 tests} to the
+Build&#8217;s status, in addition to marking the build as failing.</p>
+<p>The deferred will errback if the step encounters an exception,
+including an exception on the slave side (or if the slave goes away
+altogether). Failures in shell commands (rc!=0) will B{not} cause an
+errback, in general the BuildStep will evaluate the results and
+decide whether to treat it as a WARNING or FAILURE.</p>
+<p>&#64;type remote: L{twisted.spread.pb.RemoteReference}
+&#64;param remote: a reference to the slave&#8217;s</p>
+<div class="system-message">
+<p class="system-message-title">System Message: ERROR/3 (<tt class="docutils">/home/steven/TurboGears/test_system/tg_master/tg_master/tg_mbuildsteps.py:docstring of tg_master.tg_mbuildsteps.BaseStep</tt>, line 11)</p>
+Unexpected indentation.</div>
+<blockquote>
+L{buildbot.slave.bot.SlaveBuilder} instance where any
+RemoteCommands may be run</blockquote>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="tg_master.tg_mbuildsteps.RunSetup">
+<!--[tg_master.tg_mbuildsteps.RunSetup]-->class <tt class="descclassname">tg_master.tg_mbuildsteps.</tt><tt class="descname">RunSetup</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#tg_master.tg_mbuildsteps.RunSetup" title="Permalink to this definition">¶</a></dt>
+<dd><p>Runs setup.py in workdir</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><em>devmode</em> (boolean) &#8211; runs setup.py in develop mode</li>
+<li><em>test</em> (boolean) &#8211; runs setup.py in test mode</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="tg_master.tg_mbuildsteps.RunSetup.addURL">
+<!--[tg_master.tg_mbuildsteps.RunSetup.addURL]--><tt class="descname">addURL</tt><big>(</big><em>name</em>, <em>url</em><big>)</big><a class="headerlink" href="#tg_master.tg_mbuildsteps.RunSetup.addURL" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add a BuildStep URL to this step.</p>
+<p>An HREF to this URL will be added to any HTML representations of this
+step. This allows a step to provide links to external web pages,
+perhaps to provide detailed HTML code coverage results or other forms
+of build status.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tg_master.tg_mbuildsteps.RunSetup.commandComplete">
+<!--[tg_master.tg_mbuildsteps.RunSetup.commandComplete]--><tt class="descname">commandComplete</tt><big>(</big><em>cmd</em><big>)</big><a class="headerlink" href="#tg_master.tg_mbuildsteps.RunSetup.commandComplete" title="Permalink to this definition">¶</a></dt>
+<dd>This is a general-purpose hook method for subclasses. It will be
+called after the remote command has finished, but before any of the
+other hook functions are called.</dd></dl>
+
+<dl class="method">
+<dt id="tg_master.tg_mbuildsteps.RunSetup.createSummary">
+<!--[tg_master.tg_mbuildsteps.RunSetup.createSummary]--><tt class="descname">createSummary</tt><big>(</big><em>log</em><big>)</big><a class="headerlink" href="#tg_master.tg_mbuildsteps.RunSetup.createSummary" title="Permalink to this definition">¶</a></dt>
+<dd>To create summary logs, do something like this:
+warnings = grep(&#8216;^Warning:&#8217;, log.getText())
+self.addCompleteLog(&#8216;warnings&#8217;, warnings)</dd></dl>
+
+<dl class="method">
+<dt id="tg_master.tg_mbuildsteps.RunSetup.evaluateCommand">
+<!--[tg_master.tg_mbuildsteps.RunSetup.evaluateCommand]--><tt class="descname">evaluateCommand</tt><big>(</big><em>cmd</em><big>)</big><a class="headerlink" href="#tg_master.tg_mbuildsteps.RunSetup.evaluateCommand" title="Permalink to this definition">¶</a></dt>
+<dd>Decide whether the command was SUCCESS, WARNINGS, or FAILURE.
+Override this to, say, declare WARNINGS if there is any stderr
+activity, or to say that rc!=0 is not actually an error.</dd></dl>
+
+<dl class="method">
+<dt id="tg_master.tg_mbuildsteps.RunSetup.getText2">
+<!--[tg_master.tg_mbuildsteps.RunSetup.getText2]--><tt class="descname">getText2</tt><big>(</big><em>cmd</em>, <em>results</em><big>)</big><a class="headerlink" href="#tg_master.tg_mbuildsteps.RunSetup.getText2" title="Permalink to this definition">¶</a></dt>
+<dd>We have decided to add a short note about ourselves to the overall
+build description, probably because something went wrong. Return a
+short list of short strings. If your subclass counts test failures or
+warnings of some sort, this is a good place to announce the count.</dd></dl>
+
+<dl class="method">
+<dt id="tg_master.tg_mbuildsteps.RunSetup.setProgress">
+<!--[tg_master.tg_mbuildsteps.RunSetup.setProgress]--><tt class="descname">setProgress</tt><big>(</big><em>metric</em>, <em>value</em><big>)</big><a class="headerlink" href="#tg_master.tg_mbuildsteps.RunSetup.setProgress" title="Permalink to this definition">¶</a></dt>
+<dd>BuildSteps can call self.setProgress() to announce progress along
+some metric.</dd></dl>
+
+<dl class="method">
+<dt id="tg_master.tg_mbuildsteps.RunSetup.setupLogfiles">
+<!--[tg_master.tg_mbuildsteps.RunSetup.setupLogfiles]--><tt class="descname">setupLogfiles</tt><big>(</big><em>cmd</em>, <em>logfiles</em><big>)</big><a class="headerlink" href="#tg_master.tg_mbuildsteps.RunSetup.setupLogfiles" title="Permalink to this definition">¶</a></dt>
+<dd>Set up any additional logfiles= logs.</dd></dl>
+
+<dl class="method">
+<dt id="tg_master.tg_mbuildsteps.RunSetup.slaveVersion">
+<!--[tg_master.tg_mbuildsteps.RunSetup.slaveVersion]--><tt class="descname">slaveVersion</tt><big>(</big><em>command</em>, <em>oldversion=None</em><big>)</big><a class="headerlink" href="#tg_master.tg_mbuildsteps.RunSetup.slaveVersion" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the version number of the given slave command. For the
+commands defined in buildbot.slave.commands, this is the value of
+&#8216;cvs_ver&#8217; at the top of that file. Non-existent commands will return
+a value of None. Buildslaves running buildbot-0.5.0 or earlier did
+not respond to the version query: commands on those slaves will
+return a value of OLDVERSION, so you can distinguish between old
+buildslaves and missing commands.</p>
+<p>If you know that &lt;=0.5.0 buildslaves have the command you want (CVS
+and SVN existed back then, but none of the other VC systems), then it
+makes sense to call this with oldversion=&#8217;old&#8217;. If the command you
+want is newer than that, just leave oldversion= unspecified, and the
+command will return None for a buildslave that does not implement the
+command.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tg_master.tg_mbuildsteps.RunSetup.startCommand">
+<!--[tg_master.tg_mbuildsteps.RunSetup.startCommand]--><tt class="descname">startCommand</tt><big>(</big><em>cmd</em>, <em>errorMessages=</em><span class="optional">[</span><span class="optional">]</span><big>)</big><a class="headerlink" href="#tg_master.tg_mbuildsteps.RunSetup.startCommand" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="docutils">
+<dt>&#64;param cmd: a suitable RemoteCommand which will be launched, with</dt>
+<dd>all output being put into our self.stdio_log LogFile</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="tg_master.tg_mbuildsteps.RunSetup.startStep">
+<!--[tg_master.tg_mbuildsteps.RunSetup.startStep]--><tt class="descname">startStep</tt><big>(</big><em>remote</em><big>)</big><a class="headerlink" href="#tg_master.tg_mbuildsteps.RunSetup.startStep" title="Permalink to this definition">¶</a></dt>
+<dd><p>Begin the step. This returns a Deferred that will fire when the
+step finishes.</p>
+<p>This deferred fires with a tuple of (result, [extra text]), although
+older steps used to return just the &#8216;result&#8217; value, so the receiving
+L{base.Build} needs to be prepared to handle that too. C{result} is
+one of the SUCCESS/WARNINGS/FAILURE/SKIPPED constants from
+L{buildbot.status.builder}, and the extra text is a list of short
+strings which should be appended to the Build&#8217;s text results. This
+text allows a test-case step which fails to append B{17 tests} to the
+Build&#8217;s status, in addition to marking the build as failing.</p>
+<p>The deferred will errback if the step encounters an exception,
+including an exception on the slave side (or if the slave goes away
+altogether). Failures in shell commands (rc!=0) will B{not} cause an
+errback, in general the BuildStep will evaluate the results and
+decide whether to treat it as a WARNING or FAILURE.</p>
+<p>&#64;type remote: L{twisted.spread.pb.RemoteReference}
+&#64;param remote: a reference to the slave&#8217;s</p>
+<div class="system-message">
+<p class="system-message-title">System Message: ERROR/3 (<tt class="docutils">/home/steven/TurboGears/test_system/tg_master/tg_master/tg_mbuildsteps.py:docstring of tg_master.tg_mbuildsteps.BaseStep</tt>, line 11)</p>
+Unexpected indentation.</div>
+<blockquote>
+L{buildbot.slave.bot.SlaveBuilder} instance where any
+RemoteCommands may be run</blockquote>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="tg_master.tg_mbuildsteps.UploadEgg">
+<!--[tg_master.tg_mbuildsteps.UploadEgg]-->class <tt class="descclassname">tg_master.tg_mbuildsteps.</tt><tt class="descname">UploadEgg</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#tg_master.tg_mbuildsteps.UploadEgg" title="Permalink to this definition">¶</a></dt>
+<dd><p>Uploads an egg to the PackageIndex instance specified in $HOME/.pypirc.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><em>package</em> (string) &#8211; name of package which should be uploaded</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="tg_master.tg_mbuildsteps.UploadEgg.addURL">
+<!--[tg_master.tg_mbuildsteps.UploadEgg.addURL]--><tt class="descname">addURL</tt><big>(</big><em>name</em>, <em>url</em><big>)</big><a class="headerlink" href="#tg_master.tg_mbuildsteps.UploadEgg.addURL" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add a BuildStep URL to this step.</p>
+<p>An HREF to this URL will be added to any HTML representations of this
+step. This allows a step to provide links to external web pages,
+perhaps to provide detailed HTML code coverage results or other forms
+of build status.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tg_master.tg_mbuildsteps.UploadEgg.commandComplete">
+<!--[tg_master.tg_mbuildsteps.UploadEgg.commandComplete]--><tt class="descname">commandComplete</tt><big>(</big><em>cmd</em><big>)</big><a class="headerlink" href="#tg_master.tg_mbuildsteps.UploadEgg.commandComplete" title="Permalink to this definition">¶</a></dt>
+<dd>This is a general-purpose hook method for subclasses. It will be
+called after the remote command has finished, but before any of the
+other hook functions are called.</dd></dl>
+
+<dl class="method">
+<dt id="tg_master.tg_mbuildsteps.UploadEgg.createSummary">
+<!--[tg_master.tg_mbuildsteps.UploadEgg.createSummary]--><tt class="descname">createSummary</tt><big>(</big><em>log</em><big>)</big><a class="headerlink" href="#tg_master.tg_mbuildsteps.UploadEgg.createSummary" title="Permalink to this definition">¶</a></dt>
+<dd>To create summary logs, do something like this:
+warnings = grep(&#8216;^Warning:&#8217;, log.getText())
+self.addCompleteLog(&#8216;warnings&#8217;, warnings)</dd></dl>
+
+<dl class="method">
+<dt id="tg_master.tg_mbuildsteps.UploadEgg.evaluateCommand">
+<!--[tg_master.tg_mbuildsteps.UploadEgg.evaluateCommand]--><tt class="descname">evaluateCommand</tt><big>(</big><em>cmd</em><big>)</big><a class="headerlink" href="#tg_master.tg_mbuildsteps.UploadEgg.evaluateCommand" title="Permalink to this definition">¶</a></dt>
+<dd>Decide whether the command was SUCCESS, WARNINGS, or FAILURE.
+Override this to, say, declare WARNINGS if there is any stderr
+activity, or to say that rc!=0 is not actually an error.</dd></dl>
+
+<dl class="method">
+<dt id="tg_master.tg_mbuildsteps.UploadEgg.getText2">
+<!--[tg_master.tg_mbuildsteps.UploadEgg.getText2]--><tt class="descname">getText2</tt><big>(</big><em>cmd</em>, <em>results</em><big>)</big><a class="headerlink" href="#tg_master.tg_mbuildsteps.UploadEgg.getText2" title="Permalink to this definition">¶</a></dt>
+<dd>We have decided to add a short note about ourselves to the overall
+build description, probably because something went wrong. Return a
+short list of short strings. If your subclass counts test failures or
+warnings of some sort, this is a good place to announce the count.</dd></dl>
+
+<dl class="method">
+<dt id="tg_master.tg_mbuildsteps.UploadEgg.setProgress">
+<!--[tg_master.tg_mbuildsteps.UploadEgg.setProgress]--><tt class="descname">setProgress</tt><big>(</big><em>metric</em>, <em>value</em><big>)</big><a class="headerlink" href="#tg_master.tg_mbuildsteps.UploadEgg.setProgress" title="Permalink to this definition">¶</a></dt>
+<dd>BuildSteps can call self.setProgress() to announce progress along
+some metric.</dd></dl>
+
+<dl class="method">
+<dt id="tg_master.tg_mbuildsteps.UploadEgg.setupLogfiles">
+<!--[tg_master.tg_mbuildsteps.UploadEgg.setupLogfiles]--><tt class="descname">setupLogfiles</tt><big>(</big><em>cmd</em>, <em>logfiles</em><big>)</big><a class="headerlink" href="#tg_master.tg_mbuildsteps.UploadEgg.setupLogfiles" title="Permalink to this definition">¶</a></dt>
+<dd>Set up any additional logfiles= logs.</dd></dl>
+
+<dl class="method">
+<dt id="tg_master.tg_mbuildsteps.UploadEgg.slaveVersion">
+<!--[tg_master.tg_mbuildsteps.UploadEgg.slaveVersion]--><tt class="descname">slaveVersion</tt><big>(</big><em>command</em>, <em>oldversion=None</em><big>)</big><a class="headerlink" href="#tg_master.tg_mbuildsteps.UploadEgg.slaveVersion" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the version number of the given slave command. For the
+commands defined in buildbot.slave.commands, this is the value of
+&#8216;cvs_ver&#8217; at the top of that file. Non-existent commands will return
+a value of None. Buildslaves running buildbot-0.5.0 or earlier did
+not respond to the version query: commands on those slaves will
+return a value of OLDVERSION, so you can distinguish between old
+buildslaves and missing commands.</p>
+<p>If you know that &lt;=0.5.0 buildslaves have the command you want (CVS
+and SVN existed back then, but none of the other VC systems), then it
+makes sense to call this with oldversion=&#8217;old&#8217;. If the command you
+want is newer than that, just leave oldversion= unspecified, and the
+command will return None for a buildslave that does not implement the
+command.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tg_master.tg_mbuildsteps.UploadEgg.startCommand">
+<!--[tg_master.tg_mbuildsteps.UploadEgg.startCommand]--><tt class="descname">startCommand</tt><big>(</big><em>cmd</em>, <em>errorMessages=</em><span class="optional">[</span><span class="optional">]</span><big>)</big><a class="headerlink" href="#tg_master.tg_mbuildsteps.UploadEgg.startCommand" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="docutils">
+<dt>&#64;param cmd: a suitable RemoteCommand which will be launched, with</dt>
+<dd>all output being put into our self.stdio_log LogFile</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="tg_master.tg_mbuildsteps.UploadEgg.startStep">
+<!--[tg_master.tg_mbuildsteps.UploadEgg.startStep]--><tt class="descname">startStep</tt><big>(</big><em>remote</em><big>)</big><a class="headerlink" href="#tg_master.tg_mbuildsteps.UploadEgg.startStep" title="Permalink to this definition">¶</a></dt>
+<dd><p>Begin the step. This returns a Deferred that will fire when the
+step finishes.</p>
+<p>This deferred fires with a tuple of (result, [extra text]), although
+older steps used to return just the &#8216;result&#8217; value, so the receiving
+L{base.Build} needs to be prepared to handle that too. C{result} is
+one of the SUCCESS/WARNINGS/FAILURE/SKIPPED constants from
+L{buildbot.status.builder}, and the extra text is a list of short
+strings which should be appended to the Build&#8217;s text results. This
+text allows a test-case step which fails to append B{17 tests} to the
+Build&#8217;s status, in addition to marking the build as failing.</p>
+<p>The deferred will errback if the step encounters an exception,
+including an exception on the slave side (or if the slave goes away
+altogether). Failures in shell commands (rc!=0) will B{not} cause an
+errback, in general the BuildStep will evaluate the results and
+decide whether to treat it as a WARNING or FAILURE.</p>
+<p>&#64;type remote: L{twisted.spread.pb.RemoteReference}
+&#64;param remote: a reference to the slave&#8217;s</p>
+<div class="system-message">
+<p class="system-message-title">System Message: ERROR/3 (<tt class="docutils">/home/steven/TurboGears/test_system/tg_master/tg_master/tg_mbuildsteps.py:docstring of tg_master.tg_mbuildsteps.BaseStep</tt>, line 11)</p>
+Unexpected indentation.</div>
+<blockquote>
+L{buildbot.slave.bot.SlaveBuilder} instance where any
+RemoteCommands may be run</blockquote>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="tg_master.tg_mbuildsteps.VirtualEnv">
+<!--[tg_master.tg_mbuildsteps.VirtualEnv]-->class <tt class="descclassname">tg_master.tg_mbuildsteps.</tt><tt class="descname">VirtualEnv</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#tg_master.tg_mbuildsteps.VirtualEnv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a virtual environment in workdir. This VirtualEnv has no global
+site packages</p>
+<dl class="method">
+<dt id="tg_master.tg_mbuildsteps.VirtualEnv.addURL">
+<!--[tg_master.tg_mbuildsteps.VirtualEnv.addURL]--><tt class="descname">addURL</tt><big>(</big><em>name</em>, <em>url</em><big>)</big><a class="headerlink" href="#tg_master.tg_mbuildsteps.VirtualEnv.addURL" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add a BuildStep URL to this step.</p>
+<p>An HREF to this URL will be added to any HTML representations of this
+step. This allows a step to provide links to external web pages,
+perhaps to provide detailed HTML code coverage results or other forms
+of build status.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tg_master.tg_mbuildsteps.VirtualEnv.commandComplete">
+<!--[tg_master.tg_mbuildsteps.VirtualEnv.commandComplete]--><tt class="descname">commandComplete</tt><big>(</big><em>cmd</em><big>)</big><a class="headerlink" href="#tg_master.tg_mbuildsteps.VirtualEnv.commandComplete" title="Permalink to this definition">¶</a></dt>
+<dd>This is a general-purpose hook method for subclasses. It will be
+called after the remote command has finished, but before any of the
+other hook functions are called.</dd></dl>
+
+<dl class="method">
+<dt id="tg_master.tg_mbuildsteps.VirtualEnv.createSummary">
+<!--[tg_master.tg_mbuildsteps.VirtualEnv.createSummary]--><tt class="descname">createSummary</tt><big>(</big><em>log</em><big>)</big><a class="headerlink" href="#tg_master.tg_mbuildsteps.VirtualEnv.createSummary" title="Permalink to this definition">¶</a></dt>
+<dd>To create summary logs, do something like this:
+warnings = grep(&#8216;^Warning:&#8217;, log.getText())
+self.addCompleteLog(&#8216;warnings&#8217;, warnings)</dd></dl>
+
+<dl class="method">
+<dt id="tg_master.tg_mbuildsteps.VirtualEnv.evaluateCommand">
+<!--[tg_master.tg_mbuildsteps.VirtualEnv.evaluateCommand]--><tt class="descname">evaluateCommand</tt><big>(</big><em>cmd</em><big>)</big><a class="headerlink" href="#tg_master.tg_mbuildsteps.VirtualEnv.evaluateCommand" title="Permalink to this definition">¶</a></dt>
+<dd>Decide whether the command was SUCCESS, WARNINGS, or FAILURE.
+Override this to, say, declare WARNINGS if there is any stderr
+activity, or to say that rc!=0 is not actually an error.</dd></dl>
+
+<dl class="method">
+<dt id="tg_master.tg_mbuildsteps.VirtualEnv.getText2">
+<!--[tg_master.tg_mbuildsteps.VirtualEnv.getText2]--><tt class="descname">getText2</tt><big>(</big><em>cmd</em>, <em>results</em><big>)</big><a class="headerlink" href="#tg_master.tg_mbuildsteps.VirtualEnv.getText2" title="Permalink to this definition">¶</a></dt>
+<dd>We have decided to add a short note about ourselves to the overall
+build description, probably because something went wrong. Return a
+short list of short strings. If your subclass counts test failures or
+warnings of some sort, this is a good place to announce the count.</dd></dl>
+
+<dl class="method">
+<dt id="tg_master.tg_mbuildsteps.VirtualEnv.setProgress">
+<!--[tg_master.tg_mbuildsteps.VirtualEnv.setProgress]--><tt class="descname">setProgress</tt><big>(</big><em>metric</em>, <em>value</em><big>)</big><a class="headerlink" href="#tg_master.tg_mbuildsteps.VirtualEnv.setProgress" title="Permalink to this definition">¶</a></dt>
+<dd>BuildSteps can call self.setProgress() to announce progress along
+some metric.</dd></dl>
+
+<dl class="method">
+<dt id="tg_master.tg_mbuildsteps.VirtualEnv.setupLogfiles">
+<!--[tg_master.tg_mbuildsteps.VirtualEnv.setupLogfiles]--><tt class="descname">setupLogfiles</tt><big>(</big><em>cmd</em>, <em>logfiles</em><big>)</big><a class="headerlink" href="#tg_master.tg_mbuildsteps.VirtualEnv.setupLogfiles" title="Permalink to this definition">¶</a></dt>
+<dd>Set up any additional logfiles= logs.</dd></dl>
+
+<dl class="method">
+<dt id="tg_master.tg_mbuildsteps.VirtualEnv.slaveVersion">
+<!--[tg_master.tg_mbuildsteps.VirtualEnv.slaveVersion]--><tt class="descname">slaveVersion</tt><big>(</big><em>command</em>, <em>oldversion=None</em><big>)</big><a class="headerlink" href="#tg_master.tg_mbuildsteps.VirtualEnv.slaveVersion" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the version number of the given slave command. For the
+commands defined in buildbot.slave.commands, this is the value of
+&#8216;cvs_ver&#8217; at the top of that file. Non-existent commands will return
+a value of None. Buildslaves running buildbot-0.5.0 or earlier did
+not respond to the version query: commands on those slaves will
+return a value of OLDVERSION, so you can distinguish between old
+buildslaves and missing commands.</p>
+<p>If you know that &lt;=0.5.0 buildslaves have the command you want (CVS
+and SVN existed back then, but none of the other VC systems), then it
+makes sense to call this with oldversion=&#8217;old&#8217;. If the command you
+want is newer than that, just leave oldversion= unspecified, and the
+command will return None for a buildslave that does not implement the
+command.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tg_master.tg_mbuildsteps.VirtualEnv.startCommand">
+<!--[tg_master.tg_mbuildsteps.VirtualEnv.startCommand]--><tt class="descname">startCommand</tt><big>(</big><em>cmd</em>, <em>errorMessages=</em><span class="optional">[</span><span class="optional">]</span><big>)</big><a class="headerlink" href="#tg_master.tg_mbuildsteps.VirtualEnv.startCommand" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="docutils">
+<dt>&#64;param cmd: a suitable RemoteCommand which will be launched, with</dt>
+<dd>all output being put into our self.stdio_log LogFile</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="tg_master.tg_mbuildsteps.VirtualEnv.startStep">
+<!--[tg_master.tg_mbuildsteps.VirtualEnv.startStep]--><tt class="descname">startStep</tt><big>(</big><em>remote</em><big>)</big><a class="headerlink" href="#tg_master.tg_mbuildsteps.VirtualEnv.startStep" title="Permalink to this definition">¶</a></dt>
+<dd><p>Begin the step. This returns a Deferred that will fire when the
+step finishes.</p>
+<p>This deferred fires with a tuple of (result, [extra text]), although
+older steps used to return just the &#8216;result&#8217; value, so the receiving
+L{base.Build} needs to be prepared to handle that too. C{result} is
+one of the SUCCESS/WARNINGS/FAILURE/SKIPPED constants from
+L{buildbot.status.builder}, and the extra text is a list of short
+strings which should be appended to the Build&#8217;s text results. This
+text allows a test-case step which fails to append B{17 tests} to the
+Build&#8217;s status, in addition to marking the build as failing.</p>
+<p>The deferred will errback if the step encounters an exception,
+including an exception on the slave side (or if the slave goes away
+altogether). Failures in shell commands (rc!=0) will B{not} cause an
+errback, in general the BuildStep will evaluate the results and
+decide whether to treat it as a WARNING or FAILURE.</p>
+<p>&#64;type remote: L{twisted.spread.pb.RemoteReference}
+&#64;param remote: a reference to the slave&#8217;s</p>
+<div class="system-message">
+<p class="system-message-title">System Message: ERROR/3 (<tt class="docutils">/home/steven/TurboGears/test_system/tg_master/tg_master/tg_mbuildsteps.py:docstring of tg_master.tg_mbuildsteps.BaseStep</tt>, line 11)</p>
+Unexpected indentation.</div>
+<blockquote>
+L{buildbot.slave.bot.SlaveBuilder} instance where any
+RemoteCommands may be run</blockquote>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h4>Previous topic</h4>
+            <p class="topless"><a href="tg_master.ppath.html" title="previous chapter"><tt class="docutils literal"><span class="pre">tg_master.ppath</span></tt></a></p>
+            <h4>Next topic</h4>
+            <p class="topless"><a href="tg_master.tgbuilder.html" title="next chapter"><tt class="docutils literal"><span class="pre">tg_master.tgbuilder</span></tt></a></p>
+            <h3>This Page</h3>
+            <ul class="this-page-menu">
+              <li><a href="../_sources/modules/tg_master.tg_mbuildsteps.txt">Show Source</a></li>
+            </ul>
+            <h3>Quick search</h3>
+            <form class="search" action="../search.html" method="get">
+              <input type="text" name="q" size="18" /> <input type="submit" value="Go" />
+              <input type="hidden" name="check_keywords" value="yes" />
+              <input type="hidden" name="area" value="default" />
+            </form>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../modindex.html" title="Global Module Index"
+             accesskey="M">modules</a> |</li>
+        <li class="right" >
+          <a href="tg_master.tgbuilder.html" title="tg_master.tgbuilder"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="tg_master.ppath.html" title="tg_master.ppath"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">TurboGears BuildBot Master v0.1.0.1 documentation</a> &raquo;</li>
+      </ul>
+    </div>
+    <div class="footer">
+      &copy; Copyright 2008, Steven Mohr.
+      Last updated on Oct 09, 2008.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a>.
+    </div>
+  </body>
+</html>
