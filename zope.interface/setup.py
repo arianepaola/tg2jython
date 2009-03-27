@@ -13,7 +13,7 @@
 ##############################################################################
 """Setup for zope.interface package
 
-$Id: setup.py 90622 2008-08-30 18:44:08Z fschulze $
+$Id: setup.py 98026 2009-03-13 10:23:32Z nadako $
 """
 
 import os, sys
@@ -25,6 +25,8 @@ try:
     from setuptools import setup, Extension, Feature
     from setuptools.command.build_ext import build_ext
 except ImportError, e:
+    # do we need to support plain distutils for building when even
+    # the package itself requires setuptools for installing?
     from distutils.core import setup, Extension
     from distutils.command.build_ext import build_ext
 
@@ -55,6 +57,7 @@ else:
         zip_safe = False,
         tests_require = ['zope.testing'],
         install_requires = ['setuptools'],
+        extras_require={'docs': ['z3c.recipe.sphinxdoc']},
         features = {'codeoptimization': codeoptimization}
         )
 
@@ -64,19 +67,19 @@ def read(*rnames):
 long_description=(
         read('README.txt')
         + '\n' +
-        read('CHANGES.txt')
-        + '\n' +
         'Detailed Documentation\n'
         '**********************\n'
-        + '\n' +
+        + '\n.. contents::\n\n' +
         read('src', 'zope', 'interface', 'README.txt')
         + '\n' +
         read('src', 'zope', 'interface', 'adapter.txt')
         + '\n' +
         read('src', 'zope', 'interface', 'human.txt')
         + '\n' +
+        read('CHANGES.txt')
+        + '\n' +
         'Download\n'
-        '**********************\n'
+        '********\n'
         )
 
 
@@ -112,12 +115,12 @@ class optional_build_ext(build_ext):
 
 
 setup(name='zope.interface',
-      version = '3.5dev',
-      url='http://www.python.org/pypi/zope.interface',
+      version = '3.5.2dev',
+      url='http://pypi.python.org/pypi/zope.interface',
       license='ZPL 2.1',
-      description='Zope 3 Interface Infrastructure',
+      description='Interfaces for Python',
       author='Zope Corporation and Contributors',
-      author_email='zope3-dev@zope.org',
+      author_email='zope-dev@zope.org',
       long_description=long_description,
 
       packages = ['zope', 'zope.interface'],

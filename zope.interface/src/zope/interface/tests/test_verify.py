@@ -13,7 +13,7 @@
 ##############################################################################
 """Interface Verify tests
 
-$Id: test_verify.py 26866 2004-08-02 20:57:00Z jim $
+$Id: test_verify.py 92657 2008-10-28 17:04:41Z tlotze $
 """
 from zope.interface import Interface, implements, classImplements, Attribute
 from zope.interface.verify import verifyClass, verifyObject
@@ -21,6 +21,8 @@ from zope.interface.exceptions import DoesNotImplement, BrokenImplementation
 from zope.interface.exceptions import BrokenMethodImplementation
 
 import unittest
+import zope.testing.doctestunit
+from zope.testing import doctest
 
 class Test(unittest.TestCase):
 
@@ -190,7 +192,12 @@ class Test(unittest.TestCase):
 
 def test_suite():
     loader=unittest.TestLoader()
-    return loader.loadTestsFromTestCase(Test)
+    return unittest.TestSuite((
+        zope.testing.doctestunit.DocFileSuite(
+            '../verify.txt',
+            optionflags=doctest.NORMALIZE_WHITESPACE),
+        loader.loadTestsFromTestCase(Test),
+        ))
 
 if __name__=='__main__':
     unittest.TextTestRunner().run(test_suite())

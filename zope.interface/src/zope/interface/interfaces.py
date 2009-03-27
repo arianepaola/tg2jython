@@ -13,7 +13,7 @@
 ##############################################################################
 """Interface Package Interfaces
 
-$Id: interfaces.py 81721 2007-11-10 16:15:08Z philikon $
+$Id: interfaces.py 92521 2008-10-24 05:44:37Z baijum $
 """
 __docformat__ = 'restructuredtext'
 
@@ -678,9 +678,9 @@ class IAdapterRegistry(Interface):
 
         If no component was registered exactly for the given
         interfaces and name, then None is returned.
-        
+
         """
-  
+
     def lookup(required, provided, name='', default=None):
         """Lookup a value
 

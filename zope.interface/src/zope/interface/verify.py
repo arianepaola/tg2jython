@@ -13,7 +13,7 @@
 ##############################################################################
 """Verify interface implementations
 
-$Id: verify.py 37426 2005-07-26 06:24:15Z hdima $
+$Id: verify.py 92658 2008-10-28 17:12:35Z tlotze $
 """
 from zope.interface.exceptions import BrokenImplementation, DoesNotImplement
 from zope.interface.exceptions import BrokenMethodImplementation
@@ -52,7 +52,9 @@ def _verify(iface, candidate, tentative=0, vtype=None):
 
     # Here the `desc` is either an `Attribute` or `Method` instance
     for name, desc in iface.namesAndDescriptions(1):
-        if not hasattr(candidate, name):
+        try:
+            attr = getattr(candidate, name)
+        except AttributeError:
             if (not isinstance(desc, Method)) and vtype == 'c':
                 # We can't verify non-methods on classes, since the
                 # class may provide attrs in it's __init__.
@@ -60,7 +62,6 @@ def _verify(iface, candidate, tentative=0, vtype=None):
 
             raise BrokenImplementation(iface, name)
 
-        attr = getattr(candidate, name)
         if not isinstance(desc, Method):
             # If it's not a method, there's nothing else we can test
             continue
